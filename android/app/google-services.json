@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "361029373628",
+    "project_id": "pomodoropompurin",
+    "storage_bucket": "pomodoropompurin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361029373628:android:2efd0dbfb871e78e8e8ab9",
+        "android_client_info": {
+          "package_name": "com.example.pomodoropompurin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFI3B7gMVdBxFJdJmAertzj2YDi5s5VsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
