@@ -21,7 +21,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web
-        run: flutter build web --base-href "/${{ github.repository }}/"
+        run: flutter build web --base-href "/pomodoropompurin/"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
