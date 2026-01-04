@@ -18,6 +18,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(navigatorKey: navigatorKey, home: SplashPage());
+    return MaterialApp(
+      navigatorKey: navigatorKey,
+      theme: ThemeData(useMaterial3: false),
+      home: SplashPage(),
+    );
   }
 }

@@ -22,6 +22,15 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ItemDisplayArea();
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ProgSystemDisplay(),
+          PomTimerDisplay(),
+          ProgCalendarDisplay(),
+        ],
+      ),
+    );
   }
 }
