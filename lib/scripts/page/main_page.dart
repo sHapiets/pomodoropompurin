@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/layout/item_display/item_display_area.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_system_display.dart';
@@ -23,12 +22,14 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: [
-          ProgSystemDisplay(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [ProgSystemDisplay(), ProgCalendarDisplay()],
+          ),
+
           PomTimerDisplay(),
-          ProgCalendarDisplay(),
         ],
       ),
     );

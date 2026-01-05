@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -14,6 +15,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   final _assetManager = AssetManager.singleton;
   final _databaseManager = DatabaseManager.singleton;
+  final _pomTimer = PomTimer.singleton;
   final _progSystem = ProgSystem.singleton;
 
   final minimumDuration = Duration(seconds: 1); // minimum splash time
@@ -53,6 +55,13 @@ class _SplashPageState extends State<SplashPage> {
     // Database loading
     _progSystem.loadPomPoints(await _databaseManager.userDataLoad('pomPoints'));
     _progSystem.loadMilkJugs(await _databaseManager.userDataLoad('milkJugs'));
+
+    _pomTimer.timeSetWorkSeconds = await _databaseManager.userConfigTimerLoad(
+      'timeSetWorkSeconds',
+    );
+    _pomTimer.timeSetBreakSeconds = await _databaseManager.userConfigTimerLoad(
+      'timeSetBreakSeconds',
+    );
 
     // Not actually needed... remove soon
     _progSystem.loadDateLogList(

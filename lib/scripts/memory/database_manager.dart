@@ -1,32 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
-import 'package:pomodoropompurin/scripts/core/pom_timer.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
 
 class DatabaseManager {
   DatabaseManager._();
   static final singleton = DatabaseManager._();
 
-  final progSystem = ProgSystem.singleton;
-  final _pomTimer = PomTimer.singleton;
-
   // Easy access references, if ever needed...
-  /// NOTE: userRef only points to YANA's data
+  /// NOTE: userRef only points to YANA's data, while debugRef points to JOSEPH
   final userRef = FirebaseFirestore.instance.collection("users").doc("yana");
+  // final userRef = FirebaseFirestore.instance.collection("users").doc("jd");
+
+  CollectionReference get statusRef => userRef.collection('status');
+  CollectionReference get configRef => userRef.collection('config');
+
+  /// Load Functions
+  /// -> future functions that RETURNS the stored value
+  /// -> usually called once for preloading (SplashPage)
 
   Future<dynamic> userDataLoad(String userData) async {
-    // These are temporary constant loads for the timer to works, SHOULD BE DELETED soon!
-    _pomTimer.timeSetWorkSeconds = 5;
-    _pomTimer.timeSetBreakSeconds = 3;
-
     // Load all necessary values from USER here...
     final dataDoc = await userRef.get();
     return dataDoc[userData];
   }
 
-  Future<void> userDataSave(String userData, dynamic data) async {
-    await userRef.set({userData: data}).then((onValue) => debugPrint('nice'));
+  Future<dynamic> userConfigTimerLoad(String configTimerData) async {
+    final configTimerDoc = await configRef.doc('pomTimer').get();
+    return configTimerDoc[configTimerData];
   }
 
   //
@@ -46,5 +45,30 @@ class DatabaseManager {
         .map((doc) => DateLog.fromFirestore(doc, month, year))
         .toList();
     return logs;
+  }
+
+  /// Save Functions
+  /// -> to be called by other classes (mostly core singletons) to save data in Koupen
+  /// -> instance of the DatabaseManager must be called before using
+  /// -> each function takes the paramaters to be stored
+
+  Future<void> userConfigTimerSave(
+    int timeWorkSeconds,
+    int timeBreakSeconds,
+  ) async {
+    final configTimerRef = userRef.collection('config').doc('pomTimer');
+    await configTimerRef.set({
+      'timeSetWorkSeconds': timeWorkSeconds,
+      'timeSetBreakSeconds': timeBreakSeconds,
+    });
+  }
+
+  Future<void> userDataSave(String user, dynamic data) async {
+    await userRef.update({user: data});
+  }
+
+  Future<void> statusPomTimerSave(String status, dynamic data) async {
+    final statusPomTimerRef = statusRef.doc('pomTimer');
+    await statusPomTimerRef.update({status: data});
   }
 }

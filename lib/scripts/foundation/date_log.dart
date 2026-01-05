@@ -1,10 +1,7 @@
-// DateLog object, instantiated for one day
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// For now, contains its
-/// 1. date
-/// 2. time (seconds) as count for heatmap
-/// 3. etc idk pa
+/// A foundation class which represents a collection of data for
+/// one particular day.
 class DateLog {
   DateTime dateLogDate;
   int timeSeconds;

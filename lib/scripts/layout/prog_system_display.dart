@@ -12,6 +12,11 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   final progSystem = ProgSystem.singleton;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

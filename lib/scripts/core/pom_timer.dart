@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/layout/custom_dialogs.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// Logic class for the Pomodoro Timer and its events
 class PomTimer {
@@ -10,6 +12,7 @@ class PomTimer {
 
   final _progSystem = ProgSystem.singleton;
   final _customDialogs = CustomDialogs.singleton;
+  final _databaseManager = DatabaseManager.singleton;
 
   Timer timer = Timer.periodic(const Duration(seconds: 0), (timer) {});
   int loopsSet = 3;
@@ -27,14 +30,17 @@ class PomTimer {
   bool isPlaying = false;
   bool onBreak = false;
 
-  VoidCallback updatePomTimerCount = () {};
-  VoidCallback updatePomTimerGauge = () {};
+  // Callbacks functions for display/layout widgets (PomTimerDisplay defines this...)
+  void Function() updatePomTimerCount = () {};
+  void Function() updatePomTimerGauge = () {};
+  void Function(String) switchPomTimerMode = (s) {};
 
   void playTimer() {
     if (isPlaying) {
       // already playing...
     } else {
       isPlaying = true;
+      switchPomTimerMode('Playing');
 
       if (restart) {
         // Not a 'resume', set INITIAL INPUT times
@@ -46,11 +52,13 @@ class PomTimer {
           timeLeftSeconds = timeSetWorkSeconds;
         }
 
+        _databaseManager.statusPomTimerSave('wasActive', true);
         restart = false;
       } else {
         // if restart is false, just resume...
       }
 
+      /// Update initial Display via Callback
       updatePomTimerDisplay();
 
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -83,6 +91,20 @@ class PomTimer {
           }
         }
 
+        /// Update Koupen of current TimeTotalSeconds
+        if (onBreak) {
+          _databaseManager.statusPomTimerSave(
+            'wasTimeTotalSeconds',
+            timeTotalSeconds,
+          );
+        } else {
+          _databaseManager.statusPomTimerSave(
+            'wasTimeTotalSeconds',
+            timeTotalSeconds + (timeSetWorkSeconds - timeLeftSeconds),
+          );
+        }
+
+        /// Periodical Updates to update PomTimerDisplay
         updatePomTimerDisplay();
       });
     }
@@ -92,6 +114,7 @@ class PomTimer {
     if (isPlaying) {
       isPlaying = false;
       timer.cancel();
+      switchPomTimerMode('Paused');
     }
   }
 
@@ -106,25 +129,30 @@ class PomTimer {
       timeTotalSeconds += (timeSetWorkSeconds - timeLeftSeconds);
     }
 
-    int rewardPomPoints =
-        timeTotalSeconds; //!! CHANGE CONVERSION RATE (1s = 1point???)
+    int rewardPomPoints = PomPointsConversion.fromSeconds(timeTotalSeconds);
 
     restart = true; // restart to initial value
     isPlaying = false; // pause (stop) timer
     onBreak = false; // switch to work timer for next play.
     timeLeftSeconds = timeSetWorkSeconds;
     timeTotalSeconds = 0; //
+
+    /// Tell Koupen that the timer was stopped before connection is severed;
+    /// and rewards was already awarded...
+    _databaseManager.statusPomTimerSave('wasActive', false);
+    _databaseManager.statusPomTimerSave('wasTimeTotalSeconds', 0);
+
     timer.cancel();
 
     _customDialogs.showRewardsEndTimeDialog(rewardPomPoints);
 
     // Update outside
     _progSystem.addPomPoints(rewardPomPoints);
+    switchPomTimerMode('Idle');
     updatePomTimerDisplay();
   }
 
   void updatePomTimerDisplay() {
     updatePomTimerCount();
-    updatePomTimerGauge();
   }
 }
