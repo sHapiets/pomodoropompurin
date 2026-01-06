@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/layout/custom_dialogs.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
@@ -40,7 +39,7 @@ class PomTimer {
       // already playing...
     } else {
       isPlaying = true;
-      switchPomTimerMode('Playing');
+      switchPomTimerMode('Active');
 
       if (restart) {
         // Not a 'resume', set INITIAL INPUT times
@@ -136,6 +135,7 @@ class PomTimer {
     onBreak = false; // switch to work timer for next play.
     timeLeftSeconds = timeSetWorkSeconds;
     timeTotalSeconds = 0; //
+    switchPomTimerMode('Idle');
 
     /// Tell Koupen that the timer was stopped before connection is severed;
     /// and rewards was already awarded...
