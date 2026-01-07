@@ -34,6 +34,8 @@ class PomTimer {
   void Function() updatePomTimerGauge = () {};
   void Function(String) switchPomTimerMode = (s) {};
 
+  String pomTimerState = 'Inactive';
+
   void playTimer() {
     if (isPlaying) {
       // already playing...

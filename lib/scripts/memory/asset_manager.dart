@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
+import 'package:flame/flame.dart';
 
 /// Singleton class to manage all game assets
 class AssetManager {
@@ -31,6 +32,18 @@ class AssetManager {
         return preloadImage(assetPath, context);
       }),
     );
+  }
+
+  Future<void> preloadFlameImages() async {
+    List<String> allFlameImages = [
+      'SamplePurinArea.png',
+      'L7.png',
+      "SamplePurin.png",
+    ];
+
+    for (String imagePath in allFlameImages) {
+      await Flame.images.load(imagePath);
+    }
   }
 
   /// Lazy-load a shop image only when needed

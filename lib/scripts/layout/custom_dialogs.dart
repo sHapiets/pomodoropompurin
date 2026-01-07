@@ -15,7 +15,7 @@ class CustomDialogs {
             borderRadius: BorderRadius.circular(0), // optional
             child: Stack(
               children: [
-                Image.asset('assets/L7.png'),
+                Image.asset('assets/images/L7.png'),
                 Positioned.fill(
                   child: Padding(
                     padding: EdgeInsets.all(32),

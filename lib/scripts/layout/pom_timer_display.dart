@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class PomTimerDisplay extends StatefulWidget {
@@ -11,23 +12,37 @@ class PomTimerDisplay extends StatefulWidget {
 
 class _PomTimerDisplayState extends State<PomTimerDisplay> {
   late PomTimer _pomTimer;
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
   double displayTime = 0;
-  String displayMode = 'Input';
+  String panelDisplayMode = 'Idle';
+  String widgetPositionState = 'Tab';
 
-  int panelWidth = 350;
-  int panelHeight = 200;
+  int panelWidth = 300;
+  int panelHeight = 250;
   int tabWidth = 100;
-  bool isHidden = true;
 
   /// A widget placeholder that switches between modes
   Widget get pomTimerWidget {
-    switch (displayMode) {
+    switch (panelDisplayMode) {
       case 'Active':
         return PomTimerActiveWidget();
       case 'Paused':
         return PomTimerActiveWidget();
       default: // case Idle (or Input)
         return PomTimerIdleWidget();
+    }
+  }
+
+  double get positionFromState {
+    switch (widgetPositionState) {
+      case 'Tab':
+        return (-panelWidth).toDouble();
+      case 'Show':
+        return 10;
+      case 'Hidden':
+        return (panelWidth + tabWidth).toDouble();
+      default:
+        return 10;
     }
   }
 
@@ -42,7 +57,7 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
     };
     _pomTimer.switchPomTimerMode = (String mode) {
       setState(() {
-        displayMode = mode;
+        panelDisplayMode = mode;
       });
     };
   }
@@ -57,19 +72,23 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOutCubicEmphasized,
       top: 100,
-      right: isHidden ? (-panelWidth).toDouble() : 10,
+      right: positionFromState,
       child: Row(
         children: [
           // -- TAB
           GestureDetector(
             onTap: () {
-              isHidden = !isHidden;
+              if (widgetPositionState == 'Tab') {
+                widgetPositionState = 'Show';
+              } else if (widgetPositionState == 'Show') {
+                widgetPositionState = 'Tab';
+              }
               setState(() {});
             },
             child: SizedBox(
               height: 100,
               width: 100,
-              child: Image.asset('assets/L8.jpg'),
+              child: Image.asset('assets/images/L8.jpg'),
             ),
           ),
 
@@ -151,7 +170,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
             borderRadius: BorderRadius.circular(0), // optional
             child: Stack(
               children: [
-                Image.asset('assets/L8.jpg'),
+                Image.asset('assets/images/L8.jpg'),
                 Positioned.fill(
                   child: Padding(
                     padding: EdgeInsets.all(32),
@@ -195,6 +214,44 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // PomTimerActive Buttons
+        SizedBox(
+          height: 200,
+          width: 50,
+          child: Center(
+            child: Column(
+              spacing: 30,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 0.8,
+                              end: 1.0,
+                            ).animate(animation),
+                            child: child,
+                          ),
+                        );
+                      },
+                  child: playOrPauseButton,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _pomTimer.pauseTimer(); // Pause first
+                    showWarningEndTimerDialog();
+                  },
+                  child: Text("End"), // change to icons...
+                ),
+              ],
+            ),
+          ),
+        ),
+
         /// PomTimerActive Gauge
         SizedBox(
           width: 200,
@@ -242,44 +299,6 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                 ),
               ),
             ],
-          ),
-        ),
-
-        // PomTimerActive Buttons
-        SizedBox(
-          height: 200,
-          width: 100,
-          child: Center(
-            child: Column(
-              spacing: 30,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 300),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: ScaleTransition(
-                            scale: Tween<double>(
-                              begin: 0.8,
-                              end: 1.0,
-                            ).animate(animation),
-                            child: child,
-                          ),
-                        );
-                      },
-                  child: playOrPauseButton,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _pomTimer.pauseTimer(); // Pause first
-                    showWarningEndTimerDialog();
-                  },
-                  child: Text("End"), // change to icons...
-                ),
-              ],
-            ),
           ),
         ),
       ],

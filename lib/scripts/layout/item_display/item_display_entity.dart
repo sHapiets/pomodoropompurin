@@ -39,7 +39,7 @@ class _ItemDisplayEntityState extends State<ItemDisplayEntity> {
               onEditMode = !onEditMode;
               setState(() {});
             },
-            child: Image.asset('assets/L8.jpg'),
+            child: Image.asset('assets/images/L8.jpg'),
           ),
           if (onEditMode)
             GestureDetector(
