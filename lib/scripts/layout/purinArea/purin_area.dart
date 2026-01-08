@@ -7,6 +7,7 @@ import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/purinArea/cursor_sprite.dart';
 import 'package:pomodoropompurin/scripts/layout/purinArea/purin_area_home.dart';
 
 class PurinArea extends FlameGame
@@ -19,6 +20,13 @@ class PurinArea extends FlameGame
 
   /// Assets paths (from assets/images/->...)
   final backgroundAsset = 'L7.png';
+  @override
+  Color backgroundColor() => Colors.white;
+
+  SpriteComponent cursorSprite = CursorMovingSprite(
+    position: Vector2.zero(),
+    priority: -999,
+  );
 
   @override
   FutureOr<void> onLoad() async {
@@ -26,14 +34,33 @@ class PurinArea extends FlameGame
     newPosition = purinAreaHome.position;
     newScale = purinAreaHome.scale;
     // Add Background (change Component type?)
-    add(
+    /* add(
       SpriteComponent(
         sprite: Sprite(Flame.images.fromCache('L7.png')),
         size: Vector2(500, 500),
       ),
-    );
+    ); */
     // Add HomeArea
     add(purinAreaHome);
+  }
+
+  @override
+  void onTapDown(TapDownEvent event) {
+    cursorSprite.removeFromParent();
+    cursorSprite = CursorMovingSprite(
+      position: event.canvasPosition,
+      priority: 999,
+    );
+    add(cursorSprite);
+    purinAreaStateManager.state = "Transforming";
+  }
+
+  @override
+  void onTapUp(TapUpEvent event) {
+    if (purinAreaStateManager.state != 'Scaling') {
+      cursorSprite.removeFromParent();
+      purinAreaStateManager.state = "Idle";
+    }
   }
 
   @override
@@ -42,14 +69,31 @@ class PurinArea extends FlameGame
   }
 
   @override
+  void onDoubleTapDown(DoubleTapDownEvent event) {
+    cursorSprite.removeFromParent();
+    cursorSprite = CursorScalingSprite(
+      position: event.canvasPosition,
+      priority: 999,
+    );
+    add(cursorSprite);
+    purinAreaStateManager.state = "Transforming";
+  }
+
+  @override
   void onDoubleTapCancel(DoubleTapCancelEvent event) {
     purinAreaStateManager.state = 'Scaling';
-    debugPrint(purinAreaStateManager.state);
+  }
+
+  @override
+  void onDoubleTapUp(DoubleTapEvent event) {
+    cursorSprite.removeFromParent();
+    purinAreaStateManager.state = "Idle";
   }
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
     if (purinAreaStateManager.state == "Moving") {
+      cursorSprite.position = info.eventPosition.global;
       newPosition += info.delta.global;
 
       final minX = 0.0;
@@ -63,6 +107,7 @@ class PurinArea extends FlameGame
         newPosition.y.clamp(minY, maxY),
       );
     } else if (purinAreaStateManager.state == "Scaling") {
+      cursorSprite.position.x = info.eventPosition.global.x;
       newScale -= info.delta.global.yy * 0.005;
 
       final minScale = 0.2;
@@ -78,8 +123,8 @@ class PurinArea extends FlameGame
 
   @override
   void onPanEnd(DragEndInfo info) {
+    cursorSprite.removeFromParent();
     purinAreaStateManager.state = "Idle";
-    debugPrint(purinAreaStateManager.state);
   }
 
   @override

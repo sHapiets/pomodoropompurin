@@ -13,6 +13,8 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
 
   final purinAreaStateManager = PurinAreaStateManager.singleton;
 
+  late PurinEntity purinEntity;
+
   @override
   Future<void> onLoad() async {
     add(
@@ -21,6 +23,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
         anchor: anchor,
       ),
     );
-    add(PurinEntity(position: Vector2(0, 0), anchor: anchor));
+    purinEntity = PurinEntity(position: Vector2(0, 0), anchor: anchor);
+    add(purinEntity);
   }
 }

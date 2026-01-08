@@ -39,6 +39,7 @@ class AssetManager {
       'SamplePurinArea.png',
       'L7.png',
       "SamplePurin.png",
+      "L8.jpg",
     ];
 
     for (String imagePath in allFlameImages) {
