@@ -88,7 +88,7 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton> {
     Container(
       height: 400,
       width: 400,
-      padding: EdgeInsets.fromLTRB(150, 200, 150, 100),
+      padding: EdgeInsets.fromLTRB(150, 250, 150, 50),
       child: MaterialButton(
         onPressed: () => pomTimerDisplayStateManager.openPomTimer(),
         child: Image.asset('assets/images/L8.jpg'),
@@ -108,6 +108,7 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
   late PomTimer _pomTimer;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
   double displayTime = 0;
+  int maxTime = 1;
   String panelDisplayMode = 'Idle';
   String widgetPositionState = 'Tab';
 
@@ -136,6 +137,13 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
     _pomTimer.updatePomTimerCount = () {
       setState(() {
         displayTime = _pomTimer.timeLeftSeconds.toDouble();
+      });
+    };
+    _pomTimer.updatePomTimerGauge = () {
+      setState(() {
+        maxTime = (_pomTimer.onBreak)
+            ? _pomTimer.timeSetBreakSeconds
+            : _pomTimer.timeSetWorkSeconds;
       });
     };
     _pomTimer.switchPomTimerMode = (String mode) {
@@ -167,7 +175,7 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
                   RadialAxis(
                     radiusFactor: 0.95,
                     minimum: 0,
-                    maximum: _pomTimer.timeSetWorkSeconds.toDouble(),
+                    maximum: maxTime.toDouble(),
                     showLabels: false,
                     showTicks: false,
                     startAngle: 180,
@@ -250,11 +258,6 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
   void initState() {
     super.initState();
     _pomTimer = PomTimer.singleton;
-    _pomTimer.updatePomTimerGauge = () {
-      setState(() {
-        displayTime = _pomTimer.timeLeftSeconds.toDouble();
-      });
-    };
   }
 
   void showWarningEndTimerDialog() {
@@ -321,7 +324,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
           height: 200,
           width: 50,
           child: Center(
-            child: Column(
+            child: Row(
               spacing: 30,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -416,11 +419,6 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget> {
   void initState() {
     super.initState();
     _pomTimer = PomTimer.singleton;
-    _pomTimer.updatePomTimerGauge = () {
-      setState(() {
-        displayTime = _pomTimer.timeLeftSeconds.toDouble();
-      });
-    };
   }
 
   @override

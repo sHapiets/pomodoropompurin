@@ -4,5 +4,4 @@ class PomTimerDisplayStateManager {
 
   void Function() openPomTimer = () {};
   void Function() closePomTimer = () {};
-  void Function() hidePomTimer = () {};
 }

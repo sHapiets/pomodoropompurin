@@ -156,5 +156,6 @@ class PomTimer {
 
   void updatePomTimerDisplay() {
     updatePomTimerCount();
+    updatePomTimerGauge();
   }
 }
