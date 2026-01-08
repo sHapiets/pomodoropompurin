@@ -1,7 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/layout/menu_dropdown/menu_dial.dart';
-import 'package:pomodoropompurin/scripts/layout/pom_timer_display.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_dial.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_system_display.dart';
 import 'package:pomodoropompurin/scripts/layout/purinArea/purin_area.dart';
@@ -33,6 +34,7 @@ class _MainPageState extends State<MainPage> {
           ), */
           GameWidget(game: PurinArea()),
           MenuDial(),
+          PomTimerDial(),
         ],
       ),
     );

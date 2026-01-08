@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freestyle_speed_dial/freestyle_speed_dial.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_dial.dart';
 
 class MenuDial extends StatefulWidget {
   const MenuDial({super.key});
