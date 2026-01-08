@@ -21,7 +21,7 @@ class PurinArea extends FlameGame
   /// Assets paths (from assets/images/->...)
   final backgroundAsset = 'L7.png';
   @override
-  Color backgroundColor() => const Color.fromARGB(255, 204, 167, 102);
+  Color backgroundColor() => const Color.fromARGB(255, 235, 213, 128);
 
   SpriteComponent cursorSprite = CursorMovingSprite(
     position: Vector2.zero(),
@@ -35,12 +35,12 @@ class PurinArea extends FlameGame
     newPosition = purinAreaHome.position;
     newScale = purinAreaHome.scale;
     // Add Background (change Component type?)
-    /* add(
+    add(
       SpriteComponent(
-        sprite: Sprite(Flame.images.fromCache('L7.png')),
-        size: Vector2(500, 500),
+        sprite: Sprite(Flame.images.fromCache('test_bg.png')),
+        size: Vector2(size.x, size.y),
       ),
-    ); */
+    );
     // Add HomeArea
     add(purinAreaHome);
   }

@@ -20,12 +20,13 @@ class _MenuDialState extends State<MenuDial> {
         buttonAnchor: Alignment.bottomCenter,
         itemAnchor: Alignment.topCenter,
         buttonBuilder: (context, isActive, toggle) {
-          return Container(
+          return SizedBox(
             width: 70,
             height: 70,
             child: MaterialButton(
+              shape: CircleBorder(),
               onPressed: toggle,
-              child: Image.asset('assets/images/L8.jpg'),
+              child: Image.asset('assets/images/SamplePurin.png'),
             ),
           );
         },
@@ -40,6 +41,7 @@ class _MenuDialState extends State<MenuDial> {
             width: 50,
             height: 50,
             child: MaterialButton(
+              shape: CircleBorder(),
               onPressed: () {},
               child: const Icon(Icons.hub),
             ),
