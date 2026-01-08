@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';

@@ -135,7 +135,7 @@ class PomTimer {
     restart = true; // restart to initial value
     isPlaying = false; // pause (stop) timer
     onBreak = false; // switch to work timer for next play.
-    timeLeftSeconds = timeSetWorkSeconds;
+    timeLeftSeconds = 0;
     timeTotalSeconds = 0; //
     switchPomTimerMode('Idle');
 

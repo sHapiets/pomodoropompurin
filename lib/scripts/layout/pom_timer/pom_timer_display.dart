@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -11,15 +12,101 @@ class PomTimerDisplay extends StatefulWidget {
 }
 
 class _PomTimerDisplayState extends State<PomTimerDisplay> {
+  final PomTimer _pomTimer = PomTimer.singleton;
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
+  late Widget pomTimerAtDisplay;
+
+  @override
+  void initState() {
+    super.initState();
+    pomTimerAtDisplay = PomTimerOpenButton();
+    pomTimerDisplayStateManager.openPomTimer = () {
+      setState(() {
+        pomTimerAtDisplay = PomTimerMainWidget();
+      });
+    };
+    pomTimerDisplayStateManager.closePomTimer = () {
+      setState(() {
+        pomTimerAtDisplay = PomTimerOpenButton();
+      });
+    };
+  }
+
+  /// >>>>>>>>>>>>>>>>>>>>>
+  ///
+  /// >>>>>>>>>>>>>>>>>>>>>
+  @override
+  Widget build(BuildContext context) {
+    // Animation for Opening Widget
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 1000),
+        switchInCurve: Curves.easeOutExpo,
+        switchOutCurve: Curves.easeInExpo,
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          final slideAnimation = Tween<Offset>(
+            begin: const Offset(0, 1),
+            end: Offset.zero,
+          ).animate(animation);
+
+          return FadeTransition(
+            opacity: animation,
+            child: SlideTransition(position: slideAnimation, child: child),
+          );
+        },
+        child: pomTimerAtDisplay, // MUST have a Key
+      ),
+    );
+  }
+}
+
+class PomTimerOpenButton extends StatefulWidget {
+  const PomTimerOpenButton({super.key});
+
+  @override
+  State<PomTimerOpenButton> createState() => _PomTimerOpenButtonState();
+}
+
+class _PomTimerOpenButtonState extends State<PomTimerOpenButton> {
+  final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
+  @override
+  Widget build(BuildContext context) {
+    return // -- TAB
+    Container(
+      height: 300,
+      width: 250,
+      padding: EdgeInsets.symmetric(vertical: 100, horizontal: 80),
+      child: MaterialButton(
+        onPressed: () => pomTimerDisplayStateManager.openPomTimer(),
+        child: Image.asset('assets/images/L8.jpg'),
+      ),
+    );
+  }
+}
+
+class PomTimerMainWidget extends StatefulWidget {
+  const PomTimerMainWidget({super.key});
+
+  @override
+  State<PomTimerMainWidget> createState() => _PomTimerMainWidgetState();
+}
+
+class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
   late PomTimer _pomTimer;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
   double displayTime = 0;
   String panelDisplayMode = 'Idle';
   String widgetPositionState = 'Tab';
 
-  int panelWidth = 300;
-  int panelHeight = 250;
+  int panelWidth = 400;
+  int panelHeight = 300;
   int tabWidth = 100;
+
+  double gaugeRadius = 400;
 
   /// A widget placeholder that switches between modes
   Widget get pomTimerWidget {
@@ -30,19 +117,6 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
         return PomTimerActiveWidget();
       default: // case Idle (or Input)
         return PomTimerIdleWidget();
-    }
-  }
-
-  double get positionFromState {
-    switch (widgetPositionState) {
-      case 'Tab':
-        return (-panelWidth).toDouble();
-      case 'Show':
-        return 10;
-      case 'Hidden':
-        return (panelWidth + tabWidth).toDouble();
-      default:
-        return 10;
     }
   }
 
@@ -62,42 +136,57 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
     };
   }
 
-  /// >>>>>>>>>>>>>>>>>>>>>
-  /// PomTimer Widget Build
-  /// >>>>>>>>>>>>>>>>>>>>>
   @override
   Widget build(BuildContext context) {
-    // Animation for TABSLIDING
-    return AnimatedPositioned(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOutCubicEmphasized,
-      top: 100,
-      right: positionFromState,
-      child: Row(
-        children: [
-          // -- TAB
-          GestureDetector(
-            onTap: () {
-              if (widgetPositionState == 'Tab') {
-                widgetPositionState = 'Show';
-              } else if (widgetPositionState == 'Show') {
-                widgetPositionState = 'Tab';
-              }
-              setState(() {});
-            },
-            child: SizedBox(
-              height: 100,
-              width: 100,
-              child: Image.asset('assets/images/L8.jpg'),
+    return
+    // -- PANEL
+    SizedBox(
+      width: panelWidth.toDouble(),
+      height: panelHeight.toDouble(),
+      child: Positioned(
+        left: 0,
+        right: 0,
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: -gaugeRadius / 2,
+              child: SizedBox(
+                width: gaugeRadius,
+                height: gaugeRadius,
+                child: SfRadialGauge(
+                  axes: <RadialAxis>[
+                    RadialAxis(
+                      radiusFactor: 0.95,
+                      minimum: 0,
+                      maximum: _pomTimer.timeSetWorkSeconds.toDouble(),
+                      showLabels: false,
+                      showTicks: false,
+                      startAngle: 180,
+                      endAngle: 0,
+                      axisLineStyle: AxisLineStyle(
+                        thickness: 1,
+                        color: const Color.fromARGB(255, 255, 209, 145),
+                        thicknessUnit: GaugeSizeUnit.factor,
+                      ),
+                      pointers: <GaugePointer>[
+                        RangePointer(
+                          value: _pomTimer.timeLeftSeconds.toDouble(),
+                          width: 0.3,
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          pointerOffset: 0.1,
+                          cornerStyle: CornerStyle.bothFlat,
+                          sizeUnit: GaugeSizeUnit.factor,
+                          enableAnimation: true,
+                          animationDuration: 1000,
+                          animationType: AnimationType.bounceOut,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-
-          // -- PANEL
-          Container(
-            width: panelWidth.toDouble(),
-            height: panelHeight.toDouble(),
-            color: Colors.blueGrey,
-            child: Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //
@@ -127,8 +216,19 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
                 ),
               ],
             ),
-          ),
-        ],
+            Positioned(
+              right: 0,
+              left: 0,
+              bottom: 0,
+              child: MaterialButton(
+                onPressed: () {
+                  PomTimerDisplayStateManager.singleton.closePomTimer();
+                },
+                child: Icon(Icons.accessible_forward),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -258,40 +358,6 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
           height: 200,
           child: Stack(
             children: [
-              SfRadialGauge(
-                key: Key(
-                  'Active',
-                ), // Just used to see different SfRadialGauges switching
-                axes: <RadialAxis>[
-                  RadialAxis(
-                    minimum: 0,
-                    maximum: _pomTimer.timeSetWorkSeconds.toDouble(),
-                    showLabels: false,
-                    showTicks: false,
-                    startAngle: 270,
-                    endAngle: 270,
-                    axisLineStyle: AxisLineStyle(
-                      thickness: 1,
-                      color: Colors.orangeAccent.shade100,
-                      thicknessUnit: GaugeSizeUnit.factor,
-                    ),
-                    pointers: <GaugePointer>[
-                      RangePointer(
-                        value: _pomTimer.timeLeftSeconds.toDouble(),
-                        width: 0.3,
-                        color: Colors.white,
-                        pointerOffset: 0.1,
-                        cornerStyle: CornerStyle.bothFlat,
-                        sizeUnit: GaugeSizeUnit.factor,
-                        enableAnimation: true,
-                        animationDuration: 1000,
-                        animationType: AnimationType.bounceOut,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-
               Center(
                 child: Text(
                   PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),

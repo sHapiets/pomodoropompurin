@@ -34,7 +34,7 @@ class _MainPageState extends State<MainPage> {
           ), */
           GameWidget(game: PurinArea()),
           MenuDial(),
-          PomTimerDial(),
+          PomTimerDisplay(),
         ],
       ),
     );

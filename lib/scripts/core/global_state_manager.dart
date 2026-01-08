@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:pomodoropompurin/scripts/core/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 
 /// Handles and manages all the states of the entire app. Mostly
