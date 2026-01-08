@@ -57,6 +57,19 @@ class AssetManager {
     await preloadImage(assetPath, context);
   }
 
+  Future<void> loadFonts() async {
+    Text(' ', style: TextStyle(fontFamily: 'Nunito'));
+    Text(
+      ' ',
+      style: TextStyle(fontFamily: 'Nunito', fontWeight: FontWeight.w500),
+    );
+    Text(' ', style: TextStyle(fontFamily: 'Fredoka'));
+    Text(
+      ' ',
+      style: TextStyle(fontFamily: 'Fredoka', fontWeight: FontWeight.w500),
+    );
+  }
+
   /// Retrieve a preloaded image
   ImageProvider? getImage(String assetPath) => _images[assetPath];
 
@@ -99,9 +112,6 @@ class AssetManager {
   }
 */
 
-  // ------------------------
-  // OPTIONAL: Clear caches
-  // ------------------------
   void clearImageCache() {
     _images.clear();
     _lazyLoaded.clear();

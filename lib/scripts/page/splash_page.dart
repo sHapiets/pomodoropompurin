@@ -51,6 +51,7 @@ class _SplashPageState extends State<SplashPage> {
     ], context);
 
     await _assetManager.preloadFlameImages();
+    await _assetManager.loadFonts();
   }
 
   Future<void> _preloadData() async {
