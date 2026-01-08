@@ -58,49 +58,61 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text(
-                '$hour:$minute',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 60,
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(color: Colors.black12, offset: Offset(4, 4)),
-                  ],
+    return AnimatedPositioned(
+      duration: Duration(),
+      top: 0,
+      left: 0,
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              spacing: 2,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  '$hour:$minute',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 50,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(color: Colors.black12, offset: Offset(4, 4)),
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                ':$second',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 25,
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(color: Colors.black12, offset: Offset(4, 4)),
-                  ],
+                Text(
+                  ':$second',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 20,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(color: Colors.black12, offset: Offset(4, 4)),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Text(
-            '$month $day, $year',
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              fontSize: 20,
-              color: Colors.white,
-              shadows: [Shadow(color: Colors.black12, offset: Offset(4, 4))],
+              ],
             ),
-          ),
-        ],
+            Text(
+              '$month $day, $year',
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 15,
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                    color: Colors.black12,
+                    offset: Offset(2, 2),
+                    blurRadius: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
