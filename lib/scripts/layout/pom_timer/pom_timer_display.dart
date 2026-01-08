@@ -47,6 +47,15 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
         duration: const Duration(milliseconds: 1000),
         switchInCurve: Curves.easeOutExpo,
         switchOutCurve: Curves.easeInExpo,
+        layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
+          return Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              ...previousChildren,
+              if (currentChild != null) currentChild,
+            ],
+          );
+        },
         transitionBuilder: (Widget child, Animation<double> animation) {
           final slideAnimation = Tween<Offset>(
             begin: const Offset(0, 1),
@@ -77,9 +86,9 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton> {
   Widget build(BuildContext context) {
     return // -- TAB
     Container(
-      height: 300,
-      width: 250,
-      padding: EdgeInsets.symmetric(vertical: 100, horizontal: 80),
+      height: 400,
+      width: 400,
+      padding: EdgeInsets.fromLTRB(150, 200, 150, 100),
       child: MaterialButton(
         onPressed: () => pomTimerDisplayStateManager.openPomTimer(),
         child: Image.asset('assets/images/L8.jpg'),
@@ -103,7 +112,7 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
   String widgetPositionState = 'Tab';
 
   int panelWidth = 400;
-  int panelHeight = 300;
+  int panelHeight = 400;
   int tabWidth = 100;
 
   double gaugeRadius = 400;
@@ -144,8 +153,11 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
       width: panelWidth.toDouble(),
       height: panelHeight.toDouble(),
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
           Positioned(
+            left: 0,
+            right: 0,
             bottom: -gaugeRadius / 2,
             child: SizedBox(
               width: gaugeRadius,
@@ -183,45 +195,34 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //
-              SizedBox(
-                width: panelWidth.toDouble(),
-                height: panelHeight.toDouble(),
-                // Animation for MODE SWITCHING (not Panel)
-                child: AnimatedSwitcher(
-                  switchInCurve: Curves.linearToEaseOut,
-                  switchOutCurve: Curves.linear,
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: ScaleTransition(
-                            scale: Tween<double>(
-                              begin: 0.8,
-                              end: 1.0,
-                            ).animate(animation),
-                            child: child,
-                          ),
-                        );
-                      },
-                  child: pomTimerWidget,
-                ),
-              ),
-            ],
-          ),
           Positioned(
-            right: 0,
             left: 0,
+            right: 0,
             bottom: 0,
-            child: MaterialButton(
-              onPressed: () {
-                PomTimerDisplayStateManager.singleton.closePomTimer();
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              switchInCurve: Curves.easeOut,
+              switchOutCurve: Curves.easeIn,
+              layoutBuilder: (currentChild, previousChildren) {
+                return Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    ...previousChildren,
+                    if (currentChild != null) currentChild,
+                  ],
+                );
               },
-              child: Icon(Icons.accessible_forward),
+              transitionBuilder: (child, animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: ScaleTransition(
+                    alignment: Alignment.bottomCenter,
+                    scale: Tween(begin: 0.95, end: 1.0).animate(animation),
+                    child: child,
+                  ),
+                );
+              },
+              child: pomTimerWidget,
             ),
           ),
         ],
@@ -307,11 +308,16 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // PomTimerActive Buttons
-        SizedBox(
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Text(
+        PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),
+        style: PomTimerTextStyles.digitTextStyle,
+      ),
+    );
+
+    // PomTimerActive Buttons
+    /* SizedBox(
           height: 200,
           width: 50,
           child: Center(
@@ -346,25 +352,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
               ],
             ),
           ),
-        ),
-
-        /// PomTimerActive Gauge
-        SizedBox(
-          width: 200,
-          height: 200,
-          child: Stack(
-            children: [
-              Center(
-                child: Text(
-                  PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),
-                  style: PomTimerTextStyles.digitTextStyle,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+        ), */
   }
 }
 
@@ -442,32 +430,34 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: 300,
-        height: 200,
-        child: Center(
-          child: Column(
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 20,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 20,
-                children: [
-                  PomTimerInputField(type: 'Work'),
-                  PomTimerInputField(type: 'Break'),
-                ],
-              ),
-
-              TextButton(
-                onPressed: () {
-                  _pomTimer.playTimer();
-                },
-                child: Text('play'),
-              ),
+              PomTimerInputField(type: 'Work'),
+              PomTimerInputField(type: 'Break'),
             ],
           ),
-        ),
+
+          TextButton(
+            onPressed: () {
+              _pomTimer.playTimer();
+            },
+            child: Text('play'),
+          ),
+
+          MaterialButton(
+            onPressed: () {
+              PomTimerDisplayStateManager.singleton.closePomTimer();
+            },
+            child: Icon(Icons.accessible_forward),
+          ),
+        ],
       ),
     );
   }
