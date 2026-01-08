@@ -23,7 +23,8 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
         anchor: anchor,
       ),
     );
-    purinEntity = PurinEntity(position: Vector2(0, 0), anchor: anchor);
+    purinEntity = PurinEntity(position: Vector2(100, 100), anchor: anchor);
     add(purinEntity);
+    add(PurinEntity(position: Vector2(0, 0), anchor: anchor));
   }
 }
