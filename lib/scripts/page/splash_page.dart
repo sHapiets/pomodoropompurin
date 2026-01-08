@@ -46,7 +46,8 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _preloadAssets() async {
     // PRELOAD ASSETS HERE!
     await _assetManager.preloadImages([
-      'assets/images/L8.jpg, assets/images/L7.png',
+      'images/L8.jpg',
+      'images/L7.png',
     ], context);
 
     await _assetManager.preloadFlameImages();
