@@ -143,92 +143,88 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
     SizedBox(
       width: panelWidth.toDouble(),
       height: panelHeight.toDouble(),
-      child: Positioned(
-        left: 0,
-        right: 0,
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: -gaugeRadius / 2,
-              child: SizedBox(
-                width: gaugeRadius,
-                height: gaugeRadius,
-                child: SfRadialGauge(
-                  axes: <RadialAxis>[
-                    RadialAxis(
-                      radiusFactor: 0.95,
-                      minimum: 0,
-                      maximum: _pomTimer.timeSetWorkSeconds.toDouble(),
-                      showLabels: false,
-                      showTicks: false,
-                      startAngle: 180,
-                      endAngle: 0,
-                      axisLineStyle: AxisLineStyle(
-                        thickness: 1,
-                        color: const Color.fromARGB(255, 255, 209, 145),
-                        thicknessUnit: GaugeSizeUnit.factor,
-                      ),
-                      pointers: <GaugePointer>[
-                        RangePointer(
-                          value: _pomTimer.timeLeftSeconds.toDouble(),
-                          width: 0.3,
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          pointerOffset: 0.1,
-                          cornerStyle: CornerStyle.bothFlat,
-                          sizeUnit: GaugeSizeUnit.factor,
-                          enableAnimation: true,
-                          animationDuration: 1000,
-                          animationType: AnimationType.bounceOut,
-                        ),
-                      ],
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: -gaugeRadius / 2,
+            child: SizedBox(
+              width: gaugeRadius,
+              height: gaugeRadius,
+              child: SfRadialGauge(
+                axes: <RadialAxis>[
+                  RadialAxis(
+                    radiusFactor: 0.95,
+                    minimum: 0,
+                    maximum: _pomTimer.timeSetWorkSeconds.toDouble(),
+                    showLabels: false,
+                    showTicks: false,
+                    startAngle: 180,
+                    endAngle: 0,
+                    axisLineStyle: AxisLineStyle(
+                      thickness: 1,
+                      color: const Color.fromARGB(255, 255, 209, 145),
+                      thicknessUnit: GaugeSizeUnit.factor,
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //
-                SizedBox(
-                  width: panelWidth.toDouble(),
-                  height: panelHeight.toDouble(),
-                  // Animation for MODE SWITCHING (not Panel)
-                  child: AnimatedSwitcher(
-                    switchInCurve: Curves.linearToEaseOut,
-                    switchOutCurve: Curves.linear,
-                    duration: const Duration(milliseconds: 300),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: ScaleTransition(
-                              scale: Tween<double>(
-                                begin: 0.8,
-                                end: 1.0,
-                              ).animate(animation),
-                              child: child,
-                            ),
-                          );
-                        },
-                    child: pomTimerWidget,
+                    pointers: <GaugePointer>[
+                      RangePointer(
+                        value: _pomTimer.timeLeftSeconds.toDouble(),
+                        width: 0.3,
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        pointerOffset: 0.1,
+                        cornerStyle: CornerStyle.bothFlat,
+                        sizeUnit: GaugeSizeUnit.factor,
+                        enableAnimation: true,
+                        animationDuration: 1000,
+                        animationType: AnimationType.bounceOut,
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            Positioned(
-              right: 0,
-              left: 0,
-              bottom: 0,
-              child: MaterialButton(
-                onPressed: () {
-                  PomTimerDisplayStateManager.singleton.closePomTimer();
-                },
-                child: Icon(Icons.accessible_forward),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //
+              SizedBox(
+                width: panelWidth.toDouble(),
+                height: panelHeight.toDouble(),
+                // Animation for MODE SWITCHING (not Panel)
+                child: AnimatedSwitcher(
+                  switchInCurve: Curves.linearToEaseOut,
+                  switchOutCurve: Curves.linear,
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 0.8,
+                              end: 1.0,
+                            ).animate(animation),
+                            child: child,
+                          ),
+                        );
+                      },
+                  child: pomTimerWidget,
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            right: 0,
+            left: 0,
+            bottom: 0,
+            child: MaterialButton(
+              onPressed: () {
+                PomTimerDisplayStateManager.singleton.closePomTimer();
+              },
+              child: Icon(Icons.accessible_forward),
+            ),
+          ),
+        ],
       ),
     );
   }
