@@ -101,7 +101,7 @@ class PurinArea extends FlameGame
     if (purinAreaStateManager.state == "Moving") {
       cursorSprite.position = info.eventPosition.global;
       newPosition += info.delta.global;
-
+      /* 
       final minX = 0.0;
       final minY = 0.0;
       final maxX = size.x - purinAreaHome.size.x;
@@ -111,12 +111,12 @@ class PurinArea extends FlameGame
       newPosition = Vector2(
         newPosition.x.clamp(minX, maxX),
         newPosition.y.clamp(minY, maxY),
-      );
+      ); */
     } else if (purinAreaStateManager.state == "Scaling") {
       cursorSprite.position.x = info.eventPosition.global.x;
       newScale -= info.delta.global.yy * 0.005;
 
-      final minScale = 0.2;
+      final minScale = 0.4;
       final maxScale = 2.2;
 
       // Clamping from scaling
