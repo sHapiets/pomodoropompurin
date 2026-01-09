@@ -99,7 +99,7 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
             Text(
               '$month $day, $year',
               style: TextStyle(
-                fontFamily: 'Nunito',
+                fontFamily: 'Fredoka',
                 fontSize: 15,
                 color: Colors.white,
                 shadows: [

@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
@@ -12,19 +13,58 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   }
 
   final purinAreaStateManager = PurinAreaStateManager.singleton;
-
   late PurinEntity purinEntity;
+  late SequenceEffect onLoadAnim;
 
   @override
   Future<void> onLoad() async {
+    scale = Vector2.all(0.01);
+    addOnLoadAnim();
+    // Home Sprite
     add(
       SpriteComponent(
-        sprite: Sprite(Flame.images.fromCache('SamplePurinArea.png')),
+        sprite: Sprite(Flame.images.fromCache('purinAreaHome_floor.png')),
+        size: Vector2.all(800),
         anchor: anchor,
+        priority: 10,
+      ),
+    );
+    add(
+      SpriteComponent(
+        sprite: Sprite(Flame.images.fromCache('purinAreaHome_stairs.png')),
+        size: Vector2.all(800),
+        anchor: anchor,
+        priority: 11,
       ),
     );
     purinEntity = PurinEntity(position: Vector2(100, 100), anchor: anchor);
     add(purinEntity);
-    add(PurinEntity(position: Vector2(0, 0), anchor: anchor));
+    add(PurinEntity(position: Vector2(0, -100), anchor: anchor));
+  }
+
+  void addOnLoadAnim() {
+    onLoadAnim = SequenceEffect([
+      ScaleEffect.to(
+        Vector2.all(1.4),
+        EffectController(duration: 0.15, curve: Curves.easeOut),
+      ),
+      ScaleEffect.to(
+        Vector2.all(0.6),
+        EffectController(duration: 0.15, curve: Curves.easeIn),
+      ),
+      ScaleEffect.to(
+        Vector2.all(1.1),
+        EffectController(duration: 0.15, curve: Curves.easeOut),
+      ),
+      ScaleEffect.to(
+        Vector2.all(0.9),
+        EffectController(duration: 0.15, curve: Curves.easeIn),
+      ),
+      ScaleEffect.to(
+        Vector2.all(1),
+        EffectController(duration: 0.15, curve: Curves.easeOut),
+      ),
+    ]);
+    add(onLoadAnim);
   }
 }

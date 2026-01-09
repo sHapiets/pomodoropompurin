@@ -70,8 +70,7 @@ class _SplashPageState extends State<SplashPage> {
     _progSystem.loadDateLogList(
       await _databaseManager.calendarMonthLoad(2026, 1),
     );
-
-    debugPrint('ok');
+    DateTime.now();
   }
 
   Future<void> loadingScreenchuchu() async {}

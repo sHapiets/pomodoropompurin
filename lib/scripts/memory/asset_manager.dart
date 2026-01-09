@@ -41,6 +41,8 @@ class AssetManager {
       "SamplePurin.png",
       "L8.jpg",
       'test_bg.png',
+      "purinAreaHome_floor.png",
+      "purinAreaHome_stairs.png",
     ];
 
     for (String imagePath in allFlameImages) {

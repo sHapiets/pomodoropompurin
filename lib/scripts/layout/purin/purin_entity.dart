@@ -11,8 +11,9 @@ class PurinEntity extends SpriteComponent with TapCallbacks {
   PurinEntity({required Vector2 position, required Anchor anchor}) {
     this.position = position;
     sprite = Sprite(Flame.images.fromCache('SamplePurin.png'));
-    size = Vector2(60, 60);
+    size = Vector2(80, 80);
     this.anchor = anchor;
+    priority = 20;
   }
 
   final purinAreaStateManager = PurinAreaStateManager.singleton;
