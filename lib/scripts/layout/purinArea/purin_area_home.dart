@@ -17,7 +17,8 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   late SequenceEffect onLoadAnim;
 
   @override
-  Future<void> onLoad() async {
+  Future<void> onMount() async {
+    super.onMount();
     scale = Vector2.all(0.01);
     addOnLoadAnim();
     // Home Sprite
