@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_entity.dart';
+import 'package:pomodoropompurin/scripts/layout/purinArea/kotatsu.dart';
 
 class PurinAreaHome extends PositionComponent with TapCallbacks {
   PurinAreaHome({required Vector2 position}) {
@@ -20,12 +21,13 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   Future<void> onMount() async {
     super.onMount();
     scale = Vector2.all(0.01);
+
     addOnLoadAnim();
     // Home Sprite
     add(
       SpriteComponent(
         sprite: Sprite(Flame.images.fromCache('purinAreaHome_floor.png')),
-        size: Vector2.all(800),
+        size: Vector2.all(1200),
         anchor: anchor,
         priority: 10,
       ),
@@ -33,14 +35,14 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     add(
       SpriteComponent(
         sprite: Sprite(Flame.images.fromCache('purinAreaHome_stairs.png')),
-        size: Vector2.all(800),
+        size: Vector2.all(1200),
         anchor: anchor,
         priority: 11,
       ),
     );
-    purinEntity = PurinEntity(position: Vector2(100, 100), anchor: anchor);
+    purinEntity = PurinEntity();
+    add(Kotatsu());
     add(purinEntity);
-    add(PurinEntity(position: Vector2(0, -100), anchor: anchor));
   }
 
   void addOnLoadAnim() {

@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/layout/current_datetime_display/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/menu_dropdown/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_dial.dart';
@@ -16,12 +17,20 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final assetManager = AssetManager.singleton;
+  final pomTimer = PomTimer.singleton;
+  bool _enableModalBarrier = false;
 
   @override
   void initState() {
     super.initState();
+    /* 
+    pomTimer.disablePurinArea = (bool enableModalBarrier) {
+      setState(() {
+        _enableModalBarrier = enableModalBarrier;
+      });
+    }; */
   }
 
   @override
@@ -35,8 +44,13 @@ class _MainPageState extends State<MainPage> {
           ), */
           GameWidget(game: PurinArea()),
           MenuDial(),
-          PomTimerDisplay(),
           CurrentDatetimeDisplay(),
+          /*  if (_enableModalBarrier)
+            ModalBarrier(
+              color: const Color.fromARGB(133, 0, 0, 0),
+              dismissible: true,
+            ), */
+          PomTimerDisplay(),
         ],
       ),
     );

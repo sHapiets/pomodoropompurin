@@ -29,10 +29,11 @@ class PomTimer {
   bool isPlaying = false;
   bool onBreak = false;
 
-  // Callbacks functions for display/layout widgets (PomTimerDisplay defines this...)
+  // Callbacks functions for display/layout widgets
   void Function() updatePomTimerCount = () {};
   void Function() updatePomTimerGauge = () {};
   void Function(String) switchPomTimerMode = (s) {};
+  void Function(bool) disablePurinArea = (b) {};
 
   String pomTimerState = 'Inactive';
 
@@ -42,6 +43,7 @@ class PomTimer {
     } else {
       isPlaying = true;
       switchPomTimerMode('Active');
+      disablePurinArea(true);
 
       if (restart) {
         // Not a 'resume', set INITIAL INPUT times
@@ -116,6 +118,7 @@ class PomTimer {
       isPlaying = false;
       timer.cancel();
       switchPomTimerMode('Paused');
+      disablePurinArea(false);
     }
   }
 
@@ -138,6 +141,7 @@ class PomTimer {
     timeLeftSeconds = 0;
     timeTotalSeconds = 0; //
     switchPomTimerMode('Idle');
+    disablePurinArea(false);
 
     /// Tell Koupen that the timer was stopped before connection is severed;
     /// and rewards was already awarded...

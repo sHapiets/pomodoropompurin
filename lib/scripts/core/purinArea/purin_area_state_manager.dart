@@ -8,6 +8,6 @@ class PurinAreaStateManager {
   String state = 'Idle';
   bool get isTransforming => (state == 'Idle') ? false : true;
 
-  /// Set by PurinArea, updates newPosition s.t. position is at center
+  /// Function set in PurinArea, updates newPosition s.t. position is at center
   void Function(Vector2) jumpToPosition = (Vector2 position) {};
 }

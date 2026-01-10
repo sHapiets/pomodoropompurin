@@ -21,8 +21,8 @@ class PurinArea extends FlameGame
   /// Assets paths (from assets/images/->...)
   final backgroundAsset = 'L7.png';
   @override
-  Color backgroundColor() => const Color.fromARGB(255, 190, 179, 149);
-
+  Color backgroundColor() => const Color.fromARGB(255, 163, 210, 200);
+  /* const Color.fromARGB(255, 190, 179, 149) */
   SpriteComponent cursorSprite = CursorMovingSprite(
     position: Vector2.zero(),
     priority: -999,
