@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
@@ -7,8 +8,8 @@ import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
-import 'package:pomodoropompurin/scripts/layout/purinArea/cursor_sprite.dart';
-import 'package:pomodoropompurin/scripts/layout/purinArea/purin_area_home.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/cursor_sprite.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_home.dart';
 
 class PurinArea extends FlameGame
     with TapCallbacks, PanDetector, DoubleTapCallbacks {
@@ -21,7 +22,8 @@ class PurinArea extends FlameGame
   /// Assets paths (from assets/images/->...)
   final backgroundAsset = 'L7.png';
   @override
-  Color backgroundColor() => const Color.fromARGB(255, 163, 210, 200);
+  Color backgroundColor() => const Color.fromARGB(255, 190, 179, 149);
+  /* const Color.fromARGB(255, 163, 210, 200) */
   /* const Color.fromARGB(255, 190, 179, 149) */
   SpriteComponent cursorSprite = CursorMovingSprite(
     position: Vector2.zero(),
@@ -30,6 +32,7 @@ class PurinArea extends FlameGame
 
   @override
   FutureOr<void> onLoad() async {
+    super.onLoad();
     purinAreaHome = PurinAreaHome(position: size / 2);
     purinAreaStateManager.jumpToPosition = jumpToPosition;
     newPosition = purinAreaHome.position;
@@ -46,8 +49,9 @@ class PurinArea extends FlameGame
   }
 
   void jumpToPosition(Vector2 position) {
-    final center = Vector2(size.x / 2, size.y / 2);
-    newPosition += center - position;
+    final offsetPosition = Vector2(position.x, position.y + 100);
+    final center = size / 2;
+    newPosition += center - offsetPosition;
   }
 
   @override

@@ -1,13 +1,13 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
-import 'package:pomodoropompurin/scripts/layout/current_datetime_display/current_datetime_display.dart';
+import 'package:pomodoropompurin/scripts/layout/data_ui/current_datetime_display.dart';
+import 'package:pomodoropompurin/scripts/layout/data_ui/prog_system_display.dart';
 import 'package:pomodoropompurin/scripts/layout/equip_menu/kotatsu_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu_dropdown/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_calendar_display.dart';
-import 'package:pomodoropompurin/scripts/layout/prog_system_display.dart';
-import 'package:pomodoropompurin/scripts/layout/purinArea/purin_area.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
 class MainPage extends StatefulWidget {
@@ -49,8 +49,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
             },
           ),
-          MenuDial(),
+          ProgSystemDisplay(),
           CurrentDatetimeDisplay(),
+          MenuDial(),
           /*  if (_enableModalBarrier)
             ModalBarrier(
               color: const Color.fromARGB(133, 0, 0, 0),

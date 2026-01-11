@@ -20,14 +20,9 @@ class _MenuDialState extends State<MenuDial> {
         buttonAnchor: Alignment.bottomCenter,
         itemAnchor: Alignment.topCenter,
         buttonBuilder: (context, isActive, toggle) {
-          return SizedBox(
-            width: 70,
-            height: 70,
-            child: MaterialButton(
-              shape: CircleBorder(),
-              onPressed: toggle,
-              child: Image.asset('assets/images/SamplePurin.png'),
-            ),
+          return IconButton(
+            onPressed: toggle,
+            icon: Icon(Icons.widgets_outlined, color: Colors.white),
           );
         },
         itemBuilder: (context, Widget item, i, animation) =>

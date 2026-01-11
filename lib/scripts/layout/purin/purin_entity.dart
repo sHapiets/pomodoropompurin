@@ -22,7 +22,7 @@ class PurinEntity extends PositionComponent
   late PurinAnim purinAnim;
   late SpriteComponent purinSprite;
   late PolygonHitbox purinHitbox;
-  late TimerComponent gestureTimer;
+  late TimerComponent onTapTimer;
 
   @override
   void onMount() {
@@ -51,7 +51,7 @@ class PurinEntity extends PositionComponent
     add(hitbox);
 
     // timer for onTap timers and cancel
-    gestureTimer = TimerComponent(
+    onTapTimer = TimerComponent(
       period: 2, // <- check how much time (0.3s or lower?)
       removeOnFinish: true,
       onTick: () {
@@ -71,15 +71,6 @@ class PurinEntity extends PositionComponent
   void onTapDown(TapDownEvent event) {
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(absolutePosition);
-    add(
-      TimerComponent(
-        period: 2, // <- check how much time (0.3s or lower?)
-        removeOnFinish: true,
-        onTick: () {
-          // add dialog here (overlay)
-        },
-      ),
-    );
-    // ... dialog
+    add(onTapTimer);
   }
 }

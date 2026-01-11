@@ -60,7 +60,7 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
   Widget build(BuildContext context) {
     return AnimatedPositioned(
       duration: Duration(),
-      top: 0,
+      top: 80,
       left: 0,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -76,7 +76,7 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                   '$hour:$minute',
                   style: TextStyle(
                     fontFamily: 'Nunito',
-                    fontSize: 50,
+                    fontSize: 40,
                     color: Colors.white,
                     shadows: [
                       Shadow(color: Colors.black12, offset: Offset(4, 4)),
@@ -87,7 +87,7 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                   ':$second',
                   style: TextStyle(
                     fontFamily: 'Nunito',
-                    fontSize: 20,
+                    fontSize: 13,
                     color: Colors.white,
                     shadows: [
                       Shadow(color: Colors.black12, offset: Offset(4, 4)),

@@ -46,7 +46,7 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 1000),
         switchInCurve: Curves.easeOutExpo,
-        switchOutCurve: Curves.easeInExpo,
+        switchOutCurve: Curves.linear,
         layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
           return Stack(
             alignment: Alignment.center,
@@ -89,9 +89,11 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton> {
       height: 400,
       width: 400,
       padding: EdgeInsets.fromLTRB(150, 250, 150, 50),
-      child: MaterialButton(
-        onPressed: () => pomTimerDisplayStateManager.openPomTimer(),
-        child: Image.asset('assets/images/L8.jpg'),
+      child: Center(
+        child: MaterialButton(
+          onPressed: () => pomTimerDisplayStateManager.openPomTimer(),
+          child: Image.asset('assets/images/L8.jpg'),
+        ),
       ),
     );
   }

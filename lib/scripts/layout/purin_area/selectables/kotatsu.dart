@@ -4,7 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
-import 'package:pomodoropompurin/scripts/layout/purinArea/purin_area_selectable.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 /// A selectable object for PurinArea, creating a comfy and customizeable kotatsu inside
 ///  Purin's home.

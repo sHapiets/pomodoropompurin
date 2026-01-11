@@ -5,7 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_entity.dart';
-import 'package:pomodoropompurin/scripts/layout/purinArea/selectables/kotatsu.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
 
 class PurinAreaHome extends PositionComponent with TapCallbacks {
   PurinAreaHome({required Vector2 position}) {
