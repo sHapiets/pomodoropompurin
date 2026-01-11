@@ -46,6 +46,9 @@ class AssetManager {
       "purinEntity.png",
       "purinAreaHome_whole.png",
       "purinAreaHome_kotatsu.png",
+      "purinAreaHome_kotatsu_blue.png",
+      "Kotatsu_default.png",
+      "Kotatsu_blue.png",
     ];
 
     for (String imagePath in allFlameImages) {

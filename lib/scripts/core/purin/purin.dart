@@ -18,6 +18,6 @@ class Purin {
   Purin._();
   static final singleton = Purin._();
 
-  final _purinStateManager = PurinStateManager.singleton;
-  final _purinEquipManager = PurinEquipManager.singleton;
+  final state = PurinStateManager.singleton;
+  final equip = PurinEquipManager.singleton;
 }

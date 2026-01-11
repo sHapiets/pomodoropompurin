@@ -38,4 +38,18 @@ class Acquirables {
   Map<String, Bottom> acquirableBottoms = {};
   Map<String, OutfitSet> acquirableOutfitSets = {};
   Map<String, PurinVar> acquirablePurinVars = {};
+  Map<String, RoomDesign> acquirableRoomDesign = {
+    'default': RoomDesign(
+      id: "0000",
+      displayName: "Pudding",
+      cost: 0,
+      iconAssetPath: "Kotatsu_default.png",
+    ),
+    'blue': RoomDesign(
+      id: "0000",
+      displayName: "Blue Pudding",
+      cost: 0,
+      iconAssetPath: "Kotatsu_blue.png",
+    ),
+  };
 }

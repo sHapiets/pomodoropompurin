@@ -52,6 +52,8 @@ class PurinArea extends FlameGame
 
   @override
   void onTapDown(TapDownEvent event) {
+    overlays.removeAll(overlays.activeOverlays);
+
     cursorSprite.removeFromParent();
     cursorSprite = CursorMovingSprite(
       position: event.canvasPosition,
@@ -98,6 +100,7 @@ class PurinArea extends FlameGame
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
+    overlays.removeAll(overlays.activeOverlays);
     if (purinAreaStateManager.state == "Moving") {
       cursorSprite.position = info.eventPosition.global;
       newPosition += info.delta.global;

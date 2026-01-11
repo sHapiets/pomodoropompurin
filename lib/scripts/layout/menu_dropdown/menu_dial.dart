@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freestyle_speed_dial/freestyle_speed_dial.dart';
-import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_dial.dart';
 
+/// A clean, dropdown menu widget
 class MenuDial extends StatefulWidget {
   const MenuDial({super.key});
 
@@ -37,7 +37,7 @@ class _MenuDialState extends State<MenuDial> {
             ),
         items: [
           Container(
-            margin: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.only(top: 10),
             width: 50,
             height: 50,
             child: MaterialButton(
@@ -47,7 +47,7 @@ class _MenuDialState extends State<MenuDial> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.only(top: 10),
             width: 50,
             height: 50,
             child: MaterialButton(
