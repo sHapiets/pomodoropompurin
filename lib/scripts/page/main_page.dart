@@ -50,7 +50,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
             },
           ),
-          VignetteUI(visible: true),
           ProgSystemDisplay(),
           CurrentDatetimeDisplay(),
           MenuDial(),
