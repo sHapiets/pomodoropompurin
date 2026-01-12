@@ -67,18 +67,20 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
             margin: EdgeInsets.only(top: 10),
             width: 50,
             height: 50,
-            child: MaterialButton(
-              shape: CircleBorder(),
-              onPressed: () {},
-              child: const Icon(
-                Icons.library_add_sharp,
-                color: Colors.white,
-                shadows: [
-                  Shadow(
-                    color: Color.fromARGB(169, 147, 147, 147),
-                    offset: Offset(3, 3),
-                  ),
-                ],
+            child: Center(
+              child: MaterialButton(
+                shape: CircleBorder(),
+                onPressed: () {},
+                child: const Icon(
+                  Icons.library_add_sharp,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(169, 147, 147, 147),
+                      offset: Offset(3, 3),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -86,18 +88,20 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
             margin: EdgeInsets.only(top: 10),
             width: 50,
             height: 50,
-            child: MaterialButton(
-              shape: CircleBorder(),
-              onPressed: () {},
-              child: const Icon(
-                Icons.calendar_month_outlined,
-                color: Colors.white,
-                shadows: [
-                  Shadow(
-                    color: Color.fromARGB(169, 147, 147, 147),
-                    offset: Offset(3, 3),
-                  ),
-                ],
+            child: Center(
+              child: MaterialButton(
+                shape: CircleBorder(),
+                onPressed: () {},
+                child: const Icon(
+                  Icons.calendar_month_outlined,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(169, 147, 147, 147),
+                      offset: Offset(3, 3),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

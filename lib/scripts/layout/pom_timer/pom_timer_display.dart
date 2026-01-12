@@ -126,6 +126,16 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
       child: Center(
         child: Column(
           children: [
+            /* 
+            Text(
+              "HOLD",
+              style: TextStyle(
+                fontFamily: 'Fredoka',
+                fontSize: 10,
+                color: Colors.white,
+                shadows: [Shadow(color: Colors.black12, offset: Offset(2, 2))],
+              ),
+            ), */
             GestureDetector(
               onTapDown: (details) {
                 buttonHold();
@@ -257,14 +267,14 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
                     endAngle: 0,
                     axisLineStyle: AxisLineStyle(
                       thickness: 1,
-                      color: const Color.fromARGB(255, 255, 209, 145),
+                      color: const Color.fromARGB(150, 250, 218, 132),
                       thicknessUnit: GaugeSizeUnit.factor,
                     ),
                     pointers: <GaugePointer>[
                       RangePointer(
                         value: _pomTimer.timeLeftSeconds.toDouble(),
                         width: 0.3,
-                        color: const Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 174, 145, 72),
                         pointerOffset: 0.1,
                         cornerStyle: CornerStyle.bothFlat,
                         sizeUnit: GaugeSizeUnit.factor,
@@ -390,7 +400,13 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
       alignment: Alignment.bottomCenter,
       child: Text(
         PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),
-        style: PomTimerTextStyles.digitTextStyle,
+        style: TextStyle(
+          fontFamily: 'Fredoka',
+          fontWeight: FontWeight.w500,
+          fontSize: 30,
+          color: const Color.fromARGB(232, 255, 255, 255),
+          shadows: [Shadow(color: Colors.black12, offset: Offset(2, 2))],
+        ),
       ),
     );
 
@@ -549,7 +565,8 @@ class _PomTimerInputFieldState extends State<PomTimerInputField> {
   final _pomTimer = PomTimer.singleton;
   int _input = 0;
   String get _inputString => _input.toString().padLeft(2, '0');
-  int maxValue = 0;
+  late final int maxValue;
+  int minValue = 1;
 
   @override
   void initState() {
@@ -572,42 +589,66 @@ class _PomTimerInputFieldState extends State<PomTimerInputField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        children: [
-          Row(
-            spacing: 5,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (_input > 4) {
-                    _input -= 5;
-                    updateSetTimer();
-                    setState(() {});
-                  }
-                },
-                child: (_input > 4)
-                    ? Text('-5')
-                    : Text(''), // TODO: Change to Image button or smthing
-              ),
-              Text(_inputString),
-              GestureDetector(
-                onTap: () {
-                  if (_input < maxValue - 4) {
-                    _input += 5;
-                    updateSetTimer();
-                    setState(() {});
-                  }
-                },
-                child: (_input < maxValue - 4)
-                    ? Text('+5')
-                    : Text(''), // TODO: Change to Image button or smthing
-              ),
-            ],
+    return Stack(
+      children: [
+        Center(
+          child: Image.asset(
+            'images/pomTimer/pomTimerInput_back.png',
+            width: 150,
+            height: 120,
           ),
-          Row(spacing: 10, children: [Text('-1'), Text('+1')]),
-        ],
-      ),
+        ),
+        if (_input >= minValue + 5)
+          Positioned(
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 60,
+              height: 60,
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _input -= 5;
+                  });
+                },
+                icon: Image.asset('images/pomTimer/pomTimerInput_minus.png'),
+              ),
+            ),
+          ),
+        if (_input <= maxValue - 5)
+          Positioned(
+            top: 0,
+            bottom: 0,
+            right: 0,
+            child: Container(
+              height: 60,
+              width: 60,
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _input += 5;
+                  });
+                },
+                icon: Image.asset('images/pomTimer/pomTimerInput_plus.png'),
+              ),
+            ),
+          ),
+        Positioned.fill(
+          child: Center(
+            child: Text(
+              _inputString,
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 30,
+                color: const Color.fromARGB(255, 255, 255, 255),
+                shadows: [Shadow(color: Colors.black12, offset: Offset(2, 2))],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

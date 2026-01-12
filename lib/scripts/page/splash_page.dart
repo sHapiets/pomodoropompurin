@@ -48,6 +48,9 @@ class _SplashPageState extends State<SplashPage> {
     await _assetManager.preloadImages([
       'images/L8.jpg',
       'images/L7.png',
+      'images/pomTimer/pomTimerInput_back.png',
+      'images/pomTimer/pomTimerInput_minus.png',
+      'images/pomTimer/pomTimerInput_plus.png',
     ], context);
 
     await _assetManager.preloadFlameImages();

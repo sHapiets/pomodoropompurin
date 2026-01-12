@@ -19,9 +19,10 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
       left: 0,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 15.0, 0, 0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// GAUGE
             SizedBox(
               height: expGaugeHeight,
               width: expGaugeWidth,
@@ -84,21 +85,104 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       ],
                     ),
                     Center(
-                      child: Text(
-                        '5',
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 27,
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          shadows: [
-                            Shadow(color: Colors.black12, offset: Offset(2, 2)),
-                          ],
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.only(bottom: 30),
+                        child: Text(
+                          'Level',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            shadows: [
+                              Shadow(
+                                color: Colors.black12,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.only(top: 10),
+                        child: Text(
+                          '78',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 24,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            shadows: [
+                              Shadow(
+                                color: Colors.black12,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
+              ),
+            ),
+
+            /// PomPoints
+            Padding(
+              padding: const EdgeInsetsGeometry.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: Image.asset("assets/images/pomPoints_icon.png"),
+                    ),
+                  ),
+                  Text(
+                    '150,912',
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 13,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      shadows: [
+                        Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsetsGeometry.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: Image.asset("assets/images/pomPoints_icon.png"),
+                    ),
+                  ),
+                  Text(
+                    '1,980',
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 13,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      shadows: [
+                        Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

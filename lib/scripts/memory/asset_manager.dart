@@ -49,6 +49,7 @@ class AssetManager {
       "purinAreaHome_kotatsu_blue.png",
       "Kotatsu_default.png",
       "Kotatsu_blue.png",
+      "pomPoints_icon.png",
     ];
 
     for (String imagePath in allFlameImages) {
