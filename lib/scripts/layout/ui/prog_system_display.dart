@@ -68,7 +68,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                               gradient: SweepGradient(
                                 colors: const <Color>[
                                   Color.fromARGB(255, 255, 250, 230),
-                                  Color.fromARGB(255, 122, 253, 185),
+                                  Color.fromARGB(255, 255, 255, 255),
                                 ],
                                 stops: const <double>[0, 1],
                               ),

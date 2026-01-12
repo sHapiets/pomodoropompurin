@@ -71,7 +71,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
               shape: CircleBorder(),
               onPressed: () {},
               child: const Icon(
-                Icons.hub,
+                Icons.library_add_sharp,
                 color: Colors.white,
                 shadows: [
                   Shadow(
@@ -90,7 +90,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
               shape: CircleBorder(),
               onPressed: () {},
               child: const Icon(
-                Icons.download,
+                Icons.calendar_month_outlined,
                 color: Colors.white,
                 shadows: [
                   Shadow(
