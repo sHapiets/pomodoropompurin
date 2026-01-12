@@ -88,11 +88,30 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton> {
     Container(
       height: 400,
       width: 400,
-      padding: EdgeInsets.fromLTRB(150, 250, 150, 50),
+      padding: EdgeInsets.fromLTRB(0, 250, 0, 50),
       child: Center(
-        child: MaterialButton(
-          onPressed: () => pomTimerDisplayStateManager.openPomTimer(),
-          child: Image.asset('assets/images/L8.jpg'),
+        child: Column(
+          children: [
+            IconButton(
+              iconSize: 35,
+              onPressed: () {},
+              onLongPress: () => pomTimerDisplayStateManager.openPomTimer(),
+              icon: Icon(
+                Icons.access_alarms_outlined,
+                color: Colors.white,
+                shadows: [Shadow(offset: Offset(3, 3), color: Colors.grey)],
+              ),
+            ),
+            Text(
+              "ready when you are",
+              style: TextStyle(
+                fontFamily: 'Fredoka',
+                fontSize: 15,
+                color: Colors.white,
+                shadows: [Shadow(color: Colors.black12, offset: Offset(4, 4))],
+              ),
+            ),
+          ],
         ),
       ),
     );

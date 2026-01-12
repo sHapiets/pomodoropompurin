@@ -15,12 +15,12 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   Widget build(BuildContext context) {
     return AnimatedPositioned(
       duration: Duration(),
-      top: 0,
+      top: 30,
       left: 0,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 15.0, 0, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: expGaugeHeight,
@@ -44,7 +44,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                             thicknessUnit: GaugeSizeUnit.factor,
                           ),
                           pointers: <GaugePointer>[
-                            RangePointer(
+                            /* RangePointer(
                               value: 1,
                               width: 0.1,
                               color: const Color.fromARGB(80, 145, 145, 145),
@@ -61,19 +61,19 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                               cornerStyle: CornerStyle.bothFlat,
                               sizeUnit: GaugeSizeUnit.factor,
                               enableAnimation: false,
-                            ),
+                            ), */
                             RangePointer(
                               value: 0.7,
                               width: 0.2,
                               gradient: SweepGradient(
                                 colors: const <Color>[
                                   Color.fromARGB(255, 255, 250, 230),
-                                  Color.fromARGB(255, 183, 253, 122),
+                                  Color.fromARGB(255, 122, 253, 185),
                                 ],
                                 stops: const <double>[0, 1],
                               ),
                               pointerOffset: 0.08,
-                              cornerStyle: CornerStyle.endCurve,
+                              cornerStyle: CornerStyle.bothFlat,
                               sizeUnit: GaugeSizeUnit.factor,
                               enableAnimation: true,
                               animationDuration: 1000,

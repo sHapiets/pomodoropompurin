@@ -60,42 +60,14 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
   Widget build(BuildContext context) {
     return AnimatedPositioned(
       duration: Duration(),
-      top: 80,
+      top: 0,
       left: 0,
+      right: 0,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              spacing: 2,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                Text(
-                  '$hour:$minute',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 40,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(color: Colors.black12, offset: Offset(4, 4)),
-                    ],
-                  ),
-                ),
-                Text(
-                  ':$second',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 13,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(color: Colors.black12, offset: Offset(4, 4)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
             Text(
               '$month $day, $year',
               style: TextStyle(
@@ -110,6 +82,36 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                   ),
                 ],
               ),
+            ),
+            Row(
+              spacing: 2,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  '$hour:$minute',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 20,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                    ],
+                  ),
+                ),
+                Text(
+                  ':$second',
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 7,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(color: Colors.black12, offset: Offset(4, 4)),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
