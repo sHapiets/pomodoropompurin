@@ -98,7 +98,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
             Positioned(
               left: 0,
               right: 0,
-              bottom: -gaugeRadius / 2 + 80,
+              bottom: -gaugeRadius / 2 + 100,
               child: IgnorePointer(
                 child: SfRadialGauge(
                   axes: <RadialAxis>[
