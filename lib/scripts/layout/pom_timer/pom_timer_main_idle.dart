@@ -126,8 +126,12 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               _value = value;
                               setState(() {});
                             },
-                            markerOffset: -40,
-                            markerType: MarkerType.diamond,
+                            markerOffset: -45 * gaugeTween.value,
+                            markerType: MarkerType.image,
+                            markerHeight: 70 * gaugeTween.value,
+                            markerWidth: 70 * gaugeTween.value,
+                            imageUrl:
+                                'images/pomTimer/pomTimer_WorkPointer.png',
                           ),
                         ],
                       ),

@@ -53,6 +53,7 @@ class _SplashPageState extends State<SplashPage> {
       'images/pomTimer/pomTimerInput_plus.png',
       'images/pomTimer/pomTimerIdle_background.png',
       'images/pomTimer/pomTimerIdle_start_button.png',
+      'images/pomTimer/pomTimer_WorkPointer.png',
     ], context);
 
     await _assetManager.preloadFlameImages();
