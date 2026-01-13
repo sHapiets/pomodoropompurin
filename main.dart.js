@@ -64895,7 +64895,7 @@ s.ay=new A.abn(r)},
 R(a){var s,r,q,p=null,o=this.f,n=this.d
 n===$&&A.a()
 n=o-n.y
-n=A.wh(-120,A.WJ(A.ahg(A.c([A.a2h(new A.jV(B.bd,1,B.dS),20,!1,o,0,A.c([A.a2i(700,B.fl,B.i,B.aY,!0,new A.qd(B.F,0,6.283185307179586,B.dl,B.Di,B.kU,p),0.1,B.bd,n,0.08),A.agK(700,B.fl,3,!0,!1,"images/pomTimer/pomTimer_WorkPointer.png",50,-60,B.ex,50,p,p,n)],t.iO),0.95,!1,!1,160)],t.ud)),!0),p,p,0,0,p,p)
+n=A.wh(-100,A.WJ(A.ahg(A.c([A.a2h(new A.jV(B.bd,1,B.dS),20,!1,o,0,A.c([A.a2i(700,B.fl,B.i,B.aY,!0,new A.qd(B.F,0,6.283185307179586,B.dl,B.Di,B.kU,p),0.1,B.bd,n,0.08),A.agK(700,B.fl,3,!0,!1,"images/pomTimer/pomTimer_WorkPointer.png",50,-60,B.ex,50,p,p,n)],t.iO),0.95,!1,!1,160)],t.ud)),!0),p,p,0,0,p,p)
 o=this.d.y
 s=B.h.aW(B.h.c9(o,3600),24)
 r=B.h.aW(B.h.c9(o,60),60)
