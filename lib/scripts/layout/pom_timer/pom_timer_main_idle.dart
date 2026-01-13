@@ -73,7 +73,9 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            Align(child: Image.asset('images/pomTimerIdle_background.png')),
+            Align(
+              child: Image.asset('assets/images/pomTimerIdle_background.png'),
+            ),
 
             Positioned(
               left: 0,
@@ -128,7 +130,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             markerType: MarkerType.image,
                             markerHeight: 70 * gaugeTween.value,
                             markerWidth: 70 * gaugeTween.value,
-                            imageUrl: 'images/pomTimer_WorkPointer.png',
+                            imageUrl: 'assets/images/pomTimer_WorkPointer.png',
                           ),
                         ],
                       ),
@@ -198,7 +200,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                       return ScaleTransition(
                         scale: buttonTween,
                         child: Image.asset(
-                          'images/pomTimerIdle_start_button.png',
+                          'assets/images/pomTimerIdle_start_button.png',
                         ),
                       );
                     },

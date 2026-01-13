@@ -46,14 +46,14 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _preloadAssets() async {
     // PRELOAD ASSETS HERE!
     await _assetManager.preloadImages([
-      'images/L8.jpg',
-      'images/L7.png',
-      'images/pomTimerInput_back.png',
-      'images/pomTimerInput_minus.png',
-      'images/pomTimerInput_plus.png',
-      'images/pomTimerIdle_background.png',
-      'images/pomTimerIdle_start_button.png',
-      'images/pomTimer_WorkPointer.png',
+      'assets/images/L8.jpg',
+      'assets/images/L7.png',
+      'assets/images/pomTimerInput_back.png',
+      'assets/images/pomTimerInput_minus.png',
+      'assets/images/pomTimerInput_plus.png',
+      'assets/images/pomTimerIdle_background.png',
+      'assets/images/pomTimerIdle_start_button.png',
+      'assets/images/pomTimer_WorkPointer.png',
     ], context);
 
     await _assetManager.preloadFlameImages();
