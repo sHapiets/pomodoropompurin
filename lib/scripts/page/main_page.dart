@@ -59,6 +59,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               dismissible: true,
             ), */
           PomTimerDisplay(),
+          Image.asset('images/pomTimerIdle_background.png'),
         ],
       ),
     );
