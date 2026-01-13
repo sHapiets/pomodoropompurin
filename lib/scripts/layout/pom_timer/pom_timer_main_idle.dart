@@ -18,7 +18,10 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
   late PomTimer _pomTimer;
   double displayTime = 0;
   late AnimationController gaugeAnimController;
-  late Animation<double> gaugeTweenController;
+  late Animation<double> gaugeTween;
+
+  late AnimationController buttonAnimController;
+  late Animation<double> buttonTween;
 
   double _value = 0;
 
@@ -30,8 +33,16 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
-    gaugeTweenController = Tween<double>(begin: 0.5, end: 0.95).animate(
-      CurvedAnimation(parent: gaugeAnimController, curve: Curves.easeInOutCirc),
+    gaugeTween = Tween<double>(begin: 0.4, end: 0.8).animate(
+      CurvedAnimation(parent: gaugeAnimController, curve: Curves.easeInOutBack),
+    );
+
+    buttonAnimController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    )..repeat(reverse: true);
+    buttonTween = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(parent: buttonAnimController, curve: Curves.easeIn),
     );
   }
 
@@ -47,6 +58,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
 
   @override
   void dispose() {
+    buttonAnimController.dispose();
     gaugeAnimController.dispose();
     super.dispose();
   }
@@ -61,22 +73,26 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
         child: Stack(
           clipBehavior: Clip.none,
           children: [
+            Align(
+              child: Image.asset('images/pomTimer/pomTimerIdle_background.png'),
+            ),
+
             Positioned(
               left: 0,
               right: 0,
-              bottom: -50,
+              bottom: 47,
               child: AnimatedBuilder(
                 animation: gaugeAnimController,
                 builder: (context, child) {
                   return SfRadialGauge(
                     axes: <RadialAxis>[
                       RadialAxis(
-                        radiusFactor: gaugeTweenController.value,
+                        radiusFactor: gaugeTween.value,
                         minimum: 0,
                         maximum: 120,
                         showLabels: false,
                         showTicks: false,
-                        startAngle: 240,
+                        startAngle: 200,
                         endAngle: 40,
                         isInversed: false,
                         axisLineStyle: AxisLineStyle(
@@ -89,13 +105,13 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             value: 120,
                             width: 0.25,
                             color: const Color.fromARGB(255, 255, 255, 255),
-                            gradient: SweepGradient(
+                            /*  gradient: SweepGradient(
                               colors: const <Color>[
-                                Color.fromARGB(201, 204, 196, 249),
-                                Color.fromARGB(183, 78, 222, 241),
+                                Color.fromARGB(, 204, 196, 249),
+                                Color.fromARGB(255, 78, 222, 241),
                               ],
                               stops: const <double>[0, 1],
-                            ),
+                            ), */
                             pointerOffset: 0.1,
                             cornerStyle: CornerStyle.bothCurve,
                             sizeUnit: GaugeSizeUnit.factor,
@@ -110,14 +126,14 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               _value = value;
                               setState(() {});
                             },
-                            markerOffset: -45,
+                            markerOffset: -40,
                             markerType: MarkerType.diamond,
                           ),
                         ],
                       ),
 
                       RadialAxis(
-                        radiusFactor: 1.4 - gaugeTweenController.value,
+                        radiusFactor: 1.2 - gaugeTween.value,
                         minimum: 0,
                         maximum: 360,
                         showLabels: false,
@@ -136,13 +152,13 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             value: 360,
                             width: 0.25,
                             color: const Color.fromARGB(255, 255, 255, 255),
-                            gradient: SweepGradient(
+                            /* gradient: SweepGradient(
                               colors: const <Color>[
-                                Color.fromARGB(199, 239, 249, 152),
-                                Color.fromARGB(183, 28, 243, 82),
+                                Color.fromARGB(255, 255, 255, 255),
+                                Color.fromARGB(255, 46, 131, 100),
                               ],
                               stops: const <double>[0, 1],
-                            ),
+                            ), */
                             pointerOffset: 0.1,
                             cornerStyle: CornerStyle.bothCurve,
                             sizeUnit: GaugeSizeUnit.factor,
@@ -157,7 +173,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               _value = value;
                               setState(() {});
                             },
-                            markerOffset: -45,
+                            markerOffset: -40,
                             markerType: MarkerType.diamond,
                           ),
                         ],
@@ -168,16 +184,39 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
               ),
             ),
 
-            Positioned(
-              right: 0,
-              left: 0,
-              bottom: 0,
-              child: SizedBox(
-                child: MaterialButton(
-                  onPressed: () {
-                    _pomTimer.playTimer();
-                  },
-                  child: Text('play'),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(bottom: 190),
+                child: SizedBox(
+                  width: 75,
+                  height: 75,
+                  child: AnimatedBuilder(
+                    animation: buttonAnimController,
+                    builder: (context, child) {
+                      return ScaleTransition(
+                        scale: buttonTween,
+                        child: Image.asset(
+                          'images/pomTimer/pomTimerIdle_start_button.png',
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(bottom: 185),
+                child: SizedBox(
+                  width: 70,
+                  height: 70,
+                  child: MaterialButton(
+                    onPressed: () {},
+                    shape: CircleBorder(),
+                  ),
                 ),
               ),
             ),

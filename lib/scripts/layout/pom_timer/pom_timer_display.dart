@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
-import 'package:pomodoropompurin/scripts/layout/pom_timer/main_widget.dart';
-import 'package:pomodoropompurin/scripts/layout/pom_timer/open_timer_button.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_open_timer_button.dart';
 
 class PomTimerDisplay extends StatefulWidget {
   const PomTimerDisplay({super.key});
@@ -45,8 +45,8 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
       right: 0,
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 1000),
-        switchInCurve: Curves.easeOutExpo,
-        switchOutCurve: Curves.linear,
+        switchInCurve: Curves.easeInOutBack,
+        switchOutCurve: Curves.easeInOutBack,
         layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
           return Stack(
             alignment: Alignment.center,
@@ -62,10 +62,7 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
             end: Offset.zero,
           ).animate(animation);
 
-          return FadeTransition(
-            opacity: animation,
-            child: SlideTransition(position: slideAnimation, child: child),
-          );
+          return SlideTransition(position: slideAnimation, child: child);
         },
         child: pomTimerAtDisplay, // MUST have a Key
       ),
