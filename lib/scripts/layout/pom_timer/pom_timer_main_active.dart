@@ -151,7 +151,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                           markerHeight: 50,
                           markerWidth: 50,
                           elevation: 3,
-                          imageUrl: 'images/pomTimer/pomTimer_WorkPointer.png',
+                          imageUrl: 'images/pomTimer_WorkPointer.png',
                         ),
                       ],
                     ),
