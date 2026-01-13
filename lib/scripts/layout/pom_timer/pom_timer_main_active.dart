@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class PomTimerActiveWidget extends StatefulWidget {
   const PomTimerActiveWidget({super.key});
@@ -13,6 +14,10 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
     with TickerProviderStateMixin {
   late PomTimer _pomTimer;
   double displayTime = 0;
+  int maxTime = 1;
+
+  final double gaugeRadius = 400;
+
   Widget get playOrPauseButton {
     return _pomTimer.isPlaying ? PomTimerPauseButton() : PomTimerPlayButton();
   }
@@ -21,6 +26,19 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
   void initState() {
     super.initState();
     _pomTimer = PomTimer.singleton;
+
+    _pomTimer.updatePomTimerCount = () {
+      setState(() {
+        displayTime = _pomTimer.timeLeftSeconds.toDouble();
+      });
+    };
+    _pomTimer.updatePomTimerGauge = () {
+      setState(() {
+        maxTime = (_pomTimer.onBreak)
+            ? _pomTimer.timeSetBreakSeconds
+            : _pomTimer.timeSetWorkSeconds;
+      });
+    };
   }
 
   void showWarningEndTimerDialog() {
@@ -71,14 +89,92 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Text(
-        PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),
-        style: TextStyle(
-          fontFamily: 'Fredoka',
-          fontWeight: FontWeight.w500,
-          fontSize: 30,
-          color: const Color.fromARGB(232, 255, 255, 255),
-          shadows: [Shadow(color: Colors.black12, offset: Offset(2, 2))],
+      child: SizedBox(
+        width: gaugeRadius,
+        height: gaugeRadius,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: -gaugeRadius / 2 + 80,
+              child: IgnorePointer(
+                child: SfRadialGauge(
+                  axes: <RadialAxis>[
+                    RadialAxis(
+                      radiusFactor: 0.95,
+                      minimum: 0,
+                      maximum: maxTime.toDouble(),
+                      showLabels: false,
+                      showTicks: false,
+                      startAngle: 160,
+                      endAngle: 20,
+                      axisLineStyle: AxisLineStyle(
+                        thickness: 1,
+                        color: const Color.fromARGB(0, 255, 255, 255),
+                        thicknessUnit: GaugeSizeUnit.factor,
+                      ),
+
+                      pointers: <GaugePointer>[
+                        RangePointer(
+                          value:
+                              maxTime.toDouble() -
+                              (_pomTimer.timeLeftSeconds.toDouble()),
+                          width: 0.08,
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          gradient: SweepGradient(
+                            colors: const <Color>[
+                              Color.fromARGB(255, 255, 255, 255),
+                              Color.fromARGB(255, 255, 255, 255),
+                            ],
+                            stops: const <double>[0, 1],
+                          ),
+                          pointerOffset: 0.1,
+                          cornerStyle: CornerStyle.bothFlat,
+                          sizeUnit: GaugeSizeUnit.factor,
+                          enableAnimation: true,
+                          animationDuration: 700,
+                          animationType: AnimationType.bounceOut,
+                        ),
+
+                        MarkerPointer(
+                          value:
+                              maxTime.toDouble() -
+                              (_pomTimer.timeLeftSeconds.toDouble()),
+                          enableAnimation: true,
+                          animationDuration: 700,
+                          animationType: AnimationType.bounceOut,
+
+                          markerOffset: -60,
+                          markerType: MarkerType.image,
+                          markerHeight: 50,
+                          markerWidth: 50,
+                          elevation: 3,
+                          imageUrl: 'images/pomTimer/pomTimer_WorkPointer.png',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),
+                style: TextStyle(
+                  fontFamily: 'Fredoka',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 30,
+                  color: const Color.fromARGB(232, 255, 255, 255),
+                  shadows: [
+                    Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

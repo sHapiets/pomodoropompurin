@@ -218,7 +218,9 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                   width: 70,
                   height: 70,
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _pomTimer.playTimer();
+                    },
                     shape: CircleBorder(),
                   ),
                 ),

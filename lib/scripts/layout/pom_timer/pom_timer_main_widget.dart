@@ -15,16 +15,12 @@ class PomTimerMainWidget extends StatefulWidget {
 class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
   late PomTimer _pomTimer;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
-  double displayTime = 0;
-  int maxTime = 1;
   String panelDisplayMode = 'Idle';
   String widgetPositionState = 'Tab';
 
   int panelWidth = 400;
   int panelHeight = 400;
   int tabWidth = 100;
-
-  double gaugeRadius = 400;
 
   /// A widget placeholder that switches between modes
   Widget get pomTimerWidget {
@@ -42,18 +38,6 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget> {
   void initState() {
     super.initState();
     _pomTimer = PomTimer.singleton;
-    _pomTimer.updatePomTimerCount = () {
-      setState(() {
-        displayTime = _pomTimer.timeLeftSeconds.toDouble();
-      });
-    };
-    _pomTimer.updatePomTimerGauge = () {
-      setState(() {
-        maxTime = (_pomTimer.onBreak)
-            ? _pomTimer.timeSetBreakSeconds
-            : _pomTimer.timeSetWorkSeconds;
-      });
-    };
     _pomTimer.switchPomTimerMode = (String mode) {
       setState(() {
         panelDisplayMode = mode;
