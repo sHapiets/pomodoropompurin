@@ -43,6 +43,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
         itemAnchor: Alignment.topCenter,
         buttonBuilder: (context, isActive, toggle) {
           return IconButton(
+            color: Colors.white,
             iconSize: 40,
             onPressed: () {
               toggle();
