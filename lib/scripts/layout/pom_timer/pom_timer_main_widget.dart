@@ -3,6 +3,7 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_active.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_idle.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_pause.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
 class PomTimerMainWidget extends StatefulWidget {
@@ -18,7 +19,8 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
 
   final assetManager = AssetManager.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
-  String panelDisplayMode = 'Idle';
+
+  late void Function() updatePomTimerWidget;
 
   int panelWidth = 400;
   int panelHeight = 400;
@@ -34,44 +36,53 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
   final double playPostion = 180;
   final double pausePosition = -120;
 
-  /// A widget placeholder that switches between modes
-  Widget get pomTimerWidget {
-    switch (panelDisplayMode) {
-      case 'Active':
-        return PomTimerActiveWidget();
-      case 'Paused':
-        return PomTimerActiveWidget();
-      default: // case Idle (or Input)
-        return PomTimerIdleWidget();
+  double get backgroundPostion {
+    switch (position) {
+      case 180:
+        return 35;
+      default:
+        return 0;
     }
   }
+
+  /// A widget placeholder that switches between modes
+  Widget pomTimerWidget = PomTimerIdleWidget();
 
   @override
   void initState() {
     super.initState();
-    pomTimerDisplayStateManager.switchPomTimerMode = (String mode) {
-      setState(() {
-        panelDisplayMode = mode;
-      });
-    };
 
     scale = inputScale;
     position = inputPosition;
 
-    /// Setup State Manager Callbacks
-    pomTimerDisplayStateManager.playPomTimerByMain = () {
+    updatePomTimerWidget = () {
       setState(() {
-        scale = playScale;
-        position = playPostion;
+        switch (pomTimerDisplayStateManager.pomTimerState.value) {
+          case 'idle':
+            pomTimerWidget = PomTimerIdleWidget();
+            scale = inputScale;
+            position = inputPosition;
+          case 'pause':
+            pomTimerWidget = PomTimerPauseWidget();
+            scale = pausedScale;
+            position = pausePosition;
+          case 'play':
+            pomTimerWidget = PomTimerActiveWidget();
+            scale = playScale;
+            position = playPostion;
+        }
       });
     };
 
-    pomTimerDisplayStateManager.pausePomTimerByMain = () {
-      setState(() {
-        scale = pausedScale;
-        position = pausePosition;
-      });
-    };
+    pomTimerDisplayStateManager.pomTimerState.addListener(updatePomTimerWidget);
+  }
+
+  @override
+  void dispose() {
+    pomTimerDisplayStateManager.pomTimerState.removeListener(
+      updatePomTimerWidget,
+    );
+    super.dispose();
   }
 
   @override
@@ -86,21 +97,37 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
         children: [
           AnimatedPositioned(
             duration: Duration(milliseconds: 600),
-            curve: Curves.easeInOutBack,
+            curve: Curves.easeInOut,
             left: 0,
             right: 0,
             bottom: position,
             child: AnimatedScale(
               duration: Duration(milliseconds: 600),
               scale: scale,
-              curve: Curves.easeInOutBack,
+              curve: Curves.easeInOutCirc,
               child: SizedBox(
                 width: panelWidth.toDouble(),
                 height: panelHeight.toDouble(),
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    /// Pudding Background
+                    /// Pudding BACKGROUND
+                    AnimatedPositioned(
+                      duration: Duration(milliseconds: 600),
+                      curve: Curves.easeInOut,
+                      right: 0,
+                      left: 0,
+                      bottom: backgroundPostion,
+                      child: SizedBox(
+                        width: panelWidth.toDouble(),
+                        height: panelHeight.toDouble(),
+                        child: Image.asset(
+                          assetManager.flutterAssetPaths['pT_BG']!,
+                        ),
+                      ),
+                    ),
+
+                    /// Pudding FOREGROUND
                     Positioned(
                       right: 0,
                       left: 0,
@@ -109,7 +136,7 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
                         width: panelWidth.toDouble(),
                         height: panelHeight.toDouble(),
                         child: Image.asset(
-                          assetManager.flutterAssetPaths['pT_BG']!,
+                          assetManager.flutterAssetPaths['pT_FG']!,
                         ),
                       ),
                     ),
@@ -141,7 +168,7 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
                               child: ScaleTransition(
                                 alignment: Alignment.bottomCenter,
                                 scale: Tween(
-                                  begin: 0.95,
+                                  begin: 0.1,
                                   end: 1.0,
                                 ).animate(animation),
                                 child: child,

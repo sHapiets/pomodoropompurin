@@ -11,6 +11,7 @@ class AssetManager {
   final Map<String, bool> _lazyLoaded = {}; // Tracks lazy-loaded shop assets
 
   Map<String, String> flutterAssetPaths = {
+    'pT_FG': 'assets/images/pomTimer/pomTimer_foreground.png',
     'pT_BG': 'assets/images/pomTimer/pomTimer_background.png',
     'pT_WP': 'assets/images/pomTimer/pomTimer_work_pointer.png',
     'pT_SB': 'assets/images/pomTimer/pomTimer_start_button.png',

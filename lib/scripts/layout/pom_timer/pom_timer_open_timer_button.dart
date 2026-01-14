@@ -22,6 +22,7 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
         openIndicator = (openIndicator + 0.05).clamp(0.0, 1.0);
         if (openIndicator == 1.0) {
           pomTimerDisplayStateManager.openPomTimer();
+          pomTimerDisplayStateManager.pomTimerState.value = 'idle';
           timer.cancel();
         }
       });

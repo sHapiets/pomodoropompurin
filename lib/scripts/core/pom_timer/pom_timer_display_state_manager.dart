@@ -1,27 +1,20 @@
+import 'package:flutter/material.dart';
+
 class PomTimerDisplayStateManager {
   PomTimerDisplayStateManager._();
   static final singleton = PomTimerDisplayStateManager._();
+
+  /// Value Notifier of current time
+  ValueNotifier<int> timeLeftSeconds = ValueNotifier(0);
+
+  /// ValueNotifer if onBreak
+  ValueNotifier<bool> onBreak = ValueNotifier(false);
+
+  /// State Notifier for all PomTimerWidgets (Active, Idle/Input, Pause)
+  ValueNotifier<String> pomTimerState = ValueNotifier('input');
 
   /// Functions set in PomTimerDisplay
   /// Switches between OPEN BUTTON and MAIN WIDGET
   void Function() openPomTimer = () {};
   void Function() closePomTimer = () {};
-
-  /// Functions set in PomTimerMainWidget
-  /// Switches between ACTIVE and IDLE
-  void Function(String) switchPomTimerMode = (mode) {};
-
-  /// Functions set in PomTimerMainACTIVE
-  /// Switches between WORK and BREAK
-  /// NOTE: Break and Paused have same states (remove this note if not anymore...)
-  void Function() inputPomTimerByActive = () {};
-  void Function() playPomTimerByActive = () {};
-  void Function() pausePomTimerByActive = () {};
-
-  /// Functions set in PomTimerMainWIDGET
-  /// Switches between WORK and BREAK
-  /// NOTE: Break and Paused have same states (remove this note if not anymore...)
-  void Function() inputPomTimerByMain = () {};
-  void Function() playPomTimerByMain = () {};
-  void Function() pausePomTimerByMain = () {};
 }

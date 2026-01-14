@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -14,34 +15,47 @@ class PomTimerActiveWidget extends StatefulWidget {
 class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
     with TickerProviderStateMixin {
   late PomTimer _pomTimer;
+  final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
   final assetManager = AssetManager.singleton;
 
+  late void Function() updateTime;
+  late void Function() updateGauge;
   double displayTime = 0;
   int maxTime = 1;
 
   final double gaugeRadius = 400;
 
-  Widget get playOrPauseButton {
-    return _pomTimer.isPlaying ? PomTimerPauseButton() : PomTimerPlayButton();
-  }
-
   @override
   void initState() {
     super.initState();
     _pomTimer = PomTimer.singleton;
+    displayTime = _pomTimer.timeLeftSeconds.toDouble();
+    maxTime = (_pomTimer.onBreak)
+        ? _pomTimer.timeSetBreakSeconds
+        : _pomTimer.timeSetWorkSeconds;
 
-    _pomTimer.updatePomTimerCount = () {
+    updateTime = () {
       setState(() {
         displayTime = _pomTimer.timeLeftSeconds.toDouble();
       });
     };
-    _pomTimer.updatePomTimerGauge = () {
+    pomTimerDisplayStateManager.timeLeftSeconds.addListener(updateTime);
+
+    updateGauge = () {
       setState(() {
         maxTime = (_pomTimer.onBreak)
             ? _pomTimer.timeSetBreakSeconds
             : _pomTimer.timeSetWorkSeconds;
       });
     };
+    pomTimerDisplayStateManager.onBreak.addListener(updateGauge);
+  }
+
+  @override
+  void dispose() {
+    pomTimerDisplayStateManager.timeLeftSeconds.removeListener(updateTime);
+    pomTimerDisplayStateManager.onBreak.removeListener(updateGauge);
+    super.dispose();
   }
 
   void showWarningEndTimerDialog() {
@@ -180,22 +194,9 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                 spacing: 30,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AnimatedSwitcher(
-                    duration: Duration(milliseconds: 300),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: ScaleTransition(
-                              scale: Tween<double>(
-                                begin: 0.8,
-                                end: 1.0,
-                              ).animate(animation),
-                              child: child,
-                            ),
-                          );
-                        },
-                    child: playOrPauseButton,
+                  GestureDetector(
+                    onTap: () => _pomTimer.pauseTimer(),
+                    child: Text('pause'),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -214,6 +215,8 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
   }
 }
 
+//// REDACTED
+/* 
 class PomTimerPlayButton extends StatefulWidget {
   const PomTimerPlayButton({super.key});
 
@@ -254,4 +257,4 @@ class _PomTimerPauseButtonState extends State<PomTimerPauseButton> {
       child: Text("Pause"), // change to icons...
     );
   }
-}
+} */

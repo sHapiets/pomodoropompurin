@@ -20,7 +20,6 @@ class PomTimer {
   int loopsSet = 3;
   int timeSetWorkSeconds = 0; // The initialized values
   int timeSetBreakSeconds = 0;
-  late DateTime dateSet;
 
   int timeTotalSeconds =
       0; // Total time for rewards (max is loopsSet * timeSetWork)
@@ -33,19 +32,14 @@ class PomTimer {
   bool onBreak = false;
 
   // Callbacks functions for display/layout widgets
-  void Function() updatePomTimerCount = () {};
-  void Function() updatePomTimerGauge = () {};
   void Function(bool) disablePurinArea = (b) {};
-
-  String pomTimerState = 'Inactive';
 
   void playTimer() {
     if (isPlaying) {
       // already playing...
     } else {
       isPlaying = true;
-      pomTimerDisplayStateManager.switchPomTimerMode('Active');
-      pomTimerDisplayStateManager.playPomTimerByMain();
+      pomTimerDisplayStateManager.pomTimerState.value = 'play';
       disablePurinArea(true);
 
       if (restart) {
@@ -64,8 +58,8 @@ class PomTimer {
         // if restart is false, just resume...
       }
 
-      /// Update initial Display via Callback
-      updatePomTimerDisplay();
+      /// Update initial Display via ValueNotifier
+      pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
 
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         timeLeftSeconds--;
@@ -81,6 +75,7 @@ class PomTimer {
             timeLeftSeconds = timeSetBreakSeconds;
             timeTotalSeconds += timeSetWorkSeconds; // add to totalSeconds
             onBreak = true; // switch to break
+            pomTimerDisplayStateManager.onBreak.value = true;
             if (loopsSet <= 0) {
               // if no, more loops, end and award...
               timeLeftSeconds = timeSetWorkSeconds;
@@ -94,6 +89,7 @@ class PomTimer {
 
             timeLeftSeconds = timeSetWorkSeconds;
             onBreak = false;
+            pomTimerDisplayStateManager.onBreak.value = false;
           }
         }
 
@@ -111,7 +107,7 @@ class PomTimer {
         }
 
         /// Periodical Updates to update PomTimerDisplay
-        updatePomTimerDisplay();
+        pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
       });
     }
   }
@@ -120,8 +116,7 @@ class PomTimer {
     if (isPlaying) {
       isPlaying = false;
       timer.cancel();
-      pomTimerDisplayStateManager.switchPomTimerMode('Paused');
-      pomTimerDisplayStateManager.pausePomTimerByMain();
+      pomTimerDisplayStateManager.pomTimerState.value = 'pause';
       disablePurinArea(false);
     }
   }
@@ -142,9 +137,10 @@ class PomTimer {
     restart = true; // restart to initial value
     isPlaying = false; // pause (stop) timer
     onBreak = false; // switch to work timer for next play.
+    pomTimerDisplayStateManager.onBreak.value = false;
     timeLeftSeconds = 0;
     timeTotalSeconds = 0; //
-    pomTimerDisplayStateManager.switchPomTimerMode('Idle');
+    pomTimerDisplayStateManager.closePomTimer();
     disablePurinArea(false);
 
     /// Tell Koupen that the timer was stopped before connection is severed;
@@ -158,12 +154,6 @@ class PomTimer {
 
     // Update outside
     _progSystem.addPomPoints(rewardPomPoints);
-    pomTimerDisplayStateManager.switchPomTimerMode('Idle');
-    updatePomTimerDisplay();
-  }
-
-  void updatePomTimerDisplay() {
-    updatePomTimerCount();
-    updatePomTimerGauge();
+    pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
   }
 }
