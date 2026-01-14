@@ -26,6 +26,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/pomTimer/
   fonts:
     - family: Fredoka
       fonts:

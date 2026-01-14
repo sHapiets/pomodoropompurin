@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_widget.dart';
@@ -15,7 +12,6 @@ class PomTimerDisplay extends StatefulWidget {
 }
 
 class _PomTimerDisplayState extends State<PomTimerDisplay> {
-  final PomTimer _pomTimer = PomTimer.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
   late Widget pomTimerAtDisplay;

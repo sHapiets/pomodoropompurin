@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
+import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 /// >>>>>>>>>>>>>>>>>>>>
@@ -16,6 +17,8 @@ class PomTimerIdleWidget extends StatefulWidget {
 class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
     with TickerProviderStateMixin {
   late PomTimer _pomTimer;
+  final assetManager = AssetManager.singleton;
+
   double displayTime = 0;
   late AnimationController gaugeAnimController;
   late Animation<double> gaugeTween;
@@ -73,10 +76,6 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            Align(
-              child: Image.asset('assets/images/pomTimerIdle_background.png'),
-            ),
-
             Positioned(
               left: 0,
               right: 0,
@@ -130,7 +129,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             markerType: MarkerType.image,
                             markerHeight: 70 * gaugeTween.value,
                             markerWidth: 70 * gaugeTween.value,
-                            imageUrl: 'assets/images/pomTimer_WorkPointer.png',
+                            imageUrl: assetManager.flutterAssetPaths['pT_WP'],
                           ),
                         ],
                       ),
@@ -187,6 +186,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
               ),
             ),
 
+            ///
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -197,13 +197,11 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                   child: AnimatedBuilder(
                     animation: buttonAnimController,
                     builder: (context, child) {
-                      return ScaleTransition(
-                        scale: buttonTween,
-                        child: Image.asset(
-                          'assets/images/pomTimerIdle_start_button.png',
-                        ),
-                      );
+                      return ScaleTransition(scale: buttonTween, child: child);
                     },
+                    child: Image.asset(
+                      assetManager.flutterAssetPaths['pT_SB']!,
+                    ),
                   ),
                 ),
               ),

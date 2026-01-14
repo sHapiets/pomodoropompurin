@@ -47,9 +47,9 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
   Widget build(BuildContext context) {
     return // -- TAB
     Container(
-      height: 400,
+      height: 800,
       width: 400,
-      padding: EdgeInsets.fromLTRB(0, 250, 0, 30),
+      padding: EdgeInsets.fromLTRB(0, 650, 0, 30),
       child: Center(
         child: Column(
           children: [

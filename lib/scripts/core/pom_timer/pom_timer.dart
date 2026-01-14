@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/layout/custom_dialogs.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
@@ -12,6 +13,8 @@ class PomTimer {
   final _progSystem = ProgSystem.singleton;
   final _customDialogs = CustomDialogs.singleton;
   final _databaseManager = DatabaseManager.singleton;
+
+  final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
 
   Timer timer = Timer.periodic(const Duration(seconds: 0), (timer) {});
   int loopsSet = 3;
@@ -32,7 +35,6 @@ class PomTimer {
   // Callbacks functions for display/layout widgets
   void Function() updatePomTimerCount = () {};
   void Function() updatePomTimerGauge = () {};
-  void Function(String) switchPomTimerMode = (s) {};
   void Function(bool) disablePurinArea = (b) {};
 
   String pomTimerState = 'Inactive';
@@ -42,7 +44,8 @@ class PomTimer {
       // already playing...
     } else {
       isPlaying = true;
-      switchPomTimerMode('Active');
+      pomTimerDisplayStateManager.switchPomTimerMode('Active');
+      pomTimerDisplayStateManager.playPomTimerByMain();
       disablePurinArea(true);
 
       if (restart) {
@@ -117,7 +120,8 @@ class PomTimer {
     if (isPlaying) {
       isPlaying = false;
       timer.cancel();
-      switchPomTimerMode('Paused');
+      pomTimerDisplayStateManager.switchPomTimerMode('Paused');
+      pomTimerDisplayStateManager.pausePomTimerByMain();
       disablePurinArea(false);
     }
   }
@@ -140,7 +144,7 @@ class PomTimer {
     onBreak = false; // switch to work timer for next play.
     timeLeftSeconds = 0;
     timeTotalSeconds = 0; //
-    switchPomTimerMode('Idle');
+    pomTimerDisplayStateManager.switchPomTimerMode('Idle');
     disablePurinArea(false);
 
     /// Tell Koupen that the timer was stopped before connection is severed;
@@ -154,7 +158,7 @@ class PomTimer {
 
     // Update outside
     _progSystem.addPomPoints(rewardPomPoints);
-    switchPomTimerMode('Idle');
+    pomTimerDisplayStateManager.switchPomTimerMode('Idle');
     updatePomTimerDisplay();
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class ProgSystemDisplay extends StatefulWidget {
@@ -9,6 +10,8 @@ class ProgSystemDisplay extends StatefulWidget {
 }
 
 class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
+  final assetManager = AssetManager.singleton;
+
   final expGaugeHeight = 80.0;
   final expGaugeWidth = 80.0;
   @override
@@ -140,7 +143,9 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     child: SizedBox(
                       height: 30,
                       width: 30,
-                      child: Image.asset("assets/images/pomPoints_icon.png"),
+                      child: Image.asset(
+                        assetManager.flutterAssetPaths['pP_icon']!,
+                      ),
                     ),
                   ),
                   Text(
@@ -168,7 +173,9 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     child: SizedBox(
                       height: 30,
                       width: 30,
-                      child: Image.asset("assets/images/pomPoints_icon.png"),
+                      child: Image.asset(
+                        assetManager.flutterAssetPaths['pP_icon']!,
+                      ),
                     ),
                   ),
                   Text(

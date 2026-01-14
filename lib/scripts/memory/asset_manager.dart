@@ -10,6 +10,14 @@ class AssetManager {
   final Map<String, ImageProvider> _images = {}; // Preloaded images
   final Map<String, bool> _lazyLoaded = {}; // Tracks lazy-loaded shop assets
 
+  Map<String, String> flutterAssetPaths = {
+    'pT_BG': 'assets/images/pomTimer/pomTimer_background.png',
+    'pT_WP': 'assets/images/pomTimer/pomTimer_work_pointer.png',
+    'pT_SB': 'assets/images/pomTimer/pomTimer_start_button.png',
+
+    'pP_icon': 'assets/images/pomPoints_icon.png',
+  };
+
   /// Preload one asset globally
   Future<void> preloadImage(String assetPath, BuildContext context) async {
     if (_images.containsKey(assetPath)) return;
@@ -23,10 +31,8 @@ class AssetManager {
     }
   }
 
-  Future<void> preloadImages(
-    List<String> assetPaths,
-    BuildContext context,
-  ) async {
+  Future<void> preloadImages(BuildContext context) async {
+    List<String> assetPaths = flutterAssetPaths.values.toList();
     await Future.wait(
       assetPaths.map((assetPath) {
         return preloadImage(assetPath, context);
@@ -35,6 +41,7 @@ class AssetManager {
   }
 
   Future<void> preloadFlameImages() async {
+    // NOTE: all paths are rooted at assets/images/
     List<String> allFlameImages = [
       'SamplePurinArea.png',
       'L7.png',
