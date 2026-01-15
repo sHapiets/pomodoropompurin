@@ -31,10 +31,10 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
               width: expGaugeWidth,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color.fromARGB(133, 99, 255, 224),
+                color: const Color.fromARGB(121, 250, 226, 69),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromARGB(31, 147, 11, 11),
+                    color: const Color.fromARGB(31, 154, 44, 17),
                     offset: Offset(7, 7),
                     blurStyle: BlurStyle.inner,
                     spreadRadius: -2,

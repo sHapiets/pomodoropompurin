@@ -26,7 +26,8 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
   late AnimationController buttonAnimController;
   late Animation<double> buttonTween;
 
-  double _value = 0;
+  int timeSetWorkMinutes = 1;
+  int timeSetBreakMinutes = 1;
 
   @override
   void initState() {
@@ -87,12 +88,12 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                     axes: <RadialAxis>[
                       RadialAxis(
                         radiusFactor: gaugeTween.value,
-                        minimum: 0,
-                        maximum: 120,
+                        minimum: 1,
+                        maximum: 90,
                         showLabels: false,
                         showTicks: false,
-                        startAngle: 200,
-                        endAngle: 40,
+                        startAngle: 160,
+                        endAngle: 320,
                         isInversed: false,
                         axisLineStyle: AxisLineStyle(
                           thickness: 1,
@@ -101,7 +102,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                         ),
                         pointers: <GaugePointer>[
                           RangePointer(
-                            value: 120,
+                            value: 360,
                             width: 0.25,
                             color: const Color.fromARGB(255, 255, 255, 255),
                             /*  gradient: SweepGradient(
@@ -117,12 +118,12 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                           ),
                           MarkerPointer(
                             enableDragging: true,
-                            value: _value,
+                            value: timeSetWorkMinutes.toDouble(),
                             onValueChangeStart: (value) {
                               gaugeAnimController.forward();
                             },
                             onValueChanged: (value) {
-                              _value = value;
+                              timeSetWorkMinutes = value.round();
                               setState(() {});
                             },
                             markerOffset: -45 * gaugeTween.value,
@@ -131,18 +132,64 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             markerWidth: 70 * gaugeTween.value,
                             imageUrl: assetManager.flutterAssetPaths['pT_WP'],
                           ),
+                          MarkerPointer(
+                            enableDragging: true,
+                            value: timeSetWorkMinutes.toDouble(),
+                            onValueChangeStart: (value) {
+                              gaugeAnimController.forward();
+                            },
+                            onValueChanged: (value) {
+                              timeSetWorkMinutes = value.round();
+                              setState(() {});
+                            },
+                            markerOffset: -100 * gaugeTween.value,
+                            markerType: MarkerType.text,
+                            markerHeight: 70 * gaugeTween.value,
+                            markerWidth: 70 * gaugeTween.value,
+                            /* imageUrl: assetManager.flutterAssetPaths['pT_WP'], */
+                            text: '$timeSetWorkMinutes',
+                            textStyle: GaugeTextStyle(
+                              fontFamily: 'Fredoka',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 45 * gaugeTween.value,
+                              color: const Color.fromARGB(151, 54, 54, 54),
+                            ),
+                          ),
+                          MarkerPointer(
+                            enableDragging: true,
+                            value: timeSetWorkMinutes.toDouble(),
+                            onValueChangeStart: (value) {
+                              gaugeAnimController.forward();
+                            },
+                            onValueChanged: (value) {
+                              timeSetWorkMinutes = value.round();
+                              setState(() {});
+                            },
+                            markerOffset: -103 * gaugeTween.value,
+                            markerType: MarkerType.text,
+                            markerHeight: 70 * gaugeTween.value,
+                            markerWidth: 70 * gaugeTween.value,
+                            /* imageUrl: assetManager.flutterAssetPaths['pT_WP'], */
+                            text: '$timeSetWorkMinutes',
+                            textStyle: GaugeTextStyle(
+                              fontFamily: 'Fredoka',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 45 * gaugeTween.value,
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                            ),
+                          ),
                         ],
                       ),
 
                       RadialAxis(
                         radiusFactor: 1.2 - gaugeTween.value,
-                        minimum: 0,
-                        maximum: 360,
+                        minimum: 1,
+                        maximum: 30,
                         showLabels: false,
                         showTicks: false,
-                        startAngle: 160,
-                        endAngle: 300,
-                        isInversed: true,
+                        startAngle: 220,
+                        endAngle: 30,
+                        isInversed: false,
                         axisLineStyle: AxisLineStyle(
                           thickness: 1,
                           color: const Color.fromARGB(0, 104, 104, 104),
@@ -151,7 +198,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
 
                         pointers: <GaugePointer>[
                           RangePointer(
-                            value: 360,
+                            value: 120,
                             width: 0.25,
                             color: const Color.fromARGB(255, 255, 255, 255),
                             /* gradient: SweepGradient(
@@ -167,16 +214,57 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                           ),
                           MarkerPointer(
                             enableDragging: true,
-                            value: _value,
+                            value: timeSetBreakMinutes.toDouble(),
                             onValueChangeStart: (value) {
                               gaugeAnimController.reverse();
                             },
                             onValueChanged: (value) {
-                              _value = value;
+                              timeSetBreakMinutes = value.round();
                               setState(() {});
                             },
-                            markerOffset: -40,
+                            markerOffset: -40 * (1.2 - gaugeTween.value),
                             markerType: MarkerType.diamond,
+                          ),
+
+                          MarkerPointer(
+                            enableDragging: true,
+                            value: timeSetBreakMinutes.toDouble(),
+                            onValueChangeStart: (value) {
+                              gaugeAnimController.reverse();
+                            },
+                            onValueChanged: (value) {
+                              timeSetBreakMinutes = value.round();
+                              setState(() {});
+                            },
+                            markerOffset: -100 * (1.2 - gaugeTween.value),
+                            markerType: MarkerType.text,
+                            text: '$timeSetBreakMinutes',
+                            textStyle: GaugeTextStyle(
+                              fontFamily: 'Fredoka',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 45 * (1.2 - gaugeTween.value),
+                              color: const Color.fromARGB(151, 54, 54, 54),
+                            ),
+                          ),
+                          MarkerPointer(
+                            enableDragging: true,
+                            value: timeSetBreakMinutes.toDouble(),
+                            onValueChangeStart: (value) {
+                              gaugeAnimController.reverse();
+                            },
+                            onValueChanged: (value) {
+                              timeSetBreakMinutes = value.round();
+                              setState(() {});
+                            },
+                            markerOffset: -103 * (1.2 - gaugeTween.value),
+                            markerType: MarkerType.text,
+                            text: '$timeSetBreakMinutes',
+                            textStyle: GaugeTextStyle(
+                              fontFamily: 'Fredoka',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 45 * (1.2 - gaugeTween.value),
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                            ),
                           ),
                         ],
                       ),
@@ -186,7 +274,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
               ),
             ),
 
-            ///
+            /// PomTimer PlayButton Image (red cherry)
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -207,6 +295,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
               ),
             ),
 
+            /// Play PomTimer Button
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -216,6 +305,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                   height: 70,
                   child: MaterialButton(
                     onPressed: () {
+                      _pomTimer.timeSetWorkSeconds = timeSetWorkMinutes * 60;
                       _pomTimer.playTimer();
                     },
                     shape: CircleBorder(),
@@ -224,11 +314,45 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
               ),
             ),
 
-            MaterialButton(
-              onPressed: () {
-                PomTimerDisplayStateManager.singleton.closePomTimer();
-              },
-              child: Icon(Icons.accessible_forward),
+            /* 
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(bottom: 50),
+                child: SizedBox(
+                  width: 70,
+                  height: 70,
+                  child: 
+                ),
+              ),
+            ), */
+
+            /// ClosePomTimerButton
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(bottom: 20),
+                child: SizedBox(
+                  width: 70,
+                  height: 70,
+                  child: IconButton(
+                    iconSize: 45,
+                    onPressed: () {
+                      PomTimerDisplayStateManager.singleton.closePomTimer();
+                    },
+                    icon: Icon(
+                      Icons.arrow_drop_down_circle_rounded,
+                      color: const Color.fromARGB(255, 255, 224, 130),
+                      shadows: [
+                        Shadow(
+                          color: const Color.fromARGB(172, 252, 165, 42),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
