@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 
@@ -13,25 +14,57 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
     with TickerProviderStateMixin {
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
   double openIndicator = 0.0;
-  Timer? timer;
+  Timer? openTimer;
+
+  late String encourageText;
+  late Timer encourageTextChanger;
+  final randomForEncourageTexts = Random();
+  late int randomEncourageTextIndex = 0;
+  List<String> encourageTexts = [
+    'ready when you are',
+    'little progress counts',
+    'one thing at a time',
+    '...small steps...',
+    'let Purin handle the rest(ing)',
+    'what would Purin do?',
+  ];
+
+  ///'doing your best is plenty', 'no rush, just focus', 'you can do it',
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// Initial randomET selection
+    encourageText = encourageTexts[0];
+
+    /// Timed ET changer
+    encourageTextChanger = Timer.periodic(Duration(seconds: 10), (timer) {
+      randomEncourageTextIndex = randomForEncourageTexts.nextInt(
+        encourageTexts.length,
+      );
+      encourageText = encourageTexts[randomEncourageTextIndex];
+      setState(() {});
+    });
+  }
 
   void buttonHold() {
-    timer?.cancel();
-    timer = Timer.periodic(Duration(milliseconds: 16), (timer) {
+    openTimer?.cancel();
+    openTimer = Timer.periodic(Duration(milliseconds: 16), (openTimer) {
       setState(() {
         openIndicator = (openIndicator + 0.05).clamp(0.0, 1.0);
         if (openIndicator == 1.0) {
           pomTimerDisplayStateManager.openPomTimer();
           pomTimerDisplayStateManager.pomTimerState.value = 'idle';
-          timer.cancel();
+          openTimer.cancel();
         }
       });
     });
   }
 
   void buttonCancel() {
-    timer?.cancel();
-    timer = Timer.periodic(Duration(milliseconds: 16), (timer) {
+    openTimer?.cancel();
+    openTimer = Timer.periodic(Duration(milliseconds: 16), (openTimer) {
       setState(() {
         openIndicator = (openIndicator - 0.05).clamp(0.0, 1.0);
       });
@@ -40,7 +73,8 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
 
   @override
   void dispose() {
-    timer?.cancel();
+    openTimer?.cancel();
+    encourageTextChanger.cancel();
     super.dispose();
   }
 
@@ -80,10 +114,10 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
                 margin: EdgeInsetsGeometry.only(bottom: 4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color.fromARGB(110, 255, 219, 99),
+                  color: const Color.fromARGB(154, 254, 221, 113),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color.fromARGB(31, 173, 50, 50),
+                      color: const Color.fromARGB(100, 209, 92, 29),
                       offset: Offset(3, 3),
                     ),
                   ],
@@ -97,13 +131,24 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
                 ),
               ),
             ),
-            Text(
-              "ready when you are",
-              style: TextStyle(
-                fontFamily: 'Fredoka',
-                fontSize: 15,
-                color: Colors.white,
-                shadows: [Shadow(color: Colors.black12, offset: Offset(2, 2))],
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 500),
+              switchInCurve: Curves.linear,
+              switchOutCurve: Curves.linear,
+              transitionBuilder: (child, animation) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+              child: Text(
+                encourageText,
+                key: Key(encourageText),
+                style: TextStyle(
+                  fontFamily: 'Fredoka',
+                  fontSize: 15,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                  ],
+                ),
               ),
             ),
 

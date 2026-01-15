@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
@@ -25,9 +28,46 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
 
   final double gaugeRadius = 400;
 
+  late String encourageText;
+  late Timer encourageTextChanger;
+  final int encourageTextChangeInterval = 15;
+  final randomForEncourageTexts = Random();
+  late int randomEncourageTextIndex = 0;
+  List<String> encourageTexts = [
+    'doing your best is plenty',
+    'you can do it',
+    "you're doing great!",
+    "keep pushing",
+    "Purin cheers for you!",
+    "pause whenever to hydrate",
+    "keep going",
+    "you'll get there",
+    "water?",
+    "",
+  ];
+
+  ///
+
   @override
   void initState() {
     super.initState();
+
+    /// Initial randomET selection
+    encourageText = 'start strong and focus';
+
+    /// Timed ET changer
+    encourageTextChanger = Timer.periodic(
+      Duration(seconds: encourageTextChangeInterval),
+      (timer) {
+        randomEncourageTextIndex = randomForEncourageTexts.nextInt(
+          encourageTexts.length,
+        );
+        encourageText = encourageTexts[randomEncourageTextIndex];
+        setState(() {});
+      },
+    );
+
+    /// pomTimerSM
     _pomTimer = PomTimer.singleton;
     displayTime = _pomTimer.timeLeftSeconds.toDouble();
     maxTime = (_pomTimer.onBreak)
@@ -53,6 +93,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
 
   @override
   void dispose() {
+    encourageTextChanger.cancel();
     pomTimerDisplayStateManager.timeLeftSeconds.removeListener(updateTime);
     pomTimerDisplayStateManager.onBreak.removeListener(updateGauge);
     super.dispose();
@@ -175,16 +216,35 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
         Positioned(
           left: 0,
           right: 0,
-          bottom: 200,
+          bottom: 150,
           child: Column(
             children: [
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 600),
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+                child: Text(
+                  encourageText,
+                  key: Key(encourageText),
+                  style: TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    shadows: [
+                      Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                    ],
+                  ),
+                ),
+              ),
               Text(
                 PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),
                 style: TextStyle(
                   fontFamily: 'Fredoka',
                   fontWeight: FontWeight.w500,
-                  fontSize: 50,
-                  color: const Color.fromARGB(232, 255, 255, 255),
+                  fontSize: 45,
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   shadows: [
                     Shadow(color: Colors.black12, offset: Offset(2, 2)),
                   ],
@@ -194,16 +254,38 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                 spacing: 30,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GestureDetector(
-                    onTap: () => _pomTimer.pauseTimer(),
-                    child: Text('pause'),
+                  IconButton(
+                    iconSize: 40,
+                    onPressed: () {
+                      _pomTimer.pauseTimer();
+                    },
+                    icon: Icon(
+                      Icons.pause_rounded,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          color: const Color.fromARGB(130, 146, 105, 11),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  IconButton(
+                    iconSize: 40,
+                    onPressed: () {
                       _pomTimer.pauseTimer(); // Pause first
                       showWarningEndTimerDialog();
                     },
-                    child: Text("End"), // change to icons...
+                    icon: Icon(
+                      Icons.stop_rounded,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          color: const Color.fromARGB(130, 146, 105, 11),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
