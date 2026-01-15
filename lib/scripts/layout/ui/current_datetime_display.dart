@@ -68,6 +68,50 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Container(
+              width: 100,
+              height: 30,
+              padding: EdgeInsets.fromLTRB(9, 3, 5, 0),
+              margin: EdgeInsetsGeometry.only(top: 2),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(110, 240, 240, 240),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(offset: Offset(3, 3), color: Colors.black12),
+                ],
+              ),
+              child: Row(
+                spacing: 2,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    '$hour:$minute',
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 20,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    ':$second',
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 7,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(color: Colors.black12, offset: Offset(4, 4)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             Text(
               '$month $day, $year',
               style: TextStyle(
@@ -82,36 +126,6 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                   ),
                 ],
               ),
-            ),
-            Row(
-              spacing: 2,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                Text(
-                  '$hour:$minute',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 20,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(color: Colors.black12, offset: Offset(2, 2)),
-                    ],
-                  ),
-                ),
-                Text(
-                  ':$second',
-                  style: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 7,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(color: Colors.black12, offset: Offset(4, 4)),
-                    ],
-                  ),
-                ),
-              ],
             ),
           ],
         ),

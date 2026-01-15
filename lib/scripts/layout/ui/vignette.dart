@@ -12,16 +12,24 @@ class VignetteUI extends StatefulWidget {
 class _VignetteUIState extends State<VignetteUI> {
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
-      top: 0,
-      duration: Duration(),
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 600),
-        curve: Curves.easeOut,
-        opacity: widget.visible ? 1.0 : 0.0,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(1)),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: IgnorePointer(
+        child: SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  const Color.fromARGB(0, 167, 43, 43),
+                  const Color.fromARGB(146, 0, 0, 0),
+                ],
+                stops: [0.8, 1],
+              ),
+            ),
           ),
         ),
       ),

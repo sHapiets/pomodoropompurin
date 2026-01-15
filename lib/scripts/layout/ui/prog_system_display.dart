@@ -26,9 +26,21 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// GAUGE
-            SizedBox(
+            Container(
               height: expGaugeHeight,
               width: expGaugeWidth,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color.fromARGB(133, 99, 255, 224),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromARGB(31, 147, 11, 11),
+                    offset: Offset(7, 7),
+                    blurStyle: BlurStyle.inner,
+                    spreadRadius: -2,
+                  ),
+                ],
+              ),
               child: Center(
                 child: Stack(
                   children: [
@@ -69,13 +81,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                             RangePointer(
                               value: 0.7,
                               width: 0.2,
-                              gradient: SweepGradient(
-                                colors: const <Color>[
-                                  Color.fromARGB(255, 255, 250, 230),
-                                  Color.fromARGB(255, 255, 255, 255),
-                                ],
-                                stops: const <double>[0, 1],
-                              ),
+                              color: const Color.fromARGB(202, 255, 255, 255),
                               pointerOffset: 0.08,
                               cornerStyle: CornerStyle.bothFlat,
                               sizeUnit: GaugeSizeUnit.factor,
@@ -96,7 +102,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                             fontFamily: 'Nunito',
                             fontWeight: FontWeight.w500,
                             fontSize: 10,
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: Colors.white,
                             shadows: [
                               Shadow(
                                 color: Colors.black12,

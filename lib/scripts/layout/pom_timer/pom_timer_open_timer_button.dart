@@ -74,13 +74,26 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
               onTapCancel: () {
                 buttonCancel();
               },
-              child: IconButton(
-                iconSize: 35,
-                onPressed: () {},
-                icon: Icon(
-                  Icons.access_alarms_outlined,
-                  color: Colors.white,
-                  shadows: [Shadow(offset: Offset(3, 3), color: Colors.grey)],
+              child: Container(
+                width: 50,
+                height: 50,
+                margin: EdgeInsetsGeometry.only(bottom: 4),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color.fromARGB(110, 255, 219, 99),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(31, 173, 50, 50),
+                      offset: Offset(3, 3),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  alignment: Alignment.center,
+
+                  iconSize: 35,
+                  onPressed: () {},
+                  icon: Icon(Icons.timer_sharp, color: Colors.white),
                 ),
               ),
             ),
