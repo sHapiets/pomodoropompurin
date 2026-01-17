@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freestyle_speed_dial/freestyle_speed_dial.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 
 /// A clean, dropdown menu widget
 class MenuDial extends StatefulWidget {
@@ -12,6 +14,8 @@ class MenuDial extends StatefulWidget {
 class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
   late AnimationController menuAnimationController;
   late Animation<double> menuAnimation;
+
+  final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
 
   @override
   void initState() {
@@ -34,10 +38,17 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
-      duration: Duration(milliseconds: 500),
-      top: 40,
-      right: 40,
+    return ValueListenableBuilder(
+      valueListenable: pomTimerDisplayStateManager.pomTimerState,
+      builder: (context, value, child) {
+        return AnimatedPositioned(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          top: 40,
+          right: (value == 'play') ? -100 : 40,
+          child: child!,
+        );
+      },
       child: SpeedDialBuilder(
         buttonAnchor: Alignment.bottomCenter,
         itemAnchor: Alignment.topCenter,

@@ -54,11 +54,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ProgSystemDisplay(),
           CurrentDatetimeDisplay(),
           MenuDial(),
-          /*  if (_enableModalBarrier)
-            ModalBarrier(
-              color: const Color.fromARGB(133, 0, 0, 0),
-              dismissible: true,
-            ), */
           UIBlock(),
           PomTimerDisplay(),
         ],

@@ -35,7 +35,8 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
   @override
   Widget build(BuildContext context) {
     // Animation for Opening Widget
-    return Positioned(
+    return AnimatedPositioned(
+      duration: Duration(milliseconds: 500),
       bottom: 0,
       left: 0,
       right: 0,

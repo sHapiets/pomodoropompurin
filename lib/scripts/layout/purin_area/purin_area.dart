@@ -64,20 +64,20 @@ class PurinArea extends FlameGame
       priority: 999,
     );
     add(cursorSprite);
-    purinAreaStateManager.state = "Transforming";
+    purinAreaStateManager.state.value = "Transforming";
   }
 
   @override
   void onTapUp(TapUpEvent event) {
-    if (purinAreaStateManager.state != 'Scaling') {
+    if (purinAreaStateManager.state.value != 'Scaling') {
       cursorSprite.removeFromParent();
-      purinAreaStateManager.state = "Idle";
+      purinAreaStateManager.state.value = "Idle";
     }
   }
 
   @override
   void onTapCancel(TapCancelEvent event) {
-    purinAreaStateManager.state = 'Moving';
+    purinAreaStateManager.state.value = 'Moving';
   }
 
   @override
@@ -88,24 +88,24 @@ class PurinArea extends FlameGame
       priority: 999,
     );
     add(cursorSprite);
-    purinAreaStateManager.state = "Transforming";
+    purinAreaStateManager.state.value = "Transforming";
   }
 
   @override
   void onDoubleTapCancel(DoubleTapCancelEvent event) {
-    purinAreaStateManager.state = 'Scaling';
+    purinAreaStateManager.state.value = 'Scaling';
   }
 
   @override
   void onDoubleTapUp(DoubleTapEvent event) {
     cursorSprite.removeFromParent();
-    purinAreaStateManager.state = "Idle";
+    purinAreaStateManager.state.value = "Idle";
   }
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
     overlays.removeAll(overlays.activeOverlays);
-    if (purinAreaStateManager.state == "Moving") {
+    if (purinAreaStateManager.state.value == "Moving") {
       cursorSprite.position = info.eventPosition.global;
       newPosition += info.delta.global;
       /* 
@@ -119,7 +119,7 @@ class PurinArea extends FlameGame
         newPosition.x.clamp(minX, maxX),
         newPosition.y.clamp(minY, maxY),
       ); */
-    } else if (purinAreaStateManager.state == "Scaling") {
+    } else if (purinAreaStateManager.state.value == "Scaling") {
       cursorSprite.position.x = info.eventPosition.global.x;
       newScale -= info.delta.global.yy * 0.005;
 
@@ -137,7 +137,7 @@ class PurinArea extends FlameGame
   @override
   void onPanEnd(DragEndInfo info) {
     cursorSprite.removeFromParent();
-    purinAreaStateManager.state = "Idle";
+    purinAreaStateManager.state.value = "Idle";
   }
 
   @override

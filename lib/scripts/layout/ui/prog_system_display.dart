@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -11,15 +12,23 @@ class ProgSystemDisplay extends StatefulWidget {
 
 class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   final assetManager = AssetManager.singleton;
+  final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
 
   final expGaugeHeight = 80.0;
   final expGaugeWidth = 80.0;
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
-      duration: Duration(),
-      top: 30,
-      left: 0,
+    return ValueListenableBuilder(
+      valueListenable: pomTimerDisplayStateManager.pomTimerState,
+      builder: (context, value, child) {
+        return AnimatedPositioned(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          top: 30,
+          left: (value == 'play') ? -140 : 0,
+          child: child!,
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 15.0, 0, 0),
         child: Column(
