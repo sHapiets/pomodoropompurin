@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freestyle_speed_dial/freestyle_speed_dial.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_notes_menu.dart';
 
 /// A clean, dropdown menu widget
 class MenuDial extends StatefulWidget {
@@ -82,7 +83,17 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
             child: Center(
               child: MaterialButton(
                 shape: CircleBorder(),
-                onPressed: () {},
+                onPressed: () {
+                  showBottomSheet(
+                    enableDrag: false,
+                    context: context,
+                    elevation: 5,
+                    backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+                    builder: (context) {
+                      return TaskNotesMenu();
+                    },
+                  );
+                },
                 child: const Icon(
                   Icons.library_add_sharp,
                   color: Colors.white,
