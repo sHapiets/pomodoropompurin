@@ -9,7 +9,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 /// A selectable object for PurinArea, creating a comfy and customizeable kotatsu inside
 ///  Purin's home.
 ///
-/// This class was actually constructed before the super selectable class,
+/// This class was actually constructed before the its super class,
 /// PurinAreaSelectable. It was made to make my life a bit easier, creating a general
 /// format in constructing all the other selectables.
 /// Kindly refer to the super class for a concise understanding of selectables, since
