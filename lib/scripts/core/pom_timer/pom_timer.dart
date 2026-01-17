@@ -24,7 +24,7 @@ class PomTimer {
   int timeTotalSeconds =
       0; // Total time for rewards (max is loopsSet * timeSetWork)
   int timeLeftSeconds = 0; // A counter for time left
-  int timeDisplayedSeconds = 0; // Placeholder for what is put in Text
+  int loopsLeft = 0;
 
   bool restart =
       true; // true if the current timer is starting from initial input time
@@ -52,6 +52,16 @@ class PomTimer {
           timeLeftSeconds = timeSetWorkSeconds;
         }
 
+        loopsLeft = loopsSet;
+
+        /// Save latest PomTimerInput to database
+        _databaseManager.userConfigTimerSave(
+          timeSetWorkSeconds,
+          timeSetBreakSeconds,
+          loopsSet,
+        );
+
+        /// Note that PomTimer is active in case of disconnection
         _databaseManager.statusPomTimerSave('wasActive', true);
         restart = false;
       } else {
@@ -71,12 +81,13 @@ class PomTimer {
             ///////  ADD EVENT TRIGGER ///
             /// Like purin being like, "BREAK TIME!!" or sum shz
 
-            loopsSet--;
+            loopsLeft--;
             timeLeftSeconds = timeSetBreakSeconds;
             timeTotalSeconds += timeSetWorkSeconds; // add to totalSeconds
             onBreak = true; // switch to break
+            pomTimerDisplayStateManager.pomTimerState.value = 'break';
             pomTimerDisplayStateManager.onBreak.value = true;
-            if (loopsSet <= 0) {
+            if (loopsLeft <= 0) {
               // if no, more loops, end and award...
               timeLeftSeconds = timeSetWorkSeconds;
               endTimer(); // Award Maximum Points
@@ -89,6 +100,7 @@ class PomTimer {
 
             timeLeftSeconds = timeSetWorkSeconds;
             onBreak = false;
+            pomTimerDisplayStateManager.pomTimerState.value = 'play';
             pomTimerDisplayStateManager.onBreak.value = false;
           }
         }

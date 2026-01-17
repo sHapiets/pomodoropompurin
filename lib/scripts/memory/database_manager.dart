@@ -55,11 +55,13 @@ class DatabaseManager {
   Future<void> userConfigTimerSave(
     int timeWorkSeconds,
     int timeBreakSeconds,
+    int loopsSet,
   ) async {
     final configTimerRef = userRef.collection('config').doc('pomTimer');
     await configTimerRef.set({
       'timeSetWorkSeconds': timeWorkSeconds,
       'timeSetBreakSeconds': timeBreakSeconds,
+      'loopsSet': loopsSet,
     });
   }
 

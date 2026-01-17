@@ -61,12 +61,12 @@ class _SplashPageState extends State<SplashPage> {
     _pomTimer.timeSetBreakSeconds = await _databaseManager.userConfigTimerLoad(
       'timeSetBreakSeconds',
     );
+    _pomTimer.loopsSet = await _databaseManager.userConfigTimerLoad('loopsSet');
 
     // Not actually needed... remove soon
     _progSystem.loadDateLogList(
       await _databaseManager.calendarMonthLoad(2026, 1),
     );
-    DateTime.now();
   }
 
   Future<void> loadingScreenchuchu() async {}
