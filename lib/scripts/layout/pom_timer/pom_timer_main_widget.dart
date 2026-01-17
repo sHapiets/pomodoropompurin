@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_active.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_break.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_idle.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_pause.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
@@ -33,12 +34,12 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
 
   late double position;
   final double inputPosition = 0;
-  final double playPostion = 180;
+  final double playPostion = 160;
   final double pausePosition = -120;
 
   double get backgroundPostion {
     switch (position) {
-      case 180:
+      case 160:
         return 35;
       default:
         return 0;
@@ -70,6 +71,10 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
             pomTimerWidget = PomTimerActiveWidget();
             scale = playScale;
             position = playPostion;
+          case 'break':
+            pomTimerWidget = PomTimerBreakWidget();
+            scale = pausedScale;
+            position = pausePosition;
         }
       });
     };

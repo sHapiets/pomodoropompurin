@@ -161,8 +161,8 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                   maximum: maxTime.toDouble(),
                   showLabels: false,
                   showTicks: false,
-                  startAngle: 160,
-                  endAngle: 20,
+                  startAngle: 270,
+                  endAngle: 270,
                   axisLineStyle: AxisLineStyle(
                     thickness: 1,
                     color: const Color.fromARGB(0, 255, 255, 255),
@@ -174,7 +174,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                       value:
                           maxTime.toDouble() -
                           (_pomTimer.timeLeftSeconds.toDouble()),
-                      width: 0.08,
+                      width: 0.05,
                       color: const Color.fromARGB(255, 255, 255, 255),
                       gradient: SweepGradient(
                         colors: const <Color>[
@@ -183,14 +183,14 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                         ],
                         stops: const <double>[0, 1],
                       ),
-                      pointerOffset: 0.1,
+                      pointerOffset: 0.2,
                       cornerStyle: CornerStyle.bothFlat,
                       sizeUnit: GaugeSizeUnit.factor,
                       enableAnimation: true,
                       animationDuration: 700,
                       animationType: AnimationType.bounceOut,
                     ),
-
+                    /* 
                     MarkerPointer(
                       value:
                           maxTime.toDouble() -
@@ -205,7 +205,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                       markerWidth: 50,
                       elevation: 3,
                       imageUrl: assetManager.flutterAssetPaths['pT_WP'],
-                    ),
+                    ), */
                   ],
                 ),
               ],

@@ -8,6 +8,7 @@ import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
+import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/vignette.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
@@ -58,6 +59,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               color: const Color.fromARGB(133, 0, 0, 0),
               dismissible: true,
             ), */
+          UIBlock(),
           PomTimerDisplay(),
         ],
       ),
