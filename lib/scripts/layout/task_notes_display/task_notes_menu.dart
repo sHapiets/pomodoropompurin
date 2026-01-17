@@ -25,7 +25,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
+      width: 330,
       height: 300,
       decoration: BoxDecoration(
         color: const Color.fromARGB(0, 151, 148, 120),
@@ -38,7 +38,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
             bottom: -10,
             right: 0,
             child: Container(
-              width: 390,
+              width: 320,
               height: 250,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(237, 193, 131, 15),
@@ -50,7 +50,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
             bottom: 0,
             left: 0,
             child: Container(
-              width: 390,
+              width: 320,
               height: 250,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(145, 255, 186, 81),
@@ -79,13 +79,21 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
               iconSize: 28,
               onPressed: () {
                 taskNotesManager.addTaskNote(
-                  TaskNote(header: 'this is', content: 'sparta'),
+                  TaskNote(
+                    header: '${taskNotesManager.taskNotes.length}',
+                    content: '',
+                  ),
                 );
               },
               icon: Icon(
                 Icons.add_box_outlined,
                 color: const Color.fromARGB(255, 255, 255, 255),
-                shadows: [Shadow(color: Colors.black26, offset: Offset(3, 3))],
+                shadows: [
+                  Shadow(
+                    color: const Color.fromARGB(71, 0, 0, 0),
+                    offset: Offset(3, 3),
+                  ),
+                ],
               ),
             ),
           ),
@@ -109,27 +117,27 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
             top: 80,
             left: 25,
             child: Container(
-              width: 350,
+              width: 280,
               height: 230,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(3),
               ),
-              child: ValueListenableBuilder(
-                valueListenable: taskNotesManager.length,
-                builder: (context, value, child) {
-                  return (value == 0)
+              child: ListenableBuilder(
+                listenable: taskNotesManager,
+                builder: (context, child) {
+                  return (taskNotesManager.noTasks)
                       ? Center(
                           child: Text(
                             'this list is suspiciously empty...',
                             style: TextStyle(
                               fontFamily: 'Fredoka',
                               fontWeight: FontWeight.w500,
-                              fontSize: 18,
+                              fontSize: 15,
                               color: const Color.fromARGB(183, 179, 179, 179),
                               shadows: [
                                 Shadow(
-                                  color: const Color.fromARGB(53, 0, 0, 0),
+                                  color: const Color.fromARGB(125, 0, 0, 0),
                                   offset: Offset(1, 1),
                                 ),
                               ],
@@ -138,10 +146,11 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
                         )
                       : ListView.separated(
                           padding: EdgeInsets.all(10),
-                          itemCount: value,
+                          itemCount: taskNotesManager.taskNotes.length,
                           itemBuilder: (context, index) {
                             return TaskNoteItem(
                               taskNote: taskNotesManager.taskNotes[index],
+                              positionIndex: index,
                             );
                           },
                           separatorBuilder: (context, index) {

@@ -381,42 +381,46 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
               ),
             ),
 
-            Positioned(
-              bottom: 127,
-              right: 148,
-              child: IconButton(
-                onPressed: () {
-                  if (_pomTimer.loopsSet < 9) {
-                    _pomTimer.loopsSet++;
-                  }
-                  setState(() {});
-                },
-                icon: Icon(
-                  Icons.add_circle_rounded,
-                  color: Colors.white,
-                  shadows: [
-                    const Shadow(color: Colors.black12, offset: Offset(2, 2)),
-                  ],
+            Align(
+              alignment: AlignmentGeometry.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.fromLTRB(70, 0, 0, 125),
+                child: IconButton(
+                  onPressed: () {
+                    if (_pomTimer.loopsSet < 9) {
+                      _pomTimer.loopsSet++;
+                    }
+                    setState(() {});
+                  },
+                  icon: Icon(
+                    Icons.add_circle_rounded,
+                    color: Colors.white,
+                    shadows: [
+                      const Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                    ],
+                  ),
                 ),
               ),
             ),
 
-            Positioned(
-              bottom: 127,
-              left: 148,
-              child: IconButton(
-                onPressed: () {
-                  if (_pomTimer.loopsSet > 1) {
-                    _pomTimer.loopsSet--;
-                    setState(() {});
-                  }
-                },
-                icon: Icon(
-                  Icons.remove_circle_rounded,
-                  color: Colors.white,
-                  shadows: [
-                    const Shadow(color: Colors.black12, offset: Offset(2, 2)),
-                  ],
+            Align(
+              alignment: AlignmentGeometry.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.fromLTRB(0, 0, 70, 125),
+                child: IconButton(
+                  onPressed: () {
+                    if (_pomTimer.loopsSet > 1) {
+                      _pomTimer.loopsSet--;
+                      setState(() {});
+                    }
+                  },
+                  icon: Icon(
+                    Icons.remove_circle_rounded,
+                    color: Colors.white,
+                    shadows: [
+                      const Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                    ],
+                  ),
                 ),
               ),
             ),
