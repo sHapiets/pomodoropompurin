@@ -64,7 +64,9 @@ class _SplashPageState extends State<SplashPage> {
     _pomTimer.loopsSet = await _databaseManager.userConfigTimerLoad('loopsSet');
 
     // Not actually needed... remove soon
-    _progSystem.loadDateLogList(
+    _progSystem.loadDateLogMonth(
+      2026,
+      1,
       await _databaseManager.calendarMonthLoad(2026, 1),
     );
   }

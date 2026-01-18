@@ -2,7 +2,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
 
-/// Singleton class to manage all game assets
+/// Singleton class to manage all materials in the assets folder
+///
+/// In contrast to the DatabaseManager, this memory-based class is
+/// essentially created to link external materials for access to all
+/// other classes and widgets. It does not contain the actual assets,
+/// per se, but only links/paths. Its main function, however, is centered
+/// on preloading the assets, which are called during the splash page/
+/// loading screen.
 class AssetManager {
   AssetManager._internal();
   static final AssetManager singleton = AssetManager._internal();
@@ -10,6 +17,11 @@ class AssetManager {
   final Map<String, ImageProvider> _images = {}; // Preloaded images
   final Map<String, bool> _lazyLoaded = {}; // Tracks lazy-loaded shop assets
 
+  /// Flutter Image links are accessed via a string of the asset path rooted
+  /// at the asset folder (e.g. 'assets/..../image.png'). Due to foreseeable changes
+  /// in directories of certain images, a map is created as a reliable way
+  /// to lay a permanent set key per asset, such that the associated value (path) of
+  /// the key is mutable.
   Map<String, String> flutterAssetPaths = {
     'pT_FG': 'assets/images/pomTimer/pomTimer_foreground.png',
     'pT_BG': 'assets/images/pomTimer/pomTimer_background.png',

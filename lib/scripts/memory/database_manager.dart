@@ -73,4 +73,15 @@ class DatabaseManager {
     final statusPomTimerRef = statusRef.doc('pomTimer');
     await statusPomTimerRef.update({status: data});
   }
+
+  Future<void> dayTimeSecondsSave(int timeTotalSeconds) async {
+    final dayRef = userRef
+        .collection('dates')
+        .doc('${DateTime.now().year}')
+        .collection('months')
+        .doc('${DateTime.now().month}'.padLeft(2, '0'))
+        .collection('days')
+        .doc('${DateTime.now().day}'.padLeft(2, '0'));
+    await dayRef.update({'timeSeconds': timeTotalSeconds});
+  }
 }

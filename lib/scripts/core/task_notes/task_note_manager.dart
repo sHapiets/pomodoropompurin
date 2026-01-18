@@ -1,6 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:pomodoropompurin/scripts/core/task_notes/task_note.dart';
 
+/// This singleton class simply acts as a listenable state
+/// manager, that allows reactive building within associated widgets.
+/// It contains an ordered list of TaskNote objects currently active
+/// within the session, and can be modified via the functions I've
+/// added below.
+///
+/// Please note that methods relating to storing notes into memory
+/// in any shape or form has NOT been added, since PRIVACY, as pertaining
+/// to the initial scope of this project, is very minimal. If the future
+/// insists of this addition, this note serves as a reminder that if such
+/// plans are to be executed, reviewing the privacy capabilities of
+/// the database (access and viewablity) is extremely necessary.
 class TaskNoteManager extends ChangeNotifier {
   TaskNoteManager._();
   static final singleton = TaskNoteManager._();

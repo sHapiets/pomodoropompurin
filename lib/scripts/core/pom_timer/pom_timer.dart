@@ -6,6 +6,15 @@ import 'package:pomodoropompurin/scripts/core/prog_system.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// Logic class for the Pomodoro Timer and its events
+///
+/// Handles most of the actual states of things, which might not be the most
+/// optimal way of handling such complexity. But regardless, comments
+/// were added for everyone's convinience, especially mine.
+///
+/// A brief rundown of its functions:
+/// - control of the PomTimerDisplay widgets via state manager
+/// - updating Koupen of rewards and DateLog data
+/// -
 class PomTimer {
   PomTimer._(); // singleton-ing
   static final PomTimer singleton = PomTimer._();

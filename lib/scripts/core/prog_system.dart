@@ -14,7 +14,14 @@ class ProgSystem {
   ValueNotifier<int> milkJugs = ValueNotifier<int>(0);
   ValueNotifier<int> exPoints = ValueNotifier<int>(0);
 
-  List<DateLog> dateLogList = [];
+  Map<int, Map<int, List<DateLog>>> dateLogList = {};
+  List<DateLog> dateLogfromMonth(int year, int month) {
+    if (dateLogList[year]?[month] != null) {
+      return dateLogList[year]![month]!;
+    } else {
+      return [];
+    }
+  }
 
   String get pomPointsString => pomPoints.value.toString();
   String get milkJugsString => milkJugs.value.toString();
@@ -41,5 +48,13 @@ class ProgSystem {
       pomPoints.value = points; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadMilkJugs(int jugs) =>
       milkJugs.value = jugs; // USE ONLY FOR SPLASHSCREEN (initial loading..)
-  void loadDateLogList(List<DateLog> logList) => dateLogList = logList;
+  void loadDateLogMonth(int year, int month, List<DateLog> logList) {
+    if (!dateLogList.containsKey(year)) {
+      dateLogList.addAll({year: {}});
+    }
+    if (!dateLogList[year]!.containsKey(month)) {
+      dateLogList[year]!.addAll({month: []});
+    }
+    dateLogList[year]![month] = logList;
+  }
 }
