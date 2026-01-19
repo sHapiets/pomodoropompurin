@@ -36,7 +36,8 @@ class _UIBlockState extends State<UIBlock> with TickerProviderStateMixin {
 
     uiBlockSet = () {
       setState(() {
-        if (pomTimerDisplayStateManager.pomTimerState.value == 'play') {
+        if (pomTimerDisplayStateManager.pomTimerState.value ==
+            PomTimerStates.play) {
           currentWidget = AnimatedModalBarrier(color: fadeTween);
           fadeAnimController.forward();
         } else {
