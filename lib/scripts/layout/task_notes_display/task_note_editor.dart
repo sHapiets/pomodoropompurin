@@ -83,7 +83,7 @@ class _TaskNoteEditorState extends State<TaskNoteEditor> {
                     width: 200,
                     child: TextField(
                       controller: headerController,
-                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
                       style: TextStyle(
                         fontFamily: 'Fredoka',
                         fontWeight: FontWeight.w500,
@@ -175,7 +175,10 @@ class _TaskNoteEditorState extends State<TaskNoteEditor> {
                         );
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.save_as_outlined, color: Colors.black),
+                      icon: Icon(
+                        Icons.save_as_outlined,
+                        color: Colors.lightGreen,
+                      ),
                     ),
                   ),
                 ),
