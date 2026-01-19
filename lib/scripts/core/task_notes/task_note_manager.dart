@@ -25,6 +25,12 @@ class TaskNoteManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  void editTaskNote(int noteIndex, String header, String content) {
+    taskNotes[noteIndex].header = header;
+    taskNotes[noteIndex].content = content;
+    notifyListeners();
+  }
+
   void moveUp(int noteIndex) {
     if (noteIndex >= 1) {
       TaskNote taskNotePlaceholder = taskNotes[noteIndex];

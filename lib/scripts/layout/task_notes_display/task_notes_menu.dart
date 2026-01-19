@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/task_notes/task_note.dart';
 import 'package:pomodoropompurin/scripts/core/task_notes/task_note_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_note_editor.dart';
 import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_note_item.dart';
 
 class TaskNotesMenu extends StatefulWidget {
@@ -78,11 +79,33 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
             child: IconButton(
               iconSize: 28,
               onPressed: () {
-                taskNotesManager.addTaskNote(
-                  TaskNote(
-                    header: '${taskNotesManager.taskNotes.length}',
-                    content: '',
-                  ),
+                taskNotesManager.addTaskNote(TaskNote(header: '', content: ''));
+                showGeneralDialog(
+                  context: context,
+                  barrierColor: Colors.black38,
+                  transitionDuration: Duration(milliseconds: 500),
+                  transitionBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                        Animation<Offset> offsetAnim =
+                            Tween<Offset>(
+                              begin: Offset(-1.5, 0),
+                              end: Offset(0, 0),
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.easeInOutBack,
+                              ),
+                            );
+                        return SlideTransition(
+                          position: offsetAnim,
+                          child: child,
+                        );
+                      },
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return TaskNoteEditor(
+                      noteIndex: taskNotesManager.taskNotes.length - 1,
+                    );
+                  },
                 );
               },
               icon: Icon(

@@ -119,7 +119,9 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                 onPressed: () {
                   showGeneralDialog(
                     context: context,
+                    barrierDismissible: true,
                     barrierColor: Colors.black26,
+                    barrierLabel: '',
                     transitionDuration: Duration(milliseconds: 300),
                     transitionBuilder:
                         (context, animation, secondaryAnimation, child) {
