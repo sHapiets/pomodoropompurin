@@ -20,6 +20,22 @@ class CalendarManager extends ChangeNotifier {
   static final singleton = CalendarManager._();
 
   final progSystem = ProgSystem.singleton;
+  final monthNames = [
+    '', // placeholder for index 0
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+    'January',
+  ];
 
   List<DateLog> calendarMonthAtDisplay = [];
   int monthAtDisplay = DateTime.now().month;

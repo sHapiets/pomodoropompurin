@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freestyle_speed_dial/freestyle_speed_dial.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
-import 'package:pomodoropompurin/scripts/layout/prog_calendar_display.dart';
+import 'package:pomodoropompurin/scripts/layout/calendar_display/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_notes_menu.dart';
 
 /// A clean, dropdown menu widget

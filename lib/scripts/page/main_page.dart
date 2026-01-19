@@ -6,7 +6,7 @@ import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
 import 'package:pomodoropompurin/scripts/layout/equip_menu/kotatsu_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
-import 'package:pomodoropompurin/scripts/layout/prog_calendar_display.dart';
+import 'package:pomodoropompurin/scripts/layout/calendar_display/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/vignette.dart';
