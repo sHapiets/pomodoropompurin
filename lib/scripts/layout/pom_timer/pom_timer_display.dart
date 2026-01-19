@@ -15,6 +15,8 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
   final purinAreaStateManager = PurinAreaStateManager.singleton;
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
   late Widget pomTimerAtDisplay;
+  Widget mainWidget = PomTimerMainWidget();
+  Widget openButton = PomTimerOpenButton();
 
   @override
   void initState() {
@@ -22,12 +24,12 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
     pomTimerAtDisplay = PomTimerOpenButton();
     pomTimerDisplayStateManager.openPomTimer = () {
       setState(() {
-        pomTimerAtDisplay = PomTimerMainWidget();
+        pomTimerAtDisplay = mainWidget;
       });
     };
     pomTimerDisplayStateManager.closePomTimer = () {
       setState(() {
-        pomTimerAtDisplay = PomTimerOpenButton();
+        pomTimerAtDisplay = openButton;
       });
     };
   }
@@ -48,6 +50,7 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
           return Stack(
             alignment: Alignment.center,
             children: <Widget>[
+              if (currentChild != mainWidget) Offstage(child: mainWidget),
               ...previousChildren,
               if (currentChild != null) currentChild,
             ],

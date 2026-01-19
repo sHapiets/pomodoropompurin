@@ -11,10 +11,14 @@ class PomTimerDisplayStateManager {
   ValueNotifier<bool> onBreak = ValueNotifier(false);
 
   /// State Notifier for all PomTimerWidgets (Active, Idle/Input, Pause)
-  ValueNotifier<String> pomTimerState = ValueNotifier('input');
+  ValueNotifier<PomTimerStates> pomTimerState = ValueNotifier(
+    PomTimerStates.idle,
+  );
 
   /// Functions set in PomTimerDisplay
   /// Switches between OPEN BUTTON and MAIN WIDGET
   void Function() openPomTimer = () {};
   void Function() closePomTimer = () {};
 }
+
+enum PomTimerStates { idle, play, pause, onBreak }

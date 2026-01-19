@@ -48,7 +48,7 @@ class PomTimer {
       // already playing...
     } else {
       isPlaying = true;
-      pomTimerDisplayStateManager.pomTimerState.value = 'play';
+      pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.play;
       disablePurinArea(true);
 
       if (restart) {
@@ -94,7 +94,8 @@ class PomTimer {
             timeLeftSeconds = timeSetBreakSeconds;
             timeTotalSeconds += timeSetWorkSeconds; // add to totalSeconds
             onBreak = true; // switch to break
-            pomTimerDisplayStateManager.pomTimerState.value = 'break';
+            pomTimerDisplayStateManager.pomTimerState.value =
+                PomTimerStates.onBreak;
             pomTimerDisplayStateManager.onBreak.value = true;
             if (loopsLeft <= 0) {
               // if no, more loops, end and award...
@@ -109,7 +110,8 @@ class PomTimer {
 
             timeLeftSeconds = timeSetWorkSeconds;
             onBreak = false;
-            pomTimerDisplayStateManager.pomTimerState.value = 'play';
+            pomTimerDisplayStateManager.pomTimerState.value =
+                PomTimerStates.play;
             pomTimerDisplayStateManager.onBreak.value = false;
           }
         }
@@ -137,7 +139,7 @@ class PomTimer {
     if (isPlaying) {
       isPlaying = false;
       timer.cancel();
-      pomTimerDisplayStateManager.pomTimerState.value = 'pause';
+      pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.pause;
       disablePurinArea(false);
     }
   }

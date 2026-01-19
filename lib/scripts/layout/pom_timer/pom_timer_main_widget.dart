@@ -59,19 +59,19 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
     updatePomTimerWidget = () {
       setState(() {
         switch (pomTimerDisplayStateManager.pomTimerState.value) {
-          case 'idle':
+          case PomTimerStates.idle:
             pomTimerWidget = PomTimerIdleWidget();
             scale = inputScale;
             position = inputPosition;
-          case 'pause':
+          case PomTimerStates.pause:
             pomTimerWidget = PomTimerPauseWidget();
             scale = pausedScale;
             position = pausePosition;
-          case 'play':
+          case PomTimerStates.play:
             pomTimerWidget = PomTimerActiveWidget();
             scale = playScale;
             position = playPostion;
-          case 'break':
+          case PomTimerStates.onBreak:
             pomTimerWidget = PomTimerBreakWidget();
             scale = pausedScale;
             position = pausePosition;
