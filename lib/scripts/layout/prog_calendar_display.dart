@@ -117,7 +117,7 @@ class _ProgCalendarDisplayState extends State<ProgCalendarDisplay> {
                 top: 10,
                 left: 10,
                 child: Text(
-                  'daily focus',
+                  'daily logs',
                   style: TextStyle(
                     fontFamily: 'Fredoka',
                     fontWeight: FontWeight.w500,
