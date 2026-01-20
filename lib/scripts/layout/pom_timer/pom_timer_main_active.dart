@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
+import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_notes_menu.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -224,6 +225,8 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                 transitionBuilder: (child, animation) {
                   return FadeTransition(opacity: animation, child: child);
                 },
+
+                ///  ENCOURAGE TEXT
                 child: Text(
                   encourageText,
                   key: Key(encourageText),
@@ -238,6 +241,8 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                   ),
                 ),
               ),
+
+              /// TIME TEXT
               Text(
                 PomTimerExtensions.formatDuration(_pomTimer.timeLeftSeconds),
                 style: TextStyle(
@@ -250,12 +255,39 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                   ],
                 ),
               ),
+
+              /// PAUSE / STOP BUTTON
               Row(
-                spacing: 30,
+                spacing: 27,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    iconSize: 40,
+                    iconSize: 25,
+                    onPressed: () {
+                      showModalBottomSheet(
+                        enableDrag: false,
+                        context: context,
+                        elevation: 5,
+                        barrierColor: Colors.black26,
+                        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+                        builder: (context) {
+                          return TaskNotesMenu();
+                        },
+                      );
+                    },
+                    icon: Icon(
+                      Icons.list_alt_rounded,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          color: const Color.fromARGB(130, 146, 105, 11),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 30,
                     onPressed: () {
                       _pomTimer.pauseTimer();
                     },
@@ -271,7 +303,7 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                     ),
                   ),
                   IconButton(
-                    iconSize: 40,
+                    iconSize: 30,
                     onPressed: () {
                       _pomTimer.pauseTimer(); // Pause first
                       showWarningEndTimerDialog();
