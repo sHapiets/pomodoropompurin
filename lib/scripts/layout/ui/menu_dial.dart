@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freestyle_speed_dial/freestyle_speed_dial.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/calendar_display/prog_calendar_display.dart';
@@ -18,6 +17,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
   late Animation<double> menuAnimation;
 
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
+  ValueNotifier<bool> toggle = ValueNotifier(false);
 
   @override
   void initState() {
@@ -38,20 +38,114 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  void toggleMenu() {
+    toggle.value = !(toggle.value);
+    (menuAnimationController.isForwardOrCompleted)
+        ? menuAnimationController.reverse()
+        : menuAnimationController.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: pomTimerDisplayStateManager.pomTimerState,
       builder: (context, value, child) {
         return AnimatedPositioned(
-          duration: Duration(milliseconds: 500),
+          duration: Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           top: 40,
-          right: (value == 'play') ? -100 : 40,
+          right: (value == PomTimerStates.play) ? -100 : 40,
           child: child!,
         );
       },
-      child: SpeedDialBuilder(
+      child: Column(
+        spacing: 20,
+        children: [
+          IconButton(
+            iconSize: 40,
+            onPressed: () {
+              toggleMenu();
+            },
+            icon: AnimatedIcon(
+              color: Colors.white,
+              icon: AnimatedIcons.menu_close,
+              progress: menuAnimation,
+            ),
+          ),
+          ListenableBuilder(
+            listenable: toggle,
+            builder: (context, child) {
+              return AnimatedScale(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOutCirc,
+                scale: (toggle.value) ? 1 : 0,
+                child: child,
+              );
+            },
+            child: IconButton(
+              iconSize: 30,
+              onPressed: () {
+                showModalBottomSheet(
+                  enableDrag: false,
+                  context: context,
+                  elevation: 5,
+                  barrierColor: Colors.black26,
+                  backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+                  builder: (context) {
+                    return TaskNotesMenu();
+                  },
+                );
+                toggleMenu();
+              },
+              icon: Icon(Icons.list_alt_rounded, color: Colors.white),
+            ),
+          ),
+
+          ListenableBuilder(
+            listenable: toggle,
+            builder: (context, child) {
+              return AnimatedScale(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOutCirc,
+                scale: (toggle.value) ? 1 : 0,
+                child: child,
+              );
+            },
+            child: IconButton(
+              iconSize: 30,
+              onPressed: () {
+                showGeneralDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  barrierColor: Colors.black26,
+                  barrierLabel: '',
+                  transitionDuration: Duration(milliseconds: 300),
+                  transitionBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                        return ScaleTransition(
+                          scale: CurvedAnimation(
+                            parent: animation,
+                            curve: Curves.easeOutBack,
+                          ),
+                          child: child,
+                        );
+                      },
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return ProgCalendarDisplay();
+                  },
+                );
+                toggleMenu();
+              },
+              icon: Icon(Icons.calendar_today_rounded, color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/* SpeedDialBuilder(
         buttonAnchor: Alignment.bottomCenter,
         itemAnchor: Alignment.topCenter,
         buttonBuilder: (context, isActive, toggle) {
@@ -152,7 +246,4 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
+      ), */
