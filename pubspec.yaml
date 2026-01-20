@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: ^0.18.1
   contribution_heatmap: ^0.5.2
   syncfusion_flutter_gauges: ^32.1.21
   firebase_core: ^4.3.0

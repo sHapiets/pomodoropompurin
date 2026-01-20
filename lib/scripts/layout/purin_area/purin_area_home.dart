@@ -20,7 +20,6 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   @override
   Future<void> onMount() async {
     super.onMount();
-    scale = Vector2.all(0.01);
 
     addOnLoadAnim();
     // Home Sprite

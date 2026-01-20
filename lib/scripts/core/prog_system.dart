@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
@@ -12,7 +14,7 @@ class ProgSystem {
 
   ValueNotifier<int> pomPoints = ValueNotifier<int>(0);
   ValueNotifier<int> milkJugs = ValueNotifier<int>(0);
-  ValueNotifier<int> exPoints = ValueNotifier<int>(0);
+  ValueNotifier<int> oshiriPoints = ValueNotifier<int>(0);
 
   Map<int, Map<int, List<DateLog>>> dateLogList = {};
   List<DateLog> dateLogfromMonth(int year, int month) {
@@ -25,6 +27,8 @@ class ProgSystem {
 
   String get pomPointsString => pomPoints.value.toString();
   String get milkJugsString => milkJugs.value.toString();
+  ValueNotifier<int> oshiriLevel = ValueNotifier(0);
+  ValueNotifier<int> oshiriRemainder = ValueNotifier(0);
 
   List<String> acquiredItemsIds = [];
   List<String> acquiredHatsIds = [];
@@ -57,4 +61,30 @@ class ProgSystem {
     }
     dateLogList[year]![month] = logList;
   }
+
+  void updateLevelSystem() {
+    var low = 0;
+    var high = oshiriPointsFromLevel.length;
+
+    while (low < high) {
+      final mid = low + ((high - low) >> 1);
+      if (oshiriPointsFromLevel[mid] <= oshiriPoints.value) {
+        low = mid + 1;
+      } else {
+        high = mid;
+      }
+    }
+
+    oshiriLevel.value = low;
+    oshiriRemainder.value = (low == 0)
+        ? oshiriPoints.value
+        : oshiriPoints.value - oshiriPointsFromLevel[low - 1];
+    debugPrint(
+      '${oshiriPoints.value}, ${oshiriRemainder.value}, ${oshiriPointsFromLevel[2]}',
+    );
+  }
+
+  List<int> oshiriPointsFromLevel = List<int>.generate(1000, (int index) {
+    return (index == 0) ? 0 : (100 * pow(index, 2).toInt());
+  }, growable: true);
 }

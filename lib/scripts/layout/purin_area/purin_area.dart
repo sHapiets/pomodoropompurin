@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
@@ -32,11 +33,11 @@ class PurinArea extends FlameGame
 
   @override
   FutureOr<void> onLoad() async {
-    super.onLoad();
-    purinAreaHome = PurinAreaHome(position: size / 2);
+    await super.onLoad();
+    purinAreaHome = PurinAreaHome(position: Vector2.zero());
     purinAreaStateManager.jumpToPosition = jumpToPosition;
-    newPosition = purinAreaHome.position;
-    newScale = purinAreaHome.scale;
+    newPosition = camera.viewfinder.position.clone();
+    newScale = Vector2.all(1);
     // Add Background (change Component type?)
     /*     add(
       SpriteComponent(
@@ -45,13 +46,13 @@ class PurinArea extends FlameGame
       ),
     ); */
     // Add HomeArea
-    add(purinAreaHome);
+    world.add(purinAreaHome);
   }
 
   void jumpToPosition(Vector2 position) {
     final offsetPosition = Vector2(position.x, position.y + 100);
-    final center = size / 2;
-    newPosition += center - offsetPosition;
+    newPosition = offsetPosition;
+    newScale.x = 1.0;
   }
 
   @override
@@ -107,7 +108,9 @@ class PurinArea extends FlameGame
     overlays.removeAll(overlays.activeOverlays);
     if (purinAreaStateManager.state.value == "Moving") {
       cursorSprite.position = info.eventPosition.global;
-      newPosition += info.delta.global;
+
+      final zoom = camera.viewfinder.zoom;
+      newPosition -= info.delta.global / zoom;
       /* 
       final minX = 0.0;
       final minY = 0.0;
@@ -143,7 +146,14 @@ class PurinArea extends FlameGame
   @override
   void update(double dt) {
     super.update(dt);
-    purinAreaHome.position.lerp(newPosition, 0.1);
-    purinAreaHome.scale.lerp(newScale, 0.1);
+    camera.viewfinder.position = Vector2(
+      lerpDouble(camera.viewfinder.position.x, newPosition.x, 0.1)!,
+      lerpDouble(camera.viewfinder.position.y, newPosition.y, 0.1)!,
+    );
+    camera.viewfinder.zoom = lerpDouble(
+      camera.viewfinder.zoom,
+      newScale.x,
+      0.1,
+    )!;
   }
 }
