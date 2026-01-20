@@ -54,6 +54,9 @@ class _SplashPageState extends State<SplashPage> {
     // Database loading
     _progSystem.loadPomPoints(await _databaseManager.userDataLoad('pomPoints'));
     _progSystem.loadMilkJugs(await _databaseManager.userDataLoad('milkJugs'));
+    _progSystem.loadOshiriPoints(
+      await _databaseManager.userDataLoad('oshiriPoints'),
+    );
 
     _pomTimer.timeSetWorkSeconds = await _databaseManager.userConfigTimerLoad(
       'timeSetWorkSeconds',

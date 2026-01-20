@@ -47,11 +47,17 @@ class ProgSystem {
     _databaseManager.userDataSave('milkJugs', milkJugs.value);
   }
 
+  void addOshiriPoints(int points) {
+    oshiriPoints.value += points;
+    _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
+  }
+
   // Functions to be used to reload data
   void loadPomPoints(int points) =>
       pomPoints.value = points; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadMilkJugs(int jugs) =>
       milkJugs.value = jugs; // USE ONLY FOR SPLASHSCREEN (initial loading..)
+  void loadOshiriPoints(int points) => oshiriPoints.value = points;
   void loadDateLogMonth(int year, int month, List<DateLog> logList) {
     if (!dateLogList.containsKey(year)) {
       dateLogList.addAll({year: {}});
