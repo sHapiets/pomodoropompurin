@@ -34,6 +34,7 @@ class ProgSystem {
   List<String> acquiredHatsIds = [];
   List<String> acquiredTopsIds = [];
   List<String> acquiredBottomsIds = [];
+  List<String> acquiredPurinVarIds = ['default', "shrimp"];
   List<String> acquiredKotatsuIds = [];
 
   // Functions to be used by PomTimer, RewardEvents etc...

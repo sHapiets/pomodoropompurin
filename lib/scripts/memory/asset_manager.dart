@@ -70,6 +70,8 @@ class AssetManager {
       "Kotatsu_default.png",
       "Kotatsu_blue.png",
       "pomPoints_icon.png",
+      "purin_sprites/default/kotatsu/idle.png",
+      "purin_sprites/default/kotatsu/pet.png",
     ];
 
     for (String imagePath in allFlameImages) {

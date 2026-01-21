@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 
@@ -14,10 +15,30 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 /// -------------------------------------------------------------------
 /// Purin is a singleton class that compiles all Purin Managers (purin),
 /// serving as a main communication for any Purin-related events and activities
-class Purin {
+class Purin extends ChangeNotifier {
   Purin._();
   static final singleton = Purin._();
 
-  final state = PurinStateManager.singleton;
-  final equip = PurinEquipManager.singleton;
+  final stateManager = PurinStateManager.singleton;
+  final equipManager = PurinEquipManager.singleton;
+
+  void changePosition(PurinPosition position) {
+    stateManager.changePostion(position);
+    notifyListeners();
+  }
+
+  void changeAction(PurinAction action) {
+    stateManager.changeAction(action);
+    notifyListeners();
+  }
+
+  void pet() {
+    changeAction(PurinAction.pet);
+    notifyListeners();
+  }
+
+  void idle() {
+    changeAction(PurinAction.idle);
+    notifyListeners();
+  }
 }

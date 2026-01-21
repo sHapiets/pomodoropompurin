@@ -18,42 +18,50 @@ import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 /// of the three individual outfit acquirables.
 class PurinEquipManager {
   PurinEquipManager._();
-  static final singleton = PurinEquipManager._();
+  static final singleton = PurinEquipManager._(); /* 
+  final acquirables = Acquirables.singleton;
 
-  final _acquireables = Acquirables.singleton;
-  Hat? equippedHat = Acquirables.singleton.acquirableHats['defaultHat'];
+  final _acquireables = Acquirables.singleton; */
+  /*   Hat? equippedHat = Acquirables.singleton.acquirableHats['defaultHat'];
   Top? equippedTop;
   Bottom? equippedBottom;
-  OutfitSet? equippedOutfitSet;
-  PurinVar? equippedPurinVar;
+  OutfitSet? equippedOutfitSet; */
+  PurinVar equippedPurinVar =
+      Acquirables.singleton.acquirablePurinVars['default']!;
 
-  bool get isHatEquipped => (equippedHat == null) ? false : true;
+  /*  bool get isHatEquipped => (equippedHat == null) ? false : true;
   bool get isTopEquipped => (equippedTop == null) ? false : true;
   bool get isBottomEquipped => (equippedBottom == null) ? false : true;
   bool get isOutfitSetEquipped => (equippedOutfitSet == null) ? false : true;
   bool get isAnyThreeEquipped =>
       (isHatEquipped || isTopEquipped || isBottomEquipped) ? true : false;
-
+ */ /* 
   /// A method to be called when changing or setting equipped objects.
-  void equip({required String equipType, required String newEquipId}) {
+  void equip({required PurinEquippable equipType, required String newEquipId}) {
     switch (equipType) {
-      case 'Hat':
+      case PurinEquippable.hat:
         equippedHat = _acquireables.acquirableHats[newEquipId];
-      case 'Top':
+      case PurinEquippable.top:
         equippedTop = _acquireables.acquirableTops[newEquipId];
-      case 'Bottom':
+      case PurinEquippable.bottom:
         equippedBottom = _acquireables.acquirableBottoms[newEquipId];
-      case 'OutfitSet':
+      case PurinEquippable.outfitSet:
         equippedOutfitSet = _acquireables.acquirableOutfitSets[newEquipId];
         removeEquippedThree();
-      case 'PurinVar':
+      case PurinEquippable.purinVar:
         equippedPurinVar = _acquireables.acquirablePurinVars[newEquipId];
       default:
         debugPrint(
           'Invalid EquipType or EquipId passed to PurinEquipManager.equip!',
         );
     }
+  } */
+
+  void equip(PurinVar purinVar) {
+    equippedPurinVar = purinVar;
   }
+
+  /* 
 
   /// All remove methods simply sets equipped objects to null.
   /// (Also means..... Purin could just be naked!!!)
@@ -65,5 +73,7 @@ class PurinEquipManager {
     removeEquippedHat();
     removeEquippedTop();
     removeEquippedBottom();
-  }
+  } */
 }
+
+enum PurinEquippable { hat, top, bottom, outfitSet, purinVar }

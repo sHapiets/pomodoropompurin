@@ -32,12 +32,25 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "assets/L8.jpg",
     ),
-  };
+  }; /* 
 
   Map<String, Top> acquirableTops = {};
   Map<String, Bottom> acquirableBottoms = {};
-  Map<String, OutfitSet> acquirableOutfitSets = {};
-  Map<String, PurinVar> acquirablePurinVars = {};
+  Map<String, OutfitSet> acquirableOutfitSets = {}; */
+  Map<String, PurinVar> acquirablePurinVars = {
+    'default': PurinVar(
+      id: 'default',
+      displayName: 'Boku',
+      cost: 0,
+      iconAssetPath: '',
+    ),
+    'shrimp': PurinVar(
+      id: 'shrimp',
+      displayName: "Shrimp",
+      cost: 100,
+      iconAssetPath: '',
+    ),
+  };
   Map<String, RoomDesign> acquirableRoomDesign = {
     'default': RoomDesign(
       id: "0000",

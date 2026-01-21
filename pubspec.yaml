@@ -27,6 +27,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/pomTimer/
+    - assets/images/purin_sprites/default/kotatsu/
   fonts:
     - family: Fredoka
       fonts:

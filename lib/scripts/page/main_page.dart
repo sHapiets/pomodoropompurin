@@ -1,6 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/layout/equip_menu/purin_equip_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/purin/purin_main_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
 import 'package:pomodoropompurin/scripts/layout/equip_menu/kotatsu_equip_menu.dart';
@@ -11,6 +13,8 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/vignette.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
+
+final purinAreaKey = GlobalKey<GameWidgetState>();
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -44,10 +48,17 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             children: [ProgSystemDisplay(), ProgCalendarDisplay()],
           ), */
           GameWidget(
+            key: purinAreaKey,
             game: PurinArea(),
             overlayBuilderMap: {
               "kotatsuMenu": (BuildContext context, PurinArea game) {
                 return KotatsuEquipMenu();
+              },
+              "purinEquipMenu": (BuildContext context, PurinArea game) {
+                return PurinEquipMenu();
+              },
+              "purinMainMenu": (BuildContext context, PurinArea game) {
+                return PurinMainMenu();
               },
             },
           ),
