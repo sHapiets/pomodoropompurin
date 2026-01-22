@@ -1,3 +1,5 @@
+import 'package:flame/game.dart';
+
 import '../foundation/acquirable.dart';
 
 /// A class that simply holds all acquirables in the app
@@ -8,7 +10,7 @@ import '../foundation/acquirable.dart';
 class Acquirables {
   Acquirables._();
   static final singleton = Acquirables._();
-
+  /* 
   // All Items
   Map<String, Item> acquirableItems = {
     '0000': Item(
@@ -32,11 +34,12 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "assets/L8.jpg",
     ),
-  }; /* 
+  }; 
 
   Map<String, Top> acquirableTops = {};
   Map<String, Bottom> acquirableBottoms = {};
   Map<String, OutfitSet> acquirableOutfitSets = {}; */
+
   Map<String, PurinVar> acquirablePurinVars = {
     'default': PurinVar(
       id: 'default',
@@ -51,18 +54,21 @@ class Acquirables {
       iconAssetPath: '',
     ),
   };
+
   Map<String, RoomDesign> acquirableRoomDesign = {
     'default': RoomDesign(
       id: "0000",
       displayName: "Pudding",
       cost: 0,
       iconAssetPath: "Kotatsu_default.png",
+      position: Vector2(130, 160),
     ),
     'blue': RoomDesign(
       id: "0000",
       displayName: "Blue Pudding",
       cost: 0,
       iconAssetPath: "Kotatsu_blue.png",
+      position: Vector2(130, 160),
     ),
   };
 }

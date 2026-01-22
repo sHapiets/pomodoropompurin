@@ -1,14 +1,11 @@
 import 'dart:async';
-import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/cursor_sprite.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_home.dart';
@@ -38,6 +35,9 @@ class PurinArea extends FlameGame
     await super.onLoad();
     purinAreaHome = PurinAreaHome(position: Vector2.zero());
     purinAreaStateManager.jumpToPosition = jumpToPosition;
+    purinAreaStateManager.jumpCenterPositionAndScaled =
+        jumpCenterPositionAndScaled;
+
     newPosition = camera.viewfinder.position.clone();
     newScale = Vector2.all(1);
     // Add Background (change Component type?)
@@ -55,6 +55,11 @@ class PurinArea extends FlameGame
     final offsetPosition = Vector2(position.x + 100, position.y - 100);
     newPosition = offsetPosition;
     newScale.x = 1.0;
+  }
+
+  void jumpCenterPositionAndScaled(Vector2 position) {
+    newPosition = position;
+    newScale.x = 1.5;
   }
 
   @override
@@ -137,8 +142,8 @@ class PurinArea extends FlameGame
         newScale.y.clamp(minScale, maxScale),
       );
     } else if (purinAreaStateManager.state.value == "Pet") {
-      purin.pet();
-      purinAreaHome.purinEntity.restartActionCooldown();
+      purin.updatePetDelta(info.delta.global);
+      jumpCenterPositionAndScaled(purinAreaHome.purinEntity.absolutePosition);
     }
   }
 

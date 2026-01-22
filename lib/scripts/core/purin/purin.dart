@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
@@ -32,9 +33,25 @@ class Purin extends ChangeNotifier {
     notifyListeners();
   }
 
+  double petDeltaX = 0;
+  double petDeltaY = 0;
+  void Function() restartPetTimer = () {};
   void pet() {
     changeAction(PurinAction.pet);
     notifyListeners();
+  }
+
+  void updatePetDelta(Vector2 delta) {
+    if ((delta.x > 0 && petDeltaX <= 0) || (delta.x < 0 && petDeltaX >= 0)) {
+      petDeltaX = delta.x;
+      pet();
+      restartPetTimer();
+    }
+    if ((delta.y > 0 && petDeltaY <= 0) || delta.y < 0 && petDeltaY >= 0) {
+      petDeltaY = delta.y;
+      pet();
+      restartPetTimer();
+    }
   }
 
   void idle() {

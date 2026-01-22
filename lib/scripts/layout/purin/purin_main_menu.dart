@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 class PurinMainMenu extends StatefulWidget {
@@ -41,6 +42,8 @@ class _PurinMainMenuState extends State<PurinMainMenu>
 
   @override
   Widget build(BuildContext context) {
+    final purinAreaStateManager = PurinAreaStateManager.singleton;
+
     return Center(
       child: Transform.translate(
         offset: Offset(-50, 0),
@@ -57,11 +60,9 @@ class _PurinMainMenuState extends State<PurinMainMenu>
                   purinAreaKey.currentState?.currentGame.overlays.remove(
                     "purinMainMenu",
                   );
-                  purinAreaKey.currentState?.currentGame.overlays.add(
-                    "purinEquipMenu",
-                  );
+                  purinAreaStateManager.state.value = "Pet";
                 },
-                icon: Icon(Icons.checkroom),
+                icon: Icon(Icons.pets_rounded),
               ),
               IconButton(
                 onPressed: () {

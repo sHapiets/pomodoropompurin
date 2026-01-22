@@ -9,4 +9,5 @@ class PurinAreaStateManager {
 
   /// Function set in PurinArea, updates newPosition s.t. position is at center
   void Function(Vector2) jumpToPosition = (Vector2 position) {};
+  void Function(Vector2) jumpCenterPositionAndScaled = (Vector2 position) {};
 }

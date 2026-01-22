@@ -1,3 +1,5 @@
+import 'package:flame/components.dart';
+
 /// This sets of classes defines all objects in the app that are used
 /// for customizing. This includes items, clothes for Purin, Purin
 /// variations, and room designs.
@@ -86,5 +88,9 @@ class RoomDesign extends Acquirable {
     required super.displayName,
     required super.cost,
     required super.iconAssetPath,
+
+    required this.position,
   });
+
+  final Vector2 position;
 }

@@ -86,9 +86,6 @@ class ProgSystem {
     oshiriRemainder.value = (low == 0)
         ? oshiriPoints.value
         : oshiriPoints.value - oshiriPointsFromLevel[low - 1];
-    debugPrint(
-      '${oshiriPoints.value}, ${oshiriRemainder.value}, ${oshiriPointsFromLevel[2]}',
-    );
   }
 
   List<int> oshiriPointsFromLevel = List<int>.generate(1000, (int index) {

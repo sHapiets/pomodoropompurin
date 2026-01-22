@@ -7,12 +7,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
+import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 ///
 class PurinEntity extends PositionComponent
-    with TapCallbacks, GestureHitboxes, HasGameReference {
+    with TapCallbacks, DoubleTapCallbacks, GestureHitboxes, HasGameReference {
   PurinEntity() {
     anchor = Anchor.center;
     priority = 20;
@@ -20,10 +22,11 @@ class PurinEntity extends PositionComponent
 
   final purin = Purin.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late PurinAnim purinAnim;
   late SpriteComponent purinSprite;
-  late PolygonHitbox purinHitbox;
+  late CircleHitbox purinHitbox;
 
   late TimerComponent actionCooldown;
 
@@ -45,13 +48,13 @@ class PurinEntity extends PositionComponent
     add(purinSprite);
 
     //sample hitbox, to put in center first!
-    final hitbox = CircleHitbox(
+    purinHitbox = CircleHitbox(
       radius: 25,
       anchor: Anchor.center, // <-- remember this
     );
-    hitbox.paint.color = const Color.fromARGB(135, 68, 137, 255);
+    purinHitbox.paint.color = const Color.fromARGB(135, 68, 137, 255);
     //hitbox.renderShape = true;
-    add(hitbox);
+    add(purinHitbox);
 
     // timer for onTap timers and cancel
     actionCooldown = TimerComponent(
@@ -65,12 +68,13 @@ class PurinEntity extends PositionComponent
 
     purin.addListener(updatePostion);
     purin.addListener(updateSprite);
+    purin.restartPetTimer = restartActionCooldown;
   }
 
   void updatePostion() {
     switch (purin.stateManager.position) {
       case PurinPosition.kotatsu:
-        position = Vector2(130, 160);
+        position = purinAreaEquipManager.kotatsu.position;
       default:
         break;
     }
@@ -104,15 +108,14 @@ class PurinEntity extends PositionComponent
   }
 
   @override
+  void onTapDown(TapDownEvent event) {
+    purinAreaStateManager.state.value = "Pet";
+  }
+
+  @override
   void onLongTapDown(TapDownEvent event) {
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(absolutePosition);
     game.overlays.add("purinMainMenu");
-  }
-
-  @override
-  void onTapDown(TapDownEvent event) {
-    purinAreaStateManager.state.value = 'Pet';
-    game.overlays.removeAll(game.overlays.activeOverlays);
   }
 }
