@@ -7,6 +7,8 @@ import '../foundation/acquirable.dart';
 /// .items -> List of Item instances;
 /// .hats -> List of Hat instances
 /// etc...
+///
+/// In order to add a new Acquirable,
 class Acquirables {
   Acquirables._();
   static final singleton = Acquirables._();
@@ -40,14 +42,14 @@ class Acquirables {
   Map<String, Bottom> acquirableBottoms = {};
   Map<String, OutfitSet> acquirableOutfitSets = {}; */
 
-  Map<String, PurinVar> acquirablePurinVars = {
-    'default': PurinVar(
-      id: 'default',
+  Map<PurinVars, PurinVar> purinVars = {
+    PurinVars.boku: PurinVar(
+      id: 'boku',
       displayName: 'Boku',
       cost: 0,
       iconAssetPath: '',
     ),
-    'shrimp': PurinVar(
+    PurinVars.shrimp: PurinVar(
       id: 'shrimp',
       displayName: "Shrimp",
       cost: 100,
@@ -55,15 +57,15 @@ class Acquirables {
     ),
   };
 
-  Map<String, RoomDesign> acquirableRoomDesign = {
-    'default': RoomDesign(
+  Map<KotatsuDesigns, RoomDesign> kotatsus = {
+    KotatsuDesigns.pudding: RoomDesign(
       id: "0000",
       displayName: "Pudding",
       cost: 0,
       iconAssetPath: "Kotatsu_default.png",
       position: Vector2(130, 160),
     ),
-    'blue': RoomDesign(
+    KotatsuDesigns.aqua: RoomDesign(
       id: "0000",
       displayName: "Blue Pudding",
       cost: 0,
@@ -72,3 +74,7 @@ class Acquirables {
     ),
   };
 }
+
+enum PurinVars { boku, shrimp, pumpkin }
+
+enum KotatsuDesigns { pudding, aqua }

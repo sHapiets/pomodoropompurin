@@ -48,6 +48,12 @@ class PurinEntity extends PositionComponent
 
   late TimerComponent actionCooldown;
 
+  final spriteDirectoryFromPosition = {PurinPosition.kotatsu: 'kotatsu/'};
+  final spriteFileFromAction = {
+    PurinAction.idle: 'idle.png',
+    PurinAction.pet: 'pet.png',
+  };
+
   @override
   void onMount() {
     super.onMount();
@@ -94,31 +100,20 @@ class PurinEntity extends PositionComponent
     switch (purin.stateManager.position) {
       case PurinPosition.kotatsu:
         position = purinAreaEquipManager.kotatsu.position;
+        break;
       default:
         break;
     }
   }
 
   void updateSprite() {
-    String spriteRef = '';
-    spriteRef += 'purin_sprites/';
-    spriteRef += '${purin.equipManager.equippedPurinVar.id}/';
+    final spriteRef = StringBuffer()
+      ..write('purin_sprites/')
+      ..write('${purin.equipManager.equippedPurinVar.id}/')
+      ..write(spriteDirectoryFromPosition[purin.stateManager.position])
+      ..write(spriteFileFromAction[purin.stateManager.action]);
 
-    switch (purin.stateManager.position) {
-      case PurinPosition.kotatsu:
-        spriteRef += 'kotatsu/';
-    }
-
-    switch (purin.stateManager.action) {
-      case PurinAction.idle:
-        spriteRef += 'idle.png';
-      case PurinAction.pet:
-        spriteRef += 'pet.png';
-      default:
-        spriteRef += 'idle.png';
-    }
-
-    purinSprite.sprite?.image = Flame.images.fromCache(spriteRef);
+    purinSprite.sprite?.image = Flame.images.fromCache(spriteRef.toString());
   }
 
   void restartActionCooldown() {

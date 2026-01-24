@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
@@ -30,12 +32,12 @@ class ProgSystem {
   ValueNotifier<int> oshiriLevel = ValueNotifier(0);
   ValueNotifier<int> oshiriRemainder = ValueNotifier(0);
 
-  List<String> acquiredItemsIds = [];
+  /* List<String> acquiredItemsIds = [];
   List<String> acquiredHatsIds = [];
   List<String> acquiredTopsIds = [];
-  List<String> acquiredBottomsIds = [];
-  List<String> acquiredPurinVarIds = ['default', "shrimp"];
-  List<String> acquiredKotatsuIds = [];
+  List<String> acquiredBottomsIds = []; */
+  List<PurinVars> acquiredPurinVars = [PurinVars.boku, PurinVars.shrimp];
+  List<RoomDesign> acquiredKotatsus = [];
 
   // Functions to be used by PomTimer, RewardEvents etc...
   void addPomPoints(int points) {

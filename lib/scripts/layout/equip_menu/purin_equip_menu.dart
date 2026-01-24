@@ -28,19 +28,18 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
               Positioned(
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // columns
+                    crossAxisCount: 2,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
-                    childAspectRatio: 1.0, // width / height
+                    childAspectRatio: 1.0,
                   ),
                   itemBuilder: (context, index) {
                     return EquipTile(
-                      item:
-                          acquirables.acquirablePurinVars[progSystem
-                              .acquiredPurinVarIds[index]]!,
+                      item: acquirables
+                          .purinVars[progSystem.acquiredPurinVars[index]]!,
                     );
                   },
-                  itemCount: progSystem.acquiredPurinVarIds.length,
+                  itemCount: progSystem.acquiredPurinVars.length,
                 ),
               ),
             ],

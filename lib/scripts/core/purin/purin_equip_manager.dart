@@ -26,8 +26,7 @@ class PurinEquipManager {
   Top? equippedTop;
   Bottom? equippedBottom;
   OutfitSet? equippedOutfitSet; */
-  PurinVar equippedPurinVar =
-      Acquirables.singleton.acquirablePurinVars['default']!;
+  PurinVar equippedPurinVar = Acquirables.singleton.purinVars[PurinVars.boku]!;
 
   /*  bool get isHatEquipped => (equippedHat == null) ? false : true;
   bool get isTopEquipped => (equippedTop == null) ? false : true;

@@ -6,7 +6,7 @@ class PurinAreaEquipManager {
   PurinAreaEquipManager._();
   static final singleton = PurinAreaEquipManager._();
 
-  RoomDesign kotatsu = Acquirables.singleton.acquirableRoomDesign['default']!;
+  RoomDesign kotatsu = Acquirables.singleton.kotatsus[KotatsuDesigns.pudding]!;
 
   void Function(RoomDesign) changeKotatsu = (kotatsu) {};
 }
