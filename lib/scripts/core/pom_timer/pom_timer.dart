@@ -145,7 +145,6 @@ class PomTimer {
   }
 
   void endTimer() {
-    // impossible to end the timer if the timer hadn't started
     if (restart) {
       return;
     }
@@ -157,12 +156,12 @@ class PomTimer {
 
     int rewardPomPoints = PomPointsConversion.fromSeconds(timeTotalSeconds);
 
-    restart = true; // restart to initial value
-    isPlaying = false; // pause (stop) timer
-    onBreak = false; // switch to work timer for next play.
+    restart = true;
+    isPlaying = false;
+    onBreak = false;
     pomTimerDisplayStateManager.onBreak.value = false;
     timeLeftSeconds = 0;
-    timeTotalSeconds = 0; //
+    timeTotalSeconds = 0;
     pomTimerDisplayStateManager.closePomTimer();
     disablePurinArea(false);
 

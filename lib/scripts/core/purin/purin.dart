@@ -14,8 +14,25 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 /// his lazy ahh."
 ///
 /// -------------------------------------------------------------------
-/// Purin is a singleton class that compiles all Purin Managers (purin),
+/// [Purin] is a logic class that compiles all Purin Managers (purin),
 /// serving as a main communication for any Purin-related events and activities
+///
+/// In order to resolve changes, components that need Purin logic, such
+/// as [PurinEntity] with its sprite and position, are to use
+/// Purin.singleton.addListener(function), and pass a function that
+/// needs changes within their respecitve scopes
+///
+/// For instance, I have added a listener in [PurinEntity] called
+/// updateSprite(), which changes the link of the sprite whenever notified.
+///
+///
+/// In the same way, any Widget or Component that needs to change
+/// [Purin], like [PurinEquipMenu], should call a Purin function
+/// to allow such changes
+///
+/// Putting simply, the changes undergo this process:
+/// Widget (Input) -> Purin -> Managers -> Display (Output)
+///
 class Purin extends ChangeNotifier {
   Purin._();
   static final singleton = Purin._();
@@ -33,6 +50,17 @@ class Purin extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// PET LOGIC
+  /// In order to register a petting action, a sequence of two
+  /// user inputs is handled.
+  /// --> an initial tap on [PurinEntity]...
+  /// --> ...followed by a PanUpdate ()
+  /// (1) [PurinEntity] registers OnTapDown, and sets the [Purin]'s state to "Pet",
+  /// which registers any panning as a 'petting action' in [PurinArea].
+  /// (2) [PurinArea] then calls the updatePetDelta() function, to register if
+  /// a pan registers a petting gesture
+  /// (3) In a petting gesture, pet() is called, which notifies sprite
+  /// changes
   double petDeltaX = 0;
   double petDeltaY = 0;
   void Function() restartPetTimer = () {};
@@ -55,7 +83,7 @@ class Purin extends ChangeNotifier {
   }
 
   void idle() {
-    changeAction(PurinAction.idle);
+    stateManager.action = PurinAction.idle;
     notifyListeners();
   }
 }
