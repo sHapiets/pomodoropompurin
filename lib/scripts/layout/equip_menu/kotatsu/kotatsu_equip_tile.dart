@@ -24,13 +24,11 @@ class _KotatsuEquipTileState extends State<KotatsuEquipTile>
 
   final equippedButtonTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 6,
     color: Color.fromARGB(172, 255, 255, 255),
   );
 
   final equipButtonTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 10,
     color: Color.fromARGB(255, 255, 255, 255),
   );
 
@@ -166,11 +164,14 @@ class _KotatsuEquipTileState extends State<KotatsuEquipTile>
                             width: buttonWidth,
                             height: buttonHeight,
                             child: Center(
-                              child: Text(
-                                (showEquippedButton) ? "EQUIPPED" : "EQUIP",
-                                style: (showEquippedButton)
-                                    ? equippedButtonTextStyle
-                                    : equipButtonTextStyle,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  (showEquippedButton) ? "EQUIPPED" : "EQUIP",
+                                  style: (showEquippedButton)
+                                      ? equippedButtonTextStyle
+                                      : equipButtonTextStyle,
+                                ),
                               ),
                             ),
                           ),

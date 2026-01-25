@@ -157,11 +157,14 @@ class _PurinEquipTileState extends State<PurinEquipTile>
                         width: buttonWidth,
                         height: buttonHeight,
                         child: Center(
-                          child: Text(
-                            (showEquippedButton) ? "EQUIPPED" : "EQUIP",
-                            style: (showEquippedButton)
-                                ? equippedButtonTextStyle
-                                : equipButtonTextStyle,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              (showEquippedButton) ? "EQUIPPED" : "EQUIP",
+                              style: (showEquippedButton)
+                                  ? equippedButtonTextStyle
+                                  : equipButtonTextStyle,
+                            ),
                           ),
                         ),
                       ),
