@@ -155,12 +155,16 @@ class _PurinEquipTileState extends State<PurinEquipTile>
                     ),
                     child: MaterialButton(
                       onPressed: () {},
-                      child: Center(
-                        child: Text(
-                          (showEquippedButton) ? "EQUIPPED" : "EQUIP",
-                          style: (showEquippedButton)
-                              ? equippedButtonTextStyle
-                              : equipButtonTextStyle,
+                      child: SizedBox(
+                        width: buttonWidth,
+                        height: buttonHeight,
+                        child: Center(
+                          child: Text(
+                            (showEquippedButton) ? "EQUIPPED" : "EQUIP",
+                            style: (showEquippedButton)
+                                ? equippedButtonTextStyle
+                                : equipButtonTextStyle,
+                          ),
                         ),
                       ),
                     ),

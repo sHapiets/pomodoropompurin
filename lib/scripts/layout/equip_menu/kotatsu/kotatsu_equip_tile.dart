@@ -162,12 +162,16 @@ class _KotatsuEquipTileState extends State<KotatsuEquipTile>
                           onPressed: () {
                             purinAreaEquipManager.kotatsu.value = widget.item;
                           },
-                          child: Center(
-                            child: Text(
-                              (showEquippedButton) ? "EQUIPPED" : "EQUIP",
-                              style: (showEquippedButton)
-                                  ? equippedButtonTextStyle
-                                  : equipButtonTextStyle,
+                          child: SizedBox(
+                            width: buttonWidth,
+                            height: buttonHeight,
+                            child: Center(
+                              child: Text(
+                                (showEquippedButton) ? "EQUIPPED" : "EQUIP",
+                                style: (showEquippedButton)
+                                    ? equippedButtonTextStyle
+                                    : equipButtonTextStyle,
+                              ),
                             ),
                           ),
                         ),
