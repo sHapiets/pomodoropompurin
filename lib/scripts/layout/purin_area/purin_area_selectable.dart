@@ -94,10 +94,8 @@ class PurinAreaSelectable extends PositionComponent
   /// this function during onMount.
   /// Refer to Kotatsu.dart/onMount() as guide...
   void changeDesign(RoomDesign newRoomDesign) {
-    final assetPath = newRoomDesign.iconAssetPath;
-    sprite.removeFromParent();
+    final assetPath = newRoomDesign.spriteFlamePath;
     sprite.sprite = Sprite(Flame.images.fromCache(assetPath));
-    add(sprite);
     addOnLoadAnim();
   }
 

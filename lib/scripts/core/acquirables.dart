@@ -55,6 +55,12 @@ class Acquirables {
       cost: 100,
       iconAssetPath: '',
     ),
+    PurinVars.pumpkin: PurinVar(
+      id: 'pumpkin',
+      displayName: "Pumpkin",
+      cost: 200,
+      iconAssetPath: '',
+    ),
   };
 
   Map<KotatsuDesigns, RoomDesign> kotatsus = {
@@ -62,15 +68,19 @@ class Acquirables {
       id: "0000",
       displayName: "Pudding",
       cost: 0,
-      iconAssetPath: "Kotatsu_default.png",
+      iconAssetPath: "",
+
       position: Vector2(130, 160),
+      spriteFlamePath: "kotatsu_sprites/pudding.png",
     ),
     KotatsuDesigns.aqua: RoomDesign(
       id: "0000",
-      displayName: "Blue Pudding",
-      cost: 0,
-      iconAssetPath: "Kotatsu_blue.png",
+      displayName: "Aqua",
+      cost: 100,
+      iconAssetPath: "",
+
       position: Vector2(130, 160),
+      spriteFlamePath: "kotatsu_sprites/aqua.png",
     ),
   };
 }

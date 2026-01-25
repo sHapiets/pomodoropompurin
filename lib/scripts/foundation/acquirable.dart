@@ -90,7 +90,9 @@ class RoomDesign extends Acquirable {
     required super.iconAssetPath,
 
     required this.position,
+    required this.spriteFlamePath,
   });
 
+  final String spriteFlamePath;
   final Vector2 position;
 }

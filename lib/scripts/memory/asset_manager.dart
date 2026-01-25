@@ -72,6 +72,8 @@ class AssetManager {
       "pomPoints_icon.png",
       "purin_sprites/boku/kotatsu/idle.png",
       "purin_sprites/boku/kotatsu/pet.png",
+      "kotatsu_sprites/pudding.png",
+      "kotatsu_sprites/aqua.png",
     ];
 
     for (String imagePath in allFlameImages) {

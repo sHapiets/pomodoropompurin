@@ -3,13 +3,12 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
-import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 /// A selectable object for PurinArea, creating a comfy and customizeable kotatsu inside
 ///  Purin's home.
 ///
-/// This class was actually constructed before the its super class,
+/// This class was actually constructed before its super class,
 /// PurinAreaSelectable. It was made to make my life a bit easier, creating a general
 /// format in constructing all the other selectables.
 /// Kindly refer to the super class for a concise understanding of selectables, since
@@ -43,23 +42,23 @@ class Kotatsu extends PurinAreaSelectable {
     // IMPORTANT: Edit for every changeable RoomDesign (imagepath and size)
     sprite = SpriteComponent(
       sprite: Sprite(
-        Flame.images.fromCache(purinAreaEquipManager.kotatsu.iconAssetPath),
+        Flame.images.fromCache(
+          purinAreaEquipManager.kotatsu.value.spriteFlamePath,
+        ),
       ),
       size: Vector2.all(250),
       anchor: anchor,
     );
 
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.changeKotatsu = changeDesign;
+    purinAreaEquipManager.kotatsu.addListener(updateKotatsuDesign);
 
     super.onMount();
   }
 
-  @override
-  void changeDesign(RoomDesign newRoomDesign) {
-    super.changeDesign(newRoomDesign);
+  void updateKotatsuDesign() {
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.kotatsu = newRoomDesign;
+    super.changeDesign(purinAreaEquipManager.kotatsu.value);
   }
 
   @override

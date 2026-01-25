@@ -36,8 +36,15 @@ class ProgSystem {
   List<String> acquiredHatsIds = [];
   List<String> acquiredTopsIds = [];
   List<String> acquiredBottomsIds = []; */
-  List<PurinVars> acquiredPurinVars = [PurinVars.boku, PurinVars.shrimp];
-  List<RoomDesign> acquiredKotatsus = [];
+  Set<PurinVars> acquiredPurinVars = {
+    PurinVars.boku,
+    PurinVars.shrimp,
+    PurinVars.pumpkin,
+  };
+  Set<KotatsuDesigns> acquiredKotatsus = {
+    KotatsuDesigns.pudding,
+    KotatsuDesigns.aqua,
+  };
 
   // Functions to be used by PomTimer, RewardEvents etc...
   void addPomPoints(int points) {

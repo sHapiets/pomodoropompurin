@@ -44,7 +44,7 @@ class _PurinMainMenuState extends State<PurinMainMenu>
 
     return Center(
       child: Transform.translate(
-        offset: Offset(-50, 0),
+        offset: Offset(-30, 20),
         child: AnimatedBuilder(
           animation: loadAnimation,
           builder: (context, child) {
@@ -58,9 +58,8 @@ class _PurinMainMenuState extends State<PurinMainMenu>
                   purinAreaKey.currentState?.currentGame.overlays.remove(
                     "purinMainMenu",
                   );
-                  purinAreaStateManager.state.value = "Pet";
                 },
-                icon: Icon(Icons.pets_rounded),
+                icon: Icon(Icons.transform_rounded),
               ),
               IconButton(
                 onPressed: () {

@@ -1,6 +1,5 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +9,6 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
-import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 /// The definitive Flame component of [Purin] on [PurinArea].
 /// Handles the current configurations of [Purin] during runtime, such
@@ -68,7 +66,6 @@ class PurinEntity extends PositionComponent
     );
     updateSprite();
 
-    /// just a scalingAnim (breathing..)
     add(purinAnim);
     add(purinSprite);
 
@@ -81,10 +78,9 @@ class PurinEntity extends PositionComponent
     //hitbox.renderShape = true;
     add(purinHitbox);
 
-    // timer for onTap timers and cancel
     actionCooldown = TimerComponent(
       autoStart: false,
-      period: 0.7, // <- check how much time (0.3s or lower?)
+      period: 0.7,
       onTick: () {
         purin.idle();
       },
@@ -99,7 +95,7 @@ class PurinEntity extends PositionComponent
   void updatePostion() {
     switch (purin.stateManager.position) {
       case PurinPosition.kotatsu:
-        position = purinAreaEquipManager.kotatsu.position;
+        position = purinAreaEquipManager.kotatsu.value.position;
         break;
       default:
         break;
