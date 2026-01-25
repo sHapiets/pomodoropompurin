@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
-import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
