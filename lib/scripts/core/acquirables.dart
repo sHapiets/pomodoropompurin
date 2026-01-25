@@ -83,8 +83,48 @@ class Acquirables {
       spriteFlamePath: "kotatsu_sprites/aqua.png",
     ),
   };
+
+  Map<FloorDesigns, RoomDesign> floors = {
+    FloorDesigns.smooth: RoomDesign(
+      id: "0000",
+      displayName: "Smooth",
+      cost: 0,
+      iconAssetPath: "",
+
+      position: Vector2(0, 0),
+      spriteFlamePath: "floor_sprites/smooth.png",
+    ),
+  };
+
+  Map<InteriorWallDesigns, RoomDesign> interiorWalls = {
+    InteriorWallDesigns.smooth: RoomDesign(
+      id: "0000",
+      displayName: "Smooth",
+      cost: 0,
+      iconAssetPath: "",
+      position: Vector2(0, 0),
+      spriteFlamePath: "interior_wall_sprites/smooth.png",
+    ),
+  };
+
+  Map<ExteriorDesigns, RoomDesign> exteriors = {
+    ExteriorDesigns.plain: RoomDesign(
+      id: "0000",
+      displayName: "Plain",
+      cost: 0,
+      iconAssetPath: "",
+      position: Vector2(0, 0),
+      spriteFlamePath: "exterior_sprites/plain.png",
+    ),
+  };
 }
 
 enum PurinVars { boku, shrimp, pumpkin }
 
 enum KotatsuDesigns { pudding, aqua }
+
+enum FloorDesigns { smooth }
+
+enum InteriorWallDesigns { smooth }
+
+enum ExteriorDesigns { plain }

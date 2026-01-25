@@ -20,7 +20,6 @@ class PurinArea extends FlameGame
   late Vector2 newScale;
 
   /// Assets paths (from assets/images/->...)
-  final backgroundAsset = 'L7.png';
   @override
   Color backgroundColor() => const Color.fromARGB(255, 190, 179, 149);
   /* const Color.fromARGB(255, 163, 210, 200) */

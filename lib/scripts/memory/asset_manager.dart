@@ -74,6 +74,9 @@ class AssetManager {
       "purin_sprites/boku/kotatsu/pet.png",
       "kotatsu_sprites/pudding.png",
       "kotatsu_sprites/aqua.png",
+      "floor_sprites/smooth.png",
+      "interior_wall_sprites/smooth.png",
+      "exterior_sprites/plain.png",
     ];
 
     for (String imagePath in allFlameImages) {

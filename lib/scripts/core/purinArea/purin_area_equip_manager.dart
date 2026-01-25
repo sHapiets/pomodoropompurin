@@ -10,8 +10,29 @@ class PurinAreaEquipManager {
   ValueNotifier<RoomDesign> kotatsu = ValueNotifier(
     Acquirables.singleton.kotatsus[KotatsuDesigns.pudding]!,
   );
+  ValueNotifier<RoomDesign> floor = ValueNotifier(
+    Acquirables.singleton.floors[FloorDesigns.smooth]!,
+  );
+  ValueNotifier<RoomDesign> interiorWall = ValueNotifier(
+    Acquirables.singleton.interiorWalls[InteriorWallDesigns.smooth]!,
+  );
+  ValueNotifier<RoomDesign> exterior = ValueNotifier(
+    Acquirables.singleton.exteriors[ExteriorDesigns.plain]!,
+  );
 
   void changeKotatsu(RoomDesign newKotatsu) {
     kotatsu.value = newKotatsu;
+  }
+
+  void changeFloor(RoomDesign newFloor) {
+    floor.value = newFloor;
+  }
+
+  void changeInteriorWall(RoomDesign newInteriorWall) {
+    interiorWall.value = newInteriorWall;
+  }
+
+  void changeExterior(RoomDesign newExterior) {
+    exterior.value = newExterior;
   }
 }

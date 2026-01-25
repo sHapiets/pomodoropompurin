@@ -151,21 +151,27 @@ class _PurinEquipTileState extends State<PurinEquipTile>
                         BoxShadow(color: Colors.black12, offset: Offset(2, 2)),
                       ],
                     ),
-                    child: MaterialButton(
-                      onPressed: () {},
-                      child: SizedBox(
-                        width: buttonWidth,
-                        height: buttonHeight,
-                        child: Center(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              (showEquippedButton) ? "EQUIPPED" : "EQUIP",
-                              style: (showEquippedButton)
-                                  ? equippedButtonTextStyle
-                                  : equipButtonTextStyle,
-                            ),
-                          ),
+                    child: MaterialButton(onPressed: () {}),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: AlignmentGeometry.bottomCenter,
+              child: Transform.translate(
+                offset: Offset(0, -5),
+                child: IgnorePointer(
+                  child: SizedBox(
+                    width: buttonWidth - 20,
+                    height: buttonHeight,
+                    child: Center(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          (showEquippedButton) ? "EQUIPPED" : "EQUIP",
+                          style: (showEquippedButton)
+                              ? equippedButtonTextStyle
+                              : equipButtonTextStyle,
                         ),
                       ),
                     ),

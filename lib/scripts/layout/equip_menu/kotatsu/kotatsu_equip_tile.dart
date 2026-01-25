@@ -160,25 +160,39 @@ class _KotatsuEquipTileState extends State<KotatsuEquipTile>
                           onPressed: () {
                             purinAreaEquipManager.kotatsu.value = widget.item;
                           },
-                          child: SizedBox(
-                            width: buttonWidth,
-                            height: buttonHeight,
-                            child: Center(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  (showEquippedButton) ? "EQUIPPED" : "EQUIP",
-                                  style: (showEquippedButton)
-                                      ? equippedButtonTextStyle
-                                      : equipButtonTextStyle,
-                                ),
-                              ),
-                            ),
-                          ),
                         ),
                       ),
                     );
                   },
+                ),
+              ),
+            ),
+
+            Align(
+              alignment: AlignmentGeometry.bottomCenter,
+              child: Transform.translate(
+                offset: Offset(0, -5),
+                child: IgnorePointer(
+                  child: SizedBox(
+                    width: buttonWidth - 20,
+                    height: buttonHeight,
+                    child: Center(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: ValueListenableBuilder(
+                          valueListenable: purinAreaEquipManager.kotatsu,
+                          builder: (context, value, child) {
+                            return Text(
+                              (showEquippedButton) ? "EQUIPPED" : "EQUIP",
+                              style: (showEquippedButton)
+                                  ? equippedButtonTextStyle
+                                  : equipButtonTextStyle,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
