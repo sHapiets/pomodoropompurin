@@ -25,13 +25,11 @@ class _PurinEquipTileState extends State<PurinEquipTile>
 
   final equippedButtonTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 6,
     color: Color.fromARGB(172, 255, 255, 255),
   );
 
   final equipButtonTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 10,
     color: Color.fromARGB(255, 255, 255, 255),
   );
 
