@@ -70,7 +70,7 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "",
 
-      position: Vector2(130, 160),
+      position: Vector2(120, 170),
       spriteFlamePath: "kotatsu_sprites/pudding.png",
     ),
     KotatsuDesigns.aqua: RoomDesign(
@@ -79,7 +79,7 @@ class Acquirables {
       cost: 100,
       iconAssetPath: "",
 
-      position: Vector2(130, 160),
+      position: Vector2(120, 170),
       spriteFlamePath: "kotatsu_sprites/aqua.png",
     ),
   };
@@ -102,6 +102,7 @@ class Acquirables {
       displayName: "Smooth",
       cost: 0,
       iconAssetPath: "",
+
       position: Vector2(0, 0),
       spriteFlamePath: "interior_wall_sprites/smooth.png",
     ),
@@ -113,8 +114,33 @@ class Acquirables {
       displayName: "Plain",
       cost: 0,
       iconAssetPath: "",
+
       position: Vector2(0, 0),
       spriteFlamePath: "exterior_sprites/plain.png",
+    ),
+  };
+
+  Map<BlanketDesigns, RoomDesign> blankets = {
+    BlanketDesigns.cyan: RoomDesign(
+      id: "0000",
+      displayName: "Cyan",
+      cost: 0,
+      iconAssetPath: "",
+
+      position: Vector2(-80, 260),
+      spriteFlamePath: "blanket_sprites/cyan.png",
+    ),
+  };
+
+  Map<FutonDesigns, RoomDesign> futons = {
+    FutonDesigns.cyan: RoomDesign(
+      id: "0000",
+      displayName: "Cyan",
+      cost: 0,
+      iconAssetPath: "",
+
+      position: Vector2(33, 358),
+      spriteFlamePath: "futon_sprites/cyan.png",
     ),
   };
 }
@@ -122,6 +148,10 @@ class Acquirables {
 enum PurinVars { boku, shrimp, pumpkin }
 
 enum KotatsuDesigns { pudding, aqua }
+
+enum BlanketDesigns { cyan }
+
+enum FutonDesigns { cyan }
 
 enum FloorDesigns { smooth }
 

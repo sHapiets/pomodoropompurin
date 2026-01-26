@@ -4,8 +4,11 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_entity.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/blanket.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/exterior.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/floor.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/futon.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/interior_wall.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
 
@@ -16,11 +19,17 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   }
 
   final purinAreaStateManager = PurinAreaStateManager.singleton;
-  late Floor floorEntity;
+
   late Kotatsu kotatsuEntity;
-  late Exterior exteriorEntity;
+  late Blanket blanketEntity;
+  late Futon futonEntity;
+
   late PurinEntity purinEntity;
+
+  late Floor floorEntity;
+  late Exterior exteriorEntity;
   late InteriorWall interiorWallEntity;
+
   late SequenceEffect onLoadAnim;
 
   @override
@@ -29,41 +38,27 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
 
     addOnLoadAnim();
 
-    purinEntity = PurinEntity();
     kotatsuEntity = Kotatsu();
+    blanketEntity = Blanket();
+    futonEntity = Futon();
+
+    purinEntity = PurinEntity();
+
     floorEntity = Floor();
     exteriorEntity = Exterior();
     interiorWallEntity = InteriorWall();
+
     add(floorEntity);
     add(kotatsuEntity);
+    add(futonEntity);
+    add(blanketEntity);
     add(purinEntity);
     add(interiorWallEntity);
     add(exteriorEntity);
   }
 
   void addOnLoadAnim() {
-    onLoadAnim = SequenceEffect([
-      ScaleEffect.to(
-        Vector2.all(1.4),
-        EffectController(duration: 0.15, curve: Curves.easeOut),
-      ),
-      ScaleEffect.to(
-        Vector2.all(0.6),
-        EffectController(duration: 0.15, curve: Curves.easeIn),
-      ),
-      ScaleEffect.to(
-        Vector2.all(1.1),
-        EffectController(duration: 0.15, curve: Curves.easeOut),
-      ),
-      ScaleEffect.to(
-        Vector2.all(0.9),
-        EffectController(duration: 0.15, curve: Curves.easeIn),
-      ),
-      ScaleEffect.to(
-        Vector2.all(1),
-        EffectController(duration: 0.15, curve: Curves.easeOut),
-      ),
-    ]);
+    onLoadAnim = LoadAnimation();
     add(onLoadAnim);
   }
 }

@@ -70,13 +70,19 @@ class AssetManager {
       "Kotatsu_default.png",
       "Kotatsu_blue.png",
       "pomPoints_icon.png",
+
       "purin_sprites/boku/kotatsu/idle.png",
       "purin_sprites/boku/kotatsu/pet.png",
+      "purin_sprites/boku/futon/idle.png",
+      "purin_sprites/boku/futon/pet.png",
+
       "kotatsu_sprites/pudding.png",
       "kotatsu_sprites/aqua.png",
       "floor_sprites/smooth.png",
       "interior_wall_sprites/smooth.png",
       "exterior_sprites/plain.png",
+      "blanket_sprites/cyan.png",
+      "futon_sprites/cyan.png",
     ];
 
     for (String imagePath in allFlameImages) {
