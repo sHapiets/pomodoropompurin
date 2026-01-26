@@ -1,5 +1,6 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
 
 /// The definitive Flame component of [Purin] on [PurinArea].
 /// Handles the current configurations of [Purin] during runtime, such
@@ -33,20 +35,22 @@ class PurinEntity extends PositionComponent
     with TapCallbacks, DoubleTapCallbacks, GestureHitboxes, HasGameReference {
   PurinEntity() {
     anchor = Anchor.center;
-    priority = 20;
+    priority = 40;
   }
 
   final purin = Purin.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
+  late SequenceEffect loadAnim;
   late PurinAnim purinAnim;
   late SpriteComponent purinSprite;
   late CircleHitbox purinHitbox;
 
-  late TimerComponent actionCooldown;
-
-  final spriteDirectoryFromPosition = {PurinPosition.kotatsu: 'kotatsu/'};
+  final spriteDirectoryFromPosition = {
+    PurinPosition.kotatsu: 'kotatsu/',
+    PurinPosition.futon: 'futon/',
+  };
   final spriteFileFromAction = {
     PurinAction.idle: 'idle.png',
     PurinAction.pet: 'pet.png',
@@ -57,17 +61,20 @@ class PurinEntity extends PositionComponent
     super.onMount();
     position = Vector2(130, 160);
 
+    loadAnim = LoadAnimation()..removeOnFinish = true;
     purinAnim = PurinAnim();
     purinSprite = SpriteComponent(
       sprite: Sprite(
         Flame.images.fromCache('purin_sprites/boku/kotatsu/idle.png'),
       ),
-      size: Vector2.all(90),
+      size: Vector2.all(70),
       position: Vector2(0, 0),
       anchor: Anchor.center,
     );
     updateSprite();
+    updatePostion();
 
+    add(loadAnim);
     add(purinAnim);
     add(purinSprite);
 
@@ -80,27 +87,14 @@ class PurinEntity extends PositionComponent
     //hitbox.renderShape = true;
     add(purinHitbox);
 
-    actionCooldown = TimerComponent(
-      autoStart: false,
-      period: 0.7,
-      onTick: () {
-        purin.idle();
-      },
-    );
-    add(actionCooldown);
-
     purin.addListener(updatePostion);
     purin.addListener(updateSprite);
-    purin.restartPetTimer = restartActionCooldown;
   }
 
   void updatePostion() {
-    switch (purin.stateManager.position) {
-      case PurinPosition.kotatsu:
-        position = purinAreaEquipManager.kotatsu.value.position;
-        break;
-      default:
-        break;
+    if (position != purin.purinPositionVect2) {
+      position = purin.purinPositionVect2;
+      reloadLoadAnimation();
     }
   }
 
@@ -114,9 +108,8 @@ class PurinEntity extends PositionComponent
     purinSprite.sprite?.image = Flame.images.fromCache(spriteRef.toString());
   }
 
-  void restartActionCooldown() {
-    actionCooldown.timer.reset();
-    actionCooldown.timer.start();
+  void reloadLoadAnimation() {
+    add(loadAnim..reset());
   }
 
   @override

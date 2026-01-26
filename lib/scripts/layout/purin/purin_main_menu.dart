@@ -40,8 +40,6 @@ class _PurinMainMenuState extends State<PurinMainMenu>
 
   @override
   Widget build(BuildContext context) {
-    final purinAreaStateManager = PurinAreaStateManager.singleton;
-
     return Center(
       child: Transform.translate(
         offset: Offset(-30, 20),
@@ -57,6 +55,9 @@ class _PurinMainMenuState extends State<PurinMainMenu>
                 onPressed: () {
                   purinAreaKey.currentState?.currentGame.overlays.remove(
                     "purinMainMenu",
+                  );
+                  purinAreaKey.currentState?.currentGame.overlays.add(
+                    "purinPositionMenu",
                   );
                 },
                 icon: Icon(Icons.transform_rounded),

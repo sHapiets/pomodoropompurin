@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/layout/equip_menu/purin/purin_equip_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_main_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
@@ -56,6 +57,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
               "purinEquipMenu": (BuildContext context, PurinArea game) {
                 return PurinEquipMenu();
+              },
+              "purinPositionMenu": (BuildContext context, PurinArea game) {
+                return PurinPositionMenu();
               },
               "purinMainMenu": (BuildContext context, PurinArea game) {
                 return PurinMainMenu();

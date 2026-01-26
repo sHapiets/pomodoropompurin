@@ -1,7 +1,10 @@
+import 'dart:async' as async_lib;
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 
 /// "Conqueror of Nations, Destructor of Worlds"
 ///
@@ -39,15 +42,36 @@ class Purin extends ChangeNotifier {
 
   final stateManager = PurinStateManager.singleton;
   final equipManager = PurinEquipManager.singleton;
+  final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
+  void changeAction(PurinAction action) {
+    stateManager.changeAction(action);
+    notifyListeners();
+  }
+
+  /// POSITION LOGIC
+  /// Purin's position in [PurinAreaHome] is set by setting the Vector2 position
+  /// variable of [PurinEntity].
+  /// (*) In order to change it, this class's changePosition
+  /// should be called by passing a [PurinPosition] argument,
+  /// an enum class defined in the StateManager,which provides a limited possible
+  /// variations of positions where Purin could be placed.
+  /// (*) Given a certain [PurinPosition], you can define what Vector2 it
+  /// corresponds to by adding a case in the switch block inside the
+  /// purinPositionVect2 function below, in which [PurinEntity] automatically
+  /// updates from (via this class's ChangeNotifier).
   void changePosition(PurinPosition position) {
     stateManager.changePostion(position);
     notifyListeners();
   }
 
-  void changeAction(PurinAction action) {
-    stateManager.changeAction(action);
-    notifyListeners();
+  Vector2 get purinPositionVect2 {
+    switch (stateManager.position) {
+      case PurinPosition.kotatsu:
+        return purinAreaEquipManager.kotatsu.value.position;
+      case PurinPosition.futon:
+        return purinAreaEquipManager.futon.value.position;
+    }
   }
 
   /// PET LOGIC
@@ -59,13 +83,27 @@ class Purin extends ChangeNotifier {
   /// which registers any panning as a 'petting action' in [PurinArea].
   /// (2) [PurinArea] then calls the updatePetDelta() function, to register if
   /// a pan registers a petting gesture
-  /// (3) In a petting gesture, pet() is called, which notifies sprite
-  /// changes
+  /// (3) In every petting gesture, pet() is called, which notifies sprite
+  /// changes, and starts a cooldown timer before going back to idle
   double petDeltaX = 0;
   double petDeltaY = 0;
-  void Function() restartPetTimer = () {};
+  async_lib.Timer petCooldown = async_lib.Timer.periodic(
+    Duration(milliseconds: 700),
+    (timer) {
+      PurinStateManager.singleton.action = PurinAction.idle;
+      timer.cancel();
+    },
+  );
   void pet() {
     changeAction(PurinAction.pet);
+    petCooldown.cancel();
+    petCooldown = async_lib.Timer.periodic(Duration(milliseconds: 700), (
+      timer,
+    ) {
+      PurinStateManager.singleton.action = PurinAction.idle;
+      notifyListeners();
+      timer.cancel();
+    });
     notifyListeners();
   }
 
@@ -73,12 +111,10 @@ class Purin extends ChangeNotifier {
     if ((delta.x > 0 && petDeltaX <= 0) || (delta.x < 0 && petDeltaX >= 0)) {
       petDeltaX = delta.x;
       pet();
-      restartPetTimer();
     }
     if ((delta.y > 0 && petDeltaY <= 0) || delta.y < 0 && petDeltaY >= 0) {
       petDeltaY = delta.y;
       pet();
-      restartPetTimer();
     }
   }
 
