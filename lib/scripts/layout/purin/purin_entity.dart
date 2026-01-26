@@ -59,7 +59,9 @@ class PurinEntity extends PositionComponent
 
     purinAnim = PurinAnim();
     purinSprite = SpriteComponent(
-      sprite: Sprite(Flame.images.fromCache('purinEntity.png')),
+      sprite: Sprite(
+        Flame.images.fromCache('purin_sprites/boku/kotatsu/idle.png'),
+      ),
       size: Vector2.all(90),
       position: Vector2(0, 0),
       anchor: Anchor.center,
