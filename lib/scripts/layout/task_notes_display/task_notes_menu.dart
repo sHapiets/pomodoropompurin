@@ -93,7 +93,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
                             ).animate(
                               CurvedAnimation(
                                 parent: animation,
-                                curve: Curves.easeInOutBack,
+                                curve: Curves.easeOutBack,
                               ),
                             );
                         return SlideTransition(

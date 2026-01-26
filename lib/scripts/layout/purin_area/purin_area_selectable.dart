@@ -32,7 +32,7 @@ class PurinAreaSelectable extends PositionComponent
   PurinAreaSelectable({
     required Vector2 position,
     required this.hitbox,
-    required priority,
+    required int priority,
   }) : super(position: position) {
     anchor = Anchor.center;
     this.priority = priority;

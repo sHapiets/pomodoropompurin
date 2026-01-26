@@ -52,7 +52,7 @@ class _TaskNoteItemState extends State<TaskNoteItem> {
                   ).animate(
                     CurvedAnimation(
                       parent: animation,
-                      curve: Curves.easeInOutBack,
+                      curve: Curves.easeOutBack,
                     ),
                   );
               return SlideTransition(position: offsetAnim, child: child);
