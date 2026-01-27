@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ), */
           GameWidget(
             key: purinAreaKey,
-            game: PurinArea(),
+            game: PurinArea.gameSingleton,
             overlayBuilderMap: {
               "kotatsuMenu": (BuildContext context, PurinArea game) {
                 return KotatsuEquipMenu();

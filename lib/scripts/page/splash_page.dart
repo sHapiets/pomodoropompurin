@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
@@ -18,17 +19,24 @@ class _SplashPageState extends State<SplashPage> {
   final _pomTimer = PomTimer.singleton;
   final _progSystem = ProgSystem.singleton;
 
+  late final Widget preloadedMainPage;
+
   final minimumDuration = Duration(seconds: 1); // minimum splash time
   final startTime = DateTime.now();
 
   @override
   void initState() {
     super.initState();
+    preloadedMainPage = const MainPage();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _preloadAll();
+    });
   }
 
   Future<void> _preloadAll() async {
     await _preloadData();
     await _preloadAssets();
+    await _preloadPurinArea();
 
     // Wait for the minimum duration if preloading was too fast
     final elapsed = DateTime.now().difference(startTime);
@@ -39,8 +47,12 @@ class _SplashPageState extends State<SplashPage> {
     if (!mounted) return;
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => MainPage()),
+      MaterialPageRoute(builder: (_) => preloadedMainPage),
     );
+  }
+
+  Future<void> _preloadPurinArea() async {
+    await PurinArea.gameSingleton.onLoad();
   }
 
   Future<void> _preloadAssets() async {
@@ -78,7 +90,11 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    _preloadAll();
-    return Center(child: CircularProgressIndicator());
+    return Stack(
+      children: [
+        Center(child: CircularProgressIndicator()),
+        Offstage(child: preloadedMainPage),
+      ],
+    );
   }
 }

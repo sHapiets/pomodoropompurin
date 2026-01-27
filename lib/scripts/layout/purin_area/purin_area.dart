@@ -12,6 +12,9 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_home.dart'
 
 class PurinArea extends FlameGame
     with TapCallbacks, PanDetector, DoubleTapCallbacks {
+  PurinArea._();
+  static final gameSingleton = PurinArea._();
+
   late PurinAreaHome purinAreaHome;
   final purin = Purin.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
