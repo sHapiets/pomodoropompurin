@@ -36,7 +36,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   Future<void> onMount() async {
     super.onMount();
 
-    addOnLoadAnim();
+    onLoadAnim = LoadAnimation();
 
     kotatsuEntity = Kotatsu();
     blanketEntity = Blanket();
@@ -48,17 +48,14 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     exteriorEntity = Exterior();
     interiorWallEntity = InteriorWall();
 
-    add(floorEntity);
-    add(kotatsuEntity);
-    add(futonEntity);
-    add(blanketEntity);
-    add(purinEntity);
-    add(interiorWallEntity);
-    add(exteriorEntity);
-  }
+    await add(floorEntity);
+    await add(kotatsuEntity);
+    await add(futonEntity);
+    await add(blanketEntity);
+    await add(purinEntity);
+    await add(interiorWallEntity);
+    await add(exteriorEntity);
 
-  void addOnLoadAnim() {
-    onLoadAnim = LoadAnimation();
-    add(onLoadAnim);
+    await add(onLoadAnim);
   }
 }

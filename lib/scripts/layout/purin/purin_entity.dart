@@ -74,9 +74,9 @@ class PurinEntity extends PositionComponent
     updateSprite();
     updatePostion();
 
-    add(loadAnim);
     add(purinAnim);
     add(purinSprite);
+    add(loadAnim);
 
     //sample hitbox, to put in center first!
     purinHitbox = CircleHitbox(

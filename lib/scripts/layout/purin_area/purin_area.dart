@@ -50,7 +50,7 @@ class PurinArea extends FlameGame
       ),
     ); */
     // Add HomeArea
-    world.add(purinAreaHome);
+    await world.add(purinAreaHome);
   }
 
   void jumpToPosition(Vector2 position, Vector2 offset, double scale) {
