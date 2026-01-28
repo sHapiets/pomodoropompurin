@@ -90,11 +90,6 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Center(child: CircularProgressIndicator()),
-        Offstage(child: preloadedMainPage),
-      ],
-    );
+    return Stack(children: [Center(child: CircularProgressIndicator())]);
   }
 }
