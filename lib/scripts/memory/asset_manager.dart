@@ -73,6 +73,7 @@ class AssetManager {
 
       "purin_sprites/boku/kotatsu/idle.png",
       "purin_sprites/boku/kotatsu/pet.png",
+      "purin_sprites/boku/kotatsu/feed.png",
       "purin_sprites/boku/futon/idle.png",
       "purin_sprites/boku/futon/pet.png",
 

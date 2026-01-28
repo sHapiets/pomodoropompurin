@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 
 class PurinAreaEquipManager {
@@ -10,6 +10,7 @@ class PurinAreaEquipManager {
   ValueNotifier<RoomDesign> kotatsu = ValueNotifier(
     Acquirables.singleton.kotatsus[KotatsuDesigns.pudding]!,
   );
+  ValueNotifier<Consumable?> feedable = ValueNotifier(null);
   ValueNotifier<RoomDesign> blanket = ValueNotifier(
     Acquirables.singleton.blankets[BlanketDesigns.cyan]!,
   );
@@ -30,6 +31,8 @@ class PurinAreaEquipManager {
   void changeKotatsu(RoomDesign newKotatsu) {
     kotatsu.value = newKotatsu;
   }
+
+  void addFeedable(Consumable newFeedable) {}
 
   void changeBlanket(RoomDesign newBlanket) {
     blanket.value = newBlanket;

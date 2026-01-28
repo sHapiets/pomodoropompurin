@@ -124,9 +124,38 @@ class Purin extends ChangeNotifier {
     }
   }
 
-  void idle() {
-    stateManager.action = PurinAction.idle;
+  /// FEEDING LOGIC
+  ///
+  ///
+  ///
+  async_lib.Timer feedCooldown = async_lib.Timer.periodic(
+    Duration(milliseconds: 2500),
+    (timer) {
+      PurinStateManager.singleton.action = PurinAction.idle;
+      timer.cancel();
+    },
+  );
+  void feed() {
+    changeAction(PurinAction.feed);
+    changePosition(PurinPosition.kotatsu);
+    purinAreaStateManager.jumpToPosition(
+      purinPositionVect2,
+      Vector2(50, 50),
+      1.8,
+    );
+    feedCooldown.cancel();
+    feedCooldown = async_lib.Timer.periodic(Duration(milliseconds: 2500), (
+      timer,
+    ) {
+      PurinStateManager.singleton.action = PurinAction.idle;
+      notifyListeners();
+      timer.cancel();
+    });
     notifyListeners();
+  }
+
+  void idle() {
+    changeAction(PurinAction.idle);
   }
 
   ///

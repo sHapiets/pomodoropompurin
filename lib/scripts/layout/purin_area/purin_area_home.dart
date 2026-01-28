@@ -1,12 +1,12 @@
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
-import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/blanket.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/exterior.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/feedable.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/floor.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/futon.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/interior_wall.dart';
@@ -18,9 +18,10 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     anchor = Anchor.center;
   }
 
-  final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late Kotatsu kotatsuEntity;
+  late Feedable feedableEntity;
   late Blanket blanketEntity;
   late Futon futonEntity;
 
@@ -57,5 +58,14 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     await add(exteriorEntity);
 
     await add(onLoadAnim);
+  }
+
+  Future<void> addFeedable() async {
+    feedableEntity = Feedable();
+    await add(feedableEntity);
+  }
+
+  void removeFeedable() {
+    feedableEntity.removeFromParent();
   }
 }

@@ -54,6 +54,7 @@ class PurinEntity extends PositionComponent
   final spriteFileFromAction = {
     PurinAction.idle: 'idle.png',
     PurinAction.pet: 'pet.png',
+    PurinAction.feed: 'feed.png',
   };
 
   @override
@@ -114,7 +115,12 @@ class PurinEntity extends PositionComponent
 
   @override
   void onTapDown(TapDownEvent event) {
-    purinAreaStateManager.state.value = "Pet";
+    if (purinAreaStateManager.state.value == "Feed") {
+      purin.feed();
+      purinAreaStateManager.state.value = "Idle";
+    } else {
+      purinAreaStateManager.state.value = "Pet";
+    }
   }
 
   @override
