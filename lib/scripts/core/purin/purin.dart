@@ -43,6 +43,7 @@ class Purin extends ChangeNotifier {
   final stateManager = PurinStateManager.singleton;
   final equipManager = PurinEquipManager.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
 
   void changeAction(PurinAction action) {
     stateManager.changeAction(action);
@@ -96,6 +97,11 @@ class Purin extends ChangeNotifier {
   );
   void pet() {
     changeAction(PurinAction.pet);
+    purinAreaStateManager.jumpToPosition(
+      purinPositionVect2,
+      Vector2.zero(),
+      2.0,
+    );
     petCooldown.cancel();
     petCooldown = async_lib.Timer.periodic(Duration(milliseconds: 700), (
       timer,

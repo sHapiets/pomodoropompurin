@@ -53,10 +53,9 @@ class PurinArea extends FlameGame
     world.add(purinAreaHome);
   }
 
-  void jumpToPosition(Vector2 position) {
-    final offsetPosition = Vector2(position.x + 100, position.y - 100);
-    newPosition = offsetPosition;
-    newScale.x = 1.0;
+  void jumpToPosition(Vector2 position, Vector2 offset, double scale) {
+    newPosition = position + offset;
+    newScale.x = scale;
   }
 
   void jumpCenterPositionAndScaled(Vector2 position) {
@@ -145,7 +144,6 @@ class PurinArea extends FlameGame
       );
     } else if (purinAreaStateManager.state.value == "Pet") {
       purin.updatePetDelta(info.delta.global);
-      jumpCenterPositionAndScaled(purinAreaHome.purinEntity.absolutePosition);
     }
   }
 

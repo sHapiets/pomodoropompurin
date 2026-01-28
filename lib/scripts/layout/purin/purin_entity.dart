@@ -120,7 +120,11 @@ class PurinEntity extends PositionComponent
   @override
   void onLongTapDown(TapDownEvent event) {
     game.overlays.removeAll(game.overlays.activeOverlays);
-    purinAreaStateManager.jumpToPosition(absolutePosition);
+    purinAreaStateManager.jumpToPosition(
+      absolutePosition,
+      Vector2(100, -100),
+      1.0,
+    );
     game.overlays.add("purinMainMenu");
   }
 }

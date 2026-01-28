@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
@@ -166,6 +167,8 @@ class _PurinPositionTileState extends State<PurinPositionTile>
                             purin.changePosition(widget.purinPosition);
                             purinAreaStateManager.jumpToPosition(
                               purin.purinPositionVect2,
+                              Vector2(100, -100),
+                              1.0,
                             );
                           },
                         ),
