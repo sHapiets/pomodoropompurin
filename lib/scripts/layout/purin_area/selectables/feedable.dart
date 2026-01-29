@@ -2,6 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/src/events/messages/tap_down_event.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
@@ -26,7 +27,7 @@ class Feedable extends PurinAreaSelectable {
       );
 
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
-  final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final purin = Purin.singleton;
 
   final feedable = PurinAreaEquipManager.singleton.feedable.value!;
   int bitesLeft = 0;
@@ -45,12 +46,24 @@ class Feedable extends PurinAreaSelectable {
       anchor: anchor,
     );
 
+    purin.addListener(bite);
+
     super.onMount();
   }
 
-  void updateBiteSprite() {
+  void bite() {
     bitesLeft--;
-    feedable.biteSpritesFlamePath[biteIndex];
+    if (bitesLeft == 0) {
+      removeFromParent();
+    } else {
+      feedable.biteSpritesFlamePath[biteIndex];
+    }
+  }
+
+  @override
+  void removeFromParent() {
+    purin.removeListener(bite);
+    super.removeFromParent();
   }
 
   @override
