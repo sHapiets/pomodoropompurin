@@ -1,6 +1,7 @@
 import 'dart:async' as async_lib;
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
@@ -44,6 +45,7 @@ class Purin extends ChangeNotifier {
   final equipManager = PurinEquipManager.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final progSystem = ProgSystem.singleton;
 
   void changeAction(PurinAction action) {
     stateManager.changeAction(action);
@@ -96,6 +98,9 @@ class Purin extends ChangeNotifier {
     },
   );
   void pet() {
+    int reward = 1;
+    progSystem.addOshiriPoints(reward);
+
     stateManager.action = PurinAction.pet;
     purinAreaStateManager.jumpToPosition(
       purinPositionVect2,
@@ -141,6 +146,9 @@ class Purin extends ChangeNotifier {
     },
   );
   void feed() {
+    int reward = purinAreaEquipManager.feedable.value!.oshiriPointsPerBite;
+    progSystem.addOshiriPoints(reward);
+
     stateManager.changeAction(PurinAction.feed);
     stateManager.changePostion(PurinPosition.kotatsu);
     purinAreaStateManager.jumpToPosition(

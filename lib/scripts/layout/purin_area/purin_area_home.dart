@@ -40,6 +40,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     onLoadAnim = LoadAnimation();
 
     kotatsuEntity = Kotatsu();
+    feedableEntity = Feedable();
     blanketEntity = Blanket();
     futonEntity = Futon();
 
@@ -62,11 +63,6 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   }
 
   Future<void> addFeedable() async {
-    feedableEntity = Feedable();
     await add(feedableEntity);
-  }
-
-  void removeFeedable() {
-    feedableEntity.removeFromParent();
   }
 }
