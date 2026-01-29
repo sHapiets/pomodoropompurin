@@ -143,6 +143,17 @@ class Acquirables {
       spriteFlamePath: "futon_sprites/cyan.png",
     ),
   };
+
+  Map<RefrigeratorDesigns, RoomDesign> refrigerators = {
+    RefrigeratorDesigns.silver: RoomDesign(
+      id: "0000",
+      displayName: "Silver",
+      cost: 0,
+      iconAssetPath: "",
+      position: Vector2.zero(),
+      spriteFlamePath: 'refrigerator_sprites/silver.png',
+    ),
+  };
 }
 
 enum PurinVars { boku, shrimp, pumpkin }
@@ -152,6 +163,8 @@ enum KotatsuDesigns { pudding, aqua }
 enum BlanketDesigns { cyan }
 
 enum FutonDesigns { cyan }
+
+enum RefrigeratorDesigns { silver }
 
 enum FloorDesigns { smooth }
 

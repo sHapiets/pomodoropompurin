@@ -2,14 +2,18 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/src/events/messages/tap_down_event.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 class Feedable extends PurinAreaSelectable {
   Feedable()
     : super(
+        //TODO change hitbox and position
         position: Vector2(180, 220),
         hitbox: PolygonHitbox(
           [
@@ -52,11 +56,15 @@ class Feedable extends PurinAreaSelectable {
   }
 
   void bite() {
-    bitesLeft--;
-    if (bitesLeft == 0) {
-      removeFromParent();
-    } else {
-      feedable.biteSpritesFlamePath[biteIndex];
+    if (purin.stateManager.action == PurinAction.feed) {
+      bitesLeft--;
+      if (bitesLeft == 0) {
+        removeFromParent();
+      } else {
+        sprite.sprite = Sprite(
+          Flame.images.fromCache(feedable.biteSpritesFlamePath[biteIndex]),
+        );
+      }
     }
   }
 

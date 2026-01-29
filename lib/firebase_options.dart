@@ -41,12 +41,13 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCst5P_xly9aQQrF9xUg2pA7-0Fv8PQkN8',
-    appId: '1:361029373628:web:3f1a34a8d48a21e68e8ab9',
-    messagingSenderId: '361029373628',
-    projectId: 'pomodoropompurin',
-    authDomain: 'pomodoropompurin.firebaseapp.com',
-    storageBucket: 'pomodoropompurin.firebasestorage.app',
+    apiKey: 'AIzaSyCoC-GplKRutwUKH2OOv557h2E0ZIqGoSk',
+    appId: '1:49840295676:web:3f75c1e28029d6163ad179',
+    messagingSenderId: '49840295676',
+    projectId: 'koupen-pppurin',
+    authDomain: 'koupen-pppurin.firebaseapp.com',
+    storageBucket: 'koupen-pppurin.firebasestorage.app',
+    measurementId: 'G-JGXQJWJ0YY',
   );
 
   static const FirebaseOptions android = FirebaseOptions(

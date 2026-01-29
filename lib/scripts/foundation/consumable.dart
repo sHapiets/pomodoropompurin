@@ -1,10 +1,13 @@
 enum Consumable {
   pudding(
     price: 100,
-    totalBites: 3,
+    totalBites: 2,
     oshiriPointsPerBite: 10,
     spriteFlutterKey: 'pP_icon',
-    biteSpritesFlamePath: [],
+    biteSpritesFlamePath: [
+      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/pudding/2.png',
+    ],
   );
 
   const Consumable({

@@ -71,6 +71,9 @@ class AssetManager {
       "Kotatsu_blue.png",
       "pomPoints_icon.png",
 
+      "consumable_sprites/pudding/1.png",
+      "consumable_sprites/pudding/2.png",
+
       "purin_sprites/boku/kotatsu/idle.png",
       "purin_sprites/boku/kotatsu/pet.png",
       "purin_sprites/boku/kotatsu/feed.png",

@@ -96,7 +96,7 @@ class Purin extends ChangeNotifier {
     },
   );
   void pet() {
-    changeAction(PurinAction.pet);
+    stateManager.action = PurinAction.pet;
     purinAreaStateManager.jumpToPosition(
       purinPositionVect2,
       Vector2.zero(),
@@ -125,8 +125,13 @@ class Purin extends ChangeNotifier {
   }
 
   /// FEEDING LOGIC
-  ///
-  ///
+  /// Feeding is a state for both [Purin] and [PurinArea].
+  /// (For context), just like for Petting, [PurinArea] needs to identify that the
+  /// current gesture/action is feeding. This is set by tapping the [Feedable] component
+  /// in [PurinAreaHome] (See Feedable class for more info...)
+  /// Once set, [PurinEntity] will recieve the OnTap to activate the feed() function
+  /// below.
+  /// Just like in petting, a timer is engaged to switch the state back to idle.
   ///
   async_lib.Timer feedCooldown = async_lib.Timer.periodic(
     Duration(milliseconds: 2500),
@@ -136,8 +141,8 @@ class Purin extends ChangeNotifier {
     },
   );
   void feed() {
-    changeAction(PurinAction.feed);
-    changePosition(PurinPosition.kotatsu);
+    stateManager.changeAction(PurinAction.feed);
+    stateManager.changePostion(PurinPosition.kotatsu);
     purinAreaStateManager.jumpToPosition(
       purinPositionVect2,
       Vector2(50, 50),
@@ -157,6 +162,4 @@ class Purin extends ChangeNotifier {
   void idle() {
     changeAction(PurinAction.idle);
   }
-
-  ///
 }

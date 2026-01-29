@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
@@ -44,6 +45,7 @@ class ProgSystem {
     KotatsuDesigns.pudding,
     KotatsuDesigns.aqua,
   };
+  Map<Consumable, int> consumableInventory = {Consumable.pudding: 0};
 
   // Functions to be used by PomTimer, RewardEvents etc...
   void addPomPoints(int points) {
@@ -61,7 +63,12 @@ class ProgSystem {
     _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
   }
 
-  // Functions to be used to reload data
+  /// Consumable Inventory (Public) Functions
+  void addConsumable(Consumable consumable, int count) {
+    consumableInventory[consumable] = consumableInventory[consumable]! + 1;
+  }
+
+  // Reload Data (used for Koupen, mostly in SplashPage...)
   void loadPomPoints(int points) =>
       pomPoints.value = points; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadMilkJugs(int jugs) =>

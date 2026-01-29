@@ -13,7 +13,7 @@ dependencies:
   contribution_heatmap: ^0.5.2
   syncfusion_flutter_gauges: ^32.1.21
   firebase_core: ^4.3.0
-  cloud_firestore: ^6.1.1
+  cloud_firestore: ^6.1.2
   flame: ^1.15.0
 
 dev_dependencies:
@@ -35,6 +35,7 @@ flutter:
     - assets/images/futon_sprites/
     - assets/images/purin_sprites/boku/kotatsu/
     - assets/images/purin_sprites/boku/futon/
+    - assets/images/consumable_sprites/pudding/
   fonts:
     - family: Fredoka
       fonts:
