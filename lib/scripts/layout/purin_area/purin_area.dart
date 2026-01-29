@@ -119,17 +119,17 @@ class PurinArea extends FlameGame
 
       final zoom = camera.viewfinder.zoom;
       newPosition -= info.delta.global / zoom;
-      /* 
-      final minX = 0.0;
-      final minY = 0.0;
-      final maxX = size.x - purinAreaHome.size.x;
-      final maxY = size.y - purinAreaHome.size.y;
+
+      final minX = -size.x;
+      final minY = -size.y;
+      final maxX = size.x;
+      final maxY = size.y;
 
       // Clamping from out-of-bounds
       newPosition = Vector2(
         newPosition.x.clamp(minX, maxX),
         newPosition.y.clamp(minY, maxY),
-      ); */
+      );
     } else if (purinAreaStateManager.state.value == "Scaling") {
       cursorSprite.position.x = info.eventPosition.global.x;
       newScale -= info.delta.global.yy * 0.005;
