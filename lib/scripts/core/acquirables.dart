@@ -2,13 +2,27 @@ import 'package:flame/game.dart';
 
 import '../foundation/acquirable.dart';
 
-/// A class that simply holds all acquirables in the app
+/// A class that simply holds all acquirables.
 ///
-/// .items -> List of Item instances;
-/// .hats -> List of Hat instances
-/// etc...
+/// Each acquirable has their respective enums, which is mapped
+/// to an [Acquirable] object. I highly recommend you check the [Acquirable] class
+/// first.
 ///
-/// In order to add a new Acquirable,
+/// Each mapping is created to optimize space, such that all objects are
+/// created only once, and are only referenced from their respective enums.
+/// This also helps in isolating the logic from the items.
+///
+/// For instance, [PurinEquipManager] references the [purinVars] mapping
+/// below, such that it holds object via key reference, instead of instantiating
+/// the object.
+///
+/// Update: As of writing, the scope of the game is reduced to simply having
+/// two types of acquirables:
+/// [PurinVar] - mapped and enumerated by [PurinVars]
+///            - an all-in-one implementation of [PurinEntity] customization
+/// [RoomDesign] - enumerated by each type of [PurinAreaSelectable]
+///              - IMPORTANT: the position property defines Purin's position
+///              - also defines the sprite path, to be used by the selectable entity
 class Acquirables {
   Acquirables._();
   static final singleton = Acquirables._();
@@ -154,6 +168,17 @@ class Acquirables {
       spriteFlamePath: 'refrigerator_sprites/silver.png',
     ),
   };
+
+  Map<StudyTableDesigns, RoomDesign> study_tables = {
+    StudyTableDesigns.wooden: RoomDesign(
+      id: "0000",
+      displayName: "Wooden",
+      cost: 0,
+      iconAssetPath: "",
+      position: Vector2.zero(),
+      spriteFlamePath: "study_table_sprites/wooden.png",
+    ),
+  };
 }
 
 enum PurinVars { boku, shrimp, pumpkin }
@@ -165,6 +190,8 @@ enum BlanketDesigns { cyan }
 enum FutonDesigns { cyan }
 
 enum RefrigeratorDesigns { silver }
+
+enum StudyTableDesigns { wooden }
 
 enum FloorDesigns { smooth }
 

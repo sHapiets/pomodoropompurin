@@ -33,9 +33,11 @@ flutter:
     - assets/images/exterior_sprites/
     - assets/images/blanket_sprites/
     - assets/images/futon_sprites/
+    - assets/images/refrigerator_sprites/
+    - assets/images/study_table_sprites/
+    - assets/images/consumable_sprites/pudding/
     - assets/images/purin_sprites/boku/kotatsu/
     - assets/images/purin_sprites/boku/futon/
-    - assets/images/consumable_sprites/pudding/
   fonts:
     - family: Fredoka
       fonts:

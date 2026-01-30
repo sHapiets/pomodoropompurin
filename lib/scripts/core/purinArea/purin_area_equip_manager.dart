@@ -3,6 +3,20 @@ import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 
+/// A manager class that contains all RoomDesign objects for all selectables
+/// in [PurinAreaHome]
+///
+/// It is the bridge for user customization of owned designs. The logic
+/// in changing equipment is simple:
+/// (1) A [PurinAreaSelectable] has a overlay menu whenever OnLongTapDown
+/// (2) An [EquipTile] is opened in the grid for every owned acuirable, defined
+///     in [ProgSystem]
+/// (3) When an equip button is pressed, a change function is called in this class
+///     of the respective selectable.
+/// (4) [PurinAreaSelectable] is updated via listener (ValueNotifier)
+///
+/// This is a visualization:
+/// [EquipTile] -> [PurinAreaEquipManager] -> [PurinAreaSelectable]
 class PurinAreaEquipManager {
   PurinAreaEquipManager._();
   static final singleton = PurinAreaEquipManager._();
@@ -19,6 +33,9 @@ class PurinAreaEquipManager {
   );
   ValueNotifier<RoomDesign> refrigerator = ValueNotifier(
     Acquirables.singleton.refrigerators[RefrigeratorDesigns.silver]!,
+  );
+  ValueNotifier<RoomDesign> studyTable = ValueNotifier(
+    Acquirables.singleton.study_tables[StudyTableDesigns.wooden]!,
   );
 
   ValueNotifier<RoomDesign> floor = ValueNotifier(
