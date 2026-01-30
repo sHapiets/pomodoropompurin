@@ -70,10 +70,21 @@ class Purin extends ChangeNotifier {
 
   Vector2 get purinPositionVect2 {
     switch (stateManager.position) {
-      case PurinPosition.kotatsu:
-        return purinAreaEquipManager.kotatsu.value.position;
+      case PurinPosition.kotatsuLeft:
+        return purinAreaEquipManager
+            .kotatsu
+            .value
+            .purinPositionVectors[PurinPosition.kotatsuLeft]!;
+      case PurinPosition.kotatsuRight:
+        return purinAreaEquipManager
+            .kotatsu
+            .value
+            .purinPositionVectors[PurinPosition.kotatsuRight]!;
       case PurinPosition.futon:
-        return purinAreaEquipManager.futon.value.position;
+        return purinAreaEquipManager
+            .futon
+            .value
+            .purinPositionVectors[PurinPosition.futon]!;
     }
   }
 
@@ -150,7 +161,7 @@ class Purin extends ChangeNotifier {
     progSystem.addOshiriPoints(reward);
 
     stateManager.changeAction(PurinAction.feed);
-    stateManager.changePostion(PurinPosition.kotatsu);
+    stateManager.changePostion(PurinPosition.kotatsuLeft);
     purinAreaStateManager.jumpToPosition(
       purinPositionVect2,
       Vector2(50, 50),

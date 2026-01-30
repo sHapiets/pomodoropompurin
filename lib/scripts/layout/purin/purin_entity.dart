@@ -11,6 +11,7 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 
 /// The definitive Flame component of [Purin] on [PurinArea].
 /// Handles the current configurations of [Purin] during runtime, such
@@ -48,13 +49,19 @@ class PurinEntity extends PositionComponent
   late CircleHitbox purinHitbox;
 
   final spriteDirectoryFromPosition = {
-    PurinPosition.kotatsu: 'kotatsu/',
+    PurinPosition.kotatsuLeft: 'sit/',
+    PurinPosition.kotatsuRight: 'sit/',
     PurinPosition.futon: 'futon/',
   };
   final spriteFileFromAction = {
     PurinAction.idle: 'idle.png',
     PurinAction.pet: 'pet.png',
     PurinAction.feed: 'feed.png',
+  };
+  final spriteFlipBoolFromPostion = {
+    PurinPosition.kotatsuLeft: false,
+    PurinPosition.kotatsuRight: true,
+    PurinPosition.futon: false,
   };
 
   @override
@@ -65,9 +72,7 @@ class PurinEntity extends PositionComponent
     loadAnim = LoadAnimation()..removeOnFinish = true;
     purinAnim = PurinAnim();
     purinSprite = SpriteComponent(
-      sprite: Sprite(
-        Flame.images.fromCache('purin_sprites/boku/kotatsu/idle.png'),
-      ),
+      sprite: Sprite(Flame.images.fromCache('purin_sprites/boku/sit/idle.png')),
       size: Vector2.all(70),
       position: Vector2(0, 0),
       anchor: Anchor.center,
@@ -107,6 +112,13 @@ class PurinEntity extends PositionComponent
       ..write(spriteFileFromAction[purin.stateManager.action]);
 
     purinSprite.sprite?.image = Flame.images.fromCache(spriteRef.toString());
+    bool flip = spriteFlipBoolFromPostion[purin.stateManager.position]!;
+    (flip && !purinSprite.isFlippedHorizontally)
+        ? purinSprite.flipHorizontally()
+        : () {};
+    (!flip && purinSprite.isFlippedHorizontally)
+        ? purinSprite.flipHorizontally()
+        : () {};
   }
 
   void reloadLoadAnimation() {

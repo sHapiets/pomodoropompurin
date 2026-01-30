@@ -35,7 +35,7 @@ class PurinAreaEquipManager {
     Acquirables.singleton.refrigerators[RefrigeratorDesigns.silver]!,
   );
   ValueNotifier<RoomDesign> studyTable = ValueNotifier(
-    Acquirables.singleton.study_tables[StudyTableDesigns.wooden]!,
+    Acquirables.singleton.studyTables[StudyTableDesigns.wooden]!,
   );
 
   ValueNotifier<RoomDesign> floor = ValueNotifier(

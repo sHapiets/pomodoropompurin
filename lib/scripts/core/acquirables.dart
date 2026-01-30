@@ -1,4 +1,7 @@
 import 'package:flame/game.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 import '../foundation/acquirable.dart';
 
@@ -21,7 +24,7 @@ import '../foundation/acquirable.dart';
 /// [PurinVar] - mapped and enumerated by [PurinVars]
 ///            - an all-in-one implementation of [PurinEntity] customization
 /// [RoomDesign] - enumerated by each type of [PurinAreaSelectable]
-///              - IMPORTANT: the position property defines Purin's position
+///              - IMPORTANT: the position property defines Purin's position from [PurinPosition]
 ///              - also defines the sprite path, to be used by the selectable entity
 class Acquirables {
   Acquirables._();
@@ -84,7 +87,10 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "",
 
-      position: Vector2(120, 170),
+      purinPositionVectors: {
+        PurinPosition.kotatsuLeft: Vector2(120, 170),
+        PurinPosition.kotatsuRight: Vector2(240, 170),
+      },
       spriteFlamePath: "kotatsu_sprites/pudding.png",
     ),
     KotatsuDesigns.aqua: RoomDesign(
@@ -93,7 +99,10 @@ class Acquirables {
       cost: 100,
       iconAssetPath: "",
 
-      position: Vector2(120, 170),
+      purinPositionVectors: {
+        PurinPosition.kotatsuLeft: Vector2(120, 170),
+        PurinPosition.kotatsuRight: Vector2(120, 170),
+      },
       spriteFlamePath: "kotatsu_sprites/aqua.png",
     ),
   };
@@ -105,7 +114,7 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "",
 
-      position: Vector2(0, 0),
+      purinPositionVectors: {},
       spriteFlamePath: "floor_sprites/smooth.png",
     ),
   };
@@ -117,7 +126,7 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "",
 
-      position: Vector2(0, 0),
+      purinPositionVectors: {},
       spriteFlamePath: "interior_wall_sprites/smooth.png",
     ),
   };
@@ -129,7 +138,7 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "",
 
-      position: Vector2(0, 0),
+      purinPositionVectors: {},
       spriteFlamePath: "exterior_sprites/plain.png",
     ),
   };
@@ -141,7 +150,7 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "",
 
-      position: Vector2(-80, 260),
+      purinPositionVectors: {PurinPosition.futon: Vector2(33, 358)},
       spriteFlamePath: "blanket_sprites/cyan.png",
     ),
   };
@@ -153,7 +162,7 @@ class Acquirables {
       cost: 0,
       iconAssetPath: "",
 
-      position: Vector2(33, 358),
+      purinPositionVectors: {PurinPosition.futon: Vector2(33, 358)},
       spriteFlamePath: "futon_sprites/cyan.png",
     ),
   };
@@ -164,18 +173,18 @@ class Acquirables {
       displayName: "Silver",
       cost: 0,
       iconAssetPath: "",
-      position: Vector2.zero(),
+      purinPositionVectors: {},
       spriteFlamePath: 'refrigerator_sprites/silver.png',
     ),
   };
 
-  Map<StudyTableDesigns, RoomDesign> study_tables = {
+  Map<StudyTableDesigns, RoomDesign> studyTables = {
     StudyTableDesigns.wooden: RoomDesign(
       id: "0000",
       displayName: "Wooden",
       cost: 0,
       iconAssetPath: "",
-      position: Vector2.zero(),
+      purinPositionVectors: {},
       spriteFlamePath: "study_table_sprites/wooden.png",
     ),
   };

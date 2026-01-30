@@ -4,7 +4,7 @@ class PurinStateManager {
   static final singleton = PurinStateManager._();
 
   PurinAction action = PurinAction.idle;
-  PurinPosition position = PurinPosition.kotatsu;
+  PurinPosition position = PurinPosition.kotatsuLeft;
 
   void changeAction(PurinAction action) {
     this.action = action;
@@ -17,4 +17,4 @@ class PurinStateManager {
 
 enum PurinAction { idle, pet, feed }
 
-enum PurinPosition { kotatsu, futon }
+enum PurinPosition { kotatsuLeft, kotatsuRight, futon }

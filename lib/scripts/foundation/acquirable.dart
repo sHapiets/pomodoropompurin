@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 
 /// This sets of classes defines all objects in the app that are used
 /// for customizing. This includes items, clothes for Purin, Purin
@@ -27,7 +28,7 @@ abstract class Acquirable {
     this.cost,
   });
 }
-
+/* 
 class Item extends Acquirable {
   Item({
     required super.id,
@@ -71,7 +72,7 @@ class OutfitSet extends Acquirable {
     required super.cost,
     required super.iconAssetPath,
   });
-}
+} */
 
 class PurinVar extends Acquirable {
   PurinVar({
@@ -89,10 +90,10 @@ class RoomDesign extends Acquirable {
     required super.cost,
     required super.iconAssetPath,
 
-    required this.position,
+    required this.purinPositionVectors,
     required this.spriteFlamePath,
   });
 
   final String spriteFlamePath;
-  final Vector2 position;
+  final Map<PurinPosition, Vector2> purinPositionVectors;
 }

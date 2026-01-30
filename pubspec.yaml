@@ -36,7 +36,7 @@ flutter:
     - assets/images/refrigerator_sprites/
     - assets/images/study_table_sprites/
     - assets/images/consumable_sprites/pudding/
-    - assets/images/purin_sprites/boku/kotatsu/
+    - assets/images/purin_sprites/boku/sit/
     - assets/images/purin_sprites/boku/futon/
   fonts:
     - family: Fredoka

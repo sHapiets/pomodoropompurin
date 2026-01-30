@@ -74,9 +74,9 @@ class AssetManager {
       "consumable_sprites/pudding/1.png",
       "consumable_sprites/pudding/2.png",
 
-      "purin_sprites/boku/kotatsu/idle.png",
-      "purin_sprites/boku/kotatsu/pet.png",
-      "purin_sprites/boku/kotatsu/feed.png",
+      "purin_sprites/boku/sit/idle.png",
+      "purin_sprites/boku/sit/pet.png",
+      "purin_sprites/boku/sit/feed.png",
       "purin_sprites/boku/futon/idle.png",
       "purin_sprites/boku/futon/pet.png",
 
