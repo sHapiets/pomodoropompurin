@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -16,6 +17,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   final assetManager = AssetManager.singleton;
   final progSystem = ProgSystem.singleton;
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
 
   final expGaugeHeight = 80.0;
   final expGaugeWidth = 80.0;
@@ -31,13 +33,15 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: pomTimerDisplayStateManager.pomTimerState,
+      valueListenable: purinAreaStateManager.state,
       builder: (context, value, child) {
         return AnimatedPositioned(
           duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           top: 30,
-          left: (value == PomTimerStates.play) ? -140 : 0,
+          left: (false /* ['Feed'].any((state) => state == value) */ )
+              ? -140
+              : 0,
           child: child!,
         );
       },
