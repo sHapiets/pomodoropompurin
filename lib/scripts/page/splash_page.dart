@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -18,6 +20,8 @@ class _SplashPageState extends State<SplashPage> {
   final _databaseManager = DatabaseManager.singleton;
   final _pomTimer = PomTimer.singleton;
   final _progSystem = ProgSystem.singleton;
+  final acquirables = Acquirables.singleton;
+  final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late final Widget preloadedMainPage;
 
@@ -63,7 +67,6 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _preloadData() async {
-    // Database loading
     _progSystem.loadPomPoints(await _databaseManager.userDataLoad('pomPoints'));
     _progSystem.loadMilkJugs(await _databaseManager.userDataLoad('milkJugs'));
     _progSystem.loadOshiriPoints(
@@ -84,6 +87,16 @@ class _SplashPageState extends State<SplashPage> {
       1,
       await _databaseManager.calendarMonthLoad(2026, 1),
     );
+
+    await _databaseManager.configSelectablesLoad().then((
+      selectableConfigString,
+    ) {
+      KotatsuDesigns kotatsuDesign = KotatsuDesigns.values.byName(
+        selectableConfigString['kotatsuDesign'],
+      );
+      purinAreaEquipManager.kotatsu.value =
+          acquirables.kotatsus[kotatsuDesign]!;
+    });
   }
 
   Future<void> loadingScreenchuchu() async {}

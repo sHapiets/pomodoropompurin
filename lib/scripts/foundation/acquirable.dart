@@ -15,7 +15,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 /// a Purchasable class is no longer needed, and instead has optional
 /// properties.
 abstract class Acquirable {
-  final String id;
+  final dynamic id;
   final String displayName;
   final String iconAssetPath;
 

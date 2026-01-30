@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
@@ -48,6 +49,11 @@ class PurinEntity extends PositionComponent
   late SpriteComponent purinSprite;
   late CircleHitbox purinHitbox;
 
+  final spriteDirectoryFromPurinVar = {
+    PurinVars.boku: 'boku/',
+    PurinVars.pumpkin: 'pumpkin/',
+    PurinVars.shrimp: 'shrimp/',
+  };
   final spriteDirectoryFromPosition = {
     PurinPosition.kotatsuLeft: 'sit/',
     PurinPosition.kotatsuRight: 'sit/',
@@ -107,7 +113,9 @@ class PurinEntity extends PositionComponent
   void updateSprite() {
     final spriteRef = StringBuffer()
       ..write('purin_sprites/')
-      ..write('${purin.equipManager.equippedPurinVar.id}/')
+      ..write(
+        spriteDirectoryFromPurinVar[purin.equipManager.equippedPurinVar.id],
+      )
       ..write(spriteDirectoryFromPosition[purin.stateManager.position])
       ..write(spriteFileFromAction[purin.stateManager.action]);
 

@@ -61,19 +61,19 @@ class Acquirables {
 
   Map<PurinVars, PurinVar> purinVars = {
     PurinVars.boku: PurinVar(
-      id: 'boku',
+      id: PurinVars.boku,
       displayName: 'Boku',
       cost: 0,
       iconAssetPath: '',
     ),
     PurinVars.shrimp: PurinVar(
-      id: 'shrimp',
+      id: PurinVars.shrimp,
       displayName: "Shrimp",
       cost: 100,
       iconAssetPath: '',
     ),
     PurinVars.pumpkin: PurinVar(
-      id: 'pumpkin',
+      id: PurinVars.pumpkin,
       displayName: "Pumpkin",
       cost: 200,
       iconAssetPath: '',
@@ -82,7 +82,7 @@ class Acquirables {
 
   Map<KotatsuDesigns, RoomDesign> kotatsus = {
     KotatsuDesigns.pudding: RoomDesign(
-      id: "0000",
+      id: KotatsuDesigns.pudding,
       displayName: "Pudding",
       cost: 0,
       iconAssetPath: "",
@@ -94,7 +94,7 @@ class Acquirables {
       spriteFlamePath: "kotatsu_sprites/pudding.png",
     ),
     KotatsuDesigns.aqua: RoomDesign(
-      id: "0000",
+      id: KotatsuDesigns.aqua,
       displayName: "Aqua",
       cost: 100,
       iconAssetPath: "",
@@ -109,7 +109,7 @@ class Acquirables {
 
   Map<FloorDesigns, RoomDesign> floors = {
     FloorDesigns.smooth: RoomDesign(
-      id: "0000",
+      id: FloorDesigns.smooth,
       displayName: "Smooth",
       cost: 0,
       iconAssetPath: "",
@@ -121,7 +121,7 @@ class Acquirables {
 
   Map<InteriorWallDesigns, RoomDesign> interiorWalls = {
     InteriorWallDesigns.smooth: RoomDesign(
-      id: "0000",
+      id: InteriorWallDesigns.smooth,
       displayName: "Smooth",
       cost: 0,
       iconAssetPath: "",
@@ -133,7 +133,7 @@ class Acquirables {
 
   Map<ExteriorDesigns, RoomDesign> exteriors = {
     ExteriorDesigns.plain: RoomDesign(
-      id: "0000",
+      id: ExteriorDesigns.plain,
       displayName: "Plain",
       cost: 0,
       iconAssetPath: "",
@@ -145,7 +145,7 @@ class Acquirables {
 
   Map<BlanketDesigns, RoomDesign> blankets = {
     BlanketDesigns.cyan: RoomDesign(
-      id: "0000",
+      id: BlanketDesigns.cyan,
       displayName: "Cyan",
       cost: 0,
       iconAssetPath: "",
@@ -157,7 +157,7 @@ class Acquirables {
 
   Map<FutonDesigns, RoomDesign> futons = {
     FutonDesigns.cyan: RoomDesign(
-      id: "0000",
+      id: FutonDesigns.cyan,
       displayName: "Cyan",
       cost: 0,
       iconAssetPath: "",
@@ -169,7 +169,7 @@ class Acquirables {
 
   Map<RefrigeratorDesigns, RoomDesign> refrigerators = {
     RefrigeratorDesigns.silver: RoomDesign(
-      id: "0000",
+      id: RefrigeratorDesigns.silver,
       displayName: "Silver",
       cost: 0,
       iconAssetPath: "",
@@ -180,7 +180,7 @@ class Acquirables {
 
   Map<StudyTableDesigns, RoomDesign> studyTables = {
     StudyTableDesigns.wooden: RoomDesign(
-      id: "0000",
+      id: StudyTableDesigns.wooden,
       displayName: "Wooden",
       cost: 0,
       iconAssetPath: "",

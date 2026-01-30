@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
+import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 class KotatsuEquipTile extends StatefulWidget {
   const KotatsuEquipTile({super.key, required this.item});
@@ -15,6 +16,7 @@ class KotatsuEquipTile extends StatefulWidget {
 class _KotatsuEquipTileState extends State<KotatsuEquipTile>
     with TickerProviderStateMixin {
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
+  final databaseManager = DatabaseManager.singleton;
 
   final double iconSides = 70;
   final double tileHeight = 135;
@@ -159,6 +161,7 @@ class _KotatsuEquipTileState extends State<KotatsuEquipTile>
                         child: MaterialButton(
                           onPressed: () {
                             purinAreaEquipManager.kotatsu.value = widget.item;
+                            databaseManager.configKotatsuSave(widget.item.id);
                           },
                         ),
                       ),

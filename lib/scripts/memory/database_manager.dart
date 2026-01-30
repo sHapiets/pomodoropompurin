@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 
 class DatabaseManager {
@@ -47,6 +48,14 @@ class DatabaseManager {
     return logs;
   }
 
+  Future<Map<String, dynamic>> configSelectablesLoad() async {
+    final selectablesConfigRef = userRef
+        .collection('config')
+        .doc('selectables');
+    final selectablesConfigDoc = await selectablesConfigRef.get();
+    return selectablesConfigDoc.data()!;
+  }
+
   /// Save Functions
   /// -> to be called by other classes (mostly core singletons) to save data in Koupen
   /// -> instance of the DatabaseManager must be called before using
@@ -83,5 +92,12 @@ class DatabaseManager {
         .collection('days')
         .doc('${DateTime.now().day}'.padLeft(2, '0'));
     await dayRef.update({'timeSeconds': timeTotalSeconds});
+  }
+
+  Future<void> configKotatsuSave(KotatsuDesigns design) async {
+    final selectablesConfigRef = userRef
+        .collection('config')
+        .doc('selectables');
+    await selectablesConfigRef.update({'kotatsuDesign': design.name});
   }
 }
