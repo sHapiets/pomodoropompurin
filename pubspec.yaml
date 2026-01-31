@@ -35,6 +35,7 @@ flutter:
     - assets/images/futon_sprites/
     - assets/images/refrigerator_sprites/
     - assets/images/study_table_sprites/
+    - assets/images/study_chair_sprites/
     - assets/images/consumable_sprites/pudding/
     - assets/images/purin_sprites/boku/sit/
     - assets/images/purin_sprites/boku/futon/

@@ -58,6 +58,7 @@ class PurinEntity extends PositionComponent
     PurinPosition.kotatsuLeft: 'sit/',
     PurinPosition.kotatsuRight: 'sit/',
     PurinPosition.futon: 'futon/',
+    PurinPosition.study: 'sit/',
   };
   final spriteFileFromAction = {
     PurinAction.idle: 'idle.png',
@@ -68,6 +69,7 @@ class PurinEntity extends PositionComponent
     PurinPosition.kotatsuLeft: false,
     PurinPosition.kotatsuRight: true,
     PurinPosition.futon: false,
+    PurinPosition.study: true,
   };
 
   @override
@@ -105,6 +107,7 @@ class PurinEntity extends PositionComponent
 
   void updatePostion() {
     if (position != purin.purinPositionVect2) {
+      priority = purin.purinPriority;
       position = purin.purinPositionVect2;
       reloadLoadAnimation();
     }
@@ -148,8 +151,8 @@ class PurinEntity extends PositionComponent
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(
       absolutePosition,
-      Vector2(100, -100),
-      1.0,
+      Vector2(70, -100),
+      1.5,
     );
     game.overlays.add("purinMainMenu");
   }

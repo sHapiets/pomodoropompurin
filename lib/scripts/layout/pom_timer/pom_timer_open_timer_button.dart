@@ -1,7 +1,11 @@
-import 'dart:async';
+import 'dart:async' as async_lib;
 import 'dart:math';
+import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 
 class PomTimerOpenButton extends StatefulWidget {
   const PomTimerOpenButton({super.key});
@@ -13,11 +17,13 @@ class PomTimerOpenButton extends StatefulWidget {
 class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
     with TickerProviderStateMixin {
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
+  final purin = Purin.singleton;
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
   double openIndicator = 0.0;
-  Timer? openTimer;
+  async_lib.Timer? openTimer;
 
   late String encourageText;
-  late Timer encourageTextChanger;
+  late async_lib.Timer encourageTextChanger;
   final randomForEncourageTexts = Random();
   late int randomEncourageTextIndex = 0;
   List<String> encourageTexts = [
@@ -39,7 +45,9 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
     encourageText = encourageTexts[0];
 
     /// Timed ET changer
-    encourageTextChanger = Timer.periodic(Duration(seconds: 10), (timer) {
+    encourageTextChanger = async_lib.Timer.periodic(Duration(seconds: 10), (
+      timer,
+    ) {
       randomEncourageTextIndex = randomForEncourageTexts.nextInt(
         encourageTexts.length,
       );
@@ -50,12 +58,22 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
 
   void buttonHold() {
     openTimer?.cancel();
-    openTimer = Timer.periodic(Duration(milliseconds: 16), (openTimer) {
+    openTimer = async_lib.Timer.periodic(Duration(milliseconds: 16), (
+      openTimer,
+    ) {
       setState(() {
         openIndicator = (openIndicator + 0.05).clamp(0.0, 1.0);
         if (openIndicator == 1.0) {
           pomTimerDisplayStateManager.openPomTimer();
           pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.idle;
+
+          purin.changePosition(PurinPosition.study);
+          purinAreaStateManager.jumpToPosition(
+            purin.purinPositionVect2,
+            Vector2(0, 50),
+            2.0,
+          );
+
           openTimer.cancel();
         }
       });
@@ -64,7 +82,9 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
 
   void buttonCancel() {
     openTimer?.cancel();
-    openTimer = Timer.periodic(Duration(milliseconds: 16), (openTimer) {
+    openTimer = async_lib.Timer.periodic(Duration(milliseconds: 16), (
+      openTimer,
+    ) {
       setState(() {
         openIndicator = (openIndicator - 0.05).clamp(0.0, 1.0);
       });

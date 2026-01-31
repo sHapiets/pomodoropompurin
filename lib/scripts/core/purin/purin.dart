@@ -85,6 +85,24 @@ class Purin extends ChangeNotifier {
             .futon
             .value
             .purinPositionVectors[PurinPosition.futon]!;
+      case PurinPosition.study:
+        return purinAreaEquipManager
+            .studyTable
+            .value
+            .purinPositionVectors[PurinPosition.study]!;
+    }
+  }
+
+  int get purinPriority {
+    switch (stateManager.position) {
+      case PurinPosition.kotatsuLeft:
+        return 40;
+      case PurinPosition.kotatsuRight:
+        return 40;
+      case PurinPosition.futon:
+        return 40;
+      case PurinPosition.study:
+        return 90;
     }
   }
 

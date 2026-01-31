@@ -9,7 +9,7 @@ class StudyTable extends PurinAreaSelectable {
   StudyTable()
     : super(
         //TODO change hitbox and position
-        position: Vector2(180, 220),
+        position: Vector2(-215, 455),
         hitbox: PolygonHitbox(
           [
             Vector2(0, 75),
@@ -22,7 +22,7 @@ class StudyTable extends PurinAreaSelectable {
           anchor: Anchor.center,
           position: Vector2(0, -10),
         ),
-        priority: 50,
+        priority: 100,
       );
 
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;

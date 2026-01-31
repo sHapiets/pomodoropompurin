@@ -17,4 +17,4 @@ class PurinStateManager {
 
 enum PurinAction { idle, pet, feed }
 
-enum PurinPosition { kotatsuLeft, kotatsuRight, futon }
+enum PurinPosition { kotatsuLeft, kotatsuRight, futon, study }

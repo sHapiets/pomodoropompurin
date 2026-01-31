@@ -101,7 +101,7 @@ class Acquirables {
 
       purinPositionVectors: {
         PurinPosition.kotatsuLeft: Vector2(120, 170),
-        PurinPosition.kotatsuRight: Vector2(120, 170),
+        PurinPosition.kotatsuRight: Vector2(240, 170),
       },
       spriteFlamePath: "kotatsu_sprites/aqua.png",
     ),
@@ -184,7 +184,7 @@ class Acquirables {
       displayName: "Wooden",
       cost: 0,
       iconAssetPath: "",
-      purinPositionVectors: {},
+      purinPositionVectors: {PurinPosition.study: Vector2(-170, 410)},
       spriteFlamePath: "study_table_sprites/wooden.png",
     ),
   };

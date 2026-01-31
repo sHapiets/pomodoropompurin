@@ -11,6 +11,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/floor.dar
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/futon.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/interior_wall.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/study_table.dart';
 
 class PurinAreaHome extends PositionComponent with TapCallbacks {
   PurinAreaHome({required Vector2 position}) {
@@ -24,6 +25,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   late Feedable feedableEntity;
   late Blanket blanketEntity;
   late Futon futonEntity;
+  late StudyTable studyTableEntity;
 
   late PurinEntity purinEntity;
 
@@ -43,6 +45,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     feedableEntity = Feedable();
     blanketEntity = Blanket();
     futonEntity = Futon();
+    studyTableEntity = StudyTable();
 
     purinEntity = PurinEntity();
 
@@ -54,6 +57,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     await add(kotatsuEntity);
     await add(futonEntity);
     await add(blanketEntity);
+    await add(studyTableEntity);
     await add(purinEntity);
     await add(interiorWallEntity);
     await add(exteriorEntity);

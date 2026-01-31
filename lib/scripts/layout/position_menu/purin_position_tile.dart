@@ -167,8 +167,8 @@ class _PurinPositionTileState extends State<PurinPositionTile>
                             purin.changePosition(widget.purinPosition);
                             purinAreaStateManager.jumpToPosition(
                               purin.purinPositionVect2,
-                              Vector2(100, -100),
-                              1.0,
+                              Vector2(70, -100),
+                              1.5,
                             );
                           },
                         ),

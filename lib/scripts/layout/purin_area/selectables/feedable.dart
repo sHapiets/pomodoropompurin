@@ -14,18 +14,16 @@ class Feedable extends PurinAreaSelectable {
   Feedable()
     : super(
         //TODO change hitbox and position
-        position: Vector2(180, 220),
+        position: Vector2(180, 190),
         hitbox: PolygonHitbox(
           [
-            Vector2(0, 75),
-            Vector2(90, 30),
-            Vector2(70, 10),
-            Vector2(0, -30),
-            Vector2(-70, 10),
-            Vector2(-90, 30),
+            Vector2(-20, 20),
+            Vector2(20, 20),
+            Vector2(20, -20),
+            Vector2(-20, -20),
           ],
           anchor: Anchor.center,
-          position: Vector2(0, -10),
+          position: Vector2.zero(),
         ),
         priority: 60,
       );
@@ -49,6 +47,7 @@ class Feedable extends PurinAreaSelectable {
       size: Vector2.all(40),
       anchor: anchor,
     );
+    hitbox.renderShape = true;
 
     purin.addListener(bite);
 
