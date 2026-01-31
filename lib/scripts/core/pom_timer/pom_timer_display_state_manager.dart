@@ -12,7 +12,7 @@ class PomTimerDisplayStateManager {
 
   /// State Notifier for all PomTimerWidgets (Active, Idle/Input, Pause)
   ValueNotifier<PomTimerStates> pomTimerState = ValueNotifier(
-    PomTimerStates.idle,
+    PomTimerStates.exit,
   );
 
   /// Functions set in PomTimerDisplay
@@ -21,4 +21,4 @@ class PomTimerDisplayStateManager {
   void Function() closePomTimer = () {};
 }
 
-enum PomTimerStates { idle, play, pause, onBreak }
+enum PomTimerStates { exit, idle, play, pause, onBreak }

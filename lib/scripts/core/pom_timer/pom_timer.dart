@@ -1,5 +1,9 @@
 import 'dart:async';
+import 'package:flame/extensions.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/layout/custom_dialogs.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
@@ -19,6 +23,8 @@ class PomTimer {
   PomTimer._(); // singleton-ing
   static final PomTimer singleton = PomTimer._();
 
+  final purin = Purin.singleton;
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
   final _progSystem = ProgSystem.singleton;
   final _customDialogs = CustomDialogs.singleton;
   final _databaseManager = DatabaseManager.singleton;
@@ -40,16 +46,18 @@ class PomTimer {
   bool isPlaying = false;
   bool onBreak = false;
 
-  // Callbacks functions for display/layout widgets
-  void Function(bool) disablePurinArea = (b) {};
-
   void playTimer() {
     if (isPlaying) {
       // already playing...
     } else {
       isPlaying = true;
       pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.play;
-      disablePurinArea(true);
+      purin.changePosition(PurinPosition.study);
+      purinAreaStateManager.jumpToPosition(
+        purin.purinPositionVect2,
+        Vector2(0, 50),
+        2.0,
+      );
 
       if (restart) {
         // Not a 'resume', set INITIAL INPUT times
@@ -140,7 +148,6 @@ class PomTimer {
       isPlaying = false;
       timer.cancel();
       pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.pause;
-      disablePurinArea(false);
     }
   }
 
@@ -163,7 +170,7 @@ class PomTimer {
     timeLeftSeconds = 0;
     timeTotalSeconds = 0;
     pomTimerDisplayStateManager.closePomTimer();
-    disablePurinArea(false);
+    pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.exit;
 
     /// Tell Koupen that the timer was stopped before connection is severed;
     /// and rewards was already awarded...

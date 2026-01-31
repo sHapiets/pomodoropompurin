@@ -87,6 +87,7 @@ class AssetManager {
       "exterior_sprites/plain.png",
       "blanket_sprites/cyan.png",
       "futon_sprites/cyan.png",
+      "refrigerator_sprites/default.png",
       "study_table_sprites/wooden.png",
       "study_chair_sprites/default.png",
     ];

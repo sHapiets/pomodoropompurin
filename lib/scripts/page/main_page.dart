@@ -29,12 +29,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    /* 
-    pomTimer.disablePurinArea = (bool enableModalBarrier) {
-      setState(() {
-        _enableModalBarrier = enableModalBarrier;
-      });
-    }; */
   }
 
   @override

@@ -481,6 +481,11 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                     iconSize: 45,
                     onPressed: () {
                       PomTimerDisplayStateManager.singleton.closePomTimer();
+                      PomTimerDisplayStateManager
+                              .singleton
+                              .pomTimerState
+                              .value =
+                          PomTimerStates.exit;
                     },
                     icon: Icon(
                       Icons.arrow_drop_down_circle_rounded,

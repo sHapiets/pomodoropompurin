@@ -23,6 +23,7 @@ class PurinArea extends FlameGame
   late Vector2 newScale;
 
   /// Assets paths (from assets/images/->...)
+  ///
   @override
   Color backgroundColor() => const Color.fromARGB(255, 190, 179, 149);
   /* const Color.fromARGB(255, 163, 210, 200) */
@@ -42,14 +43,6 @@ class PurinArea extends FlameGame
 
     newPosition = camera.viewfinder.position.clone();
     newScale = Vector2.all(1);
-    // Add Background (change Component type?)
-    /*     add(
-      SpriteComponent(
-        sprite: Sprite(Flame.images.fromCache(backgroundAsset)),
-        size: Vector2(size.x, size.y),
-      ),
-    ); */
-    // Add HomeArea
     await world.add(purinAreaHome);
   }
 
