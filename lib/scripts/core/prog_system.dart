@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
+import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// A core singleton that contains all userData
@@ -46,6 +47,10 @@ class ProgSystem {
     KotatsuDesigns.aqua,
   };
   Map<Consumable, int> consumableInventory = {Consumable.pudding: 0};
+  Map<Ingridient, int> ingridientInventory = {
+    Ingridient.milk: 0,
+    Ingridient.eggs: 0,
+  };
 
   // Functions to be used by PomTimer, RewardEvents etc...
   void addPomPoints(int points) {

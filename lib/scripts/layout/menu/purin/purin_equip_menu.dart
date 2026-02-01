@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
-import 'package:pomodoropompurin/scripts/layout/equip_menu/purin/purin_equip_tile.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_tile.dart';
 
 class PurinEquipMenu extends StatefulWidget {
   const PurinEquipMenu({super.key});

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
-import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_tile.dart';
-import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_tile.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_equip_tile.dart';
 
-class PurinPositionMenu extends StatefulWidget {
-  const PurinPositionMenu({super.key});
+class KitchenMenu extends StatefulWidget {
+  const KitchenMenu({super.key});
 
   @override
-  State<PurinPositionMenu> createState() => _PurinPositionMenuState();
+  State<KitchenMenu> createState() => _KitchenMenuState();
 }
 
-class _PurinPositionMenuState extends State<PurinPositionMenu> {
+class _KitchenMenuState extends State<KitchenMenu> {
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final progSystem = ProgSystem.singleton;
+  final acquirables = Acquirables.singleton;
+
   final double menuWidth = 200;
   final double menuHeight = 250;
 
@@ -41,11 +44,13 @@ class _PurinPositionMenuState extends State<PurinPositionMenu> {
                     childAspectRatio: 1.0,
                   ),
                   itemBuilder: (context, index) {
-                    return PurinPositionTile(
-                      purinPosition: PurinPosition.values[index],
+                    return KotatsuEquipTile(
+                      item:
+                          acquirables.kotatsus[progSystem.acquiredKotatsus
+                              .toList()[index]]!,
                     );
                   },
-                  itemCount: PurinPosition.values.length,
+                  itemCount: progSystem.acquiredKotatsus.length,
                 ),
               ),
             ],

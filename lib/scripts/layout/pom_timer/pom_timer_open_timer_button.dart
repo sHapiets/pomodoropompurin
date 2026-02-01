@@ -137,7 +137,7 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
                   color: const Color.fromARGB(154, 254, 221, 113),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color.fromARGB(100, 209, 92, 29),
+                      color: const Color.fromARGB(223, 206, 121, 30),
                       offset: Offset(3, 3),
                     ),
                   ],
@@ -166,7 +166,10 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
                   fontSize: 15,
                   color: Colors.white,
                   shadows: [
-                    Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                    Shadow(
+                      color: const Color.fromARGB(162, 0, 0, 0),
+                      offset: Offset(1.5, 1.5),
+                    ),
                   ],
                 ),
               ),

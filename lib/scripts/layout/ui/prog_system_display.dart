@@ -39,9 +39,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
           duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           top: 30,
-          left: (false /* ['Feed'].any((state) => state == value) */ )
-              ? -140
-              : 0,
+          left: (false) ? -140 : 0,
           child: child!,
         );
       },
@@ -56,11 +54,11 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
               width: expGaugeWidth,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color.fromARGB(121, 250, 226, 69),
+                color: const Color.fromARGB(167, 211, 250, 69),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromARGB(31, 154, 44, 17),
-                    offset: Offset(7, 7),
+                    color: const Color.fromARGB(167, 44, 157, 114),
+                    offset: Offset(6, 6),
                     blurStyle: BlurStyle.inner,
                     spreadRadius: -2,
                   ),
@@ -152,8 +150,8 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                             color: Colors.white,
                             shadows: [
                               Shadow(
-                                color: Colors.black12,
-                                offset: Offset(2, 2),
+                                color: const Color.fromARGB(135, 0, 0, 0),
+                                offset: Offset(1, 1),
                               ),
                             ],
                           ),
@@ -177,8 +175,8 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                                 color: const Color.fromARGB(255, 255, 255, 255),
                                 shadows: [
                                   Shadow(
-                                    color: Colors.black12,
-                                    offset: Offset(2, 2),
+                                    color: const Color.fromARGB(151, 0, 0, 0),
+                                    offset: Offset(1.5, 1.5),
                                   ),
                                 ],
                               ),

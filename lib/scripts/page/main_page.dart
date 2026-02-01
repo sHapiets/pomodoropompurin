@@ -1,12 +1,13 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
-import 'package:pomodoropompurin/scripts/layout/equip_menu/purin/purin_equip_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_main_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
-import 'package:pomodoropompurin/scripts/layout/equip_menu/kotatsu/kotatsu_equip_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
@@ -44,9 +45,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             key: purinAreaKey,
             game: PurinArea.gameSingleton,
             overlayBuilderMap: {
-              "kotatsuMenu": (BuildContext context, PurinArea game) {
-                return KotatsuEquipMenu();
-              },
               "purinEquipMenu": (BuildContext context, PurinArea game) {
                 return PurinEquipMenu();
               },
@@ -55,6 +53,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
               "purinMainMenu": (BuildContext context, PurinArea game) {
                 return PurinMainMenu();
+              },
+
+              "kotatsuMenu": (BuildContext context, PurinArea game) {
+                return KotatsuEquipMenu();
+              },
+              "kitchenMenu": (BuildContext context, PurinArea game) {
+                return KitchenMenu();
               },
             },
           ),

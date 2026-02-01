@@ -74,10 +74,13 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
               padding: EdgeInsets.fromLTRB(9, 3, 5, 0),
               margin: EdgeInsetsGeometry.only(top: 2),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(110, 240, 240, 240),
+                color: const Color.fromARGB(108, 152, 190, 189),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
-                  BoxShadow(offset: Offset(3, 3), color: Colors.black12),
+                  BoxShadow(
+                    offset: Offset(3, 3),
+                    color: const Color.fromARGB(184, 110, 131, 155),
+                  ),
                 ],
               ),
               child: Row(
@@ -93,7 +96,10 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                       fontSize: 20,
                       color: Colors.white,
                       shadows: [
-                        Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                        Shadow(
+                          color: const Color.fromARGB(136, 0, 0, 0),
+                          offset: Offset(1.5, 1.5),
+                        ),
                       ],
                     ),
                   ),
@@ -120,8 +126,8 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                 color: Colors.white,
                 shadows: [
                   Shadow(
-                    color: Colors.black12,
-                    offset: Offset(2, 2),
+                    color: const Color.fromARGB(181, 0, 0, 0),
+                    offset: Offset(1.5, 1.5),
                     blurRadius: 1,
                   ),
                 ],

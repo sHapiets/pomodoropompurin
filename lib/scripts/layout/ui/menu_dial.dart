@@ -54,7 +54,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
           duration: Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           top: 40,
-          right: (false /* // hiding condition// */ ) ? -100 : 40,
+          right: (false) ? -100 : 40,
           child: child!,
         );
       },

@@ -22,12 +22,12 @@ class Kotatsu extends PurinAreaSelectable {
         position: Vector2(180, 220),
         hitbox: PolygonHitbox(
           [
-            Vector2(0, 75),
-            Vector2(90, 30),
-            Vector2(70, 10),
-            Vector2(0, -30),
-            Vector2(-70, 10),
-            Vector2(-90, 30),
+            Vector2(0, 90),
+            Vector2(105, 25),
+            Vector2(90, 0),
+            Vector2(0, -50),
+            Vector2(-90, 0),
+            Vector2(-105, 25),
           ],
           anchor: Anchor.center,
           position: Vector2(0, -10),
@@ -46,7 +46,7 @@ class Kotatsu extends PurinAreaSelectable {
           purinAreaEquipManager.kotatsu.value.spriteFlamePath,
         ),
       ),
-      size: Vector2.all(250),
+      size: Vector2.all(320),
       anchor: anchor,
     );
 

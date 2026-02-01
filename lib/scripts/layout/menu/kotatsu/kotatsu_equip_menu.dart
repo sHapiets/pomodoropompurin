@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
-import 'package:pomodoropompurin/scripts/layout/equip_menu/kotatsu/kotatsu_equip_tile.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_equip_tile.dart';
 
 class KotatsuEquipMenu extends StatefulWidget {
   const KotatsuEquipMenu({super.key});
@@ -11,6 +12,7 @@ class KotatsuEquipMenu extends StatefulWidget {
 }
 
 class _KotatsuEquipMenuState extends State<KotatsuEquipMenu> {
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
   final progSystem = ProgSystem.singleton;
   final acquirables = Acquirables.singleton;
 
