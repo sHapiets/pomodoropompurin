@@ -90,6 +90,7 @@ class AssetManager {
       "refrigerator_sprites/default.png",
       "study_table_sprites/wooden.png",
       "study_chair_sprites/default.png",
+      "kitchen_sprites/default.png",
     ];
 
     for (String imagePath in allFlameImages) {

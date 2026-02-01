@@ -70,8 +70,8 @@ class _PomTimerOpenButtonState extends State<PomTimerOpenButton>
           purin.changePosition(PurinPosition.study);
           purinAreaStateManager.jumpToPosition(
             purin.purinPositionVect2,
-            Vector2(0, 50),
-            2.0,
+            Vector2(0, 100),
+            1.5,
           );
 
           openTimer.cancel();
