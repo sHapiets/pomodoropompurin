@@ -132,6 +132,8 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
                         height: panelHeight.toDouble(),
                         child: Image.asset(
                           assetManager.flutterAssetPaths['pT_BG']!,
+                          cacheHeight: 538,
+                          cacheWidth: 500,
                         ),
                       ),
                     ),
@@ -146,6 +148,8 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
                         height: panelHeight.toDouble(),
                         child: Image.asset(
                           assetManager.flutterAssetPaths['pT_FG']!,
+                          cacheHeight: 538,
+                          cacheWidth: 500,
                         ),
                       ),
                     ),

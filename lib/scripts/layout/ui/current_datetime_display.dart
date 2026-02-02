@@ -74,12 +74,12 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
               padding: EdgeInsets.fromLTRB(9, 3, 5, 0),
               margin: EdgeInsetsGeometry.only(top: 2),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(108, 152, 190, 189),
+                color: const Color.fromARGB(108, 198, 220, 220),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
                     offset: Offset(3, 3),
-                    color: const Color.fromARGB(184, 110, 131, 155),
+                    color: const Color.fromARGB(184, 146, 161, 178),
                   ),
                 ],
               ),

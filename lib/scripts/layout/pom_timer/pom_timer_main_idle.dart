@@ -355,6 +355,8 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                     },
                     child: Image.asset(
                       assetManager.flutterAssetPaths['pT_SB']!,
+                      cacheHeight: 93,
+                      cacheWidth: 93,
                     ),
                   ),
                 ),
