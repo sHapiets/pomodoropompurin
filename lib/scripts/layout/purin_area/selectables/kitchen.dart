@@ -1,6 +1,8 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/src/events/messages/tap_down_event.dart';
+import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
@@ -36,5 +38,12 @@ class Kitchen extends PurinAreaSelectable {
     );
 
     super.onMount();
+  }
+
+  @override
+  void onLongTapDown(TapDownEvent event) {
+    game.overlays.removeAll(game.overlays.activeOverlays);
+    purinAreaStateManager.jumpToPosition(absolutePosition, Vector2(0, 0), 2.0);
+    game.overlays.add('kitchenMenu');
   }
 }
