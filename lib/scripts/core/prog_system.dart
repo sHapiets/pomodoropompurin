@@ -46,13 +46,28 @@ class ProgSystem {
     KotatsuDesigns.pudding,
     KotatsuDesigns.aqua,
   };
-  Map<Consumable, int> consumableInventory = {Consumable.pudding: 0};
+  Map<Consumable, int> consumableInventory = {
+    Consumable.pudding: 0,
+    Consumable.pizza: 0,
+    Consumable.pancake: 0,
+    Consumable.hamburgSteak: 0,
+  };
   Map<Ingridient, int> ingridientInventory = {
     Ingridient.milk: 0,
     Ingridient.eggs: 0,
+    Ingridient.butter: 0,
+    Ingridient.flour: 0,
+    Ingridient.onion: 0,
+    Ingridient.olives: 0,
+    Ingridient.tomato: 0,
+    Ingridient.groundPork: 0,
+    Ingridient.yeast: 0,
+
+    Ingridient.puddingCream: 0,
+    Ingridient.washedRice: 0,
   };
 
-  // Functions to be used by PomTimer, RewardEvents etc...
+  /// Point Systems
   void addPomPoints(int points) {
     pomPoints.value += points;
     _databaseManager.userDataSave('pomPoints', pomPoints.value);
@@ -68,9 +83,21 @@ class ProgSystem {
     _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
   }
 
-  /// Consumable Inventory (Public) Functions
-  void addConsumable(Consumable consumable, int count) {
+  /// Inventory
+  void addConsumable(Consumable consumable, int amount) {
     consumableInventory[consumable] = consumableInventory[consumable]! + 1;
+  }
+
+  void addIngridient(Ingridient ingridient, int amount) {
+    ingridientInventory[ingridient] = ingridientInventory[ingridient]! + amount;
+  }
+
+  void useConsumable(Consumable consumable, int amount) {
+    consumableInventory[consumable] = consumableInventory[consumable]! - amount;
+  }
+
+  void useIngridient(Ingridient ingridient, int amount) {
+    ingridientInventory[ingridient] = ingridientInventory[ingridient]! - amount;
   }
 
   // Reload Data (used for Koupen, mostly in SplashPage...)

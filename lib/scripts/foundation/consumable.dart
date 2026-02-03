@@ -1,5 +1,3 @@
-import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
-
 enum Consumable {
   pudding(
     displayName: "Mama's Pudding",
@@ -11,7 +9,45 @@ enum Consumable {
       'consumable_sprites/pudding/1.png',
       'consumable_sprites/pudding/2.png',
     ],
-    ingridients: {Ingridient.milk: 1, Ingridient.eggs: 1},
+  ),
+  pizza(
+    displayName: "Pizza",
+    price: 100,
+    totalBites: 4,
+    oshiriPointsPerBite: 10,
+    spriteFlutterKey: 'pP_icon',
+    biteSpritesFlamePath: [
+      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/pudding/2.png',
+      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/pudding/2.png',
+    ],
+  ),
+  pancake(
+    displayName: "Pancakes",
+    price: 0,
+    totalBites: 3,
+    oshiriPointsPerBite: 10,
+    spriteFlutterKey: 'pP_icon',
+    biteSpritesFlamePath: [
+      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/pudding/2.png',
+      'consumable_sprites/pudding/1.png',
+    ],
+  ),
+  hamburgSteak(
+    displayName: "Hamburg Steak",
+    price: 0,
+    totalBites: 5,
+    oshiriPointsPerBite: 10,
+    spriteFlutterKey: 'pP_icon',
+    biteSpritesFlamePath: [
+      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/pudding/2.png',
+      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/pudding/2.png',
+      'consumable_sprites/pudding/1.png',
+    ],
   );
 
   const Consumable({
@@ -21,7 +57,6 @@ enum Consumable {
     required this.oshiriPointsPerBite,
     required this.spriteFlutterKey,
     required this.biteSpritesFlamePath,
-    required this.ingridients,
   });
   final String displayName;
   final int price;
@@ -30,6 +65,4 @@ enum Consumable {
 
   final String spriteFlutterKey;
   final List<String> biteSpritesFlamePath;
-
-  final Map<Ingridient, int> ingridients;
 }

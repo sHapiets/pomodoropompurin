@@ -11,8 +11,9 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/floor.dar
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/futon.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/interior_wall.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/stove_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
-import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/refrigerator.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/refrigerator_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/study_chair.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/study_table.dart';
 
@@ -28,10 +29,12 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   late Feedable feedableEntity;
   late Blanket blanketEntity;
   late Futon futonEntity;
-  late Refrigerator refrigeratorEntity;
   late StudyTable studyTableEntity;
   late StudyChair studyChairEntity;
+
   late Kitchen kitchenEntity;
+  late RefrigeratorEntity refrigeratorEntity;
+  late StoveEntity stoveEntity;
 
   late PurinEntity purinEntity;
 
@@ -51,10 +54,12 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     feedableEntity = Feedable();
     blanketEntity = Blanket();
     futonEntity = Futon();
-    refrigeratorEntity = Refrigerator();
     studyTableEntity = StudyTable();
     studyChairEntity = StudyChair();
+
     kitchenEntity = Kitchen();
+    refrigeratorEntity = RefrigeratorEntity();
+    stoveEntity = StoveEntity();
 
     purinEntity = PurinEntity();
 
@@ -70,6 +75,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     await add(studyTableEntity);
     await add(studyChairEntity);
     await add(kitchenEntity);
+    await add(stoveEntity);
     await add(purinEntity);
     await add(interiorWallEntity);
     await add(exteriorEntity);

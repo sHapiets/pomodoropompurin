@@ -5,8 +5,8 @@ import 'package:flame/flame.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
-class Refrigerator extends PurinAreaSelectable {
-  Refrigerator()
+class RefrigeratorEntity extends PurinAreaSelectable {
+  RefrigeratorEntity()
     : super(
         //TODO change hitbox and position
         position: Vector2(-30, 65),

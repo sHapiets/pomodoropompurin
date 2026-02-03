@@ -24,7 +24,7 @@ class PurinAreaEquipManager {
   ValueNotifier<RoomDesign> kotatsu = ValueNotifier(
     Acquirables.singleton.kotatsus[KotatsuDesigns.pudding]!,
   );
-  ValueNotifier<Consumable?> feedable = ValueNotifier(Consumable.pudding);
+  ValueNotifier<Consumable?> feedable = ValueNotifier(Consumable.pizza);
   ValueNotifier<RoomDesign> blanket = ValueNotifier(
     Acquirables.singleton.blankets[BlanketDesigns.cyan]!,
   );

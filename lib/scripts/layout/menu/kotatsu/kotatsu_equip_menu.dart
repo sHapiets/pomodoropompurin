@@ -12,7 +12,6 @@ class KotatsuEquipMenu extends StatefulWidget {
 }
 
 class _KotatsuEquipMenuState extends State<KotatsuEquipMenu> {
-  final purinAreaStateManager = PurinAreaStateManager.singleton;
   final progSystem = ProgSystem.singleton;
   final acquirables = Acquirables.singleton;
 

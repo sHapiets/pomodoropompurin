@@ -57,10 +57,10 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                 color: const Color.fromARGB(167, 211, 250, 69),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromARGB(167, 44, 157, 114),
-                    offset: Offset(6, 6),
+                    color: const Color.fromARGB(167, 33, 161, 112),
+                    offset: Offset(5, 5),
                     blurStyle: BlurStyle.inner,
-                    spreadRadius: -2,
+                    spreadRadius: -4,
                   ),
                 ],
               ),
