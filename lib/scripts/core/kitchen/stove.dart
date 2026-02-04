@@ -5,12 +5,14 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 class Stove extends KitchenProcessor {
   Stove._()
     : super(
+        displayName: "stove",
         ingridientIngridients: {
           Ingridient.puddingBatter: {
             Ingridient.puddingCream: 1,
             Ingridient.butter: 1,
           },
           Ingridient.cookedRice: {Ingridient.washedRice: 1},
+          Ingridient.choppedOnions: {Ingridient.onion: 1},
         },
         consumableIngridients: {
           Consumable.pancake: {Ingridient.pancakeBatter: 1},

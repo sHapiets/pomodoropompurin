@@ -4,10 +4,12 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 
 abstract class KitchenProcessor {
   KitchenProcessor({
+    required this.displayName,
     required this.ingridientIngridients,
     required this.consumableIngridients,
   });
 
+  final String displayName;
   final Map<Ingridient, Map<Ingridient, int>> ingridientIngridients;
   final Map<Consumable, Map<Ingridient, int>> consumableIngridients;
 

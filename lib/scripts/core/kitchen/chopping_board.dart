@@ -4,6 +4,7 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 class ChoppingBoard extends KitchenProcessor {
   ChoppingBoard._()
     : super(
+        displayName: "chopping",
         ingridientIngridients: {
           Ingridient.pizzaToppings: {
             Ingridient.tomato: 2,

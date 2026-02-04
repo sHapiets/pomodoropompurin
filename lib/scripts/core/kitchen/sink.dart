@@ -4,6 +4,7 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 class Sink extends KitchenProcessor {
   Sink._()
     : super(
+        displayName: "sink",
         ingridientIngridients: {
           Ingridient.washedRice: {Ingridient.riceGrains: 1},
         },

@@ -39,7 +39,12 @@ class StoveEntity extends PurinAreaSelectable {
 
   @override
   void onLongTapDown(TapDownEvent event) {
-    super.onLongTapDown(event);
+    game.overlays.removeAll(game.overlays.activeOverlays);
+    purinAreaStateManager.jumpToPosition(
+      absolutePosition,
+      Vector2(0, -100),
+      2.0,
+    );
     game.overlays.add("stoveMenu");
   }
 }

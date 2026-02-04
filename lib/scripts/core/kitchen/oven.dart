@@ -5,6 +5,7 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 class Oven extends KitchenProcessor {
   Oven._()
     : super(
+        displayName: "oven",
         ingridientIngridients: {},
         consumableIngridients: {
           Consumable.pizza: {Ingridient.dough: 3, Ingridient.pizzaToppings: 1},

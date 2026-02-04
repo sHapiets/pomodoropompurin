@@ -4,6 +4,7 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 class Mixer extends KitchenProcessor {
   Mixer._()
     : super(
+        displayName: "mixer",
         ingridientIngridients: {
           Ingridient.puddingCream: {Ingridient.eggs: 1, Ingridient.milk: 1},
           Ingridient.dough: {Ingridient.flour: 1, Ingridient.yeast: 1},
