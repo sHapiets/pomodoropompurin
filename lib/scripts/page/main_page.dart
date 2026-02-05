@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/refrigerator.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/stove.dart';
+import 'package:pomodoropompurin/scripts/core/kitchen/sink.dart' as sink;
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
@@ -66,6 +67,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
               "refrigeratorMenu": (BuildContext context, PurinArea game) {
                 return KitchenMenu(kitchenProcessor: Refrigerator.singleton);
+              },
+              "sinkMenu": (BuildContext context, PurinArea game) {
+                return KitchenMenu(kitchenProcessor: sink.Sink.singleton);
               },
             },
           ),

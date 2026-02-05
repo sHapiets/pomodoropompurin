@@ -8,6 +8,7 @@ class Stove extends KitchenProcessor {
     : super(
         displayName: "stove",
         processIcon: Icons.fireplace_rounded,
+        processColor: Colors.amber,
         ingridientIngridients: {
           Ingridient.puddingBatter: {
             Ingridient.puddingCream: 1,

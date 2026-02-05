@@ -11,6 +11,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/floor.dar
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/futon.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/interior_wall.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/sink_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/stove_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/refrigerator_entity.dart';
@@ -35,6 +36,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   late Kitchen kitchenEntity;
   late RefrigeratorEntity refrigeratorEntity;
   late StoveEntity stoveEntity;
+  late SinkEntity sinkEntity;
 
   late PurinEntity purinEntity;
 
@@ -60,6 +62,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     kitchenEntity = Kitchen();
     refrigeratorEntity = RefrigeratorEntity();
     stoveEntity = StoveEntity();
+    sinkEntity = SinkEntity();
 
     purinEntity = PurinEntity();
 
@@ -76,6 +79,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     await add(studyChairEntity);
     await add(kitchenEntity);
     await add(stoveEntity);
+    await add(sinkEntity);
     await add(purinEntity);
     await add(interiorWallEntity);
     await add(exteriorEntity);

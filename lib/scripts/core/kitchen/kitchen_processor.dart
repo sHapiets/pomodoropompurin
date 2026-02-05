@@ -7,12 +7,14 @@ abstract class KitchenProcessor {
   KitchenProcessor({
     required this.displayName,
     required this.processIcon,
+    required this.processColor,
     required this.ingridientIngridients,
     required this.consumableIngridients,
   });
 
   final String displayName;
   final IconData processIcon;
+  final Color processColor;
   final Map<Ingridient, Map<Ingridient, int>> ingridientIngridients;
   final Map<Consumable, Map<Ingridient, int>> consumableIngridients;
 

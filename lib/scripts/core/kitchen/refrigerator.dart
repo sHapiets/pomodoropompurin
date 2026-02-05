@@ -8,6 +8,7 @@ class Refrigerator extends KitchenProcessor {
     : super(
         displayName: "refrigerator",
         processIcon: Icons.ac_unit,
+        processColor: const Color.fromARGB(255, 106, 185, 205),
         ingridientIngridients: {},
         consumableIngridients: {
           Consumable.pudding: {Ingridient.puddingBatter: 1},

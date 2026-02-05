@@ -62,6 +62,7 @@ class ProgSystem {
     Ingridient.tomato: 0,
     Ingridient.groundPork: 0,
     Ingridient.yeast: 0,
+    Ingridient.riceGrains: 0,
 
     Ingridient.puddingCream: 0,
     Ingridient.washedRice: 0,

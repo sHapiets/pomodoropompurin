@@ -26,8 +26,6 @@ class KitchenMenu extends StatelessWidget {
 
   final double showButtonSides = 30;
 
-  final ValueNotifier<String> showType = ValueNotifier("consumablesOnly");
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -39,132 +37,78 @@ class KitchenMenu extends StatelessWidget {
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: const Color.fromARGB(163, 255, 255, 255),
+            color: const Color.fromARGB(209, 255, 255, 255),
           ),
 
-          child: ValueListenableBuilder(
-            valueListenable: showType,
-            builder: (context, value, child) {
-              return Stack(
-                children: [
-                  Align(
-                    alignment: AlignmentGeometry.topCenter,
-                    child: Text(
-                      kitchenProcessor.displayName,
-                      style: TextStyle(
-                        fontFamily: 'Fredoka',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 25,
-                        color: const Color.fromARGB(235, 53, 53, 53),
-                        shadows: [
-                          Shadow(
-                            color: const Color.fromARGB(255, 94, 94, 94),
-                            offset: Offset(1.5, 1.5),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentGeometry.topLeft,
-                    child: AnimatedScale(
-                      scale: (value == "ingridientsOnly") ? 1 : 0.5,
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.easeInOutBack,
-                      child: GestureDetector(
-                        onTapDown: (details) {
-                          showType.value = "ingridientsOnly";
-                        },
-                        child: Container(
-                          height: showButtonSides,
-                          width: showButtonSides,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color.fromARGB(134, 108, 172, 255),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color.fromARGB(255, 58, 146, 255),
-                                offset: Offset(2, 2),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.receipt_long_rounded,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                          ),
+          child: Stack(
+            children: [
+              Align(
+                alignment: AlignmentGeometry.topLeft,
+                child: Transform.translate(
+                  offset: Offset(30, 0),
+                  child: Text(
+                    kitchenProcessor.displayName,
+                    style: TextStyle(
+                      fontFamily: 'Fredoka',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 25,
+                      color: const Color.fromARGB(255, 42, 42, 42),
+                      shadows: [
+                        Shadow(
+                          color: const Color.fromARGB(0, 0, 0, 0),
+                          offset: Offset(1.5, 1.5),
                         ),
-                      ),
+                      ],
                     ),
                   ),
+                ),
+              ),
+              Align(
+                alignment: AlignmentGeometry.topLeft,
+                child: Transform.translate(
+                  offset: Offset(0, 5),
+                  child: Icon(
+                    kitchenProcessor.processIcon,
+                    color: kitchenProcessor.processColor,
+                  ),
+                ),
+              ),
 
-                  Align(
-                    alignment: AlignmentGeometry.topRight,
-                    child: AnimatedScale(
-                      scale: (value == "consumablesOnly") ? 1 : 0.5,
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.easeInOutBack,
-                      child: GestureDetector(
-                        onTapDown: (details) {
-                          showType.value = "consumablesOnly";
-                        },
-                        child: Container(
-                          height: showButtonSides,
-                          width: showButtonSides,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color.fromARGB(159, 173, 213, 110),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color.fromARGB(255, 25, 197, 60),
-                                offset: Offset(2, 2),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.restaurant,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                          ),
+              Align(
+                alignment: AlignmentGeometry.bottomCenter,
+                child: Container(
+                  height: gridHeight,
+                  width: menuWidth,
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromARGB(135, 207, 207, 207),
+                  ),
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 0.6,
                         ),
-                      ),
-                    ),
+                    itemBuilder: (context, index) {
+                      return IngridientTile(
+                        ingridient: kitchenProcessor.ingridientIngridients.keys
+                            .toList()[index],
+                        ingridientIngridients: kitchenProcessor
+                            .ingridientIngridients
+                            .values
+                            .toList()[index],
+                        processorIcon: kitchenProcessor.processIcon,
+                        processorColor: kitchenProcessor.processColor,
+                      );
+                    },
+                    itemCount: kitchenProcessor.ingridientIngridients.length,
                   ),
-                  Align(
-                    alignment: AlignmentGeometry.bottomCenter,
-                    child: SizedBox(
-                      height: gridHeight,
-                      width: menuWidth,
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 8,
-                              mainAxisSpacing: 8,
-                              childAspectRatio: 0.6,
-                            ),
-                        itemBuilder: (context, index) {
-                          if (value == "ingridientsOnly") {
-                            return IngridientTile(
-                              ingridient: kitchenProcessor
-                                  .ingridientIngridients
-                                  .keys
-                                  .toList()[index],
-                              ingridientIngridients: kitchenProcessor
-                                  .ingridientIngridients
-                                  .values
-                                  .toList()[index],
-                              processorIcon: kitchenProcessor.processIcon,
-                            );
-                          } else {}
-                        },
-                        itemCount: (value == "ingridientsOnly")
-                            ? kitchenProcessor.ingridientIngridients.length
-                            : 0,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
+                ),
+              ),
+            ],
           ),
         ),
       ),

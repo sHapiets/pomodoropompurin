@@ -11,11 +11,13 @@ class IngridientTile extends StatefulWidget {
     required this.ingridient,
     required this.ingridientIngridients,
     required this.processorIcon,
+    required this.processorColor,
   });
 
   final Ingridient ingridient;
   final Map<Ingridient, int> ingridientIngridients;
   final IconData processorIcon;
+  final Color processorColor;
 
   @override
   State<IngridientTile> createState() => _IngridientTileState();
@@ -145,7 +147,7 @@ class _IngridientTileState extends State<IngridientTile>
             Align(
               alignment: AlignmentGeometry.topCenter,
               child: Transform.translate(
-                offset: Offset(0, 20),
+                offset: Offset(0, 10),
                 child: Container(
                   width: iconSides,
                   height: iconSides,
@@ -157,15 +159,18 @@ class _IngridientTileState extends State<IngridientTile>
             /// Ingridient Name
             Align(
               alignment: AlignmentGeometry.topCenter,
-              child: SizedBox(
-                child: Text(
-                  widget.ingridient.displayName,
-                  style: displayNameTextStyle,
+              child: Transform.translate(
+                offset: Offset(0, 70),
+                child: SizedBox(
+                  child: Text(
+                    widget.ingridient.displayName,
+                    style: displayNameTextStyle,
+                  ),
                 ),
               ),
             ),
 
-            /// Ingridient Name
+            /// ingridientIngridient Names
             Align(
               alignment: AlignmentGeometry.bottomCenter,
               child: Transform.translate(
@@ -173,6 +178,7 @@ class _IngridientTileState extends State<IngridientTile>
                 child: SizedBox(
                   height: 50,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: widget.ingridientIngridients.keys.map((
                       ingridient,
                     ) {
@@ -196,16 +202,6 @@ class _IngridientTileState extends State<IngridientTile>
               ),
             ),
 
-            Align(
-              alignment: AlignmentGeometry.topCenter,
-              child: SizedBox(
-                child: Text(
-                  widget.ingridient.displayName,
-                  style: displayNameTextStyle,
-                ),
-              ),
-            ),
-
             /// BUTTON BACKGROUND
             Align(
               alignment: AlignmentGeometry.bottomCenter,
@@ -216,7 +212,7 @@ class _IngridientTileState extends State<IngridientTile>
                   height: buttonHeight,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.amber,
+                    color: widget.processorColor,
                   ),
                 ),
               ),
@@ -266,10 +262,38 @@ class _IngridientTileState extends State<IngridientTile>
                 ),
               ),
             ),
+
+            Align(
+              alignment: AlignmentGeometry.topRight,
+              child: Transform.translate(
+                offset: Offset(-5, 5),
+                child: Container(
+                  height: 20,
+                  width: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color.fromARGB(134, 108, 172, 255),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(255, 58, 146, 255),
+                        offset: Offset(2, 2),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.receipt_long_rounded,
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    size: 20,
+                  ),
+                ),
+              ),
+            ),
+
+            // PROGRESS INDICATOR
             Align(
               alignment: AlignmentGeometry.topCenter,
               child: Transform.translate(
-                offset: Offset(0, 20),
+                offset: Offset(0, 10),
                 child: IgnorePointer(
                   child: SizedBox(
                     height: iconSides,
@@ -277,7 +301,7 @@ class _IngridientTileState extends State<IngridientTile>
                     child: CircularProgressIndicator(
                       backgroundColor: const Color.fromARGB(151, 221, 221, 221),
                       value: cookIndicator,
-                      color: const Color.fromARGB(255, 98, 175, 150),
+                      color: const Color.fromARGB(255, 98, 125, 175),
                     ),
                   ),
                 ),
