@@ -49,8 +49,12 @@ class RefrigeratorEntity extends PurinAreaSelectable {
 
   @override
   void onLongTapDown(TapDownEvent event) {
-    super.onLongTapDown(event);
-    // TODO add equip menu
+    game.overlays.removeAll(game.overlays.activeOverlays);
+    purinAreaStateManager.jumpToPosition(
+      absolutePosition,
+      Vector2(0, -100),
+      2.0,
+    );
     game.overlays.add("refrigeratorMenu");
   }
 }

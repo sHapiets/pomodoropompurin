@@ -3,27 +3,28 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 
-class IngridientTile extends StatefulWidget {
-  const IngridientTile({
+class ConsumableTile extends StatefulWidget {
+  const ConsumableTile({
     super.key,
-    required this.ingridient,
+    required this.consumable,
     required this.ingridientIngridients,
     required this.processorIcon,
     required this.processorColor,
   });
 
-  final Ingridient ingridient;
+  final Consumable consumable;
   final Map<Ingridient, int> ingridientIngridients;
   final IconData processorIcon;
   final Color processorColor;
 
   @override
-  State<IngridientTile> createState() => _IngridientTileState();
+  State<ConsumableTile> createState() => _ConsumableTileState();
 }
 
-class _IngridientTileState extends State<IngridientTile>
+class _ConsumableTileState extends State<ConsumableTile>
     with TickerProviderStateMixin {
   final progSystem = ProgSystem.singleton;
 
@@ -163,7 +164,7 @@ class _IngridientTileState extends State<IngridientTile>
                 offset: Offset(0, 70),
                 child: SizedBox(
                   child: Text(
-                    widget.ingridient.displayName,
+                    widget.consumable.displayName,
                     style: displayNameTextStyle,
                   ),
                 ),
@@ -272,10 +273,10 @@ class _IngridientTileState extends State<IngridientTile>
                   width: 20,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: const Color.fromARGB(255, 91, 147, 185),
+                    color: const Color.fromARGB(255, 176, 225, 53),
                   ),
                   child: Icon(
-                    Icons.receipt_long_rounded,
+                    Icons.restaurant,
                     color: const Color.fromARGB(255, 255, 255, 255),
                     size: 15,
                   ),
@@ -295,7 +296,7 @@ class _IngridientTileState extends State<IngridientTile>
                     child: CircularProgressIndicator(
                       backgroundColor: const Color.fromARGB(151, 221, 221, 221),
                       value: cookIndicator,
-                      color: const Color.fromARGB(255, 98, 125, 175),
+                      color: const Color.fromARGB(255, 132, 153, 58),
                     ),
                   ),
                 ),

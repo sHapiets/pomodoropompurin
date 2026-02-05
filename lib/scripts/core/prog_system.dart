@@ -65,7 +65,11 @@ class ProgSystem {
     Ingridient.riceGrains: 0,
 
     Ingridient.puddingCream: 0,
+    Ingridient.puddingBatter: 0,
+    Ingridient.pancakeBatter: 0,
     Ingridient.washedRice: 0,
+    Ingridient.cookedRice: 0,
+    Ingridient.patty: 0,
   };
 
   /// Point Systems

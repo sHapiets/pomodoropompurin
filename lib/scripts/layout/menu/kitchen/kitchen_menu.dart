@@ -3,6 +3,7 @@ import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/stove.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/kitchen/consumable_tile.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/ingridient_tile.dart';
 
 /// A menu for all KitchenProcessors for creating Ingridients or Consumables.
@@ -93,18 +94,42 @@ class KitchenMenu extends StatelessWidget {
                           childAspectRatio: 0.6,
                         ),
                     itemBuilder: (context, index) {
-                      return IngridientTile(
-                        ingridient: kitchenProcessor.ingridientIngridients.keys
-                            .toList()[index],
-                        ingridientIngridients: kitchenProcessor
-                            .ingridientIngridients
-                            .values
-                            .toList()[index],
-                        processorIcon: kitchenProcessor.processIcon,
-                        processorColor: kitchenProcessor.processColor,
-                      );
+                      if (index <
+                          kitchenProcessor.consumableIngridients.length) {
+                        return ConsumableTile(
+                          consumable: kitchenProcessor
+                              .consumableIngridients
+                              .keys
+                              .toList()[index],
+                          ingridientIngridients: kitchenProcessor
+                              .consumableIngridients
+                              .values
+                              .toList()[index],
+                          processorIcon: kitchenProcessor.processIcon,
+                          processorColor: kitchenProcessor.processColor,
+                        );
+                      } else {
+                        return IngridientTile(
+                          ingridient:
+                              kitchenProcessor.ingridientIngridients.keys
+                                  .toList()[index -
+                                  kitchenProcessor
+                                      .consumableIngridients
+                                      .length],
+                          ingridientIngridients:
+                              kitchenProcessor.ingridientIngridients.values
+                                  .toList()[index -
+                                  kitchenProcessor
+                                      .consumableIngridients
+                                      .length],
+                          processorIcon: kitchenProcessor.processIcon,
+                          processorColor: kitchenProcessor.processColor,
+                        );
+                      }
                     },
-                    itemCount: kitchenProcessor.ingridientIngridients.length,
+                    itemCount:
+                        kitchenProcessor.consumableIngridients.length +
+                        kitchenProcessor.ingridientIngridients.length,
                   ),
                 ),
               ),
