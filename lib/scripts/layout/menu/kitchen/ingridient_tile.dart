@@ -10,10 +10,12 @@ class IngridientTile extends StatefulWidget {
     super.key,
     required this.ingridient,
     required this.ingridientIngridients,
+    required this.processorIcon,
   });
 
   final Ingridient ingridient;
   final Map<Ingridient, int> ingridientIngridients;
+  final IconData processorIcon;
 
   @override
   State<IngridientTile> createState() => _IngridientTileState();
@@ -40,11 +42,11 @@ class _IngridientTileState extends State<IngridientTile>
     }
   }
 
-  final double iconSides = 70;
+  final double iconSides = 60;
   final double tileHeight = 180;
   final double tileWidth = 80;
-  final double buttonHeight = 20;
-  final double buttonWidth = 50;
+  final double buttonHeight = 40;
+  final double buttonWidth = 40;
 
   late final AnimationController tileOnLoadAnimationController;
   late final Animation<double> tileOnLoadTween;
@@ -139,14 +141,20 @@ class _IngridientTileState extends State<IngridientTile>
         ),
         child: Stack(
           children: [
+            /// Ingridient Image
             Align(
               alignment: AlignmentGeometry.topCenter,
-              child: Container(
-                width: iconSides,
-                height: iconSides,
-                color: Colors.white,
+              child: Transform.translate(
+                offset: Offset(0, 20),
+                child: Container(
+                  width: iconSides,
+                  height: iconSides,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
               ),
             ),
+
+            /// Ingridient Name
             Align(
               alignment: AlignmentGeometry.topCenter,
               child: SizedBox(
@@ -157,10 +165,68 @@ class _IngridientTileState extends State<IngridientTile>
               ),
             ),
 
+            /// Ingridient Name
             Align(
               alignment: AlignmentGeometry.bottomCenter,
               child: Transform.translate(
-                offset: Offset(0, -12),
+                offset: Offset(0, -50),
+                child: SizedBox(
+                  height: 50,
+                  child: Column(
+                    children: widget.ingridientIngridients.keys.map((
+                      ingridient,
+                    ) {
+                      int ingridientCountInInventory =
+                          progSystem.ingridientInventory[ingridient]!;
+                      int ingridientCountNeeded =
+                          widget.ingridientIngridients[ingridient]!;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(width: 20, height: 20, color: Colors.black),
+                          Text(
+                            '$ingridientCountInInventory/$ingridientCountNeeded',
+                            style: displayNameTextStyle,
+                          ),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+
+            Align(
+              alignment: AlignmentGeometry.topCenter,
+              child: SizedBox(
+                child: Text(
+                  widget.ingridient.displayName,
+                  style: displayNameTextStyle,
+                ),
+              ),
+            ),
+
+            /// BUTTON BACKGROUND
+            Align(
+              alignment: AlignmentGeometry.bottomCenter,
+              child: Transform.translate(
+                offset: Offset(0, -5),
+                child: Container(
+                  width: buttonWidth,
+                  height: buttonHeight,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.amber,
+                  ),
+                ),
+              ),
+            ),
+
+            /// PROCESS BUTTON
+            Align(
+              alignment: AlignmentGeometry.bottomCenter,
+              child: Transform.translate(
+                offset: Offset(0, -5),
                 child: ValueListenableBuilder(
                   valueListenable: maxProcessableCount,
                   builder: (context, value, child) {
@@ -181,15 +247,18 @@ class _IngridientTileState extends State<IngridientTile>
                         onTapCancel: () {
                           buttonCancel();
                         },
-                        child: Icon(
-                          Icons.fireplace_rounded,
-                          color: const Color.fromARGB(255, 255, 176, 58),
-                          /* shadows: [
-                              Shadow(
-                                color: const Color.fromARGB(255, 206, 136, 30),
-                                offset: Offset(1, 1),
-                              ),
-                            ], */
+                        child: IconButton(
+                          icon: Icon(
+                            widget.processorIcon,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            /* shadows: [
+                                Shadow(
+                                  color: const Color.fromARGB(255, 206, 136, 30),
+                                  offset: Offset(1, 1),
+                                ),
+                              ], */
+                          ),
+                          onPressed: () {},
                         ),
                       ),
                     );
@@ -198,14 +267,18 @@ class _IngridientTileState extends State<IngridientTile>
               ),
             ),
             Align(
-              alignment: AlignmentGeometry.bottomCenter,
+              alignment: AlignmentGeometry.topCenter,
               child: Transform.translate(
-                offset: Offset(0, -6),
+                offset: Offset(0, 20),
                 child: IgnorePointer(
-                  child: CircularProgressIndicator(
-                    backgroundColor: const Color.fromARGB(151, 221, 221, 221),
-                    value: cookIndicator,
-                    color: const Color.fromARGB(255, 255, 93, 93),
+                  child: SizedBox(
+                    height: iconSides,
+                    width: iconSides,
+                    child: CircularProgressIndicator(
+                      backgroundColor: const Color.fromARGB(151, 221, 221, 221),
+                      value: cookIndicator,
+                      color: const Color.fromARGB(255, 98, 175, 150),
+                    ),
                   ),
                 ),
               ),

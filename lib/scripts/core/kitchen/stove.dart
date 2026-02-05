@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
@@ -6,6 +7,7 @@ class Stove extends KitchenProcessor {
   Stove._()
     : super(
         displayName: "stove",
+        processIcon: Icons.fireplace_rounded,
         ingridientIngridients: {
           Ingridient.puddingBatter: {
             Ingridient.puddingCream: 1,

@@ -13,7 +13,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/interior_
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/stove_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
-import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/refrigerator_entity.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/refrigerator_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/study_chair.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/study_table.dart';
 
