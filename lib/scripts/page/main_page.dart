@@ -8,6 +8,7 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_main_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
@@ -70,6 +71,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
               "sinkMenu": (BuildContext context, PurinArea game) {
                 return KitchenMenu(kitchenProcessor: sink.Sink.singleton);
+              },
+
+              "shopMenu": (BuildContext context, PurinArea game) {
+                return PurchaseMenu();
               },
             },
           ),

@@ -1,140 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
-import 'package:pomodoropompurin/scripts/core/kitchen/stove.dart';
-import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
-import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/consumable_tile.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/ingridient_tile.dart';
 
-/// A menu for all KitchenProcessors for creating Ingridients or Consumables.
-///
-/// An instance of this menu is created whenever a [KitchenProcessor] selectable
-/// calls OnLongTapDown(), (e.g [StoveEntity]).
-/// To construct this menu, a [KitchenProcessors] enum value must be passed to know
-/// which processor is being selected.
-/// It contains a grid view of [IngridientTile]'s and [ConsumableTile]'s, that matches
-/// the [KitchenProcessor]'s parameters.
-///
-/// I suggest taking a look at [KitchenProcessor] to see how the processor logic is defined
 class KitchenMenu extends StatelessWidget {
-  KitchenMenu({super.key, required this.kitchenProcessor});
+  const KitchenMenu({super.key, required this.kitchenProcessor});
 
   final KitchenProcessor kitchenProcessor;
 
-  final double menuWidth = 250;
-  final double menuHeight = 300;
-  final double gridHeight = 240;
-
-  final double showButtonSides = 30;
+  static const double menuWidth = 260;
+  static const double menuHeight = 320;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Transform.translate(
-        offset: Offset(0, -50),
-        child: Container(
-          width: menuWidth,
-          height: menuHeight,
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: const Color.fromARGB(209, 255, 255, 255),
-          ),
+    final consumables = kitchenProcessor.consumableIngridients.entries.toList();
+    final ingridients = kitchenProcessor.ingridientIngridients.entries.toList();
 
-          child: Stack(
-            children: [
-              Align(
-                alignment: AlignmentGeometry.topLeft,
-                child: Transform.translate(
-                  offset: Offset(30, 0),
+    return Center(
+      child: Container(
+        width: menuWidth,
+        height: menuHeight,
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(209, 255, 255, 255),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            /// HEADER
+            Row(
+              children: [
+                Icon(
+                  kitchenProcessor.processIcon,
+                  color: kitchenProcessor.processColor,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
                   child: Text(
                     kitchenProcessor.displayName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Fredoka',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 25,
-                      color: const Color.fromARGB(255, 42, 42, 42),
-                      shadows: [
-                        Shadow(
-                          color: const Color.fromARGB(0, 0, 0, 0),
-                          offset: Offset(1.5, 1.5),
-                        ),
-                      ],
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                      color: Color.fromARGB(255, 42, 42, 42),
                     ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: AlignmentGeometry.topLeft,
-                child: Transform.translate(
-                  offset: Offset(0, 5),
-                  child: Icon(
-                    kitchenProcessor.processIcon,
-                    color: kitchenProcessor.processColor,
-                  ),
-                ),
-              ),
+              ],
+            ),
 
-              Align(
-                alignment: AlignmentGeometry.bottomCenter,
-                child: Container(
-                  height: gridHeight,
-                  width: menuWidth,
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(135, 207, 207, 207),
+            const SizedBox(height: 14),
+
+            /// GRID AREA
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: const Color.fromARGB(135, 207, 207, 207),
+                ),
+                child: GridView.builder(
+                  itemCount: consumables.length + ingridients.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.5,
                   ),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                          childAspectRatio: 0.6,
-                        ),
-                    itemBuilder: (context, index) {
-                      if (index <
-                          kitchenProcessor.consumableIngridients.length) {
-                        return ConsumableTile(
-                          consumable: kitchenProcessor
-                              .consumableIngridients
-                              .keys
-                              .toList()[index],
-                          ingridientIngridients: kitchenProcessor
-                              .consumableIngridients
-                              .values
-                              .toList()[index],
-                          processorIcon: kitchenProcessor.processIcon,
-                          processorColor: kitchenProcessor.processColor,
-                        );
-                      } else {
-                        return IngridientTile(
-                          ingridient:
-                              kitchenProcessor.ingridientIngridients.keys
-                                  .toList()[index -
-                                  kitchenProcessor
-                                      .consumableIngridients
-                                      .length],
-                          ingridientIngridients:
-                              kitchenProcessor.ingridientIngridients.values
-                                  .toList()[index -
-                                  kitchenProcessor
-                                      .consumableIngridients
-                                      .length],
-                          processorIcon: kitchenProcessor.processIcon,
-                          processorColor: kitchenProcessor.processColor,
-                        );
-                      }
-                    },
-                    itemCount:
-                        kitchenProcessor.consumableIngridients.length +
-                        kitchenProcessor.ingridientIngridients.length,
-                  ),
+                  itemBuilder: (context, index) {
+                    if (index < consumables.length) {
+                      final entry = consumables[index];
+                      return ConsumableTile(
+                        consumable: entry.key,
+                        ingridientIngridients: entry.value,
+                        processorIcon: kitchenProcessor.processIcon,
+                        processorColor: kitchenProcessor.processColor,
+                      );
+                    } else {
+                      final adjustedIndex = index - consumables.length;
+                      final entry = ingridients[adjustedIndex];
+                      return IngridientTile(
+                        ingridient: entry.key,
+                        ingridientIngridients: entry.value,
+                        processorIcon: kitchenProcessor.processIcon,
+                        processorColor: kitchenProcessor.processColor,
+                      );
+                    }
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -296,7 +296,7 @@ class _ConsumableTileState extends State<ConsumableTile>
                     child: CircularProgressIndicator(
                       backgroundColor: const Color.fromARGB(151, 221, 221, 221),
                       value: cookIndicator,
-                      color: const Color.fromARGB(255, 132, 153, 58),
+                      color: widget.processorColor,
                     ),
                   ),
                 ),

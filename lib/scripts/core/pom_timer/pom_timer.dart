@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flame/extensions.dart';
+import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/main.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
@@ -7,6 +9,7 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager
 import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/layout/custom_dialogs.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/end_pom_timer_dialog.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// Logic class for the Pomodoro Timer and its events
@@ -151,7 +154,7 @@ class PomTimer {
     }
   }
 
-  void endTimer() {
+  Future<void> endTimer() async {
     if (restart) {
       return;
     }
@@ -163,14 +166,27 @@ class PomTimer {
 
     int rewardPomPoints = PomPointsConversion.fromSeconds(timeTotalSeconds);
 
+    pomTimerDisplayStateManager.closePomTimer();
+    pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.exit;
+
+    await showDialog(
+      context: navigatorKey.currentContext!,
+      barrierDismissible: false,
+      builder: (context) {
+        return EndPomTimerDialog(
+          seconds: timeTotalSeconds,
+          points: rewardPomPoints,
+          onClose: () => Navigator.pop(context),
+        );
+      },
+    );
+
     restart = true;
     isPlaying = false;
     onBreak = false;
     pomTimerDisplayStateManager.onBreak.value = false;
     timeLeftSeconds = 0;
     timeTotalSeconds = 0;
-    pomTimerDisplayStateManager.closePomTimer();
-    pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.exit;
 
     /// Tell Koupen that the timer was stopped before connection is severed;
     /// and rewards was already awarded...
@@ -178,8 +194,6 @@ class PomTimer {
     _databaseManager.statusPomTimerSave('wasTimeTotalSeconds', 0);
 
     timer.cancel();
-
-    _customDialogs.showRewardsEndTimeDialog(rewardPomPoints);
 
     // Update outside
     _progSystem.addPomPoints(rewardPomPoints);

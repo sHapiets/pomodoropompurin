@@ -295,7 +295,7 @@ class _IngridientTileState extends State<IngridientTile>
                     child: CircularProgressIndicator(
                       backgroundColor: const Color.fromARGB(151, 221, 221, 221),
                       value: cookIndicator,
-                      color: const Color.fromARGB(255, 98, 125, 175),
+                      color: widget.processorColor,
                     ),
                   ),
                 ),

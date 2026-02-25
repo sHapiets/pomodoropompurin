@@ -93,6 +93,7 @@ class AssetManager {
       "kitchen_sprites/default.png",
       "kitchen_processors_sprites/stove.png",
       "kitchen_processors_sprites/sink.png",
+      "shop_sprites/shop.png",
     ];
 
     for (String imagePath in allFlameImages) {

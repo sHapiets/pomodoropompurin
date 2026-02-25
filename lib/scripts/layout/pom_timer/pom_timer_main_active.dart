@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/stop_pom_timer_dialog.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_notes_menu.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
@@ -98,50 +99,6 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
     pomTimerDisplayStateManager.timeLeftSeconds.removeListener(updateTime);
     pomTimerDisplayStateManager.onBreak.removeListener(updateGauge);
     super.dispose();
-  }
-
-  void showWarningEndTimerDialog() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(0), // optional
-            child: Stack(
-              children: [
-                Image.asset('assets/images/L8.jpg'),
-                Positioned.fill(
-                  child: Padding(
-                    padding: EdgeInsets.all(32),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Clipped original'),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            _pomTimer.endTimer();
-                          },
-                          child: Text('yes,stop'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            _pomTimer.playTimer();
-                          },
-                          child: Text("cancel"),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -306,7 +263,22 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                     iconSize: 30,
                     onPressed: () {
                       _pomTimer.pauseTimer(); // Pause first
-                      showWarningEndTimerDialog();
+                      showDialog(
+                        context: context,
+                        barrierDismissible:
+                            false, // prevents tap outside to close
+                        builder: (context) {
+                          return StopPomTimerDialog(
+                            onCancel: () {
+                              Navigator.of(context).pop(); // just close dialog
+                            },
+                            onConfirm: () {
+                              Navigator.of(context).pop();
+                              // Add your stop timer logic here
+                            },
+                          );
+                        },
+                      );
                     },
                     icon: Icon(
                       Icons.stop_rounded,
