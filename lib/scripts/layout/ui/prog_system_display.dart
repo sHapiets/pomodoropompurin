@@ -39,7 +39,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
           duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           top: 30,
-          left: (false) ? -140 : 0,
+          left: 0,
           child: child!,
         );
       },
@@ -192,7 +192,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
 
             /// PomPoints
             Padding(
-              padding: const EdgeInsetsGeometry.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -209,24 +209,32 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       ),
                     ),
                   ),
-                  ValueListenableBuilder(
-                    valueListenable: progSystem.pomPoints,
-                    builder: (context, value, child) {
-                      return Text(
-                        NumberFormat(
-                          '#,##0',
-                          'en_US',
-                        ).format(progSystem.pomPoints.value),
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 13,
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          shadows: [
-                            Shadow(color: Colors.black12, offset: Offset(2, 2)),
-                          ],
-                        ),
-                      );
-                    },
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ValueListenableBuilder(
+                      valueListenable: progSystem.pomPoints,
+                      builder: (context, value, child) {
+                        return Text(
+                          NumberFormat(
+                            '#,##0',
+                            'en_US',
+                          ).format(progSystem.pomPoints.value),
+                          style: const TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white, // now readable on dark bg
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -34,7 +34,7 @@ class _ConsumableTileState extends State<ConsumableTile>
   void updateProcessableCount() {
     for (Ingridient requiredIngridient in widget.ingridientIngridients.keys) {
       final int ingridientInventoryCount =
-          progSystem.ingridientInventory[requiredIngridient]!;
+          progSystem.ingridientInventory[requiredIngridient]!.value;
       final int requiredIngridientCount =
           widget.ingridientIngridients[requiredIngridient]!;
       final int processableCountFromIngridient =
@@ -65,6 +65,7 @@ class _ConsumableTileState extends State<ConsumableTile>
   bool showCookButton = false;
 
   Timer? cookTimer;
+  double cookSpeed = 0.05;
   double cookIndicator = 0.0;
 
   @override
@@ -102,9 +103,10 @@ class _ConsumableTileState extends State<ConsumableTile>
     cookTimer?.cancel();
     cookTimer = Timer.periodic(Duration(milliseconds: 16), (cookTimer) {
       setState(() {
-        cookIndicator = (cookIndicator + 0.05).clamp(0.0, 1.0);
+        cookIndicator = (cookIndicator + cookSpeed).clamp(0.0, 1.0);
         if (cookIndicator == 1.0) {
-          cookTimer.cancel();
+          cookIndicator = 0;
+          cookSpeed = (cookSpeed >= 0.15) ? 0.15 : cookSpeed + 0.03;
         }
       });
     });
@@ -112,6 +114,7 @@ class _ConsumableTileState extends State<ConsumableTile>
 
   void buttonCancel() {
     cookTimer?.cancel();
+    cookSpeed = 0.05;
     cookTimer = Timer.periodic(Duration(milliseconds: 16), (openTimer) {
       setState(() {
         cookIndicator = (cookIndicator - 0.05).clamp(0.0, 1.0);
@@ -183,17 +186,21 @@ class _ConsumableTileState extends State<ConsumableTile>
                     children: widget.ingridientIngridients.keys.map((
                       ingridient,
                     ) {
-                      int ingridientCountInInventory =
-                          progSystem.ingridientInventory[ingridient]!;
                       int ingridientCountNeeded =
                           widget.ingridientIngridients[ingridient]!;
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(width: 20, height: 20, color: Colors.black),
-                          Text(
-                            '$ingridientCountInInventory/$ingridientCountNeeded',
-                            style: displayNameTextStyle,
+                          ValueListenableBuilder(
+                            valueListenable:
+                                progSystem.ingridientInventory[ingridient]!,
+                            builder: (context, value, child) {
+                              return Text(
+                                '$value/$ingridientCountNeeded',
+                                style: displayNameTextStyle,
+                              );
+                            },
                           ),
                         ],
                       );

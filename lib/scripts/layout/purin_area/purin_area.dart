@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/cursor_sprite.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/effects/heart_particles.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_home.dart';
 
 class PurinArea extends FlameGame
@@ -21,6 +22,8 @@ class PurinArea extends FlameGame
 
   late Vector2 newPosition;
   late Vector2 newScale;
+
+  double heartParticleTimer = 0;
 
   /// Assets paths (from assets/images/->...)
   ///
@@ -137,6 +140,13 @@ class PurinArea extends FlameGame
       );
     } else if (purinAreaStateManager.state.value == "Pet") {
       purin.updatePetDelta(info.delta.global);
+      if (heartParticleTimer <= 0.03) {
+        return;
+      }
+      final worldPosition = camera.globalToLocal(info.eventPosition.global);
+
+      world.add(HeartParticle(position: worldPosition));
+      heartParticleTimer = 0;
     }
   }
 
@@ -158,5 +168,7 @@ class PurinArea extends FlameGame
       newScale.x,
       0.1,
     )!;
+
+    heartParticleTimer += dt;
   }
 }

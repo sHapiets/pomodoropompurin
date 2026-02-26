@@ -86,7 +86,7 @@ class PurchaseMenu extends StatelessWidget {
                           crossAxisCount: 2,
                           crossAxisSpacing: 12,
                           mainAxisSpacing: 12,
-                          childAspectRatio: 0.85,
+                          childAspectRatio: 0.7,
                         ),
                     itemBuilder: (context, index) {
                       return PurchaseTile(ingridient: Ingridient.values[index]);

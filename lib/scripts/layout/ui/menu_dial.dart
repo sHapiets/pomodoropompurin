@@ -4,7 +4,6 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager
 import 'package:pomodoropompurin/scripts/layout/calendar_display/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_notes_menu.dart';
 
-/// A clean, dropdown menu widget
 class MenuDial extends StatefulWidget {
   const MenuDial({super.key});
 
@@ -17,15 +16,18 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
   late Animation<double> menuAnimation;
 
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
+
   ValueNotifier<bool> toggle = ValueNotifier(false);
 
   @override
   void initState() {
     super.initState();
+
     menuAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 400),
     );
+
     menuAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -35,14 +37,18 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
   @override
   void dispose() {
     menuAnimationController.dispose();
+    toggle.dispose();
     super.dispose();
   }
 
   void toggleMenu() {
-    toggle.value = !(toggle.value);
-    (menuAnimationController.isForwardOrCompleted)
-        ? menuAnimationController.reverse()
-        : menuAnimationController.forward();
+    toggle.value = !toggle.value;
+
+    if (menuAnimationController.isCompleted) {
+      menuAnimationController.reverse();
+    } else {
+      menuAnimationController.forward();
+    }
   }
 
   @override
@@ -51,77 +57,101 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
       valueListenable: PurinAreaStateManager.singleton.state,
       builder: (context, value, child) {
         return AnimatedPositioned(
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           top: 40,
-          right: (false) ? -100 : 40,
+          right: 40,
           child: child!,
         );
       },
-      child: Column(
-        spacing: 20,
+      child: Stack(
+        alignment: Alignment.topCenter,
         children: [
-          IconButton(
-            iconSize: 40,
-            onPressed: () {
-              toggleMenu();
-            },
-            icon: AnimatedIcon(
-              color: Colors.white,
-              icon: AnimatedIcons.menu_close,
-              progress: menuAnimation,
-            ),
-          ),
-          ListenableBuilder(
-            listenable: toggle,
-            builder: (context, child) {
-              return AnimatedScale(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeInOutCirc,
-                scale: (toggle.value) ? 1 : 0,
-                child: child,
+          /// EXPANDING BACKGROUND
+          ValueListenableBuilder(
+            valueListenable: toggle,
+            builder: (context, value, _) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOutCubic,
+                width: value ? 60 : 0,
+                height: value ? 200 : 0,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(84, 89, 89, 89),
+                  borderRadius: BorderRadius.circular(40),
+                ),
               );
             },
-            child: IconButton(
-              iconSize: 30,
-              onPressed: () {
-                showModalBottomSheet(
-                  enableDrag: false,
-                  context: context,
-                  elevation: 5,
-                  barrierColor: Colors.black26,
-                  backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-                  builder: (context) {
-                    return TaskNotesMenu();
-                  },
-                );
-                toggleMenu();
-              },
-              icon: Icon(Icons.list_alt_rounded, color: Colors.white),
-            ),
           ),
 
-          ListenableBuilder(
-            listenable: toggle,
-            builder: (context, child) {
-              return AnimatedScale(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeInOutCirc,
-                scale: (toggle.value) ? 1 : 0,
-                child: child,
-              );
-            },
-            child: IconButton(
-              iconSize: 30,
-              onPressed: () {
-                showGeneralDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  barrierColor: Colors.black26,
-                  barrierLabel: '',
-                  transitionDuration: Duration(milliseconds: 300),
-                  transitionBuilder:
-                      (context, animation, secondaryAnimation, child) {
+          /// 🔘 BUTTON COLUMN
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              /// MAIN MENU BUTTON
+              IconButton(
+                iconSize: 40,
+                onPressed: toggleMenu,
+                icon: AnimatedIcon(
+                  color: Colors.white,
+                  icon: AnimatedIcons.menu_close,
+                  progress: menuAnimation,
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              /// TASK BUTTON
+              ValueListenableBuilder(
+                valueListenable: toggle,
+                builder: (context, value, child) {
+                  return AnimatedScale(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOutCirc,
+                    scale: value ? 1 : 0,
+                    child: child,
+                  );
+                },
+                child: IconButton(
+                  iconSize: 30,
+                  onPressed: () {
+                    showModalBottomSheet(
+                      enableDrag: false,
+                      context: context,
+                      elevation: 5,
+                      barrierColor: Colors.black26,
+                      backgroundColor: Colors.transparent,
+                      builder: (_) => TaskNotesMenu(),
+                    );
+                    toggleMenu();
+                  },
+                  icon: const Icon(Icons.list_alt_rounded, color: Colors.white),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              /// CALENDAR BUTTON
+              ValueListenableBuilder(
+                valueListenable: toggle,
+                builder: (context, value, child) {
+                  return AnimatedScale(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOutCirc,
+                    scale: value ? 1 : 0,
+                    child: child,
+                  );
+                },
+                child: IconButton(
+                  iconSize: 30,
+                  onPressed: () {
+                    showGeneralDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      barrierColor: Colors.black26,
+                      barrierLabel: '',
+                      transitionDuration: const Duration(milliseconds: 300),
+                      transitionBuilder: (context, animation, _, child) {
                         return ScaleTransition(
                           scale: CurvedAnimation(
                             parent: animation,
@@ -130,14 +160,17 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                           child: child,
                         );
                       },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return ProgCalendarDisplay();
+                      pageBuilder: (_, __, ___) => ProgCalendarDisplay(),
+                    );
+                    toggleMenu();
                   },
-                );
-                toggleMenu();
-              },
-              icon: Icon(Icons.calendar_today_rounded, color: Colors.white),
-            ),
+                  icon: const Icon(
+                    Icons.calendar_today_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

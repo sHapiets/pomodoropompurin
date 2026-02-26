@@ -30,20 +30,6 @@ class _IngridientTileState extends State<IngridientTile>
   final ValueNotifier<int> maxProcessableCount = ValueNotifier(1000);
   final ValueNotifier<int> processCount = ValueNotifier(0);
 
-  void updateProcessableCount() {
-    for (Ingridient requiredIngridient in widget.ingridientIngridients.keys) {
-      final int ingridientInventoryCount =
-          progSystem.ingridientInventory[requiredIngridient]!;
-      final int requiredIngridientCount =
-          widget.ingridientIngridients[requiredIngridient]!;
-      final int processableCountFromIngridient =
-          ingridientInventoryCount ~/ requiredIngridientCount;
-      (maxProcessableCount.value > processableCountFromIngridient)
-          ? maxProcessableCount.value = processableCountFromIngridient
-          : null;
-    }
-  }
-
   final double iconSides = 60;
   final double tileHeight = 180;
   final double tileWidth = 80;
@@ -59,11 +45,23 @@ class _IngridientTileState extends State<IngridientTile>
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
+  final ingNameTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 7,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+  final ingCountTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 10,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
   late final AnimationController buttonAnimationController;
   late final Animation<double> buttonTween;
   bool showCookButton = false;
 
   Timer? cookTimer;
+  double cookSpeed = 0.05;
   double cookIndicator = 0.0;
 
   @override
@@ -101,9 +99,10 @@ class _IngridientTileState extends State<IngridientTile>
     cookTimer?.cancel();
     cookTimer = Timer.periodic(Duration(milliseconds: 16), (cookTimer) {
       setState(() {
-        cookIndicator = (cookIndicator + 0.05).clamp(0.0, 1.0);
+        cookIndicator = (cookIndicator + cookSpeed).clamp(0.0, 1.0);
         if (cookIndicator == 1.0) {
-          cookTimer.cancel();
+          cookIndicator = 0;
+          cookSpeed = (cookSpeed >= 0.15) ? 0.15 : cookSpeed + 0.03;
         }
       });
     });
@@ -111,6 +110,7 @@ class _IngridientTileState extends State<IngridientTile>
 
   void buttonCancel() {
     cookTimer?.cancel();
+    cookSpeed = 0.05;
     cookTimer = Timer.periodic(Duration(milliseconds: 16), (openTimer) {
       setState(() {
         cookIndicator = (cookIndicator - 0.05).clamp(0.0, 1.0);
@@ -172,28 +172,42 @@ class _IngridientTileState extends State<IngridientTile>
 
             /// ingridientIngridient Names
             Align(
-              alignment: AlignmentGeometry.bottomCenter,
+              alignment: AlignmentGeometry.center,
               child: Transform.translate(
-                offset: Offset(0, -50),
+                offset: Offset(0, 20),
                 child: SizedBox(
-                  height: 50,
+                  height: 100,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: widget.ingridientIngridients.keys.map((
                       ingridient,
                     ) {
-                      int ingridientCountInInventory =
-                          progSystem.ingridientInventory[ingridient]!;
                       int ingridientCountNeeded =
                           widget.ingridientIngridients[ingridient]!;
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      return Column(
                         children: [
-                          Container(width: 20, height: 20, color: Colors.black),
-                          Text(
-                            '$ingridientCountInInventory/$ingridientCountNeeded',
-                            style: displayNameTextStyle,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                color: Colors.black,
+                              ),
+                              ValueListenableBuilder(
+                                valueListenable:
+                                    progSystem.ingridientInventory[ingridient]!,
+                                builder: (context, value, child) {
+                                  return Text(
+                                    '$value/$ingridientCountNeeded',
+                                    style: ingCountTextStyle,
+                                  );
+                                },
+                              ),
+                            ],
                           ),
+
+                          Text(ingridient.displayName, style: ingNameTextStyle),
                         ],
                       );
                     }).toList(),

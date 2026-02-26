@@ -12,7 +12,7 @@ class PurinMainMenu extends StatefulWidget {
 class _PurinMainMenuState extends State<PurinMainMenu>
     with TickerProviderStateMixin {
   late final AnimationController loadAnimController = AnimationController(
-    duration: const Duration(milliseconds: 450),
+    duration: const Duration(milliseconds: 300),
     vsync: this,
   );
 
@@ -24,7 +24,7 @@ class _PurinMainMenuState extends State<PurinMainMenu>
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 120), () {
       loadAnimController.forward();
     });
   }
@@ -45,83 +45,74 @@ class _PurinMainMenuState extends State<PurinMainMenu>
     return Center(
       child: ScaleTransition(
         scale: loadAnimation,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFFF3B0), // pudding yellow
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFF6D4C41).withOpacity(0.35),
-                blurRadius: 25,
-                offset: const Offset(0, 12),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              /// TITLE
-              const Text(
-                "Purin Menu 🍮",
-                style: TextStyle(
-                  fontFamily: 'Fredoka',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF6D4C41),
-                ),
-              ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _floatingButton(
+              icon: Icons.transform_rounded,
+              label: "Move",
+              onTap: () => _openOverlay("purinPositionMenu"),
+            ),
 
-              const SizedBox(height: 18),
+            const SizedBox(height: 12),
 
-              /// BUTTONS
-              _menuButton(
-                icon: Icons.transform_rounded,
-                label: "Move",
-                onTap: () => _openOverlay("purinPositionMenu"),
-              ),
-              const SizedBox(height: 12),
-              _menuButton(
-                icon: Icons.checkroom,
-                label: "Outfits",
-                onTap: () => _openOverlay("purinEquipMenu"),
-              ),
-            ],
-          ),
+            _floatingButton(
+              icon: Icons.checkroom,
+              label: "Outfits",
+              onTap: () => _openOverlay("purinEquipMenu"),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _menuButton({
+  Widget _floatingButton({
     required IconData icon,
     required String label,
     required VoidCallback onTap,
   }) {
     return InkWell(
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(30),
       onTap: onTap,
-      child: Ink(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-        decoration: BoxDecoration(
-          color: const Color(0xFFFFE08A),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, color: const Color(0xFF6D4C41)),
-            const SizedBox(width: 10),
-            Text(
-              label,
-              style: const TextStyle(
-                fontFamily: 'Fredoka',
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF6D4C41),
-              ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          /// Smaller circular icon background
+          Container(
+            padding: const EdgeInsets.all(9), // reduced from 12–14
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFE08A),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF6D4C41).withOpacity(0.20),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-          ],
-        ),
+            child: Icon(
+              icon,
+              size: 20, // smaller icon
+              color: const Color(0xFF6D4C41),
+            ),
+          ),
+
+          const SizedBox(width: 10), // tighter spacing
+          /// Better vertically centered label
+          Text(
+            label,
+            style: const TextStyle(
+              fontFamily: 'Fredoka',
+              fontWeight: FontWeight.w600,
+              fontSize: 14, // slightly smaller
+              height: 1.1,
+              color: Color(0xFF6D4C41),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -27,6 +27,7 @@ class _PurchaseTileState extends State<PurchaseTile>
   late final Animation<double> buttonScale;
 
   Timer? purchaseTimer;
+  double purchaseSpeed = 0.05;
   double purchaseIndicator = 0.0;
 
   @override
@@ -59,14 +60,18 @@ class _PurchaseTileState extends State<PurchaseTile>
     purchaseTimer?.cancel();
     purchaseTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
       setState(() {
-        purchaseIndicator = (purchaseIndicator + 0.05).clamp(0.0, 1.0);
-        if (purchaseIndicator == 1.0) timer.cancel();
+        purchaseIndicator = (purchaseIndicator + purchaseSpeed).clamp(0.0, 1.0);
+        if (purchaseIndicator == 1.0) {
+          purchaseSpeed = (purchaseSpeed > 0.15) ? 0.2 : purchaseSpeed + 0.03;
+          purchaseIndicator = 0;
+        }
       });
     });
   }
 
   void buttonCancel() {
     purchaseTimer?.cancel();
+    purchaseSpeed = 0.05;
     purchaseTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
       setState(() {
         purchaseIndicator = (purchaseIndicator - 0.05).clamp(0.0, 1.0);
@@ -118,10 +123,14 @@ class _PurchaseTileState extends State<PurchaseTile>
                     ),
                   ),
 
-                  CircularProgressIndicator(
-                    value: purchaseIndicator,
-                    backgroundColor: const Color.fromARGB(151, 221, 221, 221),
-                    color: const Color.fromARGB(255, 255, 209, 24),
+                  SizedBox(
+                    height: iconSize,
+                    width: iconSize,
+                    child: CircularProgressIndicator(
+                      value: purchaseIndicator,
+                      backgroundColor: const Color.fromARGB(151, 221, 221, 221),
+                      color: const Color.fromARGB(255, 255, 209, 24),
+                    ),
                   ),
                 ],
               ),
@@ -138,6 +147,29 @@ class _PurchaseTileState extends State<PurchaseTile>
                 fontSize: 11,
                 color: Colors.black,
               ),
+            ),
+            const SizedBox(height: 6),
+
+            /// PRICE
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.monetization_on,
+                  size: 14,
+                  color: Color.fromARGB(255, 212, 175, 55),
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  '${widget.ingridient.price}',
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+              ],
             ),
 
             const Spacer(),

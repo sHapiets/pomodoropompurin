@@ -46,30 +46,30 @@ class ProgSystem {
     KotatsuDesigns.pudding,
     KotatsuDesigns.aqua,
   };
-  Map<Consumable, int> consumableInventory = {
-    Consumable.pudding: 0,
-    Consumable.pizza: 0,
-    Consumable.pancake: 0,
-    Consumable.hamburgSteak: 0,
+  Map<Consumable, ValueNotifier<int>> consumableInventory = {
+    Consumable.pudding: ValueNotifier(0),
+    Consumable.pizza: ValueNotifier(0),
+    Consumable.pancake: ValueNotifier(0),
+    Consumable.hamburgSteak: ValueNotifier(0),
   };
-  Map<Ingridient, int> ingridientInventory = {
-    Ingridient.milk: 0,
-    Ingridient.eggs: 0,
-    Ingridient.butter: 0,
-    Ingridient.flour: 0,
-    Ingridient.onion: 0,
-    Ingridient.olives: 0,
-    Ingridient.tomato: 0,
-    Ingridient.groundPork: 0,
-    Ingridient.yeast: 0,
-    Ingridient.riceGrains: 0,
+  Map<Ingridient, ValueNotifier<int>> ingridientInventory = {
+    Ingridient.milk: ValueNotifier(0),
+    Ingridient.eggs: ValueNotifier(0),
+    Ingridient.butter: ValueNotifier(0),
+    Ingridient.flour: ValueNotifier(0),
+    Ingridient.onion: ValueNotifier(0),
+    Ingridient.olives: ValueNotifier(0),
+    Ingridient.tomato: ValueNotifier(0),
+    Ingridient.groundPork: ValueNotifier(0),
+    Ingridient.yeast: ValueNotifier(0),
+    Ingridient.riceGrains: ValueNotifier(0),
 
-    Ingridient.puddingCream: 0,
-    Ingridient.puddingBatter: 0,
-    Ingridient.pancakeBatter: 0,
-    Ingridient.washedRice: 0,
-    Ingridient.cookedRice: 0,
-    Ingridient.patty: 0,
+    Ingridient.puddingCream: ValueNotifier(0),
+    Ingridient.puddingBatter: ValueNotifier(0),
+    Ingridient.pancakeBatter: ValueNotifier(2),
+    Ingridient.washedRice: ValueNotifier(0),
+    Ingridient.cookedRice: ValueNotifier(0),
+    Ingridient.patty: ValueNotifier(0),
   };
 
   /// Point Systems
@@ -90,19 +90,23 @@ class ProgSystem {
 
   /// Inventory
   void addConsumable(Consumable consumable, int amount) {
-    consumableInventory[consumable] = consumableInventory[consumable]! + 1;
+    consumableInventory[consumable]!.value =
+        consumableInventory[consumable]!.value + 1;
   }
 
   void addIngridient(Ingridient ingridient, int amount) {
-    ingridientInventory[ingridient] = ingridientInventory[ingridient]! + amount;
+    ingridientInventory[ingridient]!.value =
+        ingridientInventory[ingridient]!.value + amount;
   }
 
   void useConsumable(Consumable consumable, int amount) {
-    consumableInventory[consumable] = consumableInventory[consumable]! - amount;
+    consumableInventory[consumable]!.value =
+        consumableInventory[consumable]!.value - amount;
   }
 
   void useIngridient(Ingridient ingridient, int amount) {
-    ingridientInventory[ingridient] = ingridientInventory[ingridient]! - amount;
+    ingridientInventory[ingridient]!.value =
+        ingridientInventory[ingridient]!.value - amount;
   }
 
   // Reload Data (used for Koupen, mostly in SplashPage...)
