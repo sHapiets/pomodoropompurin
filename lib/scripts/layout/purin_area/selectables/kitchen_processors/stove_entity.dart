@@ -7,18 +7,18 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class StoveEntity extends PurinAreaSelectable {
   StoveEntity()
     : super(
-        position: Vector2(300, 100),
+        position: Vector2(320, 5),
         hitbox: PolygonHitbox(
           [
-            Vector2(0, 90),
-            Vector2(105, 25),
-            Vector2(90, 0),
-            Vector2(0, -50),
-            Vector2(-90, 0),
-            Vector2(-105, 25),
+            Vector2(0, 10),
+            Vector2(45, -8),
+            Vector2(45, -20),
+            Vector2(0, -45),
+            Vector2(-50, -20),
+            Vector2(-50, -8),
           ],
           anchor: Anchor.center,
-          position: Vector2(0, -10),
+          position: Vector2(0, -5),
         ),
         priority: 50,
       );
@@ -30,7 +30,7 @@ class StoveEntity extends PurinAreaSelectable {
       sprite: Sprite(
         Flame.images.fromCache("kitchen_processors_sprites/stove.png"),
       ),
-      size: Vector2.all(100),
+      size: Vector2.all(130),
       anchor: anchor,
     );
 

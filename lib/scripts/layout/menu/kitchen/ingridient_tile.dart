@@ -28,7 +28,29 @@ class _IngridientTileState extends State<IngridientTile>
   final progSystem = ProgSystem.singleton;
 
   final ValueNotifier<int> maxProcessableCount = ValueNotifier(1000);
-  final ValueNotifier<int> processCount = ValueNotifier(0);
+
+  void updateMaxProcessableCount() {
+    for (MapEntry<Ingridient, int> requiredIngridient
+        in widget.ingridientIngridients.entries) {
+      final int ingridientInventoryCount =
+          progSystem.ingridientInventory[requiredIngridient.key]!.value;
+      final int processableCountFromIngridient =
+          ingridientInventoryCount ~/ requiredIngridient.value;
+      maxProcessableCount.value =
+          (maxProcessableCount.value > processableCountFromIngridient)
+          ? processableCountFromIngridient
+          : maxProcessableCount.value;
+    }
+  }
+
+  void processIngridients() {
+    for (MapEntry<Ingridient, int> requiredIngridient
+        in widget.ingridientIngridients.entries) {
+      final ingridientInventory =
+          progSystem.ingridientInventory[requiredIngridient.key]!;
+      ingridientInventory.value -= requiredIngridient.value;
+    }
+  }
 
   final double iconSides = 60;
   final double tileHeight = 180;
@@ -42,6 +64,12 @@ class _IngridientTileState extends State<IngridientTile>
   final displayNameTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
     fontSize: 10,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
+  final displayCountTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 15,
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
@@ -67,6 +95,7 @@ class _IngridientTileState extends State<IngridientTile>
   @override
   void initState() {
     super.initState();
+    updateMaxProcessableCount();
     buttonAnimationController =
         AnimationController(
             vsync: this,
@@ -99,9 +128,16 @@ class _IngridientTileState extends State<IngridientTile>
     cookTimer?.cancel();
     cookTimer = Timer.periodic(Duration(milliseconds: 16), (cookTimer) {
       setState(() {
+        if (maxProcessableCount.value == 0) {
+          cookTimer.cancel();
+          return;
+        }
+
         cookIndicator = (cookIndicator + cookSpeed).clamp(0.0, 1.0);
         if (cookIndicator == 1.0) {
           cookIndicator = 0;
+          processIngridients();
+          updateMaxProcessableCount();
           cookSpeed = (cookSpeed >= 0.15) ? 0.15 : cookSpeed + 0.03;
         }
       });
@@ -170,6 +206,20 @@ class _IngridientTileState extends State<IngridientTile>
               ),
             ),
 
+            /// ProcessIngridient Count
+            Align(
+              alignment: AlignmentGeometry.topLeft,
+              child: Transform.translate(
+                offset: Offset(8, 5),
+                child: SizedBox(
+                  child: Text(
+                    "${progSystem.ingridientInventory[widget.ingridient]!.value}",
+                    style: displayCountTextStyle,
+                  ),
+                ),
+              ),
+            ),
+
             /// ingridientIngridient Names
             Align(
               alignment: AlignmentGeometry.center,
@@ -216,63 +266,34 @@ class _IngridientTileState extends State<IngridientTile>
               ),
             ),
 
-            /// BUTTON BACKGROUND
-            Align(
-              alignment: AlignmentGeometry.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, -5),
-                child: Container(
-                  width: buttonWidth,
-                  height: buttonHeight,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.processorColor,
-                  ),
-                ),
-              ),
-            ),
-
             /// PROCESS BUTTON
             Align(
               alignment: AlignmentGeometry.bottomCenter,
               child: Transform.translate(
                 offset: Offset(0, -5),
-                child: ValueListenableBuilder(
-                  valueListenable: maxProcessableCount,
-                  builder: (context, value, child) {
-                    return AnimatedBuilder(
-                      animation: buttonTween,
-                      builder: (context, child) {
-                        return (showCookButton)
-                            ? child!
-                            : ScaleTransition(scale: buttonTween, child: child);
-                      },
-                      child: GestureDetector(
-                        onTapDown: (details) {
-                          buttonHold();
-                        },
-                        onTapUp: (details) {
-                          buttonCancel();
-                        },
-                        onTapCancel: () {
-                          buttonCancel();
-                        },
-                        child: IconButton(
-                          icon: Icon(
-                            widget.processorIcon,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            /* shadows: [
-                                Shadow(
-                                  color: const Color.fromARGB(255, 206, 136, 30),
-                                  offset: Offset(1, 1),
-                                ),
-                              ], */
-                          ),
-                          onPressed: () {},
-                        ),
+                child: ScaleTransition(
+                  scale: buttonTween,
+                  child: GestureDetector(
+                    onTapDown: (_) => buttonHold(),
+                    onTapUp: (_) => buttonCancel(),
+                    onTapCancel: buttonCancel,
+                    child: Container(
+                      height: buttonHeight,
+                      width: buttonWidth,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: widget.processorColor,
                       ),
-                    );
-                  },
+                      child: IconButton(
+                        icon: Icon(
+                          widget.processorIcon,
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          size: 22,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

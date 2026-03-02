@@ -29,20 +29,30 @@ class _ConsumableTileState extends State<ConsumableTile>
   final progSystem = ProgSystem.singleton;
 
   final ValueNotifier<int> maxProcessableCount = ValueNotifier(1000);
-  final ValueNotifier<int> processCount = ValueNotifier(0);
 
-  void updateProcessableCount() {
-    for (Ingridient requiredIngridient in widget.ingridientIngridients.keys) {
+  void updateMaxProcessableCount() {
+    for (MapEntry<Ingridient, int> requiredIngridient
+        in widget.ingridientIngridients.entries) {
       final int ingridientInventoryCount =
-          progSystem.ingridientInventory[requiredIngridient]!.value;
-      final int requiredIngridientCount =
-          widget.ingridientIngridients[requiredIngridient]!;
+          progSystem.ingridientInventory[requiredIngridient.key]!.value;
       final int processableCountFromIngridient =
-          ingridientInventoryCount ~/ requiredIngridientCount;
-      (maxProcessableCount.value > processableCountFromIngridient)
-          ? maxProcessableCount.value = processableCountFromIngridient
-          : null;
+          ingridientInventoryCount ~/ requiredIngridient.value;
+      maxProcessableCount.value =
+          (maxProcessableCount.value > processableCountFromIngridient)
+          ? processableCountFromIngridient
+          : maxProcessableCount.value;
     }
+  }
+
+  void processIngridients() {
+    for (MapEntry<Ingridient, int> requiredIngridient
+        in widget.ingridientIngridients.entries) {
+      final ingridientInventory =
+          progSystem.ingridientInventory[requiredIngridient.key]!;
+      ingridientInventory.value -= requiredIngridient.value;
+    }
+
+    progSystem.consumableInventory[widget.consumable]!.value += 1;
   }
 
   final double iconSides = 60;
@@ -60,6 +70,23 @@ class _ConsumableTileState extends State<ConsumableTile>
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
+  final displayCountTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 15,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
+  final ingNameTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 7,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+  final ingCountTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 10,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
   late final AnimationController buttonAnimationController;
   late final Animation<double> buttonTween;
   bool showCookButton = false;
@@ -71,6 +98,7 @@ class _ConsumableTileState extends State<ConsumableTile>
   @override
   void initState() {
     super.initState();
+    updateMaxProcessableCount();
     buttonAnimationController =
         AnimationController(
             vsync: this,
@@ -103,9 +131,16 @@ class _ConsumableTileState extends State<ConsumableTile>
     cookTimer?.cancel();
     cookTimer = Timer.periodic(Duration(milliseconds: 16), (cookTimer) {
       setState(() {
+        if (maxProcessableCount.value == 0) {
+          cookTimer.cancel();
+          return;
+        }
+
         cookIndicator = (cookIndicator + cookSpeed).clamp(0.0, 1.0);
         if (cookIndicator == 1.0) {
           cookIndicator = 0;
+          processIngridients();
+          updateMaxProcessableCount();
           cookSpeed = (cookSpeed >= 0.15) ? 0.15 : cookSpeed + 0.03;
         }
       });
@@ -174,13 +209,27 @@ class _ConsumableTileState extends State<ConsumableTile>
               ),
             ),
 
+            /// ProcessConsumable Count
+            Align(
+              alignment: AlignmentGeometry.topLeft,
+              child: Transform.translate(
+                offset: Offset(8, 5),
+                child: SizedBox(
+                  child: Text(
+                    "${progSystem.consumableInventory[widget.consumable]!.value}",
+                    style: displayCountTextStyle,
+                  ),
+                ),
+              ),
+            ),
+
             /// ingridientIngridient Names
             Align(
-              alignment: AlignmentGeometry.bottomCenter,
+              alignment: AlignmentGeometry.center,
               child: Transform.translate(
-                offset: Offset(0, -50),
+                offset: Offset(0, 20),
                 child: SizedBox(
-                  height: 50,
+                  height: 100,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: widget.ingridientIngridients.keys.map((
@@ -188,20 +237,30 @@ class _ConsumableTileState extends State<ConsumableTile>
                     ) {
                       int ingridientCountNeeded =
                           widget.ingridientIngridients[ingridient]!;
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      return Column(
                         children: [
-                          Container(width: 20, height: 20, color: Colors.black),
-                          ValueListenableBuilder(
-                            valueListenable:
-                                progSystem.ingridientInventory[ingridient]!,
-                            builder: (context, value, child) {
-                              return Text(
-                                '$value/$ingridientCountNeeded',
-                                style: displayNameTextStyle,
-                              );
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                color: Colors.black,
+                              ),
+                              ValueListenableBuilder(
+                                valueListenable:
+                                    progSystem.ingridientInventory[ingridient]!,
+                                builder: (context, value, child) {
+                                  return Text(
+                                    '$value/$ingridientCountNeeded',
+                                    style: ingCountTextStyle,
+                                  );
+                                },
+                              ),
+                            ],
                           ),
+
+                          Text(ingridient.displayName, style: ingNameTextStyle),
                         ],
                       );
                     }).toList(),
@@ -231,46 +290,34 @@ class _ConsumableTileState extends State<ConsumableTile>
               alignment: AlignmentGeometry.bottomCenter,
               child: Transform.translate(
                 offset: Offset(0, -5),
-                child: ValueListenableBuilder(
-                  valueListenable: maxProcessableCount,
-                  builder: (context, value, child) {
-                    return AnimatedBuilder(
-                      animation: buttonTween,
-                      builder: (context, child) {
-                        return (showCookButton)
-                            ? child!
-                            : ScaleTransition(scale: buttonTween, child: child);
-                      },
-                      child: GestureDetector(
-                        onTapDown: (details) {
-                          buttonHold();
-                        },
-                        onTapUp: (details) {
-                          buttonCancel();
-                        },
-                        onTapCancel: () {
-                          buttonCancel();
-                        },
-                        child: IconButton(
-                          icon: Icon(
-                            widget.processorIcon,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            /* shadows: [
-                                Shadow(
-                                  color: const Color.fromARGB(255, 206, 136, 30),
-                                  offset: Offset(1, 1),
-                                ),
-                              ], */
-                          ),
-                          onPressed: () {},
-                        ),
+                child: ScaleTransition(
+                  scale: buttonTween,
+                  child: GestureDetector(
+                    onTapDown: (_) => buttonHold(),
+                    onTapUp: (_) => buttonCancel(),
+                    onTapCancel: buttonCancel,
+                    child: Container(
+                      height: buttonHeight,
+                      width: buttonWidth,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: widget.processorColor,
                       ),
-                    );
-                  },
+                      child: IconButton(
+                        icon: Icon(
+                          widget.processorIcon,
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          size: 22,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
 
+            ///
             Align(
               alignment: AlignmentGeometry.topRight,
               child: Transform.translate(

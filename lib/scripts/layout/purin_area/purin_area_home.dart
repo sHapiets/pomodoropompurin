@@ -11,6 +11,9 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/floor.dar
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/futon.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/interior_wall.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/chopping_board_entity.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/mixer_entity.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/oven_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/sink_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/stove_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
@@ -40,6 +43,9 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   late RefrigeratorEntity refrigeratorEntity;
   late StoveEntity stoveEntity;
   late SinkEntity sinkEntity;
+  late OvenEntity ovenEntity;
+  late MixerEntity mixerEntity;
+  late ChoppingBoardEntity choppingBoardEntity;
 
   late PurinEntity purinEntity;
 
@@ -68,6 +74,9 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     refrigeratorEntity = RefrigeratorEntity();
     stoveEntity = StoveEntity();
     sinkEntity = SinkEntity();
+    ovenEntity = OvenEntity();
+    mixerEntity = MixerEntity();
+    choppingBoardEntity = ChoppingBoardEntity();
 
     purinEntity = PurinEntity();
 
@@ -86,6 +95,10 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     await add(kitchenEntity);
     await add(stoveEntity);
     await add(sinkEntity);
+    await add(ovenEntity);
+    await add(mixerEntity);
+    await add(choppingBoardEntity);
+
     await add(purinEntity);
     await add(interiorWallEntity);
     await add(exteriorEntity);

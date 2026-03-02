@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 
@@ -14,6 +17,8 @@ class Mixer extends KitchenProcessor {
           },
         },
         consumableIngridients: {},
+        processColor: const Color.fromARGB(255, 176, 211, 102),
+        processIcon: Icons.blender_rounded,
       );
   static final singleton = Mixer._();
 }

@@ -93,6 +93,9 @@ class AssetManager {
       "kitchen_sprites/default.png",
       "kitchen_processors_sprites/stove.png",
       "kitchen_processors_sprites/sink.png",
+      "kitchen_processors_sprites/choppingBoard.png",
+      "kitchen_processors_sprites/mixer.png",
+      "kitchen_processors_sprites/oven.png",
       "shop_sprites/shop.png",
     ];
 

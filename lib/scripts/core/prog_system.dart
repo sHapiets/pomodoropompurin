@@ -64,6 +64,8 @@ class ProgSystem {
     Ingridient.yeast: ValueNotifier(0),
     Ingridient.riceGrains: ValueNotifier(0),
 
+    Ingridient.pizzaToppings: ValueNotifier(0),
+    Ingridient.dough: ValueNotifier(0),
     Ingridient.puddingCream: ValueNotifier(0),
     Ingridient.puddingBatter: ValueNotifier(0),
     Ingridient.pancakeBatter: ValueNotifier(2),

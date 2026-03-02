@@ -12,15 +12,15 @@ class RefrigeratorEntity extends PurinAreaSelectable {
         position: Vector2(-30, 65),
         hitbox: PolygonHitbox(
           [
-            Vector2(0, 75),
-            Vector2(90, 30),
-            Vector2(70, 10),
-            Vector2(0, -30),
-            Vector2(-70, 10),
-            Vector2(-90, 30),
+            Vector2(0, 100),
+            Vector2(60, 70),
+            Vector2(60, -80),
+            Vector2(0, -100),
+            Vector2(-60, -70),
+            Vector2(-60, 80),
           ],
           anchor: Anchor.center,
-          position: Vector2(0, -10),
+          position: Vector2(0, -15),
         ),
         priority: 50,
       );

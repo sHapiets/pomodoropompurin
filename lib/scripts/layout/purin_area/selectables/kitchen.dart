@@ -9,20 +9,8 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class Kitchen extends PurinAreaSelectable {
   Kitchen()
     : super(
-        //TODO change hitbox and position
         position: Vector2(190, 30),
-        hitbox: PolygonHitbox(
-          [
-            Vector2(0, 75),
-            Vector2(90, 30),
-            Vector2(70, 10),
-            Vector2(0, -30),
-            Vector2(-70, 10),
-            Vector2(-90, 30),
-          ],
-          anchor: Anchor.center,
-          position: Vector2(0, -10),
-        ),
+        hitbox: PolygonHitbox([Vector2(1, 1), Vector2(0, 1), Vector2(0, 0)]),
         priority: 40,
       );
 

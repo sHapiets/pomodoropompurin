@@ -1,3 +1,4 @@
+import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/consumable_tile.dart';
@@ -22,11 +23,11 @@ class KitchenMenu extends StatelessWidget {
         height: menuHeight,
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(209, 255, 255, 255),
+          color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black12,
+              color: kitchenProcessor.processColor.darken(0.5),
               blurRadius: 20,
               offset: const Offset(0, 8),
             ),
@@ -64,7 +65,7 @@ class KitchenMenu extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: const Color.fromARGB(135, 207, 207, 207),
+                  color: kitchenProcessor.processColor.brighten(0.5),
                 ),
                 child: GridView.builder(
                   itemCount: consumables.length + ingridients.length,
