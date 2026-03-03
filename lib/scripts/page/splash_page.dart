@@ -78,8 +78,21 @@ class _SplashPageState extends State<SplashPage> {
     _progSystem.loadConsumableInventory(
       await _databaseManager.consumableInventoryLoad(),
     );
+    _progSystem.loadAcquiredPurinVars(
+      await _databaseManager.acquiredPurinVarLoad(),
+    );
 
     _progSystem.dateLogList = await _databaseManager.calendarLoad();
+    final dayDateLog = _progSystem.dateLogfromMonth(
+      DateTime.now().year,
+      DateTime.now().month,
+    );
+
+    _progSystem.dayTimeSeconds.value = dayDateLog
+        .firstWhere(
+          (iterDateLog) => iterDateLog.dateLogDate.day == DateTime.now().day,
+        )
+        .timeSeconds;
 
     _pomTimer.timeSetWorkSeconds = await _databaseManager.userConfigTimerLoad(
       'timeSetWorkSeconds',

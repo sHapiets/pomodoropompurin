@@ -70,7 +70,7 @@ class OutfitSet extends Acquirable {
     required super.id,
     required super.displayName,
     required super.cost,
-    required super.iconAssetPath,
+    required super.iconAssetPat,
   });
 } */
 

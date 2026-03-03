@@ -256,16 +256,21 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       ),
                     ),
                   ),
-                  Text(
-                    '1,980',
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 13,
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      shadows: [
-                        Shadow(color: Colors.black12, offset: Offset(2, 2)),
-                      ],
-                    ),
+                  ValueListenableBuilder(
+                    valueListenable: progSystem.dayTimeSeconds,
+                    builder: (context, value, child) {
+                      return Text(
+                        "$value",
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 13,
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          shadows: [
+                            Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

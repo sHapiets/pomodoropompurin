@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/rendering.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
@@ -49,6 +48,22 @@ class DatabaseManager {
     }
 
     return loadedInventory;
+  }
+
+  Future<Set<PurinVars>> acquiredPurinVarLoad() async {
+    Set<PurinVars> loadedPurinVars = {};
+
+    final userRefData = await userRef.get();
+    final purinVars = userRefData['purinVar'];
+    for (final purinVar in purinVars) {
+      loadedPurinVars.add(
+        PurinVars.values.firstWhere((purinVarValue) {
+          return purinVarValue.name == purinVar;
+        }),
+      );
+    }
+
+    return loadedPurinVars;
   }
 
   Future<dynamic> userConfigTimerLoad(String configTimerData) async {
@@ -147,6 +162,14 @@ class DatabaseManager {
     }
 
     await userRef.update(updateMap);
+  }
+
+  Future<void> acquiredPurinVarsSave(Set<PurinVars> purinVars) async {
+    userRef.set({
+      "purinVar": purinVars.map((purinVar) {
+        return purinVar.name;
+      }).toList(),
+    });
   }
 
   Future<void> statusPomTimerSave(String status, dynamic data) async {

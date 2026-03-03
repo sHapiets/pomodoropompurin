@@ -81,11 +81,14 @@ class _IngridientTileState extends State<IngridientTile>
     fontSize: 7,
     color: Color.fromARGB(255, 0, 0, 0),
   );
-  final ingCountTextStyle = const TextStyle(
-    fontFamily: 'Fredoka',
-    fontSize: 10,
-    color: Color.fromARGB(255, 0, 0, 0),
-  );
+  TextStyle ingCountTextStyle(bool insuffecientAmount) {
+    return TextStyle(
+      fontFamily: 'Fredoka',
+      fontSize: 10,
+      fontWeight: FontWeight.bold,
+      color: insuffecientAmount ? Colors.red : Colors.green,
+    );
+  }
 
   late final AnimationController buttonAnimationController;
   late final Animation<double> buttonTween;
@@ -253,7 +256,9 @@ class _IngridientTileState extends State<IngridientTile>
                                 builder: (context, value, child) {
                                   return Text(
                                     '$value/$ingridientCountNeeded',
-                                    style: ingCountTextStyle,
+                                    style: ingCountTextStyle(
+                                      value < ingridientCountNeeded,
+                                    ),
                                   );
                                 },
                               ),

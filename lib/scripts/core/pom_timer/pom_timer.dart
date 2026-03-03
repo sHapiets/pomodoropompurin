@@ -189,7 +189,7 @@ class PomTimer {
     timer.cancel();
 
     // Update outside
-    _databaseManager.dayTimeSecondsSave(timeTotalSeconds);
+    _progSystem.addDayTimeSeconds(timeTotalSeconds);
     _progSystem.addPomPoints(rewardPomPoints);
     pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
 

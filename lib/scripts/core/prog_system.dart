@@ -32,16 +32,14 @@ class ProgSystem {
   String get milkJugsString => milkJugs.value.toString();
   ValueNotifier<int> oshiriLevel = ValueNotifier(0);
   ValueNotifier<int> oshiriRemainder = ValueNotifier(0);
+  ValueNotifier<int> dayTimeSeconds = ValueNotifier(0);
 
   /* List<String> acquiredItemsIds = [];
   List<String> acquiredHatsIds = [];
   List<String> acquiredTopsIds = [];
   List<String> acquiredBottomsIds = []; */
-  Set<PurinVars> acquiredPurinVars = {
-    PurinVars.boku,
-    PurinVars.shrimp,
-    PurinVars.pumpkin,
-  };
+  Set<PurinVars> acquiredPurinVars = {};
+
   Set<KotatsuDesigns> acquiredKotatsus = {
     KotatsuDesigns.pudding,
     KotatsuDesigns.aqua,
@@ -69,6 +67,11 @@ class ProgSystem {
   void addOshiriPoints(int points) {
     oshiriPoints.value += points;
     _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
+  }
+
+  void addDayTimeSeconds(int seconds) {
+    dayTimeSeconds.value += seconds;
+    _databaseManager.dayTimeSecondsSave(dayTimeSeconds.value);
   }
 
   void usePomPoints(int points) {
@@ -119,12 +122,18 @@ class ProgSystem {
     });
   }
 
+  void acquirePurinVar(PurinVars purinVar) {
+    acquiredPurinVars.add(purinVar);
+    _databaseManager.acquiredPurinVarsSave(acquiredPurinVars);
+  }
+
   // Reload Data (used for Koupen, mostly in SplashPage...)
   void loadPomPoints(int points) =>
       pomPoints.value = points; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadMilkJugs(int jugs) =>
       milkJugs.value = jugs; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadOshiriPoints(int points) => oshiriPoints.value = points;
+  void loadDayTimeSeconds(int seconds) => dayTimeSeconds.value = seconds;
   void loadDateLogMonth(int year, int month, List<DateLog> logList) {
     if (!dateLogList.containsKey(year)) {
       dateLogList.addAll({year: {}});
@@ -145,6 +154,10 @@ class ProgSystem {
     for (MapEntry<Consumable, int> amountMapEntry in amountMap.entries) {
       consumableInventory[amountMapEntry.key]!.value = amountMapEntry.value;
     }
+  }
+
+  void loadAcquiredPurinVars(Set<PurinVars> purinVarSet) {
+    acquiredPurinVars = purinVarSet;
   }
 
   void updateLevelSystem() {
