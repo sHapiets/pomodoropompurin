@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -33,13 +34,13 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: purinAreaStateManager.state,
+      valueListenable: UIDisplayState.singleton.hide,
       builder: (context, value, child) {
         return AnimatedPositioned(
           duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           top: 30,
-          left: 0,
+          left: (value) ? -200 : 0,
           child: child!,
         );
       },

@@ -72,6 +72,14 @@ class _SplashPageState extends State<SplashPage> {
     _progSystem.loadOshiriPoints(
       await _databaseManager.userDataLoad('oshiriPoints'),
     );
+    _progSystem.loadIngridientInventory(
+      await _databaseManager.ingridientInventoryLoad(),
+    );
+    _progSystem.loadConsumableInventory(
+      await _databaseManager.consumableInventoryLoad(),
+    );
+
+    _progSystem.dateLogList = await _databaseManager.calendarLoad();
 
     _pomTimer.timeSetWorkSeconds = await _databaseManager.userConfigTimerLoad(
       'timeSetWorkSeconds',
@@ -80,13 +88,6 @@ class _SplashPageState extends State<SplashPage> {
       'timeSetBreakSeconds',
     );
     _pomTimer.loopsSet = await _databaseManager.userConfigTimerLoad('loopsSet');
-
-    // Not actually needed... remove soon
-    _progSystem.loadDateLogMonth(
-      2026,
-      1,
-      await _databaseManager.calendarMonthLoad(2026, 1),
-    );
 
     await _databaseManager.configSelectablesLoad().then((
       selectableConfigString,

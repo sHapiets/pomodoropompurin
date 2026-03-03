@@ -46,32 +46,13 @@ class ProgSystem {
     KotatsuDesigns.pudding,
     KotatsuDesigns.aqua,
   };
-  Map<Consumable, ValueNotifier<int>> consumableInventory = {
-    Consumable.pudding: ValueNotifier(0),
-    Consumable.pizza: ValueNotifier(0),
-    Consumable.pancake: ValueNotifier(0),
-    Consumable.hamburgSteak: ValueNotifier(0),
-  };
-  Map<Ingridient, ValueNotifier<int>> ingridientInventory = {
-    Ingridient.milk: ValueNotifier(0),
-    Ingridient.eggs: ValueNotifier(0),
-    Ingridient.butter: ValueNotifier(0),
-    Ingridient.flour: ValueNotifier(0),
-    Ingridient.onion: ValueNotifier(0),
-    Ingridient.olives: ValueNotifier(0),
-    Ingridient.tomato: ValueNotifier(0),
-    Ingridient.groundPork: ValueNotifier(0),
-    Ingridient.yeast: ValueNotifier(0),
-    Ingridient.riceGrains: ValueNotifier(0),
 
-    Ingridient.pizzaToppings: ValueNotifier(0),
-    Ingridient.dough: ValueNotifier(0),
-    Ingridient.puddingCream: ValueNotifier(0),
-    Ingridient.puddingBatter: ValueNotifier(0),
-    Ingridient.pancakeBatter: ValueNotifier(2),
-    Ingridient.washedRice: ValueNotifier(0),
-    Ingridient.cookedRice: ValueNotifier(0),
-    Ingridient.patty: ValueNotifier(0),
+  Map<Consumable, ValueNotifier<int>> consumableInventory = {
+    for (final consumable in Consumable.values) consumable: ValueNotifier(0),
+  };
+
+  Map<Ingridient, ValueNotifier<int>> ingridientInventory = {
+    for (final ingridient in Ingridient.values) ingridient: ValueNotifier(0),
   };
 
   /// Point Systems
@@ -90,25 +71,52 @@ class ProgSystem {
     _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
   }
 
+  void usePomPoints(int points) {
+    pomPoints.value -= points;
+    _databaseManager.userDataSave('pomPoints', pomPoints.value);
+  }
+
+  void useMilkJugs(int jugs) {
+    milkJugs.value -= jugs;
+    _databaseManager.userDataSave('milkJugs', milkJugs.value);
+  }
+
+  void useOshiriPoints(int points) {
+    oshiriPoints.value -= points;
+    _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
+  }
+
   /// Inventory
   void addConsumable(Consumable consumable, int amount) {
     consumableInventory[consumable]!.value =
-        consumableInventory[consumable]!.value + 1;
+        consumableInventory[consumable]!.value + amount;
+    _databaseManager.consumableInventorySave({
+      consumable: consumableInventory[consumable]!.value,
+    });
   }
 
   void addIngridient(Ingridient ingridient, int amount) {
     ingridientInventory[ingridient]!.value =
         ingridientInventory[ingridient]!.value + amount;
+    _databaseManager.ingridientInventorySave({
+      ingridient: ingridientInventory[ingridient]!.value,
+    });
   }
 
   void useConsumable(Consumable consumable, int amount) {
     consumableInventory[consumable]!.value =
         consumableInventory[consumable]!.value - amount;
+    _databaseManager.consumableInventorySave({
+      consumable: consumableInventory[consumable]!.value,
+    });
   }
 
   void useIngridient(Ingridient ingridient, int amount) {
     ingridientInventory[ingridient]!.value =
         ingridientInventory[ingridient]!.value - amount;
+    _databaseManager.ingridientInventorySave({
+      ingridient: ingridientInventory[ingridient]!.value,
+    });
   }
 
   // Reload Data (used for Koupen, mostly in SplashPage...)
@@ -125,6 +133,18 @@ class ProgSystem {
       dateLogList[year]!.addAll({month: []});
     }
     dateLogList[year]![month] = logList;
+  }
+
+  void loadIngridientInventory(Map<Ingridient, int> amountMap) {
+    for (MapEntry<Ingridient, int> amountMapEntry in amountMap.entries) {
+      ingridientInventory[amountMapEntry.key]!.value = amountMapEntry.value;
+    }
+  }
+
+  void loadConsumableInventory(Map<Consumable, int> amountMap) {
+    for (MapEntry<Consumable, int> amountMapEntry in amountMap.entries) {
+      consumableInventory[amountMapEntry.key]!.value = amountMapEntry.value;
+    }
   }
 
   void updateLevelSystem() {

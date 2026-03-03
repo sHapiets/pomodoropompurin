@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 
 /// A foundation class that is inherited by all Selectables.
@@ -50,7 +51,7 @@ class PurinAreaSelectable extends PositionComponent
   void onMount() {
     super.onMount();
     hitbox.paint.color = const Color.fromARGB(124, 68, 137, 255);
-    hitbox.renderShape = true;
+    //hitbox.renderShape = true;
     add(sprite);
     add(hitbox);
     addOnLoadAnim();
@@ -114,6 +115,7 @@ class PurinAreaSelectable extends PositionComponent
   /// Refer to the overriding function Kotatsu.dart for more details...
   @override
   void onLongTapDown(TapDownEvent event) {
+    UIDisplayState.singleton.hide.value = true;
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(
       absolutePosition,

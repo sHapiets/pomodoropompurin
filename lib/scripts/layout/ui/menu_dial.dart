@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/layout/calendar_display/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_notes_menu.dart';
 
@@ -54,13 +55,13 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: PurinAreaStateManager.singleton.state,
+      valueListenable: UIDisplayState.singleton.hide,
       builder: (context, value, child) {
         return AnimatedPositioned(
-          duration: const Duration(milliseconds: 300),
+          duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           top: 40,
-          right: 40,
+          right: (value) ? -200 : 40,
           child: child!,
         );
       },

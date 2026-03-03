@@ -46,10 +46,13 @@ class _IngridientTileState extends State<IngridientTile>
   void processIngridients() {
     for (MapEntry<Ingridient, int> requiredIngridient
         in widget.ingridientIngridients.entries) {
-      final ingridientInventory =
-          progSystem.ingridientInventory[requiredIngridient.key]!;
-      ingridientInventory.value -= requiredIngridient.value;
+      progSystem.useIngridient(
+        requiredIngridient.key,
+        requiredIngridient.value,
+      );
     }
+
+    progSystem.addIngridient(widget.ingridient, 1);
   }
 
   final double iconSides = 60;

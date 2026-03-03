@@ -7,6 +7,7 @@ import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/cursor_sprite.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/effects/heart_particles.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_home.dart';
@@ -61,6 +62,7 @@ class PurinArea extends FlameGame
 
   @override
   void onTapDown(TapDownEvent event) {
+    UIDisplayState.singleton.hide.value = false;
     overlays.removeAll(overlays.activeOverlays);
 
     cursorSprite.removeFromParent();
@@ -109,6 +111,7 @@ class PurinArea extends FlameGame
 
   @override
   void onPanUpdate(DragUpdateInfo info) {
+    UIDisplayState.singleton.hide.value = false;
     overlays.removeAll(overlays.activeOverlays);
     if (purinAreaStateManager.state.value == "Moving") {
       cursorSprite.position = info.eventPosition.global;
@@ -139,6 +142,7 @@ class PurinArea extends FlameGame
         newScale.y.clamp(minScale, maxScale),
       );
     } else if (purinAreaStateManager.state.value == "Pet") {
+      UIDisplayState.singleton.hide.value = true;
       purin.updatePetDelta(info.delta.global);
       if (heartParticleTimer <= 0.03) {
         return;
@@ -152,6 +156,7 @@ class PurinArea extends FlameGame
 
   @override
   void onPanEnd(DragEndInfo info) {
+    UIDisplayState.singleton.hide.value = false;
     cursorSprite.removeFromParent();
     purinAreaStateManager.state.value = "Idle";
   }

@@ -181,13 +181,6 @@ class PomTimer {
       },
     );
 
-    restart = true;
-    isPlaying = false;
-    onBreak = false;
-    pomTimerDisplayStateManager.onBreak.value = false;
-    timeLeftSeconds = 0;
-    timeTotalSeconds = 0;
-
     /// Tell Koupen that the timer was stopped before connection is severed;
     /// and rewards was already awarded...
     _databaseManager.statusPomTimerSave('wasActive', false);
@@ -196,7 +189,15 @@ class PomTimer {
     timer.cancel();
 
     // Update outside
+    _databaseManager.dayTimeSecondsSave(timeTotalSeconds);
     _progSystem.addPomPoints(rewardPomPoints);
     pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
+
+    restart = true;
+    isPlaying = false;
+    onBreak = false;
+    pomTimerDisplayStateManager.onBreak.value = false;
+    timeLeftSeconds = 0;
+    timeTotalSeconds = 0;
   }
 }

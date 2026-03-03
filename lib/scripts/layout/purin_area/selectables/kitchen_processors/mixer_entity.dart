@@ -2,6 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 class MixerEntity extends PurinAreaSelectable {
@@ -39,6 +40,7 @@ class MixerEntity extends PurinAreaSelectable {
 
   @override
   void onLongTapDown(TapDownEvent event) {
+    UIDisplayState.singleton.hide.value = true;
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(
       absolutePosition,

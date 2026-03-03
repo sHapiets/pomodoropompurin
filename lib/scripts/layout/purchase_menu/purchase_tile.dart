@@ -30,6 +30,24 @@ class _PurchaseTileState extends State<PurchaseTile>
   double purchaseSpeed = 0.05;
   double purchaseIndicator = 0.0;
 
+  bool get insufficientPomPoints {
+    if (progSystem.pomPoints.value < widget.ingridient.price) {
+      return true;
+    }
+    return false;
+  }
+
+  void purchase() {
+    progSystem.usePomPoints(widget.ingridient.price);
+    progSystem.addIngridient(widget.ingridient, 1);
+  }
+
+  final displayCountTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 15,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
   @override
   void initState() {
     super.initState();
@@ -60,8 +78,14 @@ class _PurchaseTileState extends State<PurchaseTile>
     purchaseTimer?.cancel();
     purchaseTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
       setState(() {
+        if (insufficientPomPoints) {
+          timer.cancel();
+          return;
+        }
+
         purchaseIndicator = (purchaseIndicator + purchaseSpeed).clamp(0.0, 1.0);
         if (purchaseIndicator == 1.0) {
+          purchase();
           purchaseSpeed = (purchaseSpeed > 0.15) ? 0.2 : purchaseSpeed + 0.03;
           purchaseIndicator = 0;
         }
@@ -130,6 +154,20 @@ class _PurchaseTileState extends State<PurchaseTile>
                       value: purchaseIndicator,
                       backgroundColor: const Color.fromARGB(151, 221, 221, 221),
                       color: const Color.fromARGB(255, 255, 209, 24),
+                    ),
+                  ),
+
+                  /// ProcessConsumable Count
+                  Align(
+                    alignment: AlignmentGeometry.topLeft,
+                    child: Transform.translate(
+                      offset: Offset(-20, -5),
+                      child: SizedBox(
+                        child: Text(
+                          "${progSystem.ingridientInventory[widget.ingridient]!.value}",
+                          style: displayCountTextStyle,
+                        ),
+                      ),
                     ),
                   ),
                 ],

@@ -47,12 +47,13 @@ class _ConsumableTileState extends State<ConsumableTile>
   void processIngridients() {
     for (MapEntry<Ingridient, int> requiredIngridient
         in widget.ingridientIngridients.entries) {
-      final ingridientInventory =
-          progSystem.ingridientInventory[requiredIngridient.key]!;
-      ingridientInventory.value -= requiredIngridient.value;
+      progSystem.useIngridient(
+        requiredIngridient.key,
+        requiredIngridient.value,
+      );
     }
 
-    progSystem.consumableInventory[widget.consumable]!.value += 1;
+    progSystem.addConsumable(widget.consumable, 1);
   }
 
   final double iconSides = 60;

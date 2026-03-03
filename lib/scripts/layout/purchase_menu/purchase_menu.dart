@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_tile.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -51,6 +52,7 @@ class PurchaseMenu extends StatelessWidget {
                 right: 10,
                 child: IconButton(
                   onPressed: () {
+                    UIDisplayState.singleton.hide.value = false;
                     purinAreaKey.currentState!.currentGame.overlays.removeAll(
                       purinAreaKey
                           .currentState!

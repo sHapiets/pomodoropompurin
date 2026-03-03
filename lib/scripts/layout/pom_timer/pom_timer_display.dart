@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_main_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_open_timer_button.dart';
 
@@ -37,11 +38,19 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
   @override
   Widget build(BuildContext context) {
     // Animation for Opening Widget
-    return AnimatedPositioned(
-      duration: Duration(milliseconds: 500),
-      bottom: 0,
-      left: 0,
-      right: 0,
+    return ValueListenableBuilder(
+      valueListenable: UIDisplayState.singleton.hide,
+      builder: (context, value, child) {
+        return AnimatedPositioned(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          bottom: value ? -400 : 0,
+          left: 0,
+          right: 0,
+          child: child!,
+        );
+      },
+
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 1000),
         switchInCurve: Curves.easeInOutBack,
