@@ -24,9 +24,7 @@ class _PurinMainMenuState extends State<PurinMainMenu>
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 120), () {
-      loadAnimController.forward();
-    });
+    loadAnimController.forward();
   }
 
   @override

@@ -1,16 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_tile.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 class PurchaseMenu extends StatelessWidget {
-  const PurchaseMenu({super.key});
+  PurchaseMenu({super.key});
+
+  final oshiriLevel = ProgSystem.singleton.oshiriLevel.value;
+  final unlockedPurchasableMap = UnlocksFromLevel.purchasableIngridients;
+
+  List<Ingridient> getPurchasableList() {
+    final List<Ingridient> purchasableList = [];
+
+    for (final unlockedPurchaseEntry in unlockedPurchasableMap.entries) {
+      if (unlockedPurchaseEntry.key > oshiriLevel) {
+        continue;
+      }
+
+      purchasableList.addAll(unlockedPurchaseEntry.value);
+    }
+
+    return purchasableList;
+  }
 
   @override
   Widget build(BuildContext context) {
     const double menuWidth = 320;
     const double menuHeight = 520;
+
+    final purchasableList = getPurchasableList();
 
     return Material(
       color: Colors.black45, // dimmed background
@@ -82,7 +103,7 @@ class PurchaseMenu extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: GridView.builder(
-                    itemCount: Ingridient.values.length,
+                    itemCount: purchasableList.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -91,7 +112,7 @@ class PurchaseMenu extends StatelessWidget {
                           childAspectRatio: 0.7,
                         ),
                     itemBuilder: (context, index) {
-                      return PurchaseTile(ingridient: Ingridient.values[index]);
+                      return PurchaseTile(ingridient: purchasableList[index]);
                     },
                   ),
                 ),

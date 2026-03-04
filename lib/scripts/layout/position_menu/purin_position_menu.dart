@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_tile.dart';
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_tile.dart';

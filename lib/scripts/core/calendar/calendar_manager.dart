@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 
 /// A listenable class for the ProgCalendarDisplay widget, which updates or

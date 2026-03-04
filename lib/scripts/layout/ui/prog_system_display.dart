@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
-import 'package:pomodoropompurin/scripts/core/unlock/unlock_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/level_up_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -18,7 +18,7 @@ class ProgSystemDisplay extends StatefulWidget {
 class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   final assetManager = AssetManager.singleton;
   final progSystem = ProgSystem.singleton;
-  final unlockManager = UnlockManager.singleton;
+  final levelUpManager = LevelUpManager.singleton;
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
 

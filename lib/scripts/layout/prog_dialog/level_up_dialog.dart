@@ -1,74 +1,81 @@
 import 'package:flutter/material.dart';
 
-class UnlockDialog extends StatefulWidget {
-  const UnlockDialog({super.key, required this.unlockedAcquirables});
+class LevelUpDialog extends StatelessWidget {
+  const LevelUpDialog({
+    super.key,
+    required this.newLevel,
+    required this.levelRewards,
+  });
 
-  final List<List<dynamic>> unlockedAcquirables;
+  final int newLevel;
+  final List<List<dynamic>> levelRewards;
 
-  @override
-  State<UnlockDialog> createState() => _UnlockDialogState();
-}
-
-class _UnlockDialogState extends State<UnlockDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
-        padding: const EdgeInsets.all(20),
-        constraints: const BoxConstraints(maxHeight: 400, minWidth: 300),
+        padding: const EdgeInsets.all(24),
+        constraints: const BoxConstraints(maxHeight: 450, minWidth: 300),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              "Unlocked Items 🎉",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            /// 🎉 Header
+            Column(
+              children: [
+                const Text(
+                  "Oshiri Level Up!",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  "You reached Level $newLevel",
+                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
 
+            const SizedBox(height: 20),
+
+            /// Rewards list
             Expanded(
-              child: widget.unlockedAcquirables.isEmpty
-                  ? const Center(child: Text("No items unlocked yet."))
+              child: levelRewards.isEmpty
+                  ? const Center(child: Text("No new rewards this level."))
                   : ListView.separated(
-                      itemCount: widget.unlockedAcquirables.length,
-                      separatorBuilder: (_, __) => const Divider(height: 16),
+                      itemCount: levelRewards.length,
+                      separatorBuilder: (_, __) => const Divider(height: 20),
                       itemBuilder: (context, index) {
-                        final item = widget.unlockedAcquirables[index];
-
-                        // Example structure:
-                        // item[0] = title (String)
-                        // item[1] = subtitle (String)
-                        // item[2] = icon (IconData)  <-- optional
-                        // item[3] = trailing text (String) <-- optional
+                        final reward = levelRewards[index];
 
                         return Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            if (item.length > 2 && item[2] is IconData)
+                            /// Optional icon
+                            if (reward.length > 2 && reward[2] is IconData)
                               Padding(
                                 padding: const EdgeInsets.only(right: 12),
                                 child: Icon(
-                                  item[2],
+                                  reward[2],
                                   size: 28,
                                   color: Theme.of(context).primaryColor,
                                 ),
                               ),
 
-                            /// Title
+                            /// Title & subtitle
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item[0]?.toString() ?? "",
+                                    reward[0]?.toString() ?? "",
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16,
                                     ),
                                   ),
-                                  if (item.length > 1)
+                                  if (reward.length > 1)
                                     Text(
-                                      item[1]?.toString() ?? "",
+                                      reward[1]?.toString() ?? "",
                                       style: TextStyle(
                                         color: Colors.grey[600],
                                         fontSize: 14,
@@ -79,9 +86,9 @@ class _UnlockDialogState extends State<UnlockDialog> {
                             ),
 
                             /// Optional trailing info
-                            if (item.length > 3)
+                            if (reward.length > 3)
                               Text(
-                                item[3]?.toString() ?? "",
+                                reward[3]?.toString() ?? "",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -92,14 +99,14 @@ class _UnlockDialogState extends State<UnlockDialog> {
                     ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
             /// Close button
             Align(
               alignment: Alignment.centerRight,
-              child: TextButton(
+              child: ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text("Close"),
+                child: const Text("Awesome!"),
               ),
             ),
           ],

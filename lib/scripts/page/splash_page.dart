@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
@@ -42,8 +42,6 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
 
-  /* -------------------- PROGRESS HELPER -------------------- */
-
   Future<void> _runStep(String label, Future<void> Function() task) async {
     if (!mounted) return;
 
@@ -60,8 +58,6 @@ class _SplashPageState extends State<SplashPage> {
       _progress = _completedSteps / _totalSteps;
     });
   }
-
-  /* -------------------- MASTER PRELOAD -------------------- */
 
   Future<void> _preloadAll() async {
     _calculateTotalSteps();
@@ -89,8 +85,6 @@ class _SplashPageState extends State<SplashPage> {
     // 3 asset/purin loads
   }
 
-  /* -------------------- DATA PRELOAD -------------------- */
-
   Future<void> _preloadData() async {
     await _runStep("Loading Pom Points...", () async {
       _progSystem.loadPomPoints(
@@ -106,6 +100,9 @@ class _SplashPageState extends State<SplashPage> {
       _progSystem.loadOshiriPoints(
         await _databaseManager.userDataLoad('oshiriPoints'),
       );
+      _progSystem.loadAccTotalTime(
+        await _databaseManager.userDataLoad('accTotalTime'),
+      );
     });
 
     await _runStep("Loading Ingredients...", () async {
@@ -120,11 +117,7 @@ class _SplashPageState extends State<SplashPage> {
       );
     });
 
-    await _runStep("Loading Purin Variables...", () async {
-      _progSystem.loadAcquiredPurinVars(
-        await _databaseManager.acquiredPurinVarLoad(),
-      );
-    });
+    await _runStep("Loading Purin Variables...", () async {});
 
     await _runStep("Loading Calendar...", () async {
       _progSystem.dateLogList = await _databaseManager.calendarLoad();

@@ -6,6 +6,7 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 class PomTimerOpenButton extends StatefulWidget {
   const PomTimerOpenButton({super.key});

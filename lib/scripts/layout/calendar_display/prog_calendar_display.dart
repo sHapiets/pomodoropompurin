@@ -1,7 +1,7 @@
 import 'package:contribution_heatmap/contribution_heatmap.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/calendar/calendar_manager.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 
 class ProgCalendarDisplay extends StatefulWidget {
   const ProgCalendarDisplay({super.key});

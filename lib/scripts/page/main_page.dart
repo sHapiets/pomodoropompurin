@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/main.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/chopping_board.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/mixer.dart';
@@ -8,6 +9,8 @@ import 'package:pomodoropompurin/scripts/core/kitchen/refrigerator.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/stove.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/sink.dart' as sink;
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/level_up_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
@@ -34,10 +37,34 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final assetManager = AssetManager.singleton;
   final pomTimer = PomTimer.singleton;
+  final levelUpManager = LevelUpManager.singleton;
+  final shoeAchievementManager = ShoeAchievementManager.singleton;
 
   @override
   void initState() {
+    levelUpManager.addListener(showLevelUpDialog);
+    shoeAchievementManager.addListener(showShoeAchievementDialog);
     super.initState();
+  }
+
+  void showLevelUpDialog() async {
+    await showDialog(
+      context: navigatorKey.currentContext!,
+      barrierDismissible: false,
+      builder: (context) {
+        return levelUpManager.levelUpDialog;
+      },
+    );
+  }
+
+  void showShoeAchievementDialog() async {
+    await showDialog(
+      context: navigatorKey.currentContext!,
+      barrierDismissible: false,
+      builder: (context) {
+        return shoeAchievementManager.shoeAchievementDialog;
+      },
+    );
   }
 
   @override

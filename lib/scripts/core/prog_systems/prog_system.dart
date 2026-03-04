@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
@@ -18,6 +19,13 @@ class ProgSystem {
   ValueNotifier<int> pomPoints = ValueNotifier<int>(0);
   ValueNotifier<int> milkJugs = ValueNotifier<int>(0);
   ValueNotifier<int> oshiriPoints = ValueNotifier<int>(0);
+
+  ValueNotifier<int> accTotalTime = ValueNotifier(0);
+  Map<ShoeAchievement, bool> acquiredShoeAchievementBool = {
+    ShoeAchievement.none: true,
+    ShoeAchievement.slippers: false,
+    ShoeAchievement.sneakers: false,
+  };
 
   Map<int, Map<int, List<DateLog>>> dateLogList = {};
   List<DateLog> dateLogfromMonth(int year, int month) {
@@ -67,6 +75,16 @@ class ProgSystem {
   void addOshiriPoints(int points) {
     oshiriPoints.value += points;
     _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
+  }
+
+  void addAccTotalTime(int seconds) {
+    accTotalTime.value += seconds;
+    _databaseManager.userDataSave('accTotalTime', accTotalTime.value);
+  }
+
+  void acquireShoeAchievement(ShoeAchievement newShoeAchievement) {
+    acquiredShoeAchievementBool[newShoeAchievement] = true;
+    _databaseManager.acquireShoeAchievementSave(newShoeAchievement);
   }
 
   void addDayTimeSeconds(int seconds) {
@@ -122,17 +140,13 @@ class ProgSystem {
     });
   }
 
-  void acquirePurinVar(PurinVars purinVar) {
-    acquiredPurinVars.add(purinVar);
-    _databaseManager.acquiredPurinVarsSave(acquiredPurinVars);
-  }
-
   // Reload Data (used for Koupen, mostly in SplashPage...)
   void loadPomPoints(int points) =>
       pomPoints.value = points; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadMilkJugs(int jugs) =>
       milkJugs.value = jugs; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadOshiriPoints(int points) => oshiriPoints.value = points;
+  void loadAccTotalTime(int totalTime) => accTotalTime.value = totalTime;
   void loadDayTimeSeconds(int seconds) => dayTimeSeconds.value = seconds;
   void loadDateLogMonth(int year, int month, List<DateLog> logList) {
     if (!dateLogList.containsKey(year)) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_tile.dart';
 
 class PurinEquipMenu extends StatefulWidget {
@@ -16,6 +17,23 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
 
   final double menuWidth = 200;
   final double menuHeight = 250;
+
+  final List<PurinVars> acquiredPurinVars = [];
+  final unlockPurinVarsMap = UnlocksFromLevel.acquiredPurinVars;
+  final oshiriLevel = ProgSystem.singleton.oshiriLevel.value;
+
+  @override
+  void initState() {
+    super.initState();
+
+    for (final unlockPurinVarsEntry in unlockPurinVarsMap.entries) {
+      if (unlockPurinVarsEntry.key > oshiriLevel) {
+        return;
+      }
+
+      acquiredPurinVars.add(unlockPurinVarsEntry.value);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +61,10 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
                   ),
                   itemBuilder: (context, index) {
                     return PurinEquipTile(
-                      item:
-                          acquirables.purinVars[progSystem.acquiredPurinVars
-                              .toList()[index]]!,
+                      item: acquirables.purinVars[acquiredPurinVars[index]]!,
                     );
                   },
-                  itemCount: progSystem.acquiredPurinVars.length,
+                  itemCount: acquiredPurinVars.length,
                 ),
               ),
             ],

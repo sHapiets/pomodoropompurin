@@ -13,6 +13,7 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 
 /// The definitive Flame component of [Purin] on [PurinArea].
 /// Handles the current configurations of [Purin] during runtime, such
@@ -148,6 +149,7 @@ class PurinEntity extends PositionComponent
 
   @override
   void onLongTapDown(TapDownEvent event) {
+    UIDisplayState.singleton.hide.value = true;
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(
       absolutePosition,

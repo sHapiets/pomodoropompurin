@@ -1,7 +1,7 @@
 import 'dart:async' as async_lib;
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
@@ -48,22 +49,6 @@ class DatabaseManager {
     }
 
     return loadedInventory;
-  }
-
-  Future<Set<PurinVars>> acquiredPurinVarLoad() async {
-    Set<PurinVars> loadedPurinVars = {};
-
-    final userRefData = await userRef.get();
-    final purinVars = userRefData['purinVar'];
-    for (final purinVar in purinVars) {
-      loadedPurinVars.add(
-        PurinVars.values.firstWhere((purinVarValue) {
-          return purinVarValue.name == purinVar;
-        }),
-      );
-    }
-
-    return loadedPurinVars;
   }
 
   Future<dynamic> userConfigTimerLoad(String configTimerData) async {
@@ -134,8 +119,8 @@ class DatabaseManager {
     });
   }
 
-  Future<void> userDataSave(String user, dynamic data) async {
-    await userRef.update({user: data});
+  Future<void> userDataSave(String userData, dynamic data) async {
+    await userRef.update({userData: data});
   }
 
   Future<void> ingridientInventorySave(Map<Ingridient, int> amountMap) async {
@@ -164,11 +149,15 @@ class DatabaseManager {
     await userRef.update(updateMap);
   }
 
-  Future<void> acquiredPurinVarsSave(Set<PurinVars> purinVars) async {
-    userRef.set({
-      "purinVar": purinVars.map((purinVar) {
-        return purinVar.name;
-      }).toList(),
+  Future<void> acquireShoeAchievementSave(
+    ShoeAchievement acquiredShoeAchievement,
+  ) async {
+    final shoeAchievementMapRef = userRef
+        .collection('acquired')
+        .doc('shoeAchievement');
+
+    shoeAchievementMapRef.update({
+      'acquiredBoolMap.${acquiredShoeAchievement.name}': true,
     });
   }
 

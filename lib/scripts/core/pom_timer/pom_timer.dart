@@ -8,7 +8,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/layout/custom_dialogs.dart';
-import 'package:pomodoropompurin/scripts/core/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/end_pom_timer_dialog.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
@@ -178,6 +178,7 @@ class PomTimer {
 
     // Update outside
     _progSystem.addDayTimeSeconds(timeTotalSeconds);
+    _progSystem.addAccTotalTime(timeTotalSeconds);
     _progSystem.addPomPoints(rewardPomPoints);
     pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
 
