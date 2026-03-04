@@ -4,6 +4,7 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_
 import 'package:pomodoropompurin/scripts/core/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
+import 'package:pomodoropompurin/scripts/core/unlock/unlock_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -17,6 +18,7 @@ class ProgSystemDisplay extends StatefulWidget {
 class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   final assetManager = AssetManager.singleton;
   final progSystem = ProgSystem.singleton;
+  final unlockManager = UnlockManager.singleton;
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
 
@@ -55,10 +57,10 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
               width: expGaugeWidth,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color.fromARGB(167, 211, 250, 69),
+                color: const Color.fromARGB(167, 248, 229, 60),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromARGB(167, 33, 161, 112),
+                    color: const Color.fromARGB(167, 183, 129, 43),
                     offset: Offset(5, 5),
                     blurStyle: BlurStyle.inner,
                     spreadRadius: -4,
@@ -163,7 +165,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     /// OSHIRILEVEL TEXT
                     Center(
                       child: Padding(
-                        padding: EdgeInsetsGeometry.only(top: 10),
+                        padding: EdgeInsetsGeometry.only(top: 5),
                         child: ListenableBuilder(
                           listenable: progSystem.oshiriLevel,
                           builder: (context, child) {
@@ -171,18 +173,34 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                               '${progSystem.oshiriLevel.value}',
                               style: TextStyle(
                                 fontFamily: 'Nunito',
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 24,
                                 color: const Color.fromARGB(255, 255, 255, 255),
                                 shadows: [
                                   Shadow(
-                                    color: const Color.fromARGB(151, 0, 0, 0),
-                                    offset: Offset(1.5, 1.5),
+                                    color: const Color.fromARGB(68, 0, 0, 0),
+                                    offset: Offset(2, 2),
                                   ),
                                 ],
                               ),
                             );
                           },
+                        ),
+                      ),
+                    ),
+
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.fromLTRB(2, 50, 0, 0),
+                        child: Text(
+                          '*',
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: const Color.fromARGB(255, 169, 105, 62),
+                            shadows: [],
+                          ),
                         ),
                       ),
                     ),

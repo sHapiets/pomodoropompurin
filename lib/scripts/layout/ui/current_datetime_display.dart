@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 
 class CurrentDatetimeDisplay extends StatefulWidget {
   const CurrentDatetimeDisplay({super.key});
@@ -58,11 +59,18 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
-      duration: Duration(),
-      top: 0,
-      left: 0,
-      right: 0,
+    return ValueListenableBuilder(
+      valueListenable: UIDisplayState.singleton.hide,
+      builder: (context, value, child) {
+        return AnimatedPositioned(
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          left: 0,
+          right: 0,
+          top: value ? -200 : 0,
+          child: child!,
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -71,17 +79,11 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
             Container(
               width: 100,
               height: 30,
-              padding: EdgeInsets.fromLTRB(9, 3, 5, 0),
+              padding: EdgeInsets.fromLTRB(9, 1, 5, 0),
               margin: EdgeInsetsGeometry.only(top: 2),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(108, 198, 220, 220),
+                color: const Color.fromARGB(116, 121, 125, 125),
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(3, 3),
-                    color: const Color.fromARGB(184, 146, 161, 178),
-                  ),
-                ],
               ),
               child: Row(
                 spacing: 2,
@@ -94,11 +96,13 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                     style: TextStyle(
                       fontFamily: 'Nunito',
                       fontSize: 20,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
                       shadows: [
                         Shadow(
-                          color: const Color.fromARGB(136, 0, 0, 0),
+                          color: const Color.fromARGB(51, 0, 0, 0),
                           offset: Offset(1.5, 1.5),
+                          blurRadius: 1,
                         ),
                       ],
                     ),
@@ -107,10 +111,15 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                     ':$second',
                     style: TextStyle(
                       fontFamily: 'Nunito',
+                      fontWeight: FontWeight.bold,
                       fontSize: 7,
                       color: Colors.white,
                       shadows: [
-                        Shadow(color: Colors.black12, offset: Offset(4, 4)),
+                        Shadow(
+                          color: const Color.fromARGB(35, 0, 0, 0),
+                          offset: Offset(1.5, 1.5),
+                          blurRadius: 1,
+                        ),
                       ],
                     ),
                   ),

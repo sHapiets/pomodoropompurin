@@ -169,18 +169,6 @@ class PomTimer {
     pomTimerDisplayStateManager.closePomTimer();
     pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.exit;
 
-    await showDialog(
-      context: navigatorKey.currentContext!,
-      barrierDismissible: false,
-      builder: (context) {
-        return EndPomTimerDialog(
-          seconds: timeTotalSeconds,
-          points: rewardPomPoints,
-          onClose: () => Navigator.pop(context),
-        );
-      },
-    );
-
     /// Tell Koupen that the timer was stopped before connection is severed;
     /// and rewards was already awarded...
     _databaseManager.statusPomTimerSave('wasActive', false);
@@ -192,6 +180,18 @@ class PomTimer {
     _progSystem.addDayTimeSeconds(timeTotalSeconds);
     _progSystem.addPomPoints(rewardPomPoints);
     pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
+
+    await showDialog(
+      context: navigatorKey.currentContext!,
+      barrierDismissible: false,
+      builder: (context) {
+        return EndPomTimerDialog(
+          seconds: timeTotalSeconds,
+          points: rewardPomPoints,
+          onClose: () => Navigator.pop(context),
+        );
+      },
+    );
 
     restart = true;
     isPlaying = false;

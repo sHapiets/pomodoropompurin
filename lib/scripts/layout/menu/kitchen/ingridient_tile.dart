@@ -244,6 +244,7 @@ class _IngridientTileState extends State<IngridientTile>
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            spacing: 5,
                             children: [
                               Container(
                                 width: 20,

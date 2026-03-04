@@ -86,7 +86,7 @@ class _PurchaseTileState extends State<PurchaseTile>
         purchaseIndicator = (purchaseIndicator + purchaseSpeed).clamp(0.0, 1.0);
         if (purchaseIndicator == 1.0) {
           purchase();
-          purchaseSpeed = (purchaseSpeed > 0.15) ? 0.2 : purchaseSpeed + 0.03;
+          purchaseSpeed = (purchaseSpeed > 0.15) ? 0.15 : purchaseSpeed + 0.03;
           purchaseIndicator = 0;
         }
       });
