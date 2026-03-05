@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
 class PurchaseTile extends StatefulWidget {
   const PurchaseTile({super.key, required this.ingridient});
@@ -15,6 +16,7 @@ class PurchaseTile extends StatefulWidget {
 
 class _PurchaseTileState extends State<PurchaseTile>
     with TickerProviderStateMixin {
+  final assetManager = AssetManager.singleton;
   final progSystem = ProgSystem.singleton;
 
   final double iconSize = 60;
@@ -188,25 +190,40 @@ class _PurchaseTileState extends State<PurchaseTile>
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 3),
 
             /// PRICE
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.monetization_on,
-                  size: 14,
-                  color: Color.fromARGB(255, 212, 175, 55),
+                SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: Image.asset(
+                    assetManager.flutterAssetPaths['pP_icon']!,
+                  ),
                 ),
                 const SizedBox(width: 4),
-                Text(
-                  '${widget.ingridient.price}',
-                  style: const TextStyle(
-                    fontFamily: 'Fredoka',
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 1,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(197, 200, 107, 53),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    '${widget.ingridient.price}',
+                    style: const TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(color: Colors.black26, offset: Offset(1, 1)),
+                      ],
+                    ),
                   ),
                 ),
               ],

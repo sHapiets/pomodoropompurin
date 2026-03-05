@@ -75,17 +75,17 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.easeInOutCubic,
-                width: value ? 60 : 0,
-                height: value ? 200 : 0,
+                width: value ? 60 : 60,
+                height: value ? 200 : 60,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(84, 89, 89, 89),
+                  color: const Color.fromARGB(197, 255, 255, 255),
                   borderRadius: BorderRadius.circular(40),
                 ),
               );
             },
           ),
 
-          /// 🔘 BUTTON COLUMN
+          ///  BUTTON COLUMN
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -94,7 +94,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                 iconSize: 40,
                 onPressed: toggleMenu,
                 icon: AnimatedIcon(
-                  color: Colors.white,
+                  color: const Color.fromARGB(255, 40, 40, 40),
                   icon: AnimatedIcons.menu_close,
                   progress: menuAnimation,
                 ),
@@ -126,7 +126,10 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                     );
                     toggleMenu();
                   },
-                  icon: const Icon(Icons.list_alt_rounded, color: Colors.white),
+                  icon: const Icon(
+                    Icons.list_alt_rounded,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
                 ),
               ),
 
@@ -167,7 +170,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                   },
                   icon: const Icon(
                     Icons.calendar_today_rounded,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
               ),

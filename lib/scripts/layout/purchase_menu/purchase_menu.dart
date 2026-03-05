@@ -103,14 +103,11 @@ class PurchaseMenu extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(right: 5),
-                      child: GestureDetector(
-                        onTap: () => progSystem.addOshiriPoints(100),
-                        child: SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: Image.asset(
-                            assetManager.flutterAssetPaths['pP_icon']!,
-                          ),
+                      child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: Image.asset(
+                          assetManager.flutterAssetPaths['pP_icon']!,
                         ),
                       ),
                     ),
