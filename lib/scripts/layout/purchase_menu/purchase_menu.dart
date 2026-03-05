@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_tile.dart';
+import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 class PurchaseMenu extends StatelessWidget {
   PurchaseMenu({super.key});
 
+  final progSystem = ProgSystem.singleton;
+  final assetManager = AssetManager.singleton;
   final oshiriLevel = ProgSystem.singleton.oshiriLevel.value;
   final unlockedPurchasableMap = UnlocksFromLevel.purchasableIngridients;
 
@@ -87,6 +91,63 @@ class PurchaseMenu extends StatelessWidget {
                     color: Color(0xFF006064),
                     size: 26,
                   ),
+                ),
+              ),
+
+              /// CURRENCY DISPLAY
+              Positioned(
+                top: 24,
+                right: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: GestureDetector(
+                        onTap: () => progSystem.addOshiriPoints(100),
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset(
+                            assetManager.flutterAssetPaths['pP_icon']!,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(197, 200, 107, 53),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: ValueListenableBuilder(
+                        valueListenable: progSystem.pomPoints,
+                        builder: (context, value, child) {
+                          return Text(
+                            NumberFormat(
+                              '#,##0',
+                              'en_US',
+                            ).format(progSystem.pomPoints.value),
+                            style: const TextStyle(
+                              fontFamily: 'Nunito',
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black26,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
