@@ -119,7 +119,11 @@ class _SplashPageState extends State<SplashPage> {
       );
     });
 
-    await _runStep("Loading Purin Variables...", () async {});
+    await _runStep("Loading Purin Variables...", () async {
+      _progSystem.loadAcquiredShoeAchievementBool(
+        await _databaseManager.acquiredShoeAchievementLoad(),
+      );
+    });
 
     await _runStep("Loading Calendar...", () async {
       _progSystem.dateLogList = await _databaseManager.calendarLoad();

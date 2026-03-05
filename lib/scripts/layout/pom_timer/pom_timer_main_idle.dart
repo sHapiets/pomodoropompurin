@@ -122,7 +122,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                           ),
 
                           WidgetPointer(
-                            value: 43,
+                            value: 42.7,
                             offset: -50 * gaugeTween.value,
                             child: GestureDetector(
                               onTapDown: (details) =>
@@ -131,17 +131,22 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                 '-focus-',
                                 style: TextStyle(
                                   fontFamily: 'Fredoka',
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w700,
                                   fontSize: 25 * gaugeTween.value,
                                   color: const Color.fromARGB(
-                                    212,
+                                    221,
                                     255,
                                     255,
                                     255,
                                   ),
                                   shadows: [
                                     Shadow(
-                                      color: const Color.fromARGB(106, 0, 0, 0),
+                                      color: const Color.fromARGB(
+                                        255,
+                                        42,
+                                        148,
+                                        148,
+                                      ),
                                       offset: Offset(2, 2),
                                     ),
                                   ],
@@ -210,6 +215,66 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               ),
                             ),
                           ),
+                          /* 
+                          WidgetPointer(
+                            value: 0,
+                            offset: -50 * gaugeTween.value,
+                            child: Transform.translate(
+                              offset: Offset(10, 10),
+                              child: GestureDetector(
+                                onTapDown: (details) =>
+                                    gaugeAnimController.forward(),
+                                child: IconButton(
+                                  onPressed: () {
+                                    if (timeSetWorkMinutes > 1) {
+                                      timeSetWorkMinutes--;
+                                      setState(() {});
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.remove_circle_rounded,
+                                    color: Colors.white,
+                                    shadows: [
+                                      const Shadow(
+                                        color: Colors.black12,
+                                        offset: Offset(2, 2),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          WidgetPointer(
+                            value: 90,
+                            offset: -50 * gaugeTween.value,
+                            child: Transform.translate(
+                              offset: Offset(-10, 10),
+                              child: GestureDetector(
+                                onTapDown: (details) =>
+                                    gaugeAnimController.forward(),
+                                child: IconButton(
+                                  onPressed: () {
+                                    if (timeSetWorkMinutes < 90) {
+                                      timeSetWorkMinutes++;
+                                      setState(() {});
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.add_circle_rounded,
+                                    color: Colors.white,
+                                    shadows: [
+                                      const Shadow(
+                                        color: Colors.black12,
+                                        offset: Offset(2, 2),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ), */
                         ],
                       ),
 
@@ -272,6 +337,41 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               ),
                             ),
                           ),
+                          WidgetPointer(
+                            value: 15.35,
+                            offset: -50 * (1.2 - gaugeTween.value),
+                            child: GestureDetector(
+                              onTapDown: (details) =>
+                                  gaugeAnimController.reverse(),
+                              child: IgnorePointer(
+                                child: Text(
+                                  '-break-',
+                                  style: TextStyle(
+                                    fontFamily: 'Fredoka',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 25 * (1.2 - gaugeTween.value),
+                                    color: const Color.fromARGB(
+                                      221,
+                                      255,
+                                      255,
+                                      255,
+                                    ),
+                                    shadows: [
+                                      Shadow(
+                                        color: const Color.fromARGB(
+                                          255,
+                                          163,
+                                          89,
+                                          32,
+                                        ),
+                                        offset: Offset(2, 2),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
 
                           WidgetPointer(
                             enableDragging: true,
@@ -291,43 +391,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                 onTapDown: (details) =>
                                     gaugeAnimController.reverse(),
                                 child: Image.asset(
-                                  assetManager.flutterAssetPaths['pT_WP']!,
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          WidgetPointer(
-                            value: 15.35,
-                            offset: -50 * (1.2 - gaugeTween.value),
-                            child: GestureDetector(
-                              onTapDown: (details) =>
-                                  gaugeAnimController.reverse(),
-                              child: IgnorePointer(
-                                child: Text(
-                                  '-break-',
-                                  style: TextStyle(
-                                    fontFamily: 'Fredoka',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 25 * (1.2 - gaugeTween.value),
-                                    color: const Color.fromARGB(
-                                      212,
-                                      255,
-                                      255,
-                                      255,
-                                    ),
-                                    shadows: [
-                                      Shadow(
-                                        color: const Color.fromARGB(
-                                          106,
-                                          0,
-                                          0,
-                                          0,
-                                        ),
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
-                                  ),
+                                  assetManager.flutterAssetPaths['pT_BP']!,
                                 ),
                               ),
                             ),

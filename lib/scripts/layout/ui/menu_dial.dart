@@ -92,14 +92,30 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
             mainAxisSize: MainAxisSize.min,
             children: [
               /// MAIN MENU BUTTON
-              IconButton(
-                iconSize: 40,
-                onPressed: toggleMenu,
-                icon: AnimatedIcon(
-                  color: const Color.fromARGB(255, 40, 40, 40),
-                  icon: AnimatedIcons.menu_close,
-                  progress: menuAnimation,
-                ),
+              Stack(
+                children: [
+                  Transform.translate(
+                    offset: Offset(2, 2),
+                    child: IconButton(
+                      iconSize: 40,
+                      onPressed: toggleMenu,
+                      icon: AnimatedIcon(
+                        color: const Color.fromARGB(76, 115, 115, 115),
+                        icon: AnimatedIcons.menu_close,
+                        progress: menuAnimation,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 40,
+                    onPressed: toggleMenu,
+                    icon: AnimatedIcon(
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      icon: AnimatedIcons.menu_close,
+                      progress: menuAnimation,
+                    ),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 20),

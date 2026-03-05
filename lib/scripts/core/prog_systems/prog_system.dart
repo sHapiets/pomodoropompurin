@@ -147,6 +147,12 @@ class ProgSystem {
       milkJugs.value = jugs; // USE ONLY FOR SPLASHSCREEN (initial loading..)
   void loadOshiriPoints(int points) => oshiriPoints.value = points;
   void loadAccTotalTime(int totalTime) => accTotalTime.value = totalTime;
+  void loadAcquiredShoeAchievementBool(
+    Map<ShoeAchievement, bool> acquiredShoeAchievements,
+  ) {
+    acquiredShoeAchievementBool = acquiredShoeAchievements;
+  }
+
   void loadDayTimeSeconds(int seconds) => dayTimeSeconds.value = seconds;
   void loadDateLogMonth(int year, int month, List<DateLog> logList) {
     if (!dateLogList.containsKey(year)) {

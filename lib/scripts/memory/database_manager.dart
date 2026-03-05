@@ -27,6 +27,29 @@ class DatabaseManager {
     return dataDoc[userData];
   }
 
+  Future<Map<ShoeAchievement, bool>> acquiredShoeAchievementLoad() async {
+    final Map<ShoeAchievement, bool> shoeAchievementMap = {};
+    shoeAchievementMap.addAll({ShoeAchievement.none: true});
+
+    final acquiredShoeAchievementDoc = await userRef
+        .collection('acquired')
+        .doc('shoeAchievement')
+        .get();
+
+    final loadedShoeAchievementMap =
+        acquiredShoeAchievementDoc['acquiredBoolMap'];
+
+    for (final shoeAchievementMapEntry in loadedShoeAchievementMap.entries) {
+      final shoeAchievement = ShoeAchievement.values.byName(
+        shoeAchievementMapEntry.key,
+      );
+      final acquiredBool = shoeAchievementMapEntry.value;
+      shoeAchievementMap.addAll({shoeAchievement: acquiredBool});
+    }
+
+    return shoeAchievementMap;
+  }
+
   Future<Map<Ingridient, int>> ingridientInventoryLoad() async {
     Map<Ingridient, int> loadedInventory = {};
 

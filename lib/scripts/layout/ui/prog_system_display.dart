@@ -122,7 +122,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                                 RangePointer(
                                   value: progSystem.oshiriRemainder.value
                                       .toDouble(),
-                                  width: 0.2,
+                                  width: 0.18,
                                   color: const Color.fromARGB(
                                     197,
                                     255,
@@ -142,9 +142,10 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                         );
                       },
                     ),
-                    Center(
+                    Align(
+                      alignment: Alignment.center,
                       child: Padding(
-                        padding: EdgeInsetsGeometry.only(bottom: 30),
+                        padding: EdgeInsetsGeometry.only(bottom: 20),
                         child: Text(
                           'Level',
                           style: TextStyle(
@@ -166,7 +167,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     /// OSHIRILEVEL TEXT
                     Center(
                       child: Padding(
-                        padding: EdgeInsetsGeometry.only(top: 5),
+                        padding: EdgeInsetsGeometry.only(top: 15),
                         child: ListenableBuilder(
                           listenable: progSystem.oshiriLevel,
                           builder: (context, child) {
@@ -192,14 +193,14 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
 
                     Center(
                       child: Padding(
-                        padding: EdgeInsetsGeometry.fromLTRB(2, 50, 0, 0),
+                        padding: EdgeInsetsGeometry.only(bottom: 30),
                         child: Text(
                           '*',
                           style: TextStyle(
                             fontFamily: 'Nunito',
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
-                            color: const Color.fromARGB(255, 169, 105, 62),
+                            color: const Color.fromARGB(255, 255, 255, 255),
                             shadows: [],
                           ),
                         ),
@@ -276,7 +277,10 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     child: SizedBox(
                       height: 30,
                       width: 30,
-                      child: Icon(Icons.timeline_rounded),
+                      child: Icon(
+                        Icons.today_rounded,
+                        color: const Color.fromARGB(255, 31, 150, 108),
+                      ),
                     ),
                   ),
                   Container(

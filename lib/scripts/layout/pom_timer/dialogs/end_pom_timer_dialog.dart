@@ -107,16 +107,31 @@ class EndPomTimerDialog extends StatelessWidget {
             ),
 
             const SizedBox(height: 12),
-
             // Points Display
-            Text(
-              "+ $pomPoints points ⭐",
-              style: const TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
-                color: Color(0xFF6D4C41),
-              ),
+            Column(
+              children: [
+                Text(
+                  "+ $pomPoints Pom Points",
+                  style: const TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF6D4C41),
+                  ),
+                ),
+
+                const SizedBox(height: 6),
+
+                Text(
+                  "+ $oshiriPoints Oshiri Points",
+                  style: const TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF8D6E63),
+                  ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 28),
