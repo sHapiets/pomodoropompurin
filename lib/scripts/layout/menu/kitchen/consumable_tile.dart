@@ -74,6 +74,7 @@ class _ConsumableTileState extends State<ConsumableTile>
   final displayCountTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
     fontSize: 15,
+    fontWeight: FontWeight.w600,
     color: Color.fromARGB(255, 0, 0, 0),
   );
 

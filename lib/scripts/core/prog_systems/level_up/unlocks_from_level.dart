@@ -21,7 +21,7 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 class UnlocksFromLevel {
   static Map<int, List<Ingridient>> purchasableIngridients = {
     1: [Ingridient.milk, Ingridient.eggs],
-    2: [Ingridient.cookedRice],
+    2: [Ingridient.butter],
   };
 
   static Map<int, PurinVars> acquiredPurinVars = {

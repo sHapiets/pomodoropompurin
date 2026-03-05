@@ -86,15 +86,9 @@ class _TaskNoteEditorState extends State<TaskNoteEditor> {
                       textInputAction: TextInputAction.next,
                       style: TextStyle(
                         fontFamily: 'Fredoka',
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         fontSize: 20,
                         color: Color.fromARGB(183, 0, 0, 0),
-                        shadows: [
-                          Shadow(
-                            color: Color.fromARGB(125, 0, 0, 0),
-                            offset: Offset(1, 1),
-                          ),
-                        ],
                       ),
                       decoration: const InputDecoration(
                         icon: Icon(Icons.text_fields_rounded),

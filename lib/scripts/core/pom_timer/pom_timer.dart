@@ -7,7 +7,6 @@ import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
-import 'package:pomodoropompurin/scripts/layout/custom_dialogs.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/end_pom_timer_dialog.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
@@ -29,7 +28,6 @@ class PomTimer {
   final purin = Purin.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
   final _progSystem = ProgSystem.singleton;
-  final _customDialogs = CustomDialogs.singleton;
   final _databaseManager = DatabaseManager.singleton;
 
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
@@ -165,6 +163,9 @@ class PomTimer {
     }
 
     int rewardPomPoints = PomPointsConversion.fromSeconds(timeTotalSeconds);
+    int rewardOshiriPoints = OshiriPointsConversion.fromSeconds(
+      timeTotalSeconds,
+    );
 
     pomTimerDisplayStateManager.closePomTimer();
     pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.exit;
@@ -188,7 +189,8 @@ class PomTimer {
       builder: (context) {
         return EndPomTimerDialog(
           seconds: timeTotalSeconds,
-          points: rewardPomPoints,
+          pomPoints: rewardPomPoints,
+          oshiriPoints: rewardOshiriPoints,
           onClose: () => Navigator.pop(context),
         );
       },

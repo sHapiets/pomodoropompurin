@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 class EndPomTimerDialog extends StatelessWidget {
   final int seconds;
-  final int points;
+  final int pomPoints;
+  final int oshiriPoints;
   final VoidCallback onClose;
 
   const EndPomTimerDialog({
     Key? key,
     required this.seconds,
-    required this.points,
+    required this.pomPoints,
+    required this.oshiriPoints,
     required this.onClose,
   }) : super(key: key);
 
@@ -108,7 +110,7 @@ class EndPomTimerDialog extends StatelessWidget {
 
             // Points Display
             Text(
-              "+ $points points ⭐",
+              "+ $pomPoints points ⭐",
               style: const TextStyle(
                 fontFamily: 'Nunito',
                 fontSize: 18,

@@ -45,7 +45,6 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
     "keep going",
     "you'll get there",
     "water?",
-    "",
   ];
 
   ///
