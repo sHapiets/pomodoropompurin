@@ -31,6 +31,11 @@ class TaskNoteManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleDone(int index) {
+    taskNotes[index].isDone = !taskNotes[index].isDone;
+    notifyListeners();
+  }
+
   void moveUp(int noteIndex) {
     if (noteIndex >= 1) {
       TaskNote taskNotePlaceholder = taskNotes[noteIndex];

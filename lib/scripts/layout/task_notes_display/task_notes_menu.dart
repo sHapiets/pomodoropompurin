@@ -49,7 +49,10 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
           },
         );
       },
-      icon: Icon(Icons.add, color: const Color.fromARGB(255, 255, 183, 95)),
+      icon: Icon(
+        Icons.add_box_sharp,
+        color: const Color.fromARGB(255, 255, 183, 95),
+      ),
     );
   }
 
@@ -72,7 +75,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
               width: 310,
               height: 250,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(200, 255, 171, 67),
+                color: const Color.fromARGB(255, 238, 171, 89),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -84,7 +87,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
               width: 320,
               height: 260,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(179, 255, 220, 187),
+                color: const Color.fromARGB(143, 206, 113, 51),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -139,7 +142,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
                             Center(child: addTaskNoteButton),
                             Center(
                               child: Text(
-                                'this list is suspiciously empty...',
+                                'add your task notes here',
                                 style: TextStyle(
                                   fontFamily: 'Fredoka',
                                   fontWeight: FontWeight.w500,
