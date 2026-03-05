@@ -1,5 +1,6 @@
 class PomPointsConversion {
   static int fromSeconds(int seconds) {
-    return seconds;
+    final points = (seconds / 30).ceil();
+    return points;
   }
 }

@@ -42,8 +42,8 @@ class StudyChair extends PurinAreaSelectable {
 
   @override
   void onLongTapDown(TapDownEvent event) {
-    super.onLongTapDown(event);
-    // TODO add equip menu
-    game.overlays.add('');
+    /* super.onLongTapDown(event);
+    // add equip menu
+    game.overlays.add(''); */
   }
 }

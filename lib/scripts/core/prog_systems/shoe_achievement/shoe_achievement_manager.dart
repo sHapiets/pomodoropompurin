@@ -23,10 +23,10 @@ class ShoeAchievementManager extends ChangeNotifier {
   Future<void> initialize() async {
     accTotalTime = progSystem.accTotalTime.value;
     accTotalTime = await databaseManager.userDataLoad('accTotalTime');
-    progSystem.accTotalTime.addListener(shoeAchievementFromTotalTime);
+    progSystem.accTotalTime.addListener(unlockShoeAchievementFromTotalTime);
   }
 
-  void shoeAchievementFromTotalTime() {
+  void unlockShoeAchievementFromTotalTime() {
     accTotalTime = progSystem.accTotalTime.value;
     ShoeAchievement newShoeAchievement = ShoeAchievement.values.lastWhere((sA) {
       return accTotalTime >= sA.secondsRequirement;

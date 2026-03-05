@@ -4,7 +4,7 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
-import 'package:pomodoropompurin/scripts/core/prog_systems/level_up_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -235,7 +235,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(209, 233, 196, 14),
+                      color: const Color.fromARGB(197, 200, 107, 53),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ValueListenableBuilder(
@@ -249,7 +249,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                           style: const TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w800,
                             color: Colors.white,
                             shadows: [
                               Shadow(
@@ -285,7 +285,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(197, 200, 107, 53),
+                      color: const Color.fromARGB(209, 179, 193, 24),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ValueListenableBuilder(
@@ -296,6 +296,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                           style: TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 13,
+                            fontWeight: FontWeight.bold,
                             color: const Color.fromARGB(255, 255, 255, 255),
                             shadows: [
                               Shadow(

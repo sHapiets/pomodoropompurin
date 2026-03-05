@@ -8,7 +8,7 @@ import 'package:pomodoropompurin/scripts/core/kitchen/refrigerator.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/stove.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/sink.dart' as sink;
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
-import 'package:pomodoropompurin/scripts/core/prog_systems/level_up_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';

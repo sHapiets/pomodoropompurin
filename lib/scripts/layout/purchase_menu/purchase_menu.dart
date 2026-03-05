@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
-import 'package:pomodoropompurin/scripts/core/prog_systems/unlocks_from_level.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_tile.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
