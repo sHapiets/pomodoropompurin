@@ -3,6 +3,7 @@ import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
@@ -168,17 +169,22 @@ class _SplashPageState extends State<SplashPage> {
       await _databaseManager.configSelectablesLoad().then((
         selectableConfigString,
       ) {
-        KotatsuDesigns kotatsuDesign = KotatsuDesigns.values.byName(
+        final kotatsuDesign = KotatsuDesigns.values.byName(
           selectableConfigString['kotatsuDesign'],
         );
+        final feedable = Consumable.values.byName(
+          selectableConfigString['feedable'],
+        );
+        final bitesLeft = selectableConfigString['feedableBitesLeft'];
 
-        purinAreaEquipManager.kotatsu.value =
-            acquirables.kotatsus[kotatsuDesign]!;
+        purinAreaEquipManager.changeKotatsu(
+          acquirables.kotatsus[kotatsuDesign]!,
+        );
+
+        purinAreaEquipManager.addFeedable(feedable, bitesLeft);
       });
     });
   }
-
-  /* -------------------- ASSET PRELOAD -------------------- */
 
   Future<void> _preloadAssets() async {
     await _runStep("Preloading Images...", () async {
@@ -194,15 +200,11 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
 
-  /* -------------------- PURIN AREA -------------------- */
-
   Future<void> _preloadPurinArea() async {
     await _runStep("Initializing Purin Area...", () async {
       await PurinArea.gameSingleton.onLoad();
     });
   }
-
-  /* -------------------- UI -------------------- */
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
+import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// A manager class that contains all RoomDesign objects for all selectables
 /// in [PurinAreaHome]
@@ -21,10 +22,14 @@ class PurinAreaEquipManager {
   PurinAreaEquipManager._();
   static final singleton = PurinAreaEquipManager._();
 
+  final databaseManager = DatabaseManager.singleton;
+
   ValueNotifier<RoomDesign> kotatsu = ValueNotifier(
     Acquirables.singleton.kotatsus[KotatsuDesigns.pudding]!,
   );
-  ValueNotifier<Consumable?> feedable = ValueNotifier(Consumable.pizza);
+  ValueNotifier<Consumable> feedable = ValueNotifier(Consumable.pizza);
+  VoidCallback addFeedableEntity = () {};
+  ValueNotifier<int> feedableBitesLeft = ValueNotifier(0);
   ValueNotifier<RoomDesign> blanket = ValueNotifier(
     Acquirables.singleton.blankets[BlanketDesigns.cyan]!,
   );
@@ -52,12 +57,16 @@ class PurinAreaEquipManager {
     kotatsu.value = newKotatsu;
   }
 
-  void addFeedable(Consumable newFeedable) {
-    feedable.value = newFeedable;
+  void biteFeedable(int bitesLeft) {
+    feedableBitesLeft.value = bitesLeft;
+    databaseManager.configFeedableSave(feedable.value, bitesLeft);
   }
 
-  void removeFeedable() {
-    feedable.value = null;
+  void addFeedable(Consumable newFeedable, int bitesLeft) {
+    feedable.value = newFeedable;
+    feedableBitesLeft.value = bitesLeft;
+    databaseManager.configFeedableSave(feedable.value, bitesLeft);
+    addFeedableEntity();
   }
 
   void changeBlanket(RoomDesign newBlanket) {

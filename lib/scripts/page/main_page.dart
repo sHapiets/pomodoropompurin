@@ -11,6 +11,7 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_consumable_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_menu.dart';
@@ -90,7 +91,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
 
               "kotatsuMenu": (BuildContext context, PurinArea game) {
-                return KotatsuEquipMenu();
+                return KotatsuConsumableMenu();
               },
               "stoveMenu": (BuildContext context, PurinArea game) {
                 return KitchenMenu(kitchenProcessor: Stove.singleton);

@@ -104,10 +104,15 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     await add(exteriorEntity);
 
     await add(onLoadAnim);
+
     await addFeedable();
+    purinAreaEquipManager.addFeedableEntity = addFeedable;
   }
 
   Future<void> addFeedable() async {
+    if (purinAreaEquipManager.feedableBitesLeft.value == 0) {
+      return;
+    }
     await add(feedableEntity);
   }
 }

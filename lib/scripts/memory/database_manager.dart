@@ -183,4 +183,12 @@ class DatabaseManager {
         .doc('selectables');
     await selectablesConfigRef.update({'kotatsuDesign': design.name});
   }
+
+  Future<void> configFeedableSave(Consumable consumable, int bitesLeft) async {
+    final selectablesConfigRef = userRef
+        .collection('config')
+        .doc('selectables');
+    await selectablesConfigRef.update({'feedable': consumable.name});
+    await selectablesConfigRef.update({'feedableBitesLeft': bitesLeft});
+  }
 }

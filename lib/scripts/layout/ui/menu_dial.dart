@@ -68,6 +68,8 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
+          SizedBox(width: 60),
+
           /// EXPANDING BACKGROUND
           ValueListenableBuilder(
             valueListenable: toggle,
@@ -75,8 +77,8 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.easeInOutCubic,
-                width: value ? 60 : 60,
-                height: value ? 200 : 60,
+                width: value ? 60 : 0,
+                height: value ? 200 : 0,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(197, 255, 255, 255),
                   borderRadius: BorderRadius.circular(40),

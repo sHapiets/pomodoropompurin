@@ -2,12 +2,9 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/src/events/messages/tap_down_event.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
-import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
-import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 class Feedable extends PurinAreaSelectable {
@@ -31,15 +28,15 @@ class Feedable extends PurinAreaSelectable {
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
   final purin = Purin.singleton;
 
-  final feedable = PurinAreaEquipManager.singleton.feedable.value!;
   int bitesLeft = 0;
+  final feedable = PurinAreaEquipManager.singleton.feedable.value!;
   int get biteIndex {
     return bitesLeft - 1;
   }
 
   @override
   void onMount() {
-    bitesLeft = feedable.totalBites;
+    bitesLeft = purinAreaEquipManager.feedableBitesLeft.value;
     sprite = SpriteComponent(
       sprite: Sprite(
         Flame.images.fromCache(feedable.biteSpritesFlamePath[biteIndex]),
@@ -57,6 +54,7 @@ class Feedable extends PurinAreaSelectable {
   void bite() {
     if (purin.stateManager.action == PurinAction.feed) {
       bitesLeft--;
+      purinAreaEquipManager.biteFeedable(bitesLeft);
       if (bitesLeft == 0) {
         removeFromParent();
       } else {
