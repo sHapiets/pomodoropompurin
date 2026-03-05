@@ -3,6 +3,7 @@ import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -124,16 +125,32 @@ class _SplashPageState extends State<SplashPage> {
     });
 
     await _runStep("Restoring Today Progress...", () async {
-      final dayDateLog = _progSystem.dateLogfromMonth(
+      final monthDateLog = _progSystem.dateLogfromMonth(
         DateTime.now().year,
         DateTime.now().month,
       );
 
-      _progSystem.dayTimeSeconds.value = dayDateLog
-          .firstWhere(
-            (iterDateLog) => iterDateLog.dateLogDate.day == DateTime.now().day,
-          )
-          .timeSeconds;
+      if (monthDateLog == []) {
+        _progSystem.addDayTimeSeconds(0);
+        return;
+      }
+
+      bool dayDateLogExists = false;
+      final DateLog dayDateLog = monthDateLog.firstWhere(
+        (iterDateLog) {
+          dayDateLogExists = true;
+          return iterDateLog.dateLogDate.day == DateTime.now().day;
+        },
+        orElse: () {
+          return DateLog(dateLogDate: DateTime.now(), timeSeconds: 0);
+        },
+      );
+
+      if (dayDateLogExists == false) {
+        _progSystem.addDayTimeSeconds(0);
+      }
+
+      _progSystem.dayTimeSeconds.value = dayDateLog.timeSeconds;
     });
 
     await _runStep("Loading Timer Settings...", () async {
