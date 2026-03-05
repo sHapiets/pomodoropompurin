@@ -145,7 +145,7 @@ class _ConsumableTileState extends State<ConsumableTile>
           cookIndicator = 0;
           processIngridients();
           updateMaxProcessableCount();
-          cookSpeed = (cookSpeed >= 0.15) ? 0.15 : cookSpeed + 0.03;
+          cookSpeed = (cookSpeed >= 0.15) ? 0.15 : cookSpeed + 0.015;
         }
       });
     });

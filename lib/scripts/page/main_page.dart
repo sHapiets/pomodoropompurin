@@ -2,7 +2,6 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/chopping_board.dart';
-import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/mixer.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/oven.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/refrigerator.dart';

@@ -5,6 +5,7 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -234,7 +235,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.black12,
+                      color: const Color.fromARGB(209, 233, 196, 14),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ValueListenableBuilder(
@@ -249,7 +250,13 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                             fontFamily: 'Nunito',
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white, // now readable on dark bg
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black26,
+                                offset: Offset(1, 1),
+                              ),
+                            ],
                           ),
                         );
                       },
@@ -269,26 +276,37 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     child: SizedBox(
                       height: 30,
                       width: 30,
-                      child: Image.asset(
-                        assetManager.flutterAssetPaths['pP_icon']!,
-                      ),
+                      child: Icon(Icons.timeline_rounded),
                     ),
                   ),
-                  ValueListenableBuilder(
-                    valueListenable: progSystem.dayTimeSeconds,
-                    builder: (context, value, child) {
-                      return Text(
-                        "$value",
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 13,
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          shadows: [
-                            Shadow(color: Colors.black12, offset: Offset(2, 2)),
-                          ],
-                        ),
-                      );
-                    },
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(197, 200, 107, 53),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ValueListenableBuilder(
+                      valueListenable: progSystem.dayTimeSeconds,
+                      builder: (context, value, child) {
+                        return Text(
+                          PomTimerExtensions.formatDuration(value),
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 13,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            shadows: [
+                              Shadow(
+                                color: Colors.black26,
+                                offset: Offset(1, 1),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
