@@ -4,9 +4,6 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-/// >>>>>>>>>>>>>>>>>>>>
-/// POM TIMER IDLE WIDGET
-/// >>>>>>>>>>>>>>>>>>>>
 class PomTimerIdleWidget extends StatefulWidget {
   const PomTimerIdleWidget({super.key});
 
@@ -134,7 +131,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                   fontWeight: FontWeight.w700,
                                   fontSize: 25 * gaugeTween.value,
                                   color: const Color.fromARGB(
-                                    221,
+                                    194,
                                     255,
                                     255,
                                     255,
@@ -203,9 +200,20 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               setState(() {});
                             },
                             offset: -45 * gaugeTween.value,
-                            child: SizedBox(
+                            child: Container(
                               width: 60 * gaugeTween.value,
                               height: 60 * gaugeTween.value,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: Offset(2, 2),
+                                  ),
+                                ],
+                              ),
+                              padding: EdgeInsets.all(3),
                               child: GestureDetector(
                                 onTapDown: (details) =>
                                     gaugeAnimController.forward(),
@@ -384,9 +392,20 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               setState(() {});
                             },
                             offset: -45 * (1.2 - gaugeTween.value),
-                            child: SizedBox(
+                            child: Container(
                               width: 60 * (1.2 - gaugeTween.value),
                               height: 60 * (1.2 - gaugeTween.value),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: Offset(2, 2),
+                                  ),
+                                ],
+                              ),
+                              padding: EdgeInsets.all(3),
                               child: GestureDetector(
                                 onTapDown: (details) =>
                                     gaugeAnimController.reverse(),
