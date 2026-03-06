@@ -29,7 +29,7 @@ class _PurchaseTileState extends State<PurchaseTile>
   late final Animation<double> buttonScale;
 
   Timer? purchaseTimer;
-  double purchaseSpeed = 0.05;
+  double purchaseSpeed = 0.03;
   double purchaseIndicator = 0.0;
 
   bool get insufficientPomPoints {
@@ -89,9 +89,9 @@ class _PurchaseTileState extends State<PurchaseTile>
         purchaseIndicator = (purchaseIndicator + purchaseSpeed).clamp(0.0, 1.0);
         if (purchaseIndicator == 1.0) {
           purchase();
-          purchaseSpeed = (purchaseSpeed >= 0.15)
-              ? 0.15
-              : purchaseSpeed + 0.015;
+          purchaseSpeed = (purchaseSpeed >= 0.05)
+              ? 0.05
+              : purchaseSpeed + 0.006;
           purchaseIndicator = 0;
         }
       });
@@ -100,7 +100,7 @@ class _PurchaseTileState extends State<PurchaseTile>
 
   void buttonCancel() {
     purchaseTimer?.cancel();
-    purchaseSpeed = 0.05;
+    purchaseSpeed = 0.03;
     purchaseTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
       setState(() {
         purchaseIndicator = (purchaseIndicator - 0.05).clamp(0.0, 1.0);

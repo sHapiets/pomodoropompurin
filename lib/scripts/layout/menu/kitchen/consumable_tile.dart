@@ -97,7 +97,7 @@ class _ConsumableTileState extends State<ConsumableTile>
   bool showCookButton = false;
 
   Timer? cookTimer;
-  double cookSpeed = 0.05;
+  double cookSpeed = 0.03;
   double cookIndicator = 0.0;
 
   @override
@@ -146,7 +146,7 @@ class _ConsumableTileState extends State<ConsumableTile>
           cookIndicator = 0;
           processIngridients();
           updateMaxProcessableCount();
-          cookSpeed = (cookSpeed >= 0.15) ? 0.15 : cookSpeed + 0.015;
+          cookSpeed = (cookSpeed >= 0.05) ? 0.05 : cookSpeed + 0.006;
         }
       });
     });
@@ -154,7 +154,7 @@ class _ConsumableTileState extends State<ConsumableTile>
 
   void buttonCancel() {
     cookTimer?.cancel();
-    cookSpeed = 0.05;
+    cookSpeed = 0.03;
     cookTimer = Timer.periodic(Duration(milliseconds: 16), (openTimer) {
       setState(() {
         cookIndicator = (cookIndicator - 0.05).clamp(0.0, 1.0);
