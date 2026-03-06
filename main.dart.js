@@ -26573,7 +26573,7 @@ _.d=a
 _.e=b
 _.ch=_.ay=_.Q=_.z=$
 _.cx=null
-_.cy=0.05
+_.cy=0.03
 _.db=0
 _.bZ$=c
 _.ai$=d
@@ -26602,7 +26602,7 @@ _.d=a
 _.e=b
 _.ch=_.ay=_.Q=_.z=$
 _.cx=null
-_.cy=0.05
+_.cy=0.03
 _.db=0
 _.bZ$=c
 _.ai$=d
@@ -26870,7 +26870,7 @@ _.d=a
 _.e=b
 _.z=_.y=_.x=_.w=$
 _.Q=null
-_.as=0.05
+_.as=0.03
 _.at=0
 _.bZ$=c
 _.ai$=d
@@ -87977,7 +87977,7 @@ if(s!=null)s.av()
 this.cx=A.ek(A.bb(0,0,16,0),new A.aoF(this))},
 jL(){var s=this,r=s.cx
 if(r!=null)r.av()
-s.cy=0.05
+s.cy=0.03
 s.cx=A.ek(A.bb(0,0,16,0),new A.aoD(s))},
 l(){var s=this,r=s.cx
 if(r!=null)r.av()
@@ -88019,7 +88019,7 @@ if(s===1){r.db=0
 r.JW()
 r.wh()
 s=r.cy
-r.cy=s>=0.15?0.15:s+0.015}},
+r.cy=s>=0.05?0.05:s+0.006}},
 $S:0}
 A.aoD.prototype={
 $1(a){var s=this.a
@@ -88100,7 +88100,7 @@ if(s!=null)s.av()
 this.cx=A.ek(A.bb(0,0,16,0),new A.aqV(this))},
 jL(){var s=this,r=s.cx
 if(r!=null)r.av()
-s.cy=0.05
+s.cy=0.03
 s.cx=A.ek(A.bb(0,0,16,0),new A.aqT(s))},
 l(){var s=this,r=s.cx
 if(r!=null)r.av()
@@ -88141,7 +88141,7 @@ if(s===1){r.db=0
 r.JW()
 r.wh()
 s=r.cy
-r.cy=s>=0.15?0.15:s+0.015}},
+r.cy=s>=0.05?0.05:s+0.006}},
 $S:0}
 A.aqT.prototype={
 $1(a){var s=this.a
@@ -89191,7 +89191,7 @@ if(s!=null)s.av()
 this.Q=A.ek(B.oB,new A.aur(this))},
 jL(){var s=this,r=s.Q
 if(r!=null)r.av()
-s.as=0.05
+s.as=0.03
 s.Q=A.ek(B.oB,new A.aup(s))},
 l(){var s=this,r=s.Q
 if(r!=null)r.av()
@@ -89232,7 +89232,7 @@ q.sm(q.a-r.d)
 s.a.pn("pomPoints",q.a)
 s.Uj(p.a.c,1)
 s=p.as
-p.as=s>=0.15?0.15:s+0.015
+p.as=s>=0.05?0.05:s+0.006
 p.at=0}},
 $S:0}
 A.aup.prototype={
