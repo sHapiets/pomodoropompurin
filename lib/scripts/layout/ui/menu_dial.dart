@@ -80,7 +80,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                 width: value ? 60 : 0,
                 height: value ? 200 : 0,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(197, 255, 255, 255),
+                  color: const Color.fromARGB(183, 150, 130, 86),
                   borderRadius: BorderRadius.circular(40),
                 ),
               );
@@ -100,7 +100,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                       iconSize: 40,
                       onPressed: toggleMenu,
                       icon: AnimatedIcon(
-                        color: const Color.fromARGB(76, 115, 115, 115),
+                        color: const Color.fromARGB(164, 76, 74, 74),
                         icon: AnimatedIcons.menu_close,
                         progress: menuAnimation,
                       ),
@@ -110,7 +110,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                     iconSize: 40,
                     onPressed: toggleMenu,
                     icon: AnimatedIcon(
-                      color: const Color.fromARGB(255, 0, 0, 0),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       icon: AnimatedIcons.menu_close,
                       progress: menuAnimation,
                     ),
@@ -146,7 +146,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                   },
                   icon: const Icon(
                     Icons.list_alt_rounded,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ),
@@ -188,7 +188,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                   },
                   icon: const Icon(
                     Icons.calendar_today_rounded,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ),

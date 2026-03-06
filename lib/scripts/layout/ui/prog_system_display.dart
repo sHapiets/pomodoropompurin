@@ -53,160 +53,185 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// GAUGE
-            Container(
-              height: expGaugeHeight,
-              width: expGaugeWidth,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color.fromARGB(167, 248, 229, 60),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color.fromARGB(167, 183, 129, 43),
-                    offset: Offset(5, 5),
-                    blurStyle: BlurStyle.inner,
-                    spreadRadius: -4,
+            ValueListenableBuilder(
+              valueListenable: progSystem.oshiriRemainder,
+              builder: (context, value, child) {
+                return Tooltip(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(133, 99, 99, 99),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ],
-              ),
-              child: Center(
-                child: Stack(
-                  children: [
-                    ValueListenableBuilder(
-                      valueListenable: progSystem.oshiriRemainder,
-                      builder: (context, value, child) {
-                        return SfRadialGauge(
-                          axes: <RadialAxis>[
-                            RadialAxis(
-                              radiusFactor: 0.95,
-                              minimum: 0,
-                              maximum: (progSystem.oshiriLevel.value == 1)
-                                  ? progSystem.oshiriPointsFromLevel[1]
-                                        .toDouble()
-                                  : (progSystem.oshiriPointsFromLevel[progSystem
-                                                .oshiriLevel
-                                                .value] -
-                                            progSystem
-                                                .oshiriPointsFromLevel[progSystem
-                                                    .oshiriLevel
-                                                    .value -
-                                                1])
-                                        .toDouble(),
-                              showLabels: false,
-                              showTicks: false,
-                              startAngle: 270,
-                              endAngle: 270,
-                              axisLineStyle: AxisLineStyle(
-                                thickness: 1,
-                                color: const Color.fromARGB(0, 0, 0, 0),
-                                thicknessUnit: GaugeSizeUnit.factor,
-                              ),
-                              pointers: <GaugePointer>[
-                                /* RangePointer(
-                                value: 1,
-                                width: 0.1,
-                                color: const Color.fromARGB(80, 145, 145, 145),
-                                pointerOffset: 0.15,
-                                cornerStyle: CornerStyle.bothFlat,
-                                sizeUnit: GaugeSizeUnit.factor,
-                                enableAnimation: false,
-                              ),
-                              RangePointer(
-                                value: 1,
-                                width: 0.1,
-                                color: const Color.fromARGB(75, 209, 209, 209),
-                                pointerOffset: 0.1,
-                                cornerStyle: CornerStyle.bothFlat,
-                                sizeUnit: GaugeSizeUnit.factor,
-                                enableAnimation: false,
-                              ), */
-                                RangePointer(
-                                  value: progSystem.oshiriRemainder.value
-                                      .toDouble(),
-                                  width: 0.18,
-                                  color: const Color.fromARGB(
-                                    197,
-                                    255,
-                                    255,
-                                    255,
-                                  ),
-                                  pointerOffset: 0.05,
+                  message:
+                      "${progSystem.oshiriRemainder.value} / ${(progSystem.oshiriLevel.value == 1) ? progSystem.oshiriPointsFromLevel[1].toDouble() : (progSystem.oshiriPointsFromLevel[progSystem.oshiriLevel.value] - progSystem.oshiriPointsFromLevel[progSystem.oshiriLevel.value - 1]).toDouble()}",
+                  textStyle: const TextStyle(
+                    fontFamily: 'Nunito',
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
+                  child: child,
+                );
+              },
+              child: Container(
+                height: expGaugeHeight,
+                width: expGaugeWidth,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color.fromARGB(167, 248, 229, 60),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(167, 183, 129, 43),
+                      offset: Offset(5, 5),
+                      blurStyle: BlurStyle.inner,
+                      spreadRadius: -4,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Stack(
+                    children: [
+                      ValueListenableBuilder(
+                        valueListenable: progSystem.oshiriRemainder,
+                        builder: (context, value, child) {
+                          return SfRadialGauge(
+                            axes: <RadialAxis>[
+                              RadialAxis(
+                                radiusFactor: 0.95,
+                                minimum: 0,
+                                maximum: (progSystem.oshiriLevel.value == 1)
+                                    ? progSystem.oshiriPointsFromLevel[1]
+                                          .toDouble()
+                                    : (progSystem.oshiriPointsFromLevel[progSystem
+                                                  .oshiriLevel
+                                                  .value] -
+                                              progSystem
+                                                  .oshiriPointsFromLevel[progSystem
+                                                      .oshiriLevel
+                                                      .value -
+                                                  1])
+                                          .toDouble(),
+                                showLabels: false,
+                                showTicks: false,
+                                startAngle: 270,
+                                endAngle: 270,
+                                axisLineStyle: AxisLineStyle(
+                                  thickness: 1,
+                                  color: const Color.fromARGB(0, 0, 0, 0),
+                                  thicknessUnit: GaugeSizeUnit.factor,
+                                ),
+                                pointers: <GaugePointer>[
+                                  /* RangePointer(
+                                  value: 1,
+                                  width: 0.1,
+                                  color: const Color.fromARGB(80, 145, 145, 145),
+                                  pointerOffset: 0.15,
                                   cornerStyle: CornerStyle.bothFlat,
                                   sizeUnit: GaugeSizeUnit.factor,
-                                  enableAnimation: true,
-                                  animationDuration: 1000,
-                                  animationType: AnimationType.bounceOut,
+                                  enableAnimation: false,
                                 ),
-                              ],
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.only(bottom: 20),
-                        child: Text(
-                          'Level',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: const Color.fromARGB(135, 0, 0, 0),
-                                offset: Offset(1, 1),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    /// OSHIRILEVEL TEXT
-                    Center(
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.only(top: 15),
-                        child: ListenableBuilder(
-                          listenable: progSystem.oshiriLevel,
-                          builder: (context, child) {
-                            return Text(
-                              '${progSystem.oshiriLevel.value}',
-                              style: TextStyle(
-                                fontFamily: 'Nunito',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                shadows: [
-                                  Shadow(
-                                    color: const Color.fromARGB(68, 0, 0, 0),
-                                    offset: Offset(2, 2),
+                                RangePointer(
+                                  value: 1,
+                                  width: 0.1,
+                                  color: const Color.fromARGB(75, 209, 209, 209),
+                                  pointerOffset: 0.1,
+                                  cornerStyle: CornerStyle.bothFlat,
+                                  sizeUnit: GaugeSizeUnit.factor,
+                                  enableAnimation: false,
+                                ), */
+                                  RangePointer(
+                                    value: progSystem.oshiriRemainder.value
+                                        .toDouble(),
+                                    width: 0.18,
+                                    color: const Color.fromARGB(
+                                      197,
+                                      255,
+                                      255,
+                                      255,
+                                    ),
+                                    pointerOffset: 0.05,
+                                    cornerStyle: CornerStyle.bothFlat,
+                                    sizeUnit: GaugeSizeUnit.factor,
+                                    enableAnimation: true,
+                                    animationDuration: 1000,
+                                    animationType: AnimationType.bounceOut,
                                   ),
                                 ],
                               ),
-                            );
-                          },
-                        ),
+                            ],
+                          );
+                        },
                       ),
-                    ),
-
-                    Center(
-                      child: Padding(
-                        padding: EdgeInsetsGeometry.only(bottom: 30),
-                        child: Text(
-                          '*',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            shadows: [],
+                      Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.only(bottom: 20),
+                          child: Text(
+                            'Level',
+                            style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  color: const Color.fromARGB(135, 0, 0, 0),
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+
+                      /// OSHIRILEVEL TEXT
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.only(top: 15),
+                          child: ListenableBuilder(
+                            listenable: progSystem.oshiriLevel,
+                            builder: (context, child) {
+                              return Text(
+                                '${progSystem.oshiriLevel.value}',
+                                style: TextStyle(
+                                  fontFamily: 'Nunito',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: const Color.fromARGB(
+                                    255,
+                                    255,
+                                    255,
+                                    255,
+                                  ),
+                                  shadows: [
+                                    Shadow(
+                                      color: const Color.fromARGB(68, 0, 0, 0),
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsetsGeometry.only(bottom: 30),
+                          child: Text(
+                            '*',
+                            style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              shadows: [],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -221,11 +246,25 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     padding: const EdgeInsets.only(right: 5),
                     child: GestureDetector(
                       onTap: () => progSystem.addOshiriPoints(100),
-                      child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: Image.asset(
-                          assetManager.flutterAssetPaths['pP_icon']!,
+                      child: Tooltip(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(133, 99, 99, 99),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        message: "PomPoints",
+                        textStyle: const TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                        verticalOffset: 10,
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset(
+                            assetManager.flutterAssetPaths['pP_icon']!,
+                          ),
                         ),
                       ),
                     ),
@@ -274,12 +313,23 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 5),
-                    child: SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: Icon(
-                        Icons.today_rounded,
-                        color: const Color.fromARGB(255, 31, 150, 108),
+                    child: Tooltip(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(133, 99, 99, 99),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      message: "today's progress",
+                      textStyle: const TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      verticalOffset: 10,
+                      child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: Icon(Icons.today_rounded, color: Colors.black),
                       ),
                     ),
                   ),
