@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/chopping_board.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/mixer.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/oven.dart';
@@ -122,6 +123,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           MenuDial(),
           UIBlock(),
           PomTimerDisplay(),
+          ScriptDialog(
+            imagePaths: [
+              assetManager.flutterAssetPaths["pP_icon"]!,
+              assetManager.flutterAssetPaths["pP_icon"]!,
+            ],
+            dialogues: [
+              {"Purin": "Hi nice to meet you"},
+              {"Purin": "Its been a while!"},
+            ],
+          ),
         ],
       ),
     );
