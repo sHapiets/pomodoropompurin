@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 class PurinMainMenu extends StatefulWidget {
@@ -20,6 +21,8 @@ class _PurinMainMenuState extends State<PurinMainMenu>
     parent: loadAnimController,
     curve: Curves.easeOutBack,
   );
+
+  final scriptManager = ScriptManager.singleton;
 
   @override
   void initState() {

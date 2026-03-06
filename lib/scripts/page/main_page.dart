@@ -1,7 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
-import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/chopping_board.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/mixer.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/oven.dart';
@@ -17,9 +17,9 @@ import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_main_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/script_dialog/script_dialog_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
-import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_equip_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
@@ -40,6 +40,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final pomTimer = PomTimer.singleton;
   final levelUpManager = LevelUpManager.singleton;
   final shoeAchievementManager = ShoeAchievementManager.singleton;
+  final scriptManager = ScriptManager.singleton;
 
   @override
   void initState() {
@@ -123,16 +124,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           MenuDial(),
           UIBlock(),
           PomTimerDisplay(),
-          ScriptDialog(
-            imagePaths: [
-              assetManager.flutterAssetPaths["pP_icon"]!,
-              assetManager.flutterAssetPaths["pP_icon"]!,
-            ],
-            dialogues: [
-              {"Purin": "Hi nice to meet you"},
-              {"Purin": "Its been a while!"},
-            ],
-          ),
+          ScriptDialogWidget(),
         ],
       ),
     );

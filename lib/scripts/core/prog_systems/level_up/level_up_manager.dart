@@ -1,7 +1,9 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
-import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_dialog/level_up_dialog.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
@@ -13,7 +15,11 @@ class LevelUpManager extends ChangeNotifier {
 
   final progSystem = ProgSystem.singleton;
   final databaseManager = DatabaseManager.singleton;
+  final scriptManager = ScriptManager.singleton;
   Widget levelUpDialog = LevelUpDialog(newLevel: 0, levelRewards: []);
+
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final purin = Purin.singleton;
 
   int currentLevel = 0;
 
@@ -25,6 +31,14 @@ class LevelUpManager extends ChangeNotifier {
 
   void unlockFromNewLevel() {
     currentLevel = progSystem.oshiriLevel.value;
+
+    scriptManager.levelUpDialog(currentLevel);
+    purinAreaStateManager.jumpToPosition(
+      purin.purinPositionVect2,
+      Vector2.zero(),
+      1.8,
+    );
+
     switch (currentLevel) {
       case 2:
         levelUpDialog = LevelUpDialog(

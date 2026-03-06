@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
@@ -20,6 +21,7 @@ class PurinArea extends FlameGame
   late PurinAreaHome purinAreaHome;
   final purin = Purin.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final scriptManager = ScriptManager.singleton;
 
   late Vector2 newPosition;
   late Vector2 newScale;
@@ -64,6 +66,7 @@ class PurinArea extends FlameGame
   void onTapDown(TapDownEvent event) {
     UIDisplayState.singleton.hide.value = false;
     overlays.removeAll(overlays.activeOverlays);
+    scriptManager.removeDialog();
 
     cursorSprite.removeFromParent();
     cursorSprite = CursorMovingSprite(
@@ -113,6 +116,7 @@ class PurinArea extends FlameGame
   void onPanUpdate(DragUpdateInfo info) {
     UIDisplayState.singleton.hide.value = false;
     overlays.removeAll(overlays.activeOverlays);
+    scriptManager.removeDialog();
     if (purinAreaStateManager.state.value == "Moving") {
       cursorSprite.position = info.eventPosition.global;
 
@@ -124,7 +128,6 @@ class PurinArea extends FlameGame
       final maxX = size.x;
       final maxY = size.y;
 
-      // Clamping from out-of-bounds
       newPosition = Vector2(
         newPosition.x.clamp(minX, maxX),
         newPosition.y.clamp(minY, maxY),
@@ -157,6 +160,7 @@ class PurinArea extends FlameGame
   @override
   void onPanEnd(DragEndInfo info) {
     UIDisplayState.singleton.hide.value = false;
+    scriptManager.removeDialog();
     cursorSprite.removeFromParent();
     purinAreaStateManager.state.value = "Idle";
   }

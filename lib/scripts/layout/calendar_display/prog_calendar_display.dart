@@ -124,7 +124,7 @@ class _ProgCalendarDisplayState extends State<ProgCalendarDisplay> {
                                 in calendarManager.calendarMonthAtDisplay)
                               ContributionEntry(
                                 entry.dateLogDate,
-                                entry.timeSeconds,
+                                (entry.timeSeconds / 3600).ceil().clamp(0, 5),
                               ),
                           ],
                         ),

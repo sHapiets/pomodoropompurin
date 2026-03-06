@@ -105,7 +105,9 @@ class LevelUpDialog extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
                 child: const Text("Awesome!"),
               ),
             ),

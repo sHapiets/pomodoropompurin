@@ -6,6 +6,7 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
@@ -157,5 +158,6 @@ class PurinEntity extends PositionComponent
       1.5,
     );
     game.overlays.add("purinMainMenu");
+    ScriptManager.singleton.purinMenuDialog();
   }
 }

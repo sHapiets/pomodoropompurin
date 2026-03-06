@@ -1,19 +1,22 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 
 class ScriptDialog extends StatefulWidget {
   final List<String> imagePaths;
   final List<Map<String, String>> dialogues;
   final int mode;
+  final bool isStatic;
   final Duration charDelay;
   final Duration transitionDuration;
-  final VoidCallback? onFinished; // Callback when dialogue ends
+  final VoidCallback? onFinished;
 
   const ScriptDialog({
     Key? key,
     required this.imagePaths,
     required this.dialogues,
     this.mode = 0,
+    this.isStatic = false,
     this.charDelay = const Duration(milliseconds: 40),
     this.transitionDuration = const Duration(milliseconds: 300),
     this.onFinished,
@@ -31,6 +34,8 @@ class _ScriptDialogState extends State<ScriptDialog>
   int _charIndex = 0;
   late AnimationController _fadeController;
   bool _visible = true;
+
+  final scriptManager = ScriptManager.singleton;
 
   @override
   void initState() {
@@ -64,25 +69,27 @@ class _ScriptDialogState extends State<ScriptDialog>
   }
 
   void _nextDialogue() {
+    if (widget.isStatic) {
+      return;
+    }
+
     final fullText = widget.dialogues[_currentIndex].values.first;
     if (_displayedText != fullText) {
-      // Complete current line instantly
       setState(() {
         _displayedText = fullText;
         _charIndex = fullText.length;
       });
     } else if (_currentIndex < widget.dialogues.length - 1) {
-      // Move to next dialogue
       setState(() {
         _currentIndex++;
       });
       _startTyping();
     } else {
-      // End of dialogues, hide widget
       _typingTimer?.cancel();
       setState(() {
         _visible = false;
       });
+      ScriptManager.singleton.removeDialog();
       if (widget.onFinished != null) {
         widget.onFinished!();
       }
@@ -98,7 +105,9 @@ class _ScriptDialogState extends State<ScriptDialog>
 
   @override
   Widget build(BuildContext context) {
-    if (!_visible) return const SizedBox.shrink();
+    if (!_visible) {
+      return const SizedBox.shrink();
+    }
 
     double screenWidth = MediaQuery.of(context).size.width;
     double dialogWidth = screenWidth * 0.9;
@@ -116,6 +125,7 @@ class _ScriptDialogState extends State<ScriptDialog>
           child: FadeTransition(
             opacity: _fadeController,
             child: Card(
+              color: const Color.fromARGB(217, 255, 255, 255),
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -138,13 +148,17 @@ class _ScriptDialogState extends State<ScriptDialog>
                             currentCharacter,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Fredoka',
                               fontSize: 16,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             _displayedText,
-                            style: const TextStyle(fontSize: 14),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Fredoka',
+                            ),
                           ),
                         ],
                       ),

@@ -175,7 +175,7 @@ class Purin extends ChangeNotifier {
     },
   );
   void feed() {
-    int reward = purinAreaEquipManager.feedable.value!.oshiriPointsPerBite;
+    int reward = purinAreaEquipManager.feedable.value.oshiriPointsPerBite;
     progSystem.addOshiriPoints(reward);
 
     stateManager.changeAction(PurinAction.feed);

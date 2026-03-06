@@ -329,7 +329,13 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       child: SizedBox(
                         height: 30,
                         width: 30,
-                        child: Icon(Icons.today_rounded, color: Colors.black),
+                        child: Icon(
+                          Icons.today_rounded,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(color: Colors.black26, offset: Offset(2, 2)),
+                          ],
+                        ),
                       ),
                     ),
                   ),
