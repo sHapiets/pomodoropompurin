@@ -200,6 +200,6 @@ class ProgSystem {
   }
 
   List<int> oshiriPointsFromLevel = List<int>.generate(1000, (int index) {
-    return (index == 0) ? 0 : (100 * pow(index, 2).toInt());
+    return (index == 0) ? 0 : ((1000 * pow(index, 1.5)).toInt());
   }, growable: true);
 }
