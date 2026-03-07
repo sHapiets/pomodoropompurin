@@ -143,13 +143,10 @@ class _PurchaseTileState extends State<PurchaseTile>
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Container(
-                    height: iconSize,
-                    width: iconSize,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
+                  SizedBox(
+                    width: iconSize - 10,
+                    height: iconSize - 10,
+                    child: Image.asset(widget.ingridient.spriteFlutterPath),
                   ),
 
                   SizedBox(
@@ -187,6 +184,7 @@ class _PurchaseTileState extends State<PurchaseTile>
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontFamily: 'Fredoka',
+                fontWeight: FontWeight.w600,
                 fontSize: 11,
                 color: Colors.black,
               ),

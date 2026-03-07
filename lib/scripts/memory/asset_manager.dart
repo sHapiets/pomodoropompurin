@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
+import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 
 /// Singleton class to manage all materials in the assets folder
 ///
@@ -30,6 +31,8 @@ class AssetManager {
     'pT_SB': 'assets/images/pomTimer/pomTimer_start_button.png',
 
     'pP_icon': 'assets/images/pomPoints_icon.png',
+
+    ...{for (final ing in Ingridient.values) ing.name: ing.spriteFlutterPath},
   };
 
   /// Preload one asset globally

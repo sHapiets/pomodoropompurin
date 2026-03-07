@@ -66,7 +66,8 @@ class _IngridientTileState extends State<IngridientTile>
 
   final displayNameTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 10,
+    fontWeight: FontWeight.w600,
+    fontSize: 11,
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
@@ -79,7 +80,7 @@ class _IngridientTileState extends State<IngridientTile>
 
   final ingNameTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 7,
+    fontSize: 9,
     color: Color.fromARGB(255, 0, 0, 0),
   );
   TextStyle ingCountTextStyle(bool insuffecientAmount) {
@@ -190,11 +191,11 @@ class _IngridientTileState extends State<IngridientTile>
             Align(
               alignment: AlignmentGeometry.topCenter,
               child: Transform.translate(
-                offset: Offset(0, 10),
-                child: Container(
-                  width: iconSides,
-                  height: iconSides,
-                  color: const Color.fromARGB(255, 255, 255, 255),
+                offset: Offset(0, 15),
+                child: SizedBox(
+                  width: iconSides - 10,
+                  height: iconSides - 10,
+                  child: Image.asset(widget.ingridient.spriteFlutterPath),
                 ),
               ),
             ),
@@ -247,10 +248,12 @@ class _IngridientTileState extends State<IngridientTile>
                             mainAxisAlignment: MainAxisAlignment.center,
                             spacing: 5,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 20,
                                 height: 20,
-                                color: Colors.black,
+                                child: Image.asset(
+                                  ingridient.spriteFlutterPath,
+                                ),
                               ),
                               ValueListenableBuilder(
                                 valueListenable:

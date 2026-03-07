@@ -15,10 +15,12 @@ class Stove extends KitchenProcessor {
             Ingridient.butter: 1,
           },
           Ingridient.cookedRice: {Ingridient.washedRice: 1},
-          Ingridient.choppedOnions: {Ingridient.onion: 1},
         },
         consumableIngridients: {
-          Consumable.pancake: {Ingridient.pancakeBatter: 1},
+          Consumable.pancake: {
+            Ingridient.pancakeBatter: 1,
+            Ingridient.butter: 1,
+          },
           Consumable.hamburgSteak: {
             Ingridient.patty: 1,
             Ingridient.cookedRice: 1,

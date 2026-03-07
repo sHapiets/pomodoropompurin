@@ -10,108 +10,108 @@ enum Ingridient {
   milk(
     displayName: "Milk",
     price: 50,
-    spriteFlamePath: "ingridient_sprites/milk.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/milk.png",
   ),
   eggs(
     displayName: "Eggs",
     price: 20,
-    spriteFlamePath: "ingridient_sprites/eggs.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/eggs.png",
   ),
   butter(
     displayName: "Butter",
     price: 30,
-    spriteFlamePath: "ingridient_sprites/butter.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/butter.png",
   ),
   flour(
     displayName: "Flour",
     price: 40,
-    spriteFlamePath: "ingridient_sprites/flour.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/flour.png",
   ),
   yeast(
     displayName: "Yeast",
     price: 10,
-    spriteFlamePath: "ingridient_sprites/yeast.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/yeast.png",
   ),
   olives(
     displayName: "Olives",
     price: 20,
-    spriteFlamePath: "ingridient_sprites/olives.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/olives.png",
   ),
   onion(
     displayName: "Onion",
     price: 10,
-    spriteFlamePath: "ingridient_sprites/onion.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/onion.png",
   ),
   tomato(
     displayName: "Tomato",
     price: 10,
-    spriteFlamePath: "ingridient_sprites/tomato.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/tomato.png",
   ),
   riceGrains(
     displayName: "Rice Grains",
     price: 15,
-    spriteFlamePath: "ingridient_sprites/riceGrains.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/riceGrains.png",
   ),
   groundPork(
     displayName: "Ground Pork",
     price: 80,
-    spriteFlamePath: "ingridient_sprites/groundPork.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/groundPork.png",
   ),
 
   /// Processed
   puddingCream(
     displayName: "Pudding Cream",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/puddingCream.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/puddingCream.png",
   ),
   puddingBatter(
     displayName: "Pudding Batter",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/puddingBatter.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/puddingBatter.png",
   ),
   pancakeBatter(
     displayName: "Pancake Batter",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/pancakeBatter.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/pancakeBatter.png",
   ),
   dough(
     displayName: "Dough",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/dough.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/dough.png",
   ),
   pizzaToppings(
     displayName: "Pizza Toppings",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/pizzaToppings.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/pizzaToppings.png",
   ),
   washedRice(
     displayName: "Washed Rice",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/washedRice.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/washedRice.png",
   ),
   cookedRice(
     displayName: "Cooked Rice",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/cookedRice.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/cookedRice.png",
   ),
   choppedOnions(
     displayName: "Chopped Onions",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/choppedOnions.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/choppedOnions.png",
   ),
   patty(
     displayName: "Patty",
     price: 0,
-    spriteFlamePath: "ingridient_sprites/patty.png",
+    spriteFlutterPath: "assets/images/ingridient_sprites/patty.png",
   );
 
   const Ingridient({
     required this.displayName,
     required this.price,
-    required this.spriteFlamePath,
+    required this.spriteFlutterPath,
   });
 
   final String displayName;
   final int price;
-  final String spriteFlamePath;
+  final String spriteFlutterPath;
 }

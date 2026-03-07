@@ -67,7 +67,8 @@ class _ConsumableTileState extends State<ConsumableTile>
 
   final displayNameTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 10,
+    fontWeight: FontWeight.w600,
+    fontSize: 11,
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
@@ -80,7 +81,7 @@ class _ConsumableTileState extends State<ConsumableTile>
 
   final ingNameTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 7,
+    fontSize: 9,
     color: Color.fromARGB(255, 0, 0, 0),
   );
   TextStyle ingCountTextStyle(bool insuffecientAmount) {
@@ -248,10 +249,12 @@ class _ConsumableTileState extends State<ConsumableTile>
                             mainAxisAlignment: MainAxisAlignment.center,
                             spacing: 5,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 20,
                                 height: 20,
-                                color: Colors.black,
+                                child: Image.asset(
+                                  ingridient.spriteFlutterPath,
+                                ),
                               ),
                               ValueListenableBuilder(
                                 valueListenable:
