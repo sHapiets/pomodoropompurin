@@ -23,30 +23,187 @@ class ScriptsMap {
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
       ],
       dialogues: [
-        {"Purin": "Hi nice to meet you"},
-        {"Purin": "3"},
+        {"Purin": "You know what?"},
+        {"Purin": "I believe snacks solve many problems."},
+        {"Purin": "Problems like..."},
+        {"Purin": "..."},
+        {"Purin": "...hunger?"},
+        {"Purin": "Though I do get hungry so easily."},
+        {"Purin": "So I always love the food you prepare for me!"},
       ],
     ),
+
     4: ScriptDialog(
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
       ],
       dialogues: [
-        {"Purin": "Hi nice to meet you"},
-        {"Purin": "4"},
+        {"Purin": "I heard the fridge humming again."},
+        {"Purin": "Even though it's loud, it has a soothing feel to it."},
+        {"Purin": "I wonder if it ever gets tired."},
+        {"Purin": "Maybe eating more from it helps it rest?"},
+        {"Purin": "..."},
+        {"Purin": "......"},
+        {"Purin": "EXPERIMENT TIME!"},
       ],
     ),
-    10: ScriptDialog(
+
+    5: ScriptDialog(
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
       ],
       dialogues: [
-        {"Purin": "Hi nice to meet you"},
-        {"Purin": "10"},
+        {"Purin": "Do shoes ever get lonely?"},
+        {"Purin": "Like, maybe if one of them loses their pair?"},
+        {"Purin": "I always think that they do, "},
+        {"Purin": "...so when I hide my mother-owner's shoes"},
+        {"Purin": "I never leave either of them by themselves."},
+        {
+          "Purin":
+              "Or at least I keep one of them company while we find for the other one.",
+        },
+      ],
+    ),
+
+    6: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+      ],
+      dialogues: [
+        {
+          "Purin":
+              "One day, I'll become extreeemely BIG! Just like my Mama and Papa.",
+        },
+        {"Purin": "That's why eating will forever be my favorite sport."},
+        {"Purin": "Though I wonder if it's my all-time favorite one..."},
+        {"Purin": "Sleeping, maybe?"},
+        {"Purin": "But I can't eat while sleeping, can I?"},
+        {"Purin": "Hmm..."},
+        {"Purin": "Well, I do become bigger in my dreams sometimes..."},
+        {"Purin": "...but I get disappointed waking up."},
+        {"Purin": "Let's call it a tie for now!"},
+      ],
+    ),
+
+    7: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+      ],
+      dialogues: [
+        {"Purin": "I wonder if clouds get tired from traveling."},
+        {
+          "Purin":
+              "I enjoy going out from time to time, but nothing beats relaxing at home",
+        },
+        {
+          "Purin":
+              "And staying at home becomes extremely cozy especially when it rains...",
+        },
+        {"Purin": "..."},
+        {"Purin": "If clouds travel so much..."},
+        {"Purin": "...is rain... just clouds taking a bath?...."},
+        {"Purin": "...or their sweat dropping from the sky?"},
+        {"Purin": "..."},
+        {"Purin": "I hope mother-owner gets us raincoats soon."},
+      ],
+    ),
+
+    8: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+      ],
+      dialogues: [
+        {"Purin": "..."},
+        {"Purin": "I'm a bit sad right now..."},
+        {
+          "Purin":
+              "Just a while ago, I was saving this perfect slice of porkchop.",
+        },
+        {
+          "Purin":
+              "I hid it somewhere in the refrigerator, but now, I couldn't find it...",
+        },
+        {
+          "Purin":
+              "I'm thinking that maybe I should have eaten it while I had the chance",
+        },
+        {"Purin": "Or maybe it was never meant to fill my tummy..."},
+        {"Purin": "...."},
+        {"Purin": "Thinking about this porkchop makes me just as hungry!"},
+        {"Purin": "A pizza right now would be nice ~pom-u~."},
+      ],
+    ),
+
+    9: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+      ],
+      dialogues: [
+        {"Purin": "I wonder if clouds get tired from traveling."},
+        {
+          "Purin":
+              "I enjoy going out from time to time, but nothing beats relaxing at home",
+        },
+        {
+          "Purin":
+              "And staying at home becomes extremely cozy especially when it rains...",
+        },
+        {"Purin": "..."},
+        {"Purin": "If clouds travel so much..."},
+        {"Purin": "...is rain... just clouds taking a bath?...."},
+        {"Purin": "...or their sweat dropping from the sky?"},
+        {"Purin": "..."},
+        {"Purin": "I hope mother-owner gets us raincoats soon."},
       ],
     ),
     22: ScriptDialog(
@@ -60,4 +217,18 @@ class ScriptsMap {
       ],
     ),
   };
+
+  static ScriptDialog tutorial = ScriptDialog(
+    imagePaths: [],
+    dialogues: [
+      {"Koupen": "..."},
+      {"Koupen": "In this unknown dimension..."},
+      {"Koupen": "...TIME is your best friend!"},
+      {"Koupen": "Take it from yours truly."},
+      {"Koupen": "I play with TIME all the time too."},
+      {"Koupen": "So everyday, I always get to do a lot of exciting things!"},
+      {"Koupen": "But TIME is not only our friend during the fun times..."},
+      {"Koupen": "...but also our best friend to achieve our goals."},
+    ],
+  );
 }

@@ -12,88 +12,148 @@ class LevelUpDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const pudding = Color(0xFFFFF4D6);
+    const caramel = Color(0xFFC87A2A);
+    const softCaramel = Color(0xFFE8B77D);
+
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      backgroundColor: Colors.transparent,
       child: Container(
-        padding: const EdgeInsets.all(24),
         constraints: const BoxConstraints(maxHeight: 450, minWidth: 300),
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFFF8EC), pudding],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.circular(28),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.brown.withOpacity(.2),
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            /// 🎉 Header
+            /// 🍮 Header
             Column(
               children: [
                 const Text(
-                  "Oshiri Level Up!",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  "🍮 Oshiri Level Up!",
+                  style: TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700,
+                    color: caramel,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   "You reached Level $newLevel",
-                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.brown,
+                  ),
                 ),
               ],
             ),
 
             const SizedBox(height: 20),
 
-            /// Rewards list
+            /// Rewards
             Expanded(
               child: levelRewards.isEmpty
-                  ? const Center(child: Text("No new rewards this level."))
+                  ? const Center(
+                      child: Text(
+                        "No new rewards this level.",
+                        style: TextStyle(
+                          fontFamily: 'Fredoka',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.brown,
+                        ),
+                      ),
+                    )
                   : ListView.separated(
                       itemCount: levelRewards.length,
-                      separatorBuilder: (_, __) => const Divider(height: 20),
+                      separatorBuilder: (_, __) => const SizedBox(height: 14),
                       itemBuilder: (context, index) {
                         final reward = levelRewards[index];
 
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            /// Optional icon
-                            if (reward.length > 2 && reward[2] is IconData)
-                              Padding(
-                                padding: const EdgeInsets.only(right: 12),
-                                child: Icon(
-                                  reward[2],
-                                  size: 28,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-
-                            /// Title & subtitle
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    reward[0]?.toString() ?? "",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                    ),
+                        return Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(.6),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: softCaramel),
+                          ),
+                          child: Row(
+                            children: [
+                              if (reward.length > 2 && reward[2] is IconData)
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: pudding,
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
-                                  if (reward.length > 1)
+                                  child: Icon(
+                                    reward[2],
+                                    size: 22,
+                                    color: caramel,
+                                  ),
+                                ),
+
+                              const SizedBox(width: 12),
+
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Text(
-                                      reward[1]?.toString() ?? "",
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontSize: 14,
+                                      reward[0]?.toString() ?? "",
+                                      style: const TextStyle(
+                                        fontFamily: 'Fredoka',
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Colors.brown,
                                       ),
                                     ),
-                                ],
-                              ),
-                            ),
-
-                            /// Optional trailing info
-                            if (reward.length > 3)
-                              Text(
-                                reward[3]?.toString() ?? "",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                    if (reward.length > 1)
+                                      Text(
+                                        reward[1]?.toString() ?? "",
+                                        style: const TextStyle(
+                                          fontFamily: 'Fredoka',
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color.fromARGB(
+                                            255,
+                                            148,
+                                            117,
+                                            61,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
                                 ),
                               ),
-                          ],
+
+                              if (reward.length > 3)
+                                Text(
+                                  reward[3]?.toString() ?? "",
+                                  style: const TextStyle(
+                                    fontFamily: 'Fredoka',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                    color: caramel,
+                                  ),
+                                ),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -101,14 +161,29 @@ class LevelUpDialog extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            /// Close button
-            Align(
-              alignment: Alignment.centerRight,
+            /// Button
+            SizedBox(
+              width: double.infinity,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: caramel,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text("Awesome!"),
+                child: const Text(
+                  "Sweet!",
+                  style: TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ),
           ],
