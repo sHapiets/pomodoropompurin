@@ -63,8 +63,8 @@ class PurinAreaEquipManager {
   }
 
   void addFeedable(Consumable newFeedable, int bitesLeft) {
-    feedable.value = newFeedable;
     feedableBitesLeft.value = bitesLeft;
+    feedable.value = newFeedable;
     databaseManager.configFeedableSave(feedable.value, bitesLeft);
     addFeedableEntity();
   }

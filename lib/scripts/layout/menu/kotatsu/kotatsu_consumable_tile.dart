@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -182,6 +184,16 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
                               return;
                             }
                             placeConsumable();
+                            UIDisplayState.singleton.hide.value = false;
+                            purinAreaKey.currentState!.currentGame.overlays
+                                .removeAll(
+                                  purinAreaKey
+                                      .currentState!
+                                      .currentGame
+                                      .overlays
+                                      .activeOverlays,
+                                );
+                            ScriptManager.singleton.removeDialog();
                           },
                         ),
                       ),

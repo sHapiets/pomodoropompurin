@@ -31,7 +31,6 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late Kotatsu kotatsuEntity;
-  late Feedable feedableEntity;
   late Blanket blanketEntity;
   late Futon futonEntity;
   late StudyTable studyTableEntity;
@@ -62,7 +61,6 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     onLoadAnim = LoadAnimation();
 
     kotatsuEntity = Kotatsu();
-    feedableEntity = Feedable();
     blanketEntity = Blanket();
     futonEntity = Futon();
     studyTableEntity = StudyTable();
@@ -113,6 +111,6 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
     if (purinAreaEquipManager.feedableBitesLeft.value == 0) {
       return;
     }
-    await add(feedableEntity);
+    await add(Feedable());
   }
 }

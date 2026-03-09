@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
+import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 
 /// Singleton class to manage all materials in the assets folder
@@ -77,6 +78,10 @@ class AssetManager {
 
       "consumable_sprites/pudding/1.png",
       "consumable_sprites/pudding/2.png",
+      "consumable_sprites/pizza/1.png",
+      "consumable_sprites/pizza/2.png",
+      "consumable_sprites/pizza/3.png",
+      "consumable_sprites/pizza/4.png",
 
       "purin_sprites/boku/sit/idle.png",
       "purin_sprites/boku/sit/pet.png",

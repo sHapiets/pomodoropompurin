@@ -11,7 +11,7 @@ class Oven extends KitchenProcessor {
         displayName: "oven",
         ingridientIngridients: {},
         consumableIngridients: {
-          Consumable.pizza: {Ingridient.dough: 3, Ingridient.pizzaToppings: 1},
+          Consumable.pizza: {Ingridient.dough: 1, Ingridient.pizzaToppings: 1},
         },
         processColor: const Color.fromARGB(255, 192, 59, 29),
         processIcon: Icons.microwave,

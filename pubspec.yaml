@@ -38,7 +38,10 @@ flutter:
     - assets/images/study_chair_sprites/
     - assets/images/kitchen_sprites/
     - assets/images/ingridient_sprites/
-    - assets/images/consumable_sprites/
+    - assets/images/consumable_sprites/pudding/
+    - assets/images/consumable_sprites/pizza/
+    - assets/images/consumable_sprites/hamburg_steak/
+    - assets/images/consumable_sprites/pancakes/
     - assets/images/kitchen_processors_sprites/
     - assets/images/shop_sprites/
     - assets/images/consumable_sprites/pudding/

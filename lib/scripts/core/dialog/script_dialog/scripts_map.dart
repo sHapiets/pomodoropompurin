@@ -31,12 +31,18 @@ class ScriptsMap {
       ],
       dialogues: [
         {"Purin": "You know what?"},
-        {"Purin": "I believe snacks solve many problems."},
+        {"Purin": "I think that snacks are the solution to ALL problems."},
         {"Purin": "Problems like..."},
         {"Purin": "..."},
         {"Purin": "...hunger?"},
-        {"Purin": "Though I do get hungry so easily."},
-        {"Purin": "So I always love the food you prepare for me!"},
+        {
+          "Purin":
+              "Though I do get hungry so easily, so it's more of a habit than a problem.",
+        },
+        {
+          "Purin":
+              "Either way, I will always love the food mother-owner prepares for me!",
+        },
       ],
     ),
 
@@ -49,15 +55,17 @@ class ScriptsMap {
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
       ],
       dialogues: [
         {"Purin": "I heard the fridge humming again."},
         {"Purin": "Even though it's loud, it has a soothing feel to it."},
-        {"Purin": "I wonder if it ever gets tired."},
-        {"Purin": "Maybe eating more from it helps it rest?"},
+        {"Purin": "It's almost like it's calling for my attention..."},
+        {"Purin": "I wonder if it ever gets tired though."},
+        {"Purin": "Maybe eating a lot more of its food helps it rest?"},
         {"Purin": "..."},
         {"Purin": "......"},
-        {"Purin": "EXPERIMENT TIME!"},
+        {"Purin": "EXPERIMENT TIME!!!"},
       ],
     ),
 
@@ -71,11 +79,14 @@ class ScriptsMap {
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
       ],
       dialogues: [
-        {"Purin": "Do shoes ever get lonely?"},
+        {"Purin": "Do shoes ever feel lonely?"},
         {"Purin": "Like, maybe if one of them loses their pair?"},
-        {"Purin": "I always think that they do, "},
-        {"Purin": "...so when I hide my mother-owner's shoes"},
-        {"Purin": "I never leave either of them by themselves."},
+        {"Purin": "...."},
+        {"Purin": "I always think that they do... "},
+        {
+          "Purin":
+              "...so whenever I hide my mother-owner's shoes, I never leave either of them by themselves.",
+        },
         {
           "Purin":
               "Or at least I keep one of them company while we find for the other one.",
@@ -206,6 +217,41 @@ class ScriptsMap {
         {"Purin": "I hope mother-owner gets us raincoats soon."},
       ],
     ),
+
+    10: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+      ],
+      dialogues: [
+        {
+          "Purin":
+              'They say that, "Life is about the journey, not the destination."',
+        },
+        {
+          "Purin":
+              "But whenever I travel from the couch to the fridge, I'd always think about the fridge the entire time anyways.",
+        },
+        {
+          "Purin":
+              "I would wonder what snacks await me, as my quest for nom~noms continues.",
+        },
+        {
+          "Purin":
+              "Though I always sure hoped the journey was always worth it.",
+        },
+        {
+          "Purin":
+              "Maybe because it was the journey that made me look forward to what I had set myself to achieve...",
+        },
+        {"Purin": "...which is why I end up taking TWO snacks instead!"},
+      ],
+    ),
+
     22: ScriptDialog(
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
@@ -224,10 +270,27 @@ class ScriptsMap {
       {"Koupen": "..."},
       {"Koupen": "In this unknown dimension..."},
       {"Koupen": "...TIME is your best friend!"},
-      {"Koupen": "Take it from yours truly."},
-      {"Koupen": "I play with TIME all the time too."},
-      {"Koupen": "So everyday, I always get to do a lot of exciting things!"},
-      {"Koupen": "But TIME is not only our friend during the fun times..."},
+      {"Koupen": "Take it from me. I play with TIME everyday, too."},
+      {
+        "Koupen":
+            "I spend a lot of my time with my friends, my family, and myself.",
+      },
+      {"Koupen": "I always get to do a lot of exciting things!"},
+      {"Koupen": "Like smelling the fragrant flowers during spring..."},
+      {"Koupen": "...sometimes playing games with my fellow penguins..."},
+      {"Koupen": "...or maybe going for a walk to smell some flowers..."},
+      {"Koupen": "...helping Adelie-san in the farm is also fun..."},
+      {
+        "Koupen":
+            "...I also get in the mood to gather flowers to smell them...",
+      },
+      {"Koupen": "...hmmm..."},
+      {"Koupen": "...did I mention smelling flowers?"},
+      {"Koupen": "Anyways, TIME is always a joy to have."},
+      {
+        "Koupen":
+            "But TIME is not only our best friend during the fun times...",
+      },
       {"Koupen": "...but also our best friend to achieve our goals."},
     ],
   );

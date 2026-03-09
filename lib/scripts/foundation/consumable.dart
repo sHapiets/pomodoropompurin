@@ -17,10 +17,10 @@ enum Consumable {
     oshiriPointsPerBite: 300,
     spriteFlutterKey: 'pP_icon',
     biteSpritesFlamePath: [
-      'consumable_sprites/pudding/1.png',
-      'consumable_sprites/pudding/2.png',
-      'consumable_sprites/pudding/1.png',
-      'consumable_sprites/pudding/2.png',
+      'consumable_sprites/pizza/1.png',
+      'consumable_sprites/pizza/2.png',
+      'consumable_sprites/pizza/3.png',
+      'consumable_sprites/pizza/4.png',
     ],
   ),
   pancake(

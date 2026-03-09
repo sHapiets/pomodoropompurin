@@ -11,13 +11,13 @@ class Feedable extends PurinAreaSelectable {
   Feedable()
     : super(
         //TODO change hitbox and position
-        position: Vector2(180, 190),
+        position: Vector2(180, 180),
         hitbox: PolygonHitbox(
           [
-            Vector2(-20, 20),
-            Vector2(20, 20),
-            Vector2(20, -20),
-            Vector2(-20, -20),
+            Vector2(-30, 30),
+            Vector2(30, 30),
+            Vector2(30, -30),
+            Vector2(-30, -30),
           ],
           anchor: Anchor.center,
           position: Vector2.zero(),
@@ -29,7 +29,7 @@ class Feedable extends PurinAreaSelectable {
   final purin = Purin.singleton;
 
   int bitesLeft = 0;
-  final feedable = PurinAreaEquipManager.singleton.feedable.value!;
+  final feedable = PurinAreaEquipManager.singleton.feedable.value;
   int get biteIndex {
     return bitesLeft - 1;
   }
@@ -41,10 +41,10 @@ class Feedable extends PurinAreaSelectable {
       sprite: Sprite(
         Flame.images.fromCache(feedable.biteSpritesFlamePath[biteIndex]),
       ),
-      size: Vector2.all(40),
+      size: Vector2.all(70),
       anchor: anchor,
     );
-    hitbox.renderShape = true;
+    //hitbox.renderShape = true;
 
     purin.addListener(bite);
 
@@ -61,6 +61,7 @@ class Feedable extends PurinAreaSelectable {
         sprite.sprite = Sprite(
           Flame.images.fromCache(feedable.biteSpritesFlamePath[biteIndex]),
         );
+        super.addOnLoadAnim();
       }
     }
   }

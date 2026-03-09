@@ -22,6 +22,7 @@ class UnlocksFromLevel {
   static Map<int, List<Ingridient>> purchasableIngridients = {
     1: [Ingridient.milk, Ingridient.eggs],
     2: [Ingridient.butter],
+    3: [Ingridient.pizzaToppings, Ingridient.dough],
   };
 
   static Map<int, PurinVars> acquiredPurinVars = {
