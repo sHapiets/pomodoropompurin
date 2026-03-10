@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
@@ -9,13 +10,28 @@ class DatabaseManager {
   DatabaseManager._();
   static final singleton = DatabaseManager._();
 
+  final accountManager = AccountManager.singleton;
+
   // Easy access references, if ever needed...
   /// NOTE: userRef only points to YANA's data, while debugRef points to JOSEPH
-  final userRef = FirebaseFirestore.instance.collection("users").doc("yana");
+  DocumentReference userRef = FirebaseFirestore.instance
+      .collection("users")
+      .doc("yana");
   // final userRef = FirebaseFirestore.instance.collection("users").doc("jd");
 
   CollectionReference get statusRef => userRef.collection('status');
   CollectionReference get configRef => userRef.collection('config');
+
+  void reloadUserDocRef() {
+    if (accountManager.currentUser == null) {
+      return;
+    }
+
+    final userID = accountManager.currentUser!.uid;
+    userRef = FirebaseFirestore.instance.collection("users").doc(userID);
+  }
+
+  Future<void> createUserDatabase() async {}
 
   /// Load Functions
   /// -> future functions that RETURNS the stored value

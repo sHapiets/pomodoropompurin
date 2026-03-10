@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
+import 'package:pomodoropompurin/scripts/layout/account_manager/login_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -19,6 +21,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   final _assetManager = AssetManager.singleton;
+  final _accountManager = AccountManager.singleton;
   final _databaseManager = DatabaseManager.singleton;
   final _pomTimer = PomTimer.singleton;
   final _progSystem = ProgSystem.singleton;
@@ -26,6 +29,7 @@ class _SplashPageState extends State<SplashPage> {
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late final Widget preloadedMainPage;
+  Widget loginWidget = SizedBox.shrink();
 
   final minimumDuration = const Duration(seconds: 1);
   final startTime = DateTime.now();
@@ -42,6 +46,12 @@ class _SplashPageState extends State<SplashPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _preloadAll();
     });
+  }
+
+  Future<void> initialize() async {
+    _accountManager.loggedIn.addListener(_preloadAll);
+    _accountManager.loggedIn.value = true;
+    _accountManager.autoLogin();
   }
 
   Future<void> _runStep(String label, Future<void> Function() task) async {
@@ -213,36 +223,67 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Pomodoro Pompurin",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 40),
+      backgroundColor: const Color.fromARGB(255, 30, 30, 30),
+      body: DefaultTextStyle(
+        style: const TextStyle(fontFamily: 'Nunito', color: Colors.white),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 36),
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Spacer(),
 
-              Text(
-                _currentStep,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16),
-              ),
+                    Text(
+                      _currentStep,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
 
-              const SizedBox(height: 16),
+                    const SizedBox(height: 24),
 
-              LinearProgressIndicator(
-                value: _progress,
-                minHeight: 8,
-                borderRadius: BorderRadius.circular(8),
-              ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: LinearProgressIndicator(
+                        value: _progress,
+                        minHeight: 10,
+                        backgroundColor: Colors.white.withOpacity(0.08),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                          Colors.white,
+                        ),
+                      ),
+                    ),
 
-              const SizedBox(height: 12),
+                    const SizedBox(height: 14),
 
-              Text("${(_progress * 100).toInt()}%"),
-            ],
+                    Text(
+                      "${(_progress * 100).toInt()}%",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white70,
+                      ),
+                    ),
+
+                    const Spacer(),
+                  ],
+                ),
+                /* 
+                ValueListenableBuilder(
+                  valueListenable: _accountManager.loggedIn,
+                  builder: (context, value, child) {
+                    if (value == false) {
+                      return const LoginWidget();
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ), */
+              ],
+            ),
           ),
         ),
       ),

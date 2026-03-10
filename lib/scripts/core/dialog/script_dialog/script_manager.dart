@@ -15,6 +15,8 @@ class ScriptManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  void startUpDialog() {}
+
   void levelUpDialog(int newLevel) {
     if (ScriptsMap.fromLevelUp.containsKey(newLevel)) {
       scriptDialog = ScriptsMap.fromLevelUp[newLevel]!;
