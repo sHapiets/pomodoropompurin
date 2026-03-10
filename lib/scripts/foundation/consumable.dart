@@ -4,7 +4,7 @@ enum Consumable {
     price: 0,
     totalBites: 2,
     oshiriPointsPerBite: 400,
-    spriteFlutterKey: 'pP_icon',
+    iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pudding/1.png',
       'consumable_sprites/pudding/2.png',
@@ -15,7 +15,7 @@ enum Consumable {
     price: 0,
     totalBites: 4,
     oshiriPointsPerBite: 300,
-    spriteFlutterKey: 'pP_icon',
+    iconFlutterPath: 'assets/images/consumable_sprites/pizza/4.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pizza/1.png',
       'consumable_sprites/pizza/2.png',
@@ -28,11 +28,11 @@ enum Consumable {
     price: 0,
     totalBites: 3,
     oshiriPointsPerBite: 250,
-    spriteFlutterKey: 'pP_icon',
+    iconFlutterPath: 'assets/images/consumable_sprites/pancakes/3.png',
     biteSpritesFlamePath: [
-      'consumable_sprites/pudding/1.png',
-      'consumable_sprites/pudding/2.png',
-      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/pancakes/1.png',
+      'consumable_sprites/pancakes/2.png',
+      'consumable_sprites/pancakes/3.png',
     ],
   ),
   hamburgSteak(
@@ -40,13 +40,13 @@ enum Consumable {
     price: 0,
     totalBites: 5,
     oshiriPointsPerBite: 250,
-    spriteFlutterKey: 'pP_icon',
+    iconFlutterPath: 'assets/images/consumable_sprites/hamburg_steak/5.png',
     biteSpritesFlamePath: [
-      'consumable_sprites/pudding/1.png',
-      'consumable_sprites/pudding/2.png',
-      'consumable_sprites/pudding/1.png',
-      'consumable_sprites/pudding/2.png',
-      'consumable_sprites/pudding/1.png',
+      'consumable_sprites/hamburg_steak/1.png',
+      'consumable_sprites/hamburg_steak/2.png',
+      'consumable_sprites/hamburg_steak/3.png',
+      'consumable_sprites/hamburg_steak/4.png',
+      'consumable_sprites/hamburg_steak/5.png',
     ],
   );
 
@@ -55,7 +55,7 @@ enum Consumable {
     required this.price,
     required this.totalBites,
     required this.oshiriPointsPerBite,
-    required this.spriteFlutterKey,
+    required this.iconFlutterPath,
     required this.biteSpritesFlamePath,
   });
   final String displayName;
@@ -63,6 +63,6 @@ enum Consumable {
   final int totalBites;
   final int oshiriPointsPerBite;
 
-  final String spriteFlutterKey;
+  final String iconFlutterPath;
   final List<String> biteSpritesFlamePath;
 }

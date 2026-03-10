@@ -47,7 +47,7 @@ class PurinEntity extends PositionComponent
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late SequenceEffect loadAnim;
-  late PurinAnim purinAnim;
+  late IdleBreathingAnimation purinAnim;
   late SpriteComponent purinSprite;
   late CircleHitbox purinHitbox;
 
@@ -80,7 +80,7 @@ class PurinEntity extends PositionComponent
     position = Vector2(130, 160);
 
     loadAnim = LoadAnimation()..removeOnFinish = true;
-    purinAnim = PurinAnim();
+    purinAnim = IdleBreathingAnimation();
     purinSprite = SpriteComponent(
       sprite: Sprite(Flame.images.fromCache('purin_sprites/boku/sit/idle.png')),
       size: Vector2.all(70),

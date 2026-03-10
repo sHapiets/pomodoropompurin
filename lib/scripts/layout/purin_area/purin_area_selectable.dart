@@ -119,7 +119,7 @@ class PurinAreaSelectable extends PositionComponent
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(
       absolutePosition,
-      Vector2(100, -100),
+      Vector2(0, -200),
       1.0,
     );
   }

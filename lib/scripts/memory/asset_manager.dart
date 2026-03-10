@@ -34,6 +34,7 @@ class AssetManager {
     'pP_icon': 'assets/images/pomPoints_icon.png',
 
     ...{for (final ing in Ingridient.values) ing.name: ing.spriteFlutterPath},
+    ...{for (final con in Consumable.values) con.name: con.iconFlutterPath},
   };
 
   /// Preload one asset globally
@@ -82,6 +83,14 @@ class AssetManager {
       "consumable_sprites/pizza/2.png",
       "consumable_sprites/pizza/3.png",
       "consumable_sprites/pizza/4.png",
+      "consumable_sprites/pancakes/1.png",
+      "consumable_sprites/pancakes/2.png",
+      "consumable_sprites/pancakes/3.png",
+      'consumable_sprites/hamburg_steak/1.png',
+      'consumable_sprites/hamburg_steak/2.png',
+      'consumable_sprites/hamburg_steak/3.png',
+      'consumable_sprites/hamburg_steak/4.png',
+      'consumable_sprites/hamburg_steak/5.png',
 
       "purin_sprites/boku/sit/idle.png",
       "purin_sprites/boku/sit/pet.png",

@@ -6,6 +6,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 
 /// "Conqueror of Nations, Destructor of Worlds"
 ///
@@ -182,7 +183,7 @@ class Purin extends ChangeNotifier {
     stateManager.changePostion(PurinPosition.kotatsuLeft);
     purinAreaStateManager.jumpToPosition(
       purinPositionVect2,
-      Vector2(50, 50),
+      Vector2(25, 0),
       1.8,
     );
     feedCooldown.cancel();
@@ -190,6 +191,7 @@ class Purin extends ChangeNotifier {
       timer,
     ) {
       PurinStateManager.singleton.action = PurinAction.idle;
+      UIDisplayState.singleton.hide.value = false;
       notifyListeners();
       timer.cancel();
     });

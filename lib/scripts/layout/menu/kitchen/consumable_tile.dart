@@ -192,11 +192,11 @@ class _ConsumableTileState extends State<ConsumableTile>
             Align(
               alignment: AlignmentGeometry.topCenter,
               child: Transform.translate(
-                offset: Offset(0, 10),
-                child: Container(
-                  width: iconSides,
-                  height: iconSides,
-                  color: const Color.fromARGB(255, 255, 255, 255),
+                offset: Offset(0, 15),
+                child: SizedBox(
+                  width: iconSides - 10,
+                  height: iconSides - 10,
+                  child: Image.asset(widget.consumable.iconFlutterPath),
                 ),
               ),
             ),

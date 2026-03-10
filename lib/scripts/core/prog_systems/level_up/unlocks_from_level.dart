@@ -20,9 +20,14 @@ import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 /// classes to access.
 class UnlocksFromLevel {
   static Map<int, List<Ingridient>> purchasableIngridients = {
-    1: [Ingridient.milk, Ingridient.eggs],
-    2: [Ingridient.butter],
-    3: [Ingridient.pizzaToppings, Ingridient.dough],
+    2: [Ingridient.eggs, Ingridient.milk, Ingridient.butter],
+    3: [Ingridient.flour],
+    4: [
+      Ingridient.flour,
+      Ingridient.onion,
+      Ingridient.groundPork,
+      Ingridient.riceGrains,
+    ],
   };
 
   static Map<int, PurinVars> acquiredPurinVars = {

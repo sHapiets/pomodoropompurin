@@ -5,6 +5,8 @@ import 'package:flame/src/events/messages/tap_down_event.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
+import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 class Feedable extends PurinAreaSelectable {
@@ -48,6 +50,7 @@ class Feedable extends PurinAreaSelectable {
 
     purin.addListener(bite);
 
+    add(IdleBreathingAnimation());
     super.onMount();
   }
 
@@ -55,6 +58,7 @@ class Feedable extends PurinAreaSelectable {
     if (purin.stateManager.action == PurinAction.feed) {
       bitesLeft--;
       purinAreaEquipManager.biteFeedable(bitesLeft);
+      UIDisplayState.singleton.hide.value = true;
       if (bitesLeft == 0) {
         removeFromParent();
       } else {

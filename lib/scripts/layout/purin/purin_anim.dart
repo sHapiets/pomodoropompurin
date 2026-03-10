@@ -2,8 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/widgets.dart';
 
-class PurinAnim extends SequenceEffect {
-  PurinAnim()
+class IdleBreathingAnimation extends SequenceEffect {
+  IdleBreathingAnimation()
     : super([
         ScaleEffect.to(
           Vector2.all(1.1),
