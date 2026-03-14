@@ -61,7 +61,8 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
                   ),
                   itemBuilder: (context, index) {
                     return PurinEquipTile(
-                      item: acquirables.purinVars[acquiredPurinVars[index]]!,
+                      purinVar:
+                          acquirables.purinVars[acquiredPurinVars[index]]!,
                     );
                   },
                   itemCount: acquiredPurinVars.length,

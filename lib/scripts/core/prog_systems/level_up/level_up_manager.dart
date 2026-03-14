@@ -55,26 +55,10 @@ class LevelUpManager extends ChangeNotifier {
       );
     }
 
-    switch (currentLevel) {
-      case 2:
-        levelUpDialog = LevelUpDialog(
-          newLevel: 2,
-          levelRewards: unlockedPurchasables,
-        );
-
-      /// NOTE: depend on UnlocksFromLevel when a purchasable is available
-      case 3:
-        levelUpDialog = LevelUpDialog(
-          newLevel: 3,
-          levelRewards: unlockedPurchasables,
-        );
-      case 4:
-        levelUpDialog = LevelUpDialog(
-          newLevel: 4,
-          levelRewards: unlockedPurchasables,
-        );
-    }
-
+    levelUpDialog = LevelUpDialog(
+      newLevel: currentLevel,
+      levelRewards: unlockedPurchasables,
+    );
     notifyListeners();
   }
 }

@@ -48,6 +48,12 @@ flutter:
     - assets/images/consumable_sprites/pudding/
     - assets/images/purin_sprites/boku/sit/
     - assets/images/purin_sprites/boku/futon/
+    - assets/images/purin_sprites/pumpkin/sit/
+    - assets/images/purin_sprites/pumpkin/futon/
+    - assets/images/purin_sprites/summer/sit/
+    - assets/images/purin_sprites/summer/futon/
+    - assets/images/purin_sprites/bee/sit/
+    - assets/images/purin_sprites/bee/futon/
   fonts:
     - family: Fredoka
       fonts:

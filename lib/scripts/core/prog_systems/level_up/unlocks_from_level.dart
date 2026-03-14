@@ -22,17 +22,13 @@ class UnlocksFromLevel {
   static Map<int, List<Ingridient>> purchasableIngridients = {
     2: [Ingridient.eggs, Ingridient.milk, Ingridient.butter],
     3: [Ingridient.flour],
-    4: [
-      Ingridient.flour,
-      Ingridient.onion,
-      Ingridient.groundPork,
-      Ingridient.riceGrains,
-    ],
+    5: [Ingridient.onion, Ingridient.groundPork, Ingridient.riceGrains],
   };
 
   static Map<int, PurinVars> acquiredPurinVars = {
     1: PurinVars.boku,
-    2: PurinVars.pumpkin,
-    12: PurinVars.shrimp,
+    4: PurinVars.pumpkin,
+    12: PurinVars.summer,
+    13: PurinVars.bee,
   };
 }

@@ -62,20 +62,26 @@ class Acquirables {
   Map<PurinVars, PurinVar> purinVars = {
     PurinVars.boku: PurinVar(
       id: PurinVars.boku,
-      displayName: 'Boku',
+      displayName: 'Boku-Purin',
       cost: 0,
-      iconAssetPath: '',
-    ),
-    PurinVars.shrimp: PurinVar(
-      id: PurinVars.shrimp,
-      displayName: "Shrimp",
-      cost: 100,
       iconAssetPath: '',
     ),
     PurinVars.pumpkin: PurinVar(
       id: PurinVars.pumpkin,
-      displayName: "Pumpkin",
-      cost: 200,
+      displayName: "Pumpkin-Purin",
+      cost: 0,
+      iconAssetPath: '',
+    ),
+    PurinVars.summer: PurinVar(
+      id: PurinVars.summer,
+      displayName: "Summer-Purin",
+      cost: 0,
+      iconAssetPath: '',
+    ),
+    PurinVars.bee: PurinVar(
+      id: PurinVars.bee,
+      displayName: "Bee-Purin",
+      cost: 0,
       iconAssetPath: '',
     ),
   };
@@ -190,7 +196,7 @@ class Acquirables {
   };
 }
 
-enum PurinVars { boku, shrimp, pumpkin }
+enum PurinVars { boku, pumpkin, summer, bee }
 
 enum KotatsuDesigns { pudding, aqua }
 

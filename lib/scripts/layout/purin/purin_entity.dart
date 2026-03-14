@@ -59,7 +59,8 @@ class PurinEntity extends PositionComponent
   final spriteDirectoryFromPurinVar = {
     PurinVars.boku: 'boku/',
     PurinVars.pumpkin: 'pumpkin/',
-    PurinVars.shrimp: 'shrimp/',
+    PurinVars.summer: 'summer/',
+    PurinVars.bee: 'bee/',
   };
   final spriteDirectoryFromPosition = {
     PurinPosition.kotatsuLeft: 'sit/',

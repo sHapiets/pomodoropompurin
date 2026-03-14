@@ -5,9 +5,9 @@ import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 
 class PurinEquipTile extends StatefulWidget {
-  const PurinEquipTile({super.key, required this.item});
+  const PurinEquipTile({super.key, required this.purinVar});
 
-  final Acquirable item;
+  final PurinVar purinVar;
 
   @override
   State<PurinEquipTile> createState() => _PurinEquipTileState();
@@ -44,7 +44,7 @@ class _PurinEquipTileState extends State<PurinEquipTile>
 
   late final AnimationController buttonAnimationController;
   late final Animation<double> buttonTween;
-  bool showEquippedButton = false;
+  ValueNotifier<bool> showEquippedButton = ValueNotifier(false);
 
   @override
   void initState() {
@@ -81,9 +81,9 @@ class _PurinEquipTileState extends State<PurinEquipTile>
   }
 
   void changeEquipButton() {
-    (purin.equipManager.equippedPurinVar == widget.item)
-        ? {showEquippedButton = true}
-        : {showEquippedButton = false};
+    (purin.equipManager.equippedPurinVar == widget.purinVar)
+        ? {showEquippedButton.value = true}
+        : {showEquippedButton.value = false};
   }
 
   @override
@@ -122,62 +122,80 @@ class _PurinEquipTileState extends State<PurinEquipTile>
               alignment: AlignmentGeometry.topCenter,
               child: SizedBox(
                 child: Text(
-                  widget.item.displayName,
+                  widget.purinVar.displayName,
                   style: displayNameTextStyle,
                 ),
               ),
             ),
 
-            Align(
-              alignment: AlignmentGeometry.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, -5),
-                child: AnimatedBuilder(
-                  animation: buttonTween,
-                  builder: (context, child) {
-                    return (showEquippedButton)
-                        ? child!
-                        : ScaleTransition(scale: buttonTween, child: child);
-                  },
-                  child: Container(
-                    width: buttonWidth,
-                    height: buttonHeight,
-                    decoration: BoxDecoration(
-                      color: (showEquippedButton)
-                          ? const Color.fromARGB(141, 144, 167, 179)
-                          : const Color.fromARGB(255, 105, 194, 15),
-                      borderRadius: BorderRadius.circular(3),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black12, offset: Offset(2, 2)),
-                      ],
-                    ),
-                    child: MaterialButton(onPressed: () {}),
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: AlignmentGeometry.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, -5),
-                child: IgnorePointer(
-                  child: SizedBox(
-                    width: buttonWidth - 20,
-                    height: buttonHeight,
-                    child: Center(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          (showEquippedButton) ? "EQUIPPED" : "EQUIP",
-                          style: (showEquippedButton)
-                              ? equippedButtonTextStyle
-                              : equipButtonTextStyle,
+            ValueListenableBuilder(
+              valueListenable: showEquippedButton,
+              builder: (context, value, child) {
+                return Align(
+                  alignment: AlignmentGeometry.bottomCenter,
+                  child: Transform.translate(
+                    offset: Offset(0, -5),
+                    child: AnimatedBuilder(
+                      animation: buttonTween,
+                      builder: (context, child) {
+                        return (value)
+                            ? child!
+                            : ScaleTransition(scale: buttonTween, child: child);
+                      },
+                      child: Container(
+                        width: buttonWidth,
+                        height: buttonHeight,
+                        decoration: BoxDecoration(
+                          color: (value)
+                              ? const Color.fromARGB(141, 144, 167, 179)
+                              : const Color.fromARGB(255, 105, 194, 15),
+                          borderRadius: BorderRadius.circular(3),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
+                        ),
+                        child: MaterialButton(
+                          onPressed: () {
+                            purin.equip(widget.purinVar);
+                          },
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
+            ),
+
+            ValueListenableBuilder(
+              valueListenable: showEquippedButton,
+              builder: (context, value, child) {
+                return Align(
+                  alignment: AlignmentGeometry.bottomCenter,
+                  child: Transform.translate(
+                    offset: Offset(0, -5),
+                    child: IgnorePointer(
+                      child: SizedBox(
+                        width: buttonWidth - 20,
+                        height: buttonHeight,
+                        child: Center(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              (value) ? "EQUIPPED" : "EQUIP",
+                              style: (value)
+                                  ? equippedButtonTextStyle
+                                  : equipButtonTextStyle,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

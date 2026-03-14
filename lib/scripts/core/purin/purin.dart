@@ -10,6 +10,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
+import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 
 /// "Conqueror of Nations, Destructor of Worlds"
 ///
@@ -108,6 +109,14 @@ class Purin extends ChangeNotifier {
       case PurinPosition.study:
         return 90;
     }
+  }
+
+  /// EQUIP LOGIC
+  ///
+  ///
+  void equip(PurinVar purinVar) {
+    equipManager.equip(purinVar);
+    notifyListeners();
   }
 
   /// PET LOGIC

@@ -38,7 +38,6 @@ class LevelUpDialog extends StatelessWidget {
         ),
         child: Column(
           children: [
-            /// 🍮 Header
             Column(
               children: [
                 const Text(

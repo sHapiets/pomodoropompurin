@@ -25,6 +25,7 @@ class _LevelUpScriptWidget extends State<LevelUpScriptWidget> {
   void reload() {
     setState(() {
       if (levelUpScriptDialog.value.imagePaths.isEmpty) {
+        uiDisplayState.hide.value = false;
         dialog = const SizedBox.shrink();
         showBarrier = false;
       } else {
