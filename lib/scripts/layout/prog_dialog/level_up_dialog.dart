@@ -42,7 +42,7 @@ class LevelUpDialog extends StatelessWidget {
             Column(
               children: [
                 const Text(
-                  "🍮 Oshiri Level Up!",
+                  "* Oshiri Level Up!",
                   style: TextStyle(
                     fontFamily: 'Fredoka',
                     fontSize: 26,
@@ -94,18 +94,15 @@ class LevelUpDialog extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              if (reward.length > 2 && reward[2] is IconData)
+                              if (reward.length > 2 && reward[2] is String)
                                 Container(
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                     color: pudding,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
-                                  child: Icon(
-                                    reward[2],
-                                    size: 22,
-                                    color: caramel,
-                                  ),
+                                  width: 50,
+                                  child: Image.asset(reward[2]),
                                 ),
 
                               const SizedBox(width: 12),

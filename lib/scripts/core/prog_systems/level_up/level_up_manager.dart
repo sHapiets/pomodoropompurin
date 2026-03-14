@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
@@ -39,20 +40,39 @@ class LevelUpManager extends ChangeNotifier {
       1.8,
     );
 
+    final List<List<dynamic>> unlockedPurchasables = [];
+    if (UnlocksFromLevel.purchasableIngridients[currentLevel] != null) {
+      unlockedPurchasables.addAll(
+        UnlocksFromLevel.purchasableIngridients[currentLevel]!.map((
+          ingridient,
+        ) {
+          return [
+            ingridient.displayName,
+            "New Purchasable Ingridient!",
+            ingridient.spriteFlutterPath,
+          ];
+        }).toList(),
+      );
+    }
+
     switch (currentLevel) {
       case 2:
         levelUpDialog = LevelUpDialog(
           newLevel: 2,
-          levelRewards: [
-            ["Sword", "izza nice Sword", Icons.abc],
-          ],
+          levelRewards: unlockedPurchasables,
         );
 
       /// NOTE: depend on UnlocksFromLevel when a purchasable is available
       case 3:
-        levelUpDialog = LevelUpDialog(newLevel: 3, levelRewards: []);
+        levelUpDialog = LevelUpDialog(
+          newLevel: 3,
+          levelRewards: unlockedPurchasables,
+        );
       case 4:
-        levelUpDialog = LevelUpDialog(newLevel: 4, levelRewards: []);
+        levelUpDialog = LevelUpDialog(
+          newLevel: 4,
+          levelRewards: unlockedPurchasables,
+        );
     }
 
     notifyListeners();
