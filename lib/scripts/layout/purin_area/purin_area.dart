@@ -66,7 +66,7 @@ class PurinArea extends FlameGame
   void onTapDown(TapDownEvent event) {
     UIDisplayState.singleton.hide.value = false;
     overlays.removeAll(overlays.activeOverlays);
-    scriptManager.removeDialog();
+    scriptManager.removeAllDialogs();
 
     cursorSprite.removeFromParent();
     cursorSprite = CursorMovingSprite(
@@ -116,7 +116,7 @@ class PurinArea extends FlameGame
   void onPanUpdate(DragUpdateInfo info) {
     UIDisplayState.singleton.hide.value = false;
     overlays.removeAll(overlays.activeOverlays);
-    scriptManager.removeDialog();
+    scriptManager.removeAllDialogs();
     if (purinAreaStateManager.state.value == "Moving") {
       cursorSprite.position = info.eventPosition.global;
 
@@ -160,7 +160,7 @@ class PurinArea extends FlameGame
   @override
   void onPanEnd(DragEndInfo info) {
     UIDisplayState.singleton.hide.value = false;
-    scriptManager.removeDialog();
+    scriptManager.removeAllDialogs();
     cursorSprite.removeFromParent();
     purinAreaStateManager.state.value = "Idle";
   }

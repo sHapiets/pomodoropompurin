@@ -206,14 +206,32 @@ class DatabaseManager {
   }
 
   Future<void> dayTimeSecondsSave(int timeTotalSeconds) async {
-    final dayRef = userRef
-        .collection('dates')
-        .doc('${DateTime.now().year}')
-        .collection('months')
-        .doc('${DateTime.now().month}'.padLeft(2, '0'))
-        .collection('days')
-        .doc('${DateTime.now().day}'.padLeft(2, '0'));
-    await dayRef.set({'timeSeconds': timeTotalSeconds});
+    final now = DateTime.now();
+
+    final yearId = '${now.year}';
+    final monthId = '${5}'.padLeft(2, '0');
+    final dayId = '${now.day}'.padLeft(2, '0');
+
+    final yearRef = userRef.collection('dates').doc(yearId);
+    final monthRef = yearRef.collection('months').doc(monthId);
+    final dayRef = monthRef.collection('days').doc(dayId);
+
+    final yearSnap = await yearRef.get();
+    if (!yearSnap.exists) {
+      await yearRef.set({});
+    }
+
+    final monthSnap = await monthRef.get();
+    if (!monthSnap.exists) {
+      await monthRef.set({});
+    }
+
+    final daySnap = await dayRef.get();
+    if (!daySnap.exists) {
+      await dayRef.set({'timeSeconds': timeTotalSeconds});
+    } else {
+      await dayRef.update({'timeSeconds': timeTotalSeconds});
+    }
   }
 
   Future<void> configKotatsuSave(KotatsuDesigns design) async {

@@ -94,7 +94,7 @@ class KotatsuConsumableMenu extends StatelessWidget {
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
-                          childAspectRatio: 1,
+                          childAspectRatio: 0.8,
                         ),
                     itemBuilder: (context, index) {
                       final consumable = acquiredConsumables.keys

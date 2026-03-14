@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 
-class ScriptDialogWidget extends StatefulWidget {
-  const ScriptDialogWidget({super.key});
+class FeedScriptWidget extends StatefulWidget {
+  const FeedScriptWidget({super.key});
 
   @override
-  State<ScriptDialogWidget> createState() => _ScriptDialogWidgetState();
+  State<FeedScriptWidget> createState() => _FeedScriptWidgetState();
 }
 
-class _ScriptDialogWidgetState extends State<ScriptDialogWidget> {
-  final scriptManager = ScriptManager.singleton;
+class _FeedScriptWidgetState extends State<FeedScriptWidget> {
+  final feedScriptDialog = ScriptManager.singleton.feedScriptDialog;
   final uiDisplayState = UIDisplayState.singleton;
 
   Widget dialog = const SizedBox.shrink();
@@ -19,19 +19,17 @@ class _ScriptDialogWidgetState extends State<ScriptDialogWidget> {
   @override
   void initState() {
     super.initState();
-    scriptManager.addListener(reload);
+    feedScriptDialog.addListener(reload);
   }
 
   void reload() {
     setState(() {
-      if (scriptManager.scriptDialog.imagePaths.isEmpty) {
-        uiDisplayState.hide.value = false;
+      if (feedScriptDialog.value.imagePaths.isEmpty) {
         dialog = const SizedBox.shrink();
         showBarrier = false;
       } else {
-        uiDisplayState.hide.value = true;
-        dialog = scriptManager.scriptDialog;
-        if (scriptManager.scriptDialog.isStatic) {
+        dialog = feedScriptDialog.value;
+        if (feedScriptDialog.value.isStatic) {
           showBarrier = false;
         } else {
           showBarrier = true;
@@ -42,7 +40,7 @@ class _ScriptDialogWidgetState extends State<ScriptDialogWidget> {
 
   @override
   void dispose() {
-    scriptManager.removeListener(reload);
+    feedScriptDialog.removeListener(reload);
     super.dispose();
   }
 

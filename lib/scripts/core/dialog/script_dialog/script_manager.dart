@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/scripts_map.dart';
@@ -8,24 +10,48 @@ class ScriptManager extends ChangeNotifier {
   ScriptManager._();
   static final singleton = ScriptManager._();
 
-  ScriptDialog scriptDialog = ScriptDialog(imagePaths: [], dialogues: []);
-
-  void removeDialog() {
-    scriptDialog = ScriptDialog(imagePaths: [], dialogues: []);
-    notifyListeners();
-  }
+  ValueNotifier<ScriptDialog> levelUpScriptDialog = ValueNotifier(
+    ScriptDialog(imagePaths: [], dialogues: []),
+  );
+  ValueNotifier<ScriptDialog> purinMenuScriptDialog = ValueNotifier(
+    ScriptDialog(imagePaths: [], dialogues: []),
+  );
+  ValueNotifier<ScriptDialog> feedScriptDialog = ValueNotifier(
+    ScriptDialog(imagePaths: [], dialogues: []),
+  );
+  ValueNotifier<ScriptDialog> petScriptDialog = ValueNotifier(
+    ScriptDialog(imagePaths: [], dialogues: []),
+  );
 
   void startUpDialog() {}
 
-  void levelUpDialog(int newLevel) {
+  void removeAllDialogs() {
+    purinMenuScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+    feedScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+    petScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+    notifyListeners();
+  }
+
+  void removeLevelUpDialog() {
+    levelUpScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+    notifyListeners();
+  }
+
+  void addLevelUpDialog(int newLevel) {
     if (ScriptsMap.fromLevelUp.containsKey(newLevel)) {
-      scriptDialog = ScriptsMap.fromLevelUp[newLevel]!;
+      levelUpScriptDialog.value = ScriptsMap.fromLevelUp[newLevel]!
+        ..onFinished = removeLevelUpDialog;
       notifyListeners();
     }
   }
 
-  void purinMenuDialog() {
-    scriptDialog = ScriptDialog(
+  void removePurinMenuDialog() {
+    purinMenuScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+    notifyListeners();
+  }
+
+  void addPurinMenuDialog() {
+    purinMenuScriptDialog.value = ScriptDialog(
       imagePaths: [AssetManager.singleton.flutterAssetPaths["pP_icon"]!],
       dialogues: [
         {"Purin": "What's up? (^ ω ^ )"},
@@ -35,8 +61,38 @@ class ScriptManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void purinPetDialog() {
-    scriptDialog = ScriptDialog(
+  void removeFeedDialog() {
+    feedScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+    notifyListeners();
+  }
+
+  final List<String> purinFeedRandomScripts = [
+    "That hits the spot ~ !",
+    "I'm just warming up, keep it coming!",
+    "Anything mama-owner make is delicious!",
+    "Maybe I should diet.... never!",
+  ];
+  final random = Random();
+
+  void addFeedDialog() {
+    final index = random.nextInt(purinFeedRandomScripts.length);
+    feedScriptDialog.value = ScriptDialog(
+      imagePaths: [AssetManager.singleton.flutterAssetPaths["pP_icon"]!],
+      dialogues: [
+        {"Purin": purinFeedRandomScripts[index]},
+      ],
+      isStatic: true,
+    );
+    notifyListeners();
+  }
+
+  void removePetDialog() {
+    petScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+    notifyListeners();
+  }
+
+  void addPetDialog() {
+    petScriptDialog.value = ScriptDialog(
       imagePaths: [AssetManager.singleton.flutterAssetPaths["pP_icon"]!],
       dialogues: [
         {"Purin": "Pomu ~ Pomu ~~"},

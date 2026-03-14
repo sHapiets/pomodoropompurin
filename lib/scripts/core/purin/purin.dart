@@ -1,6 +1,9 @@
 import 'dart:async' as async_lib;
+import 'dart:math';
 import 'package:flame/components.dart';
+import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
@@ -120,6 +123,7 @@ class Purin extends ChangeNotifier {
   /// changes, and starts a cooldown timer before going back to idle
   double petDeltaX = 0;
   double petDeltaY = 0;
+  final random = Random();
   async_lib.Timer petCooldown = async_lib.Timer.periodic(
     Duration(milliseconds: 700),
     (timer) {
@@ -128,7 +132,8 @@ class Purin extends ChangeNotifier {
     },
   );
   void pet() {
-    int reward = 1;
+    final bool addOshiri = random.nextBoolean(odds: 0.1);
+    int reward = addOshiri ? 1 : 0;
     progSystem.addOshiriPoints(reward);
 
     stateManager.action = PurinAction.pet;
@@ -137,6 +142,7 @@ class Purin extends ChangeNotifier {
       Vector2.zero(),
       2.0,
     );
+    ScriptManager.singleton.addPetDialog();
     petCooldown.cancel();
     petCooldown = async_lib.Timer.periodic(Duration(milliseconds: 700), (
       timer,
@@ -176,7 +182,7 @@ class Purin extends ChangeNotifier {
     },
   );
   void feed() {
-    int reward = purinAreaEquipManager.feedable.value.oshiriPointsPerBite;
+    final reward = purinAreaEquipManager.feedable.value.oshiriPointsPerBite;
     progSystem.addOshiriPoints(reward);
 
     stateManager.changeAction(PurinAction.feed);
@@ -186,12 +192,15 @@ class Purin extends ChangeNotifier {
       Vector2(25, 0),
       1.8,
     );
+    ScriptManager.singleton.removeFeedDialog();
+    ScriptManager.singleton.addFeedDialog();
+    UIDisplayState.singleton.hide.value = true;
     feedCooldown.cancel();
     feedCooldown = async_lib.Timer.periodic(Duration(milliseconds: 2500), (
       timer,
     ) {
+      ScriptManager.singleton.removeFeedDialog();
       PurinStateManager.singleton.action = PurinAction.idle;
-      UIDisplayState.singleton.hide.value = false;
       notifyListeners();
       timer.cancel();
     });

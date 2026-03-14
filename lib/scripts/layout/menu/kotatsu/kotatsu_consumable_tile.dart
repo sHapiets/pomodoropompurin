@@ -1,8 +1,12 @@
 import 'dart:math';
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
@@ -25,6 +29,8 @@ class KotatsuConsumableTile extends StatefulWidget {
 class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
     with TickerProviderStateMixin {
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
+  final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final purin = Purin.singleton;
   final progSystem = ProgSystem.singleton;
 
   final double iconSides = 70;
@@ -45,7 +51,15 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
 
   final displayNameTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 10,
+    fontWeight: FontWeight.w600,
+    fontSize: 11,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
+  final displayCountTextStyle = const TextStyle(
+    fontFamily: 'Fredoka',
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
@@ -55,6 +69,12 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
       widget.consumable.totalBites,
     );
     progSystem.useConsumable(widget.consumable, 1);
+    purin.changePosition(PurinPosition.kotatsuLeft);
+    purinAreaStateManager.jumpToPosition(
+      purin.purinPositionVect2,
+      Vector2(25, 0),
+      1.8,
+    );
   }
 
   late final AnimationController tileOnLoadAnimationController;
@@ -137,14 +157,34 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
                 width: iconSides,
                 height: iconSides,
                 color: Colors.white,
+                child: Image.asset(widget.consumable.iconFlutterPath),
               ),
             ),
+
+            /// Ingridient Name
             Align(
               alignment: AlignmentGeometry.topCenter,
-              child: SizedBox(
-                child: Text(
-                  widget.consumable.displayName,
-                  style: displayNameTextStyle,
+              child: Transform.translate(
+                offset: Offset(0, 70),
+                child: SizedBox(
+                  child: Text(
+                    widget.consumable.displayName,
+                    style: displayNameTextStyle,
+                  ),
+                ),
+              ),
+            ),
+
+            /// ProcessConsumable Count
+            Align(
+              alignment: AlignmentGeometry.topLeft,
+              child: Transform.translate(
+                offset: Offset(8, 5),
+                child: SizedBox(
+                  child: Text(
+                    "${progSystem.consumableInventory[widget.consumable]!.value}",
+                    style: displayCountTextStyle,
+                  ),
                 ),
               ),
             ),
@@ -193,7 +233,7 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
                                       .overlays
                                       .activeOverlays,
                                 );
-                            ScriptManager.singleton.removeDialog();
+                            ScriptManager.singleton.removeAllDialogs();
                           },
                         ),
                       ),

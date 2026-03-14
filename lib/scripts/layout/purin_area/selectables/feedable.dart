@@ -58,7 +58,6 @@ class Feedable extends PurinAreaSelectable {
     if (purin.stateManager.action == PurinAction.feed) {
       bitesLeft--;
       purinAreaEquipManager.biteFeedable(bitesLeft);
-      UIDisplayState.singleton.hide.value = true;
       if (bitesLeft == 0) {
         removeFromParent();
       } else {
@@ -79,6 +78,7 @@ class Feedable extends PurinAreaSelectable {
   @override
   void onTapDown(TapDownEvent event) {
     purinAreaStateManager.state.value = 'Feed';
+    UIDisplayState.singleton.hide.value = true;
   }
 
   @override

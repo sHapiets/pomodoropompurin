@@ -28,21 +28,23 @@ class ScriptsMap {
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
       ],
       dialogues: [
         {"Purin": "You know what?"},
-        {"Purin": "I think that snacks are the solution to ALL problems."},
+        {"Purin": "I think that snacks are the solution to ALL my problems."},
         {"Purin": "Problems like..."},
         {"Purin": "..."},
         {"Purin": "...hunger?"},
-        {
-          "Purin":
-              "Though I do get hungry so easily, so it's more of a habit than a problem.",
-        },
-        {
-          "Purin":
-              "Either way, I will always love the food mother-owner prepares for me!",
-        },
+        {"Purin": "Hmmm..."},
+        {"Purin": "I guess snacks don't really do much after all..."},
+        {"Purin": "But then again, getting hungry is the ONLY problem I have."},
+        {"Purin": "..."},
+        {"Purin": "....."},
+        {"Purin": "Talking about being hungry makes me hungry even more!"},
       ],
     ),
 
@@ -59,13 +61,16 @@ class ScriptsMap {
       ],
       dialogues: [
         {"Purin": "I heard the fridge humming again."},
-        {"Purin": "Even though it's loud, it has a soothing feel to it."},
+        {
+          "Purin":
+              "Even though it's a bit loud, it has a soothing sound and feel to it.",
+        },
         {"Purin": "It's almost like it's calling for my attention..."},
         {"Purin": "I wonder if it ever gets tired though."},
         {"Purin": "Maybe eating a lot more of its food helps it rest?"},
         {"Purin": "..."},
         {"Purin": "......"},
-        {"Purin": "EXPERIMENT TIME!!!"},
+        {"Purin": "HELP IS ON THE WAY!!!"},
       ],
     ),
 
@@ -81,11 +86,11 @@ class ScriptsMap {
       dialogues: [
         {"Purin": "Do shoes ever feel lonely?"},
         {"Purin": "Like, maybe if one of them loses their pair?"},
-        {"Purin": "...."},
+        {"Purin": "Hmm...."},
         {"Purin": "I always think that they do... "},
         {
           "Purin":
-              "...so whenever I hide my mother-owner's shoes, I never leave either of them by themselves.",
+              "...so whenever I hide my mama-owner's shoes, I never leave either of them by themselves.",
         },
         {
           "Purin":
@@ -105,19 +110,21 @@ class ScriptsMap {
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
         AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
       ],
       dialogues: [
         {
           "Purin":
-              "One day, I'll become extreeemely BIG! Just like my Mama and Papa.",
+              "One day, I'll become extreeeeemely BIG! Just like my Mama and Papa.",
         },
-        {"Purin": "That's why eating will forever be my favorite sport."},
-        {"Purin": "Though I wonder if it's my all-time favorite one..."},
-        {"Purin": "Sleeping, maybe?"},
+        {"Purin": "That's why eating will forever be my favorite sport!"},
+        {"Purin": "Though I wonder if it's my favorite one of ALL-TIME..."},
+        {"Purin": "Sleeping might be a strong contender..."},
         {"Purin": "But I can't eat while sleeping, can I?"},
         {"Purin": "Hmm..."},
         {"Purin": "Well, I do become bigger in my dreams sometimes..."},
         {"Purin": "...but I get disappointed waking up."},
+        {"Purin": "Hmm..."},
         {"Purin": "Let's call it a tie for now!"},
       ],
     ),
@@ -138,18 +145,18 @@ class ScriptsMap {
         {"Purin": "I wonder if clouds get tired from traveling."},
         {
           "Purin":
-              "I enjoy going out from time to time, but nothing beats relaxing at home",
+              "I enjoy going out from time to time, but staying and relaxing at home is just unbeatable.",
         },
         {
           "Purin":
-              "And staying at home becomes extremely cozy especially when it rains...",
+              "And it just becomes extremely cozy especially when it rains...",
         },
         {"Purin": "..."},
         {"Purin": "If clouds travel so much..."},
         {"Purin": "...is rain... just clouds taking a bath?...."},
         {"Purin": "...or their sweat dropping from the sky?"},
         {"Purin": "..."},
-        {"Purin": "I hope mother-owner gets us raincoats soon."},
+        {"Purin": "I hope mama-owner gets us raincoats soon."},
       ],
     ),
 
@@ -180,7 +187,7 @@ class ScriptsMap {
           "Purin":
               "I'm thinking that maybe I should have eaten it while I had the chance",
         },
-        {"Purin": "Or maybe it was never meant to fill my tummy..."},
+        {"Purin": "Or maybe it was just never meant to fill me up..."},
         {"Purin": "...."},
         {"Purin": "Thinking about this porkchop makes me just as hungry!"},
         {"Purin": "A pizza right now would be nice ~pom-u~."},
@@ -214,7 +221,7 @@ class ScriptsMap {
         {"Purin": "...is rain... just clouds taking a bath?...."},
         {"Purin": "...or their sweat dropping from the sky?"},
         {"Purin": "..."},
-        {"Purin": "I hope mother-owner gets us raincoats soon."},
+        {"Purin": "I hope mama-owner gets us raincoats soon."},
       ],
     ),
 

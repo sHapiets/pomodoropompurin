@@ -17,7 +17,10 @@ import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_main_menu.dart';
-import 'package:pomodoropompurin/scripts/layout/script_dialog/script_dialog_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/script_dialog/feed_script_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/script_dialog/level_up_script_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/script_dialog/pet_script_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/script_dialog/purin_menu_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
@@ -124,7 +127,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           MenuDial(),
           UIBlock(),
           PomTimerDisplay(),
-          ScriptDialogWidget(),
+          LevelUpScriptWidget(),
+          FeedScriptWidget(),
+          PetScriptWidget(),
+          PurinMenuScriptWidget(),
         ],
       ),
     );

@@ -7,11 +7,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/effects/floating_plus_oshiri.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
@@ -43,6 +45,9 @@ class PurinEntity extends PositionComponent
   }
 
   final purin = Purin.singleton;
+  final progSystem = ProgSystem.singleton;
+  int currentOshiriPoints = 0;
+
   final purinAreaStateManager = PurinAreaStateManager.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
@@ -105,6 +110,9 @@ class PurinEntity extends PositionComponent
 
     purin.addListener(updatePostion);
     purin.addListener(updateSprite);
+
+    currentOshiriPoints = progSystem.oshiriPoints.value;
+    progSystem.oshiriPoints.addListener(addFloatingPlusOshiri);
   }
 
   void updatePostion() {
@@ -138,6 +146,17 @@ class PurinEntity extends PositionComponent
     add(loadAnim..reset());
   }
 
+  void addFloatingPlusOshiri() {
+    final newOshiriPoints = progSystem.oshiriPoints.value;
+    add(
+      FloatingPlusOshiri(
+        position: Vector2(0, -20),
+        points: newOshiriPoints - currentOshiriPoints,
+      ),
+    );
+    currentOshiriPoints = newOshiriPoints;
+  }
+
   @override
   void onTapDown(TapDownEvent event) {
     if (purinAreaStateManager.state.value == "Feed") {
@@ -158,6 +177,6 @@ class PurinEntity extends PositionComponent
       1.5,
     );
     game.overlays.add("purinMainMenu");
-    ScriptManager.singleton.purinMenuDialog();
+    ScriptManager.singleton.addPurinMenuDialog();
   }
 }

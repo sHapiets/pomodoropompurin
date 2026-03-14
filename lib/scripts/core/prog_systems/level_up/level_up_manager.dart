@@ -32,7 +32,7 @@ class LevelUpManager extends ChangeNotifier {
   void unlockFromNewLevel() {
     currentLevel = progSystem.oshiriLevel.value;
 
-    scriptManager.levelUpDialog(currentLevel);
+    scriptManager.addLevelUpDialog(currentLevel);
     purinAreaStateManager.jumpToPosition(
       purin.purinPositionVect2,
       Vector2.zero(),

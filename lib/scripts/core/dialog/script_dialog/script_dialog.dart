@@ -9,9 +9,9 @@ class ScriptDialog extends StatefulWidget {
   final bool isStatic;
   final Duration charDelay;
   final Duration transitionDuration;
-  final VoidCallback? onFinished;
+  VoidCallback? onFinished;
 
-  const ScriptDialog({
+  ScriptDialog({
     Key? key,
     required this.imagePaths,
     required this.dialogues,
@@ -34,8 +34,6 @@ class _ScriptDialogState extends State<ScriptDialog>
   int _charIndex = 0;
   late AnimationController _fadeController;
   bool _visible = true;
-
-  final scriptManager = ScriptManager.singleton;
 
   @override
   void initState() {
@@ -89,7 +87,6 @@ class _ScriptDialogState extends State<ScriptDialog>
       setState(() {
         _visible = false;
       });
-      ScriptManager.singleton.removeDialog();
       if (widget.onFinished != null) {
         widget.onFinished!();
       }
