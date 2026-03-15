@@ -18,13 +18,16 @@ class ScriptsMap {
         AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
       ],
       dialogues: [
-        {"Purin": "You know what?"},
-        {"Purin": "I think that snacks are the solution to ALL my problems."},
+        {"Purin": "Hmm...."},
+        {
+          "Purin":
+              "I think that snacks are the solution to ALL problems in the world.",
+        },
         {"Purin": "Problems like..."},
-        {"Purin": "..."},
+        {"Purin": "...."},
         {"Purin": "...hunger?"},
-        {"Purin": "Hmmm..."},
-        {"Purin": "I guess snacks don't really do much after all..."},
+        {"Purin": "And maybe.... uhmmm...."},
+        {"Purin": "I guess snacks don't really solve much after all..."},
         {"Purin": "But then again, getting hungry is the ONLY problem I have."},
         {"Purin": "..."},
         {"Purin": "....."},
@@ -47,7 +50,7 @@ class ScriptsMap {
         {"Purin": "I heard the fridge humming again."},
         {
           "Purin":
-              "Even though it's a bit loud, it has a soothing sound and feel to it.",
+              "Even though it's a bit loud, it does have a soothing feel to it.",
         },
         {"Purin": "It's almost like it's calling for my attention..."},
         {"Purin": "I wonder if it ever gets tired though."},
@@ -63,38 +66,45 @@ class ScriptsMap {
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
       ],
       dialogues: [
         {"Purin": "Do shoes ever feel lonely?"},
-        {"Purin": "Like, maybe if one of them loses their pair?"},
+        {"Purin": "Like, maybe if one of them loses their pair-mate?"},
         {"Purin": "Hmm...."},
-        {"Purin": "I always think that they do... "},
         {
           "Purin":
-              "...so whenever I hide my mama-owner's shoes, I never leave either of them by themselves.",
+              "They probably do, the same way for me whenever mama-owner or Muffin isn't around...",
+        },
+        {"Purin": "...."},
+        {"Purin": "ALRIGHTY! From now on, ..."},
+        {
+          "Purin":
+              "...whenever I hide mama-owner's shoes, I'll never leave either of them by themselves.",
         },
         {
           "Purin":
-              "Or at least I keep one of them company while we find for the other one.",
+              "Orrrr... at least I keep one of them company while we find for the other one!",
         },
       ],
     ),
 
     6: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
       ],
       dialogues: [
         {
@@ -102,28 +112,93 @@ class ScriptsMap {
               "One day, I'll become extreeeeemely BIG! Just like my Mama and Papa.",
         },
         {"Purin": "That's why eating will forever be my favorite sport!"},
-        {"Purin": "Though I wonder if it's my favorite one of ALL-TIME..."},
+        {"Purin": "Though I wonder if it's my favorite one of all-time..."},
         {"Purin": "Sleeping might be a strong contender..."},
         {"Purin": "But I can't eat while sleeping, can I?"},
         {"Purin": "Hmm..."},
         {"Purin": "Well, I do become bigger in my dreams sometimes..."},
         {"Purin": "...but I get disappointed waking up."},
         {"Purin": "Hmm..."},
-        {"Purin": "Let's call it a tie for now!"},
+        {"Purin": "Let's make it a tie for now!"},
       ],
     ),
 
     7: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+      ],
+      dialogues: [
+        {
+          "Purin":
+              'They say that, "Life is about the journey, not the destination."',
+        },
+        {
+          "Purin":
+              "But whenever I travel from the couch to the fridge, I'd always think about the fridge the entire time anyways.",
+        },
+        {
+          "Purin":
+              "I would wonder what snacks await me, surging towards my quest for nom~noms.",
+        },
+        {"Purin": "Though I sure hoped the journey was always worth it."},
+        {
+          "Purin":
+              "Because it was the journey that made me look forward on what I had set myself to achieve...",
+        },
+        {"Purin": "...which is why I end up taking TWO snacks instead!"},
+      ],
+    ),
+
+    8: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "..."},
+        {"Purin": "I'm a bit sad right now..."},
+        {
+          "Purin":
+              "Just a while ago, I was saving this perfect slice of porkchop.",
+        },
+        {
+          "Purin":
+              "I hid it somewhere in the fridge, but now, I couldn't find it...",
+        },
+        {
+          "Purin":
+              "I'm thinking that maybe I should have eaten it while I had the chance",
+        },
+        {"Purin": "Or maybe it was just never meant to fill me up..."},
+        {"Purin": "...."},
+        {"Purin": "Thinking about this porkchop makes me just as hungry!"},
+        {"Purin": "A pizza right now would be nice ~pom-u~."},
+      ],
+    ),
+
+    9: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
       ],
       dialogues: [
         {"Purin": "I wonder if clouds get tired from traveling."},
@@ -141,105 +216,6 @@ class ScriptsMap {
         {"Purin": "...or their sweat dropping from the sky?"},
         {"Purin": "..."},
         {"Purin": "I hope mama-owner gets us raincoats soon."},
-      ],
-    ),
-
-    8: ScriptDialog(
-      imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-      ],
-      dialogues: [
-        {"Purin": "..."},
-        {"Purin": "I'm a bit sad right now..."},
-        {
-          "Purin":
-              "Just a while ago, I was saving this perfect slice of porkchop.",
-        },
-        {
-          "Purin":
-              "I hid it somewhere in the refrigerator, but now, I couldn't find it...",
-        },
-        {
-          "Purin":
-              "I'm thinking that maybe I should have eaten it while I had the chance",
-        },
-        {"Purin": "Or maybe it was just never meant to fill me up..."},
-        {"Purin": "...."},
-        {"Purin": "Thinking about this porkchop makes me just as hungry!"},
-        {"Purin": "A pizza right now would be nice ~pom-u~."},
-      ],
-    ),
-
-    9: ScriptDialog(
-      imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-      ],
-      dialogues: [
-        {"Purin": "I wonder if clouds get tired from traveling."},
-        {
-          "Purin":
-              "I enjoy going out from time to time, but nothing beats relaxing at home",
-        },
-        {
-          "Purin":
-              "And staying at home becomes extremely cozy especially when it rains...",
-        },
-        {"Purin": "..."},
-        {"Purin": "If clouds travel so much..."},
-        {"Purin": "...is rain... just clouds taking a bath?...."},
-        {"Purin": "...or their sweat dropping from the sky?"},
-        {"Purin": "..."},
-        {"Purin": "I hope mama-owner gets us raincoats soon."},
-      ],
-    ),
-
-    10: ScriptDialog(
-      imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-      ],
-      dialogues: [
-        {
-          "Purin":
-              'They say that, "Life is about the journey, not the destination."',
-        },
-        {
-          "Purin":
-              "But whenever I travel from the couch to the fridge, I'd always think about the fridge the entire time anyways.",
-        },
-        {
-          "Purin":
-              "I would wonder what snacks await me, as my quest for nom~noms continues.",
-        },
-        {
-          "Purin":
-              "Though I always sure hoped the journey was always worth it.",
-        },
-        {
-          "Purin":
-              "Maybe because it was the journey that made me look forward to what I had set myself to achieve...",
-        },
-        {"Purin": "...which is why I end up taking TWO snacks instead!"},
       ],
     ),
 
