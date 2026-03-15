@@ -19,7 +19,11 @@ class LevelUpDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
-        constraints: const BoxConstraints(maxHeight: 450, minWidth: 300),
+        constraints: const BoxConstraints(
+          maxHeight: 400,
+          minWidth: 300,
+          maxWidth: 350,
+        ),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           gradient: const LinearGradient(

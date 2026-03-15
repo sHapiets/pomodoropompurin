@@ -15,7 +15,7 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
   final progSystem = ProgSystem.singleton;
   final acquirables = Acquirables.singleton;
 
-  final double menuWidth = 200;
+  final double menuWidth = 250;
   final double menuHeight = 250;
 
   final List<PurinVars> acquiredPurinVars = [];
@@ -57,7 +57,7 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
-                    childAspectRatio: 1.0,
+                    childAspectRatio: 0.9,
                   ),
                   itemBuilder: (context, index) {
                     return PurinEquipTile(

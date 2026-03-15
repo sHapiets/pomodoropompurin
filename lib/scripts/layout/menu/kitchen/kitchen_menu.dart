@@ -25,15 +25,8 @@ class KitchenMenu extends StatelessWidget {
           height: menuHeight,
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
+            color: const Color.fromARGB(228, 255, 255, 255),
             borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: kitchenProcessor.processColor.darken(0.5),
-                blurRadius: 20,
-                offset: const Offset(0, 8),
-              ),
-            ],
           ),
           child: Column(
             children: [

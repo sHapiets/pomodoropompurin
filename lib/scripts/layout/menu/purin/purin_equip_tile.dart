@@ -35,7 +35,8 @@ class _PurinEquipTileState extends State<PurinEquipTile>
 
   final displayNameTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
-    fontSize: 10,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
     color: Color.fromARGB(255, 0, 0, 0),
   );
 
@@ -112,18 +113,24 @@ class _PurinEquipTileState extends State<PurinEquipTile>
           children: [
             Align(
               alignment: AlignmentGeometry.topCenter,
-              child: Container(
-                width: iconSides,
-                height: iconSides,
-                color: Colors.white,
+              child: Transform.translate(
+                offset: const Offset(0, 10),
+                child: SizedBox(
+                  width: iconSides,
+                  height: iconSides,
+                  child: Image.asset(widget.purinVar.iconAssetPath),
+                ),
               ),
             ),
             Align(
-              alignment: AlignmentGeometry.topCenter,
-              child: SizedBox(
-                child: Text(
-                  widget.purinVar.displayName,
-                  style: displayNameTextStyle,
+              alignment: AlignmentGeometry.center,
+              child: Transform.translate(
+                offset: const Offset(0, 25),
+                child: SizedBox(
+                  child: Text(
+                    widget.purinVar.displayName,
+                    style: displayNameTextStyle,
+                  ),
                 ),
               ),
             ),

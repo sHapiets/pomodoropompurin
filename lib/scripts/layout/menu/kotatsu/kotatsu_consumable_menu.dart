@@ -34,7 +34,7 @@ class KotatsuConsumableMenu extends StatelessWidget {
           height: menuHeight,
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
+            color: const Color.fromARGB(223, 255, 255, 255),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(

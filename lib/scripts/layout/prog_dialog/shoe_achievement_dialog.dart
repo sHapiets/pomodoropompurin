@@ -16,7 +16,6 @@ class ShoeAchievementDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            /// 🎉 Header
             Column(
               children: [
                 const Text(
