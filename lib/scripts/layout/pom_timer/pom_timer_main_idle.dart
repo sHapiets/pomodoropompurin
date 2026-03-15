@@ -119,8 +119,8 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                           ),
 
                           WidgetPointer(
-                            value: 42.7,
-                            offset: -50 * gaugeTween.value,
+                            value: 43,
+                            offset: -46.5 * gaugeTween.value,
                             child: GestureDetector(
                               onTapDown: (details) =>
                                   gaugeAnimController.forward(),
@@ -131,22 +131,11 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                   fontWeight: FontWeight.w700,
                                   fontSize: 25 * gaugeTween.value,
                                   color: const Color.fromARGB(
-                                    194,
-                                    255,
-                                    255,
-                                    255,
+                                    191,
+                                    53,
+                                    161,
+                                    147,
                                   ),
-                                  shadows: [
-                                    Shadow(
-                                      color: const Color.fromARGB(
-                                        255,
-                                        42,
-                                        148,
-                                        148,
-                                      ),
-                                      offset: Offset(2, 2),
-                                    ),
-                                  ],
                                 ),
                               ),
                             ),
@@ -213,76 +202,86 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                   ),
                                 ],
                               ),
-                              padding: EdgeInsets.all(3),
+                              padding: EdgeInsets.all(5),
                               child: GestureDetector(
                                 onTapDown: (details) =>
                                     gaugeAnimController.forward(),
                                 child: Image.asset(
                                   assetManager.flutterAssetPaths['pT_WP']!,
-                                ),
-                              ),
-                            ),
-                          ),
-                          /* 
-                          WidgetPointer(
-                            value: 0,
-                            offset: -50 * gaugeTween.value,
-                            child: Transform.translate(
-                              offset: Offset(10, 10),
-                              child: GestureDetector(
-                                onTapDown: (details) =>
-                                    gaugeAnimController.forward(),
-                                child: IconButton(
-                                  onPressed: () {
-                                    if (timeSetWorkMinutes > 1) {
-                                      timeSetWorkMinutes--;
-                                      setState(() {});
-                                    }
-                                  },
-                                  icon: Icon(
-                                    Icons.remove_circle_rounded,
-                                    color: Colors.white,
-                                    shadows: [
-                                      const Shadow(
-                                        color: Colors.black12,
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
-                                  ),
+                                  cacheHeight: 100,
+                                  cacheWidth: 100,
                                 ),
                               ),
                             ),
                           ),
 
+                          // ADD WORKPOINTER
                           WidgetPointer(
-                            value: 90,
-                            offset: -50 * gaugeTween.value,
-                            child: Transform.translate(
-                              offset: Offset(-10, 10),
-                              child: GestureDetector(
-                                onTapDown: (details) =>
-                                    gaugeAnimController.forward(),
-                                child: IconButton(
-                                  onPressed: () {
-                                    if (timeSetWorkMinutes < 90) {
-                                      timeSetWorkMinutes++;
-                                      setState(() {});
-                                    }
-                                  },
-                                  icon: Icon(
-                                    Icons.add_circle_rounded,
-                                    color: Colors.white,
-                                    shadows: [
-                                      const Shadow(
-                                        color: Colors.black12,
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
+                            enableDragging: false,
+                            value: 86,
+                            offset: -48 * gaugeTween.value,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (timeSetWorkMinutes < 90) {
+                                    timeSetWorkMinutes += 1;
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: 40 * gaugeTween.value,
+                                height: 40 * gaugeTween.value,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(0, 255, 255, 255),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.add_circle_rounded,
+                                  color: const Color.fromARGB(
+                                    121,
+                                    53,
+                                    161,
+                                    147,
                                   ),
+                                  size: 25 * gaugeTween.value,
                                 ),
                               ),
                             ),
-                          ), */
+                          ),
+
+                          // SUBTRACT WORKPOINTER
+                          WidgetPointer(
+                            enableDragging: false,
+                            value: 5,
+                            offset: -48 * gaugeTween.value,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (timeSetWorkMinutes > 1) {
+                                    timeSetWorkMinutes -= 1;
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: 40 * gaugeTween.value,
+                                height: 40 * gaugeTween.value,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(0, 255, 255, 255),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.remove_circle_rounded,
+                                  color: const Color.fromARGB(
+                                    121,
+                                    53,
+                                    161,
+                                    147,
+                                  ),
+                                  size: 25 * gaugeTween.value,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
 
@@ -346,8 +345,8 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             ),
                           ),
                           WidgetPointer(
-                            value: 15.35,
-                            offset: -50 * (1.2 - gaugeTween.value),
+                            value: 15.5,
+                            offset: -46.5 * (1.2 - gaugeTween.value),
                             child: GestureDetector(
                               onTapDown: (details) =>
                                   gaugeAnimController.reverse(),
@@ -359,22 +358,11 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                     fontWeight: FontWeight.w700,
                                     fontSize: 25 * (1.2 - gaugeTween.value),
                                     color: const Color.fromARGB(
-                                      221,
-                                      255,
-                                      255,
-                                      255,
+                                      206,
+                                      148,
+                                      86,
+                                      25,
                                     ),
-                                    shadows: [
-                                      Shadow(
-                                        color: const Color.fromARGB(
-                                          255,
-                                          163,
-                                          89,
-                                          32,
-                                        ),
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ),
@@ -405,12 +393,72 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                   ),
                                 ],
                               ),
-                              padding: EdgeInsets.all(3),
+                              padding: EdgeInsets.all(5),
                               child: GestureDetector(
                                 onTapDown: (details) =>
                                     gaugeAnimController.reverse(),
                                 child: Image.asset(
                                   assetManager.flutterAssetPaths['pT_BP']!,
+                                  cacheHeight: 100,
+                                  cacheWidth: 100,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          // ADD BREAKPOINTER
+                          WidgetPointer(
+                            enableDragging: false,
+                            value: 28.5,
+                            offset: -48 * (1.2 - gaugeTween.value),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (timeSetBreakMinutes < 30) {
+                                    timeSetBreakMinutes += 1;
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: 40 * (1.2 - gaugeTween.value),
+                                height: 40 * (1.2 - gaugeTween.value),
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(0, 255, 255, 255),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.add_circle_rounded,
+                                  color: const Color.fromARGB(93, 144, 91, 37),
+                                  size: 25 * (1.2 - gaugeTween.value),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          // SUBTRACT BREAKPOINTER
+                          WidgetPointer(
+                            enableDragging: false,
+                            value: 2.5,
+                            offset: -48 * (1.2 - gaugeTween.value),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (timeSetBreakMinutes > 1) {
+                                    timeSetBreakMinutes -= 1;
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: 40 * (1.2 - gaugeTween.value),
+                                height: 40 * (1.2 - gaugeTween.value),
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(0, 255, 255, 255),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.remove_circle_rounded,
+                                  color: const Color.fromARGB(93, 144, 91, 37),
+                                  size: 25 * (1.2 - gaugeTween.value),
                                 ),
                               ),
                             ),
