@@ -87,7 +87,7 @@ class EndPomTimerDialog extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Nunito',
-                fontSize: 15,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFF8D6E63),
               ),

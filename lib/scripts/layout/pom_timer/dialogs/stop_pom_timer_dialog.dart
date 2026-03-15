@@ -55,7 +55,7 @@ class StopPomTimerDialog extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Fredoka',
-                fontSize: 28,
+                fontSize: 22,
                 fontWeight: FontWeight.w900,
                 color: Color(0xFF6D4C41),
               ),
@@ -73,7 +73,7 @@ class StopPomTimerDialog extends StatelessWidget {
                 color: Color(0xFF8D6E63),
               ),
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 15),
 
             const Text(
               "( You will still receive rewards based on the current stop time! )",
@@ -110,6 +110,7 @@ class StopPomTimerDialog extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Fredoka',
                         fontWeight: FontWeight.w800,
+                        fontSize: 12,
                       ),
                     ),
                   ),
@@ -136,6 +137,7 @@ class StopPomTimerDialog extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Fredoka',
                         fontWeight: FontWeight.w900,
+                        fontSize: 12,
                       ),
                     ),
                   ),
