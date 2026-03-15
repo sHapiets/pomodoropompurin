@@ -261,12 +261,14 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                   IconButton(
                     iconSize: 30,
                     onPressed: () {
-                      _pomTimer.pauseTimer(); // Pause first
-                      showDialog(
+                      _pomTimer.pauseTimer();
+                      showGeneralDialog(
                         context: context,
-                        barrierDismissible:
-                            false, // prevents tap outside to close
-                        builder: (context) {
+                        barrierDismissible: false,
+                        barrierLabel: "Pomodoro End",
+                        barrierColor: Colors.black54,
+                        transitionDuration: const Duration(milliseconds: 400),
+                        pageBuilder: (context, animation, secondaryAnimation) {
                           return StopPomTimerDialog(
                             onCancel: () {
                               Navigator.of(context).pop(); // just close dialog
@@ -277,6 +279,25 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
                             },
                           );
                         },
+                        transitionBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                              final curved = CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.easeInOutBack,
+                                reverseCurve: Curves.easeInOutBack,
+                              );
+
+                              return FadeTransition(
+                                opacity: animation,
+                                child: ScaleTransition(
+                                  scale: Tween<double>(
+                                    begin: 0.7,
+                                    end: 1,
+                                  ).animate(curved),
+                                  child: child,
+                                ),
+                              );
+                            },
                       );
                     },
                     icon: Icon(

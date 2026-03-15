@@ -131,9 +131,11 @@ class _ScriptDialogState extends State<ScriptDialog>
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage(currentImage),
-                      radius: 30,
+                    Stack(
+                      children: [
+                        CircleAvatar(radius: 30),
+                        SizedBox(width: 60, child: Image.asset(currentImage)),
+                      ],
                     ),
                     const SizedBox(width: 12),
                     Expanded(

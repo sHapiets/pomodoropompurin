@@ -183,15 +183,33 @@ class PomTimer {
     _progSystem.addPomPoints(rewardPomPoints);
     pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
 
-    await showDialog(
+    await showGeneralDialog(
       context: navigatorKey.currentContext!,
       barrierDismissible: false,
-      builder: (context) {
+      barrierLabel: "Pomodoro End",
+      barrierColor: Colors.black54,
+      transitionDuration: const Duration(milliseconds: 400),
+      pageBuilder: (context, animation, secondaryAnimation) {
         return EndPomTimerDialog(
           seconds: timeTotalSeconds,
           pomPoints: rewardPomPoints,
           oshiriPoints: rewardOshiriPoints,
           onClose: () => Navigator.pop(context),
+        );
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        final curved = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOutBack,
+          reverseCurve: Curves.easeInOutBack,
+        );
+
+        return FadeTransition(
+          opacity: animation,
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.7, end: 1).animate(curved),
+            child: child,
+          ),
         );
       },
     );

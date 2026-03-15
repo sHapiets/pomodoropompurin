@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 
@@ -33,8 +34,20 @@ class AssetManager {
 
     'pP_icon': 'assets/images/pomPoints_icon.png',
 
+    'curious_purin_icon': 'assets/images/character_icons/purin/curious.png',
+    'happy_purin_icon': 'assets/images/character_icons/purin/happy.png',
+    'eating_purin_icon': 'assets/images/character_icons/purin/eating.png',
+    'blank_purin_icon': 'assets/images/character_icons/purin/blank.png',
+    'thinking_purin_icon': 'assets/images/character_icons/purin/thinking.png',
+    'down_purin_icon': 'assets/images/character_icons/purin/down.png',
+    'please_purin_icon': 'assets/images/character_icons/purin/please.png',
+
     ...{for (final ing in Ingridient.values) ing.name: ing.spriteFlutterPath},
     ...{for (final con in Consumable.values) con.name: con.iconFlutterPath},
+    ...{
+      for (final purinVar in Acquirables.singleton.purinVars.values)
+        purinVar.displayName: purinVar.iconAssetPath,
+    },
   };
 
   /// Preload one asset globally

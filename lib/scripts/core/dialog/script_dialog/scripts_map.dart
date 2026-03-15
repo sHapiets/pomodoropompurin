@@ -1,37 +1,21 @@
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
 class ScriptsMap {
-  static Map<PurinAction, ScriptDialog> fromPurinAction = {
-    PurinAction.pet: ScriptDialog(
-      imagePaths: [AssetManager.singleton.flutterAssetPaths["pP_icon"]!],
-      dialogues: [
-        {"Purin": "~ Kyuuun!"},
-      ],
-    ),
-    PurinAction.feed: ScriptDialog(
-      imagePaths: [AssetManager.singleton.flutterAssetPaths["pP_icon"]!],
-      dialogues: [
-        {"Purin": "Delicious!"},
-      ],
-    ),
-  };
-
   static Map<int, ScriptDialog> fromLevelUp = {
     3: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
       ],
       dialogues: [
         {"Purin": "You know what?"},
@@ -50,14 +34,14 @@ class ScriptsMap {
 
     4: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
       ],
       dialogues: [
         {"Purin": "I heard the fridge humming again."},
@@ -76,12 +60,12 @@ class ScriptsMap {
 
     5: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
       ],
       dialogues: [
         {"Purin": "Do shoes ever feel lonely?"},

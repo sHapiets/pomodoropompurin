@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
@@ -16,6 +17,7 @@ class LevelUpManager extends ChangeNotifier {
 
   final progSystem = ProgSystem.singleton;
   final databaseManager = DatabaseManager.singleton;
+  final acquirables = Acquirables.singleton;
   final scriptManager = ScriptManager.singleton;
   Widget levelUpDialog = LevelUpDialog(newLevel: 0, levelRewards: []);
 
@@ -41,6 +43,19 @@ class LevelUpManager extends ChangeNotifier {
     );
 
     final List<List<dynamic>> unlockedPurchasables = [];
+
+    if (UnlocksFromLevel.acquiredPurinVars[currentLevel] != null) {
+      final newPurinVar = acquirables
+          .purinVars[UnlocksFromLevel.acquiredPurinVars[currentLevel]!]!;
+      unlockedPurchasables.addAll([
+        [
+          newPurinVar.displayName,
+          "New Purin Collected!",
+          newPurinVar.iconAssetPath,
+        ],
+      ]);
+    }
+
     if (UnlocksFromLevel.purchasableIngridients[currentLevel] != null) {
       unlockedPurchasables.addAll(
         UnlocksFromLevel.purchasableIngridients[currentLevel]!.map((

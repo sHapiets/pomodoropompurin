@@ -10,6 +10,8 @@ class ScriptManager extends ChangeNotifier {
   ScriptManager._();
   static final singleton = ScriptManager._();
 
+  final assetManager = AssetManager.singleton;
+
   ValueNotifier<ScriptDialog> levelUpScriptDialog = ValueNotifier(
     ScriptDialog(imagePaths: [], dialogues: []),
   );
@@ -52,7 +54,7 @@ class ScriptManager extends ChangeNotifier {
 
   void addPurinMenuDialog() {
     purinMenuScriptDialog.value = ScriptDialog(
-      imagePaths: [AssetManager.singleton.flutterAssetPaths["pP_icon"]!],
+      imagePaths: [assetManager.flutterAssetPaths['curious_purin_icon']!],
       dialogues: [
         {"Purin": "What's up? (^ ω ^ )"},
       ],
@@ -77,7 +79,7 @@ class ScriptManager extends ChangeNotifier {
   void addFeedDialog() {
     final index = random.nextInt(purinFeedRandomScripts.length);
     feedScriptDialog.value = ScriptDialog(
-      imagePaths: [AssetManager.singleton.flutterAssetPaths["pP_icon"]!],
+      imagePaths: [assetManager.flutterAssetPaths['eating_purin_icon']!],
       dialogues: [
         {"Purin": purinFeedRandomScripts[index]},
       ],

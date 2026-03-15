@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/end_pom_timer_dialog.dart';
+import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
 class StopPomTimerDialog extends StatelessWidget {
   final _pomTimer = PomTimer.singleton;
+  final assetManager = AssetManager.singleton;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
 
@@ -18,6 +20,7 @@ class StopPomTimerDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
+        width: 400,
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: const Color(0xFFFFF3B0), // soft pudding yellow
@@ -33,33 +36,35 @@ class StopPomTimerDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Cute pudding icon bubble
             Container(
+              height: 200,
               padding: const EdgeInsets.all(18),
               decoration: const BoxDecoration(
                 color: Color(0xFFFFE08A),
                 shape: BoxShape.circle,
               ),
-              child: const Text("🍮", style: TextStyle(fontSize: 38)),
+              child: Image.asset(
+                assetManager.flutterAssetPaths['please_purin_icon']!,
+              ),
             ),
 
             const SizedBox(height: 18),
 
             const Text(
-              "Stop the timer?",
+              "Stop your PomTimer?",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 22,
+                fontFamily: 'Fredoka',
+                fontSize: 28,
                 fontWeight: FontWeight.w900,
-                color: Color(0xFF6D4C41), // pudding brown
+                color: Color(0xFF6D4C41),
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 25),
 
             const Text(
-              "Your Pomodoro is still cooking!\nAre you sure you want to stop it?",
+              "Are you sure you want to end\nyour current timer?",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Nunito',
@@ -68,8 +73,20 @@ class StopPomTimerDialog extends StatelessWidget {
                 color: Color(0xFF8D6E63),
               ),
             ),
+            const SizedBox(height: 25),
 
-            const SizedBox(height: 26),
+            const Text(
+              "( You will still receive rewards based on the current stop time! )",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF8D6E63),
+              ),
+            ),
+
+            const SizedBox(height: 25),
 
             Row(
               children: [
@@ -89,9 +106,9 @@ class StopPomTimerDialog extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      "Keep Cooking!!",
+                      "I can keep pushing!",
                       style: TextStyle(
-                        fontFamily: 'Nunito',
+                        fontFamily: 'Fredoka',
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -117,7 +134,7 @@ class StopPomTimerDialog extends StatelessWidget {
                     child: const Text(
                       "End Timer",
                       style: TextStyle(
-                        fontFamily: 'Nunito',
+                        fontFamily: 'Fredoka',
                         fontWeight: FontWeight.w900,
                       ),
                     ),

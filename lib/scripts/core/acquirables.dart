@@ -64,37 +64,37 @@ class Acquirables {
       id: PurinVars.boku,
       displayName: 'Boku-Purin',
       cost: 0,
-      iconAssetPath: '',
+      iconAssetPath: 'assets/images/purin_sprites/boku_icon.png',
     ),
     PurinVars.pumpkin: PurinVar(
       id: PurinVars.pumpkin,
       displayName: "Pumpkin-Purin",
       cost: 0,
-      iconAssetPath: '',
+      iconAssetPath: 'assets/images/purin_sprites/pumpkin_icon.png',
     ),
     PurinVars.summer: PurinVar(
       id: PurinVars.summer,
       displayName: "Summer-Purin",
       cost: 0,
-      iconAssetPath: '',
+      iconAssetPath: 'assets/images/purin_sprites/summer_icon.png',
     ),
     PurinVars.bee: PurinVar(
       id: PurinVars.bee,
       displayName: "Bee-Purin",
       cost: 0,
-      iconAssetPath: '',
+      iconAssetPath: 'assets/images/purin_sprites/bee_icon.png',
     ),
     PurinVars.pika: PurinVar(
       id: PurinVars.pika,
       displayName: "Pika-Purin",
       cost: 0,
-      iconAssetPath: '',
+      iconAssetPath: 'assets/images/purin_sprites/pika_icon.png',
     ),
     PurinVars.yana: PurinVar(
       id: PurinVars.yana,
       displayName: "Yana-Purin",
       cost: 0,
-      iconAssetPath: '',
+      iconAssetPath: 'assets/images/purin_sprites/yana_icon.png',
     ),
   };
 

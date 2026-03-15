@@ -23,6 +23,12 @@ class UnlocksFromLevel {
     2: [Ingridient.eggs, Ingridient.milk, Ingridient.butter],
     3: [Ingridient.flour],
     5: [Ingridient.onion, Ingridient.groundPork, Ingridient.riceGrains],
+    6: [
+      Ingridient.yeast,
+      Ingridient.flour,
+      Ingridient.tomato,
+      Ingridient.olives,
+    ],
   };
 
   static Map<int, PurinVars> acquiredPurinVars = {
