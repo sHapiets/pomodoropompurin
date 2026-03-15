@@ -12,9 +12,11 @@ class FloatingPlusOshiri extends TextComponent {
         anchor: Anchor.center,
         textRenderer: TextPaint(
           style: const TextStyle(
-            color: Colors.greenAccent,
-            fontSize: 18,
+            color: Color.fromARGB(255, 255, 255, 255),
+            fontSize: 10,
+            fontFamily: 'Nunito',
             fontWeight: FontWeight.bold,
+            shadows: [Shadow(color: Colors.black26, offset: Offset(2, 2))],
           ),
         ),
       );

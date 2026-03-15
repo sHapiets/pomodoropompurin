@@ -147,7 +147,7 @@ class PurinArea extends FlameGame
     } else if (purinAreaStateManager.state.value == "Pet") {
       UIDisplayState.singleton.hide.value = true;
       purin.updatePetDelta(info.delta.global);
-      if (heartParticleTimer <= 0.03) {
+      if (heartParticleTimer <= 0.06) {
         return;
       }
       final worldPosition = camera.globalToLocal(info.eventPosition.global);
