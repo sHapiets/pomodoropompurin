@@ -84,6 +84,18 @@ class Acquirables {
       cost: 0,
       iconAssetPath: '',
     ),
+    PurinVars.pika: PurinVar(
+      id: PurinVars.pika,
+      displayName: "Pika-Purin",
+      cost: 0,
+      iconAssetPath: '',
+    ),
+    PurinVars.yana: PurinVar(
+      id: PurinVars.yana,
+      displayName: "Yana-Purin",
+      cost: 0,
+      iconAssetPath: '',
+    ),
   };
 
   Map<KotatsuDesigns, RoomDesign> kotatsus = {
@@ -196,7 +208,7 @@ class Acquirables {
   };
 }
 
-enum PurinVars { boku, pumpkin, summer, bee }
+enum PurinVars { boku, pumpkin, summer, bee, pika, yana, pol }
 
 enum KotatsuDesigns { pudding, aqua }
 

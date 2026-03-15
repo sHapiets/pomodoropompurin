@@ -27,8 +27,10 @@ class UnlocksFromLevel {
 
   static Map<int, PurinVars> acquiredPurinVars = {
     1: PurinVars.boku,
+    2: PurinVars.yana,
     4: PurinVars.pumpkin,
-    12: PurinVars.summer,
-    13: PurinVars.bee,
+    5: PurinVars.pika,
+    6: PurinVars.summer,
+    7: PurinVars.bee,
   };
 }

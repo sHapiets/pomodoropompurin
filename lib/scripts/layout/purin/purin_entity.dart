@@ -3,6 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/sprite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
@@ -54,24 +55,19 @@ class PurinEntity extends PositionComponent
   late SequenceEffect loadAnim;
   late IdleBreathingAnimation purinAnim;
   late SpriteComponent purinSprite;
+  late Map<PurinVars, SpriteSheet> purinSheets;
   late CircleHitbox purinHitbox;
 
-  final spriteDirectoryFromPurinVar = {
-    PurinVars.boku: 'boku/',
-    PurinVars.pumpkin: 'pumpkin/',
-    PurinVars.summer: 'summer/',
-    PurinVars.bee: 'bee/',
+  final spriteSheetRowFromPosition = {
+    PurinPosition.kotatsuLeft: 0,
+    PurinPosition.kotatsuRight: 0,
+    PurinPosition.study: 0,
+    PurinPosition.futon: 1,
   };
-  final spriteDirectoryFromPosition = {
-    PurinPosition.kotatsuLeft: 'sit/',
-    PurinPosition.kotatsuRight: 'sit/',
-    PurinPosition.futon: 'futon/',
-    PurinPosition.study: 'sit/',
-  };
-  final spriteFileFromAction = {
-    PurinAction.idle: 'idle.png',
-    PurinAction.pet: 'pet.png',
-    PurinAction.feed: 'feed.png',
+  final spriteSheetColumnFromAction = {
+    PurinAction.idle: 0,
+    PurinAction.pet: 1,
+    PurinAction.feed: 2,
   };
   final spriteFlipBoolFromPostion = {
     PurinPosition.kotatsuLeft: false,
@@ -85,10 +81,37 @@ class PurinEntity extends PositionComponent
     super.onMount();
     position = Vector2(130, 160);
 
+    purinSheets = {
+      PurinVars.boku: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/boku_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.pumpkin: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/pumpkin_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.summer: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/summer_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.bee: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/bee_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.pika: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/pika_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.yana: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/yana_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+    };
+
     loadAnim = LoadAnimation()..removeOnFinish = true;
     purinAnim = IdleBreathingAnimation();
     purinSprite = SpriteComponent(
-      sprite: Sprite(Flame.images.fromCache('purin_sprites/boku/sit/idle.png')),
+      sprite: Sprite(Flame.images.fromCache('purinEntity.png')),
       size: Vector2.all(70),
       position: Vector2(0, 0),
       anchor: Anchor.center,
@@ -125,22 +148,21 @@ class PurinEntity extends PositionComponent
   }
 
   void updateSprite() {
-    final spriteRef = StringBuffer()
-      ..write('purin_sprites/')
-      ..write(
-        spriteDirectoryFromPurinVar[purin.equipManager.equippedPurinVar.id],
-      )
-      ..write(spriteDirectoryFromPosition[purin.stateManager.position])
-      ..write(spriteFileFromAction[purin.stateManager.action]);
+    final purinVar = purin.equipManager.equippedPurinVar.id;
+    final sheet = purinSheets[purinVar]!;
 
-    purinSprite.sprite?.image = Flame.images.fromCache(spriteRef.toString());
+    final row = spriteSheetRowFromPosition[purin.stateManager.position]!;
+    final col = spriteSheetColumnFromAction[purin.stateManager.action]!;
+
+    purinSprite.sprite = sheet.getSprite(row, col);
+
     bool flip = spriteFlipBoolFromPostion[purin.stateManager.position]!;
-    (flip && !purinSprite.isFlippedHorizontally)
-        ? purinSprite.flipHorizontally()
-        : () {};
-    (!flip && purinSprite.isFlippedHorizontally)
-        ? purinSprite.flipHorizontally()
-        : () {};
+
+    if (flip && !purinSprite.isFlippedHorizontally) {
+      purinSprite.flipHorizontally();
+    } else if (!flip && purinSprite.isFlippedHorizontally) {
+      purinSprite.flipHorizontally();
+    }
   }
 
   void reloadLoadAnimation() {
