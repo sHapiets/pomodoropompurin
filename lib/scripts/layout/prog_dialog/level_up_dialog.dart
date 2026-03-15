@@ -128,7 +128,7 @@ class LevelUpDialog extends StatelessWidget {
                                         reward[1]?.toString() ?? "",
                                         style: const TextStyle(
                                           fontFamily: 'Fredoka',
-                                          fontSize: 14,
+                                          fontSize: 10,
                                           fontWeight: FontWeight.w400,
                                           color: Color.fromARGB(
                                             255,
