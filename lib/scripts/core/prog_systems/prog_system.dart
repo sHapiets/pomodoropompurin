@@ -89,6 +89,16 @@ class ProgSystem {
 
   void addDayTimeSeconds(int seconds) {
     dayTimeSeconds.value += seconds;
+    final now = DateTime.now();
+    if (!dateLogList.containsKey(now.year)) {
+      dateLogList.addAll({now.year: {}});
+    }
+    if (!dateLogList[now.year]!.containsKey(now.month)) {
+      dateLogList[now.year]!.addAll({now.month: []});
+    }
+    dateLogList[now.year]![now.month]!.add(
+      DateLog(dateLogDate: now, timeSeconds: seconds),
+    );
     _databaseManager.dayTimeSecondsSave(dayTimeSeconds.value);
   }
 

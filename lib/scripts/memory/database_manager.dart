@@ -209,7 +209,7 @@ class DatabaseManager {
     final now = DateTime.now();
 
     final yearId = '${now.year}';
-    final monthId = '${5}'.padLeft(2, '0');
+    final monthId = '${now.month}'.padLeft(2, '0');
     final dayId = '${now.day}'.padLeft(2, '0');
 
     final yearRef = userRef.collection('dates').doc(yearId);
