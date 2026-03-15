@@ -10,12 +10,12 @@ class Mixer extends KitchenProcessor {
         displayName: "mixer",
         ingridientIngridients: {
           Ingridient.puddingCream: {Ingridient.eggs: 1, Ingridient.milk: 1},
-          Ingridient.dough: {Ingridient.flour: 1, Ingridient.yeast: 1},
+          Ingridient.pancakeBatter: {Ingridient.flour: 1, Ingridient.eggs: 2},
           Ingridient.patty: {
             Ingridient.choppedOnions: 1,
             Ingridient.groundPork: 1,
           },
-          Ingridient.pancakeBatter: {Ingridient.flour: 1, Ingridient.eggs: 2},
+          Ingridient.dough: {Ingridient.flour: 1, Ingridient.yeast: 1},
         },
         consumableIngridients: {},
         processColor: const Color.fromARGB(255, 176, 211, 102),

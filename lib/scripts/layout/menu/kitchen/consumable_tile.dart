@@ -280,47 +280,40 @@ class _ConsumableTileState extends State<ConsumableTile>
               ),
             ),
 
-            /// BUTTON BACKGROUND
-            Align(
-              alignment: AlignmentGeometry.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, -5),
-                child: Container(
-                  width: buttonWidth,
-                  height: buttonHeight,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.processorColor,
-                  ),
-                ),
-              ),
-            ),
-
             /// PROCESS BUTTON
             Align(
               alignment: AlignmentGeometry.bottomCenter,
               child: Transform.translate(
                 offset: Offset(0, -5),
-                child: ScaleTransition(
-                  scale: buttonTween,
-                  child: GestureDetector(
-                    onTapDown: (_) => buttonHold(),
-                    onTapUp: (_) => buttonCancel(),
-                    onTapCancel: buttonCancel,
-                    child: Container(
-                      height: buttonHeight,
-                      width: buttonWidth,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: widget.processorColor,
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          widget.processorIcon,
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          size: 22,
+                child: ValueListenableBuilder(
+                  valueListenable: maxProcessableCount,
+                  builder: (context, value, child) {
+                    if (value <= 0) {
+                      return Icon(Icons.close, size: 45, color: Colors.black26);
+                    }
+                    return child!;
+                  },
+                  child: ScaleTransition(
+                    scale: buttonTween,
+                    child: GestureDetector(
+                      onTapDown: (_) => buttonHold(),
+                      onTapUp: (_) => buttonCancel(),
+                      onTapCancel: buttonCancel,
+                      child: Container(
+                        height: buttonHeight,
+                        width: buttonWidth,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: widget.processorColor,
                         ),
-                        onPressed: () {},
+                        child: IconButton(
+                          icon: Icon(
+                            widget.processorIcon,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            size: 22,
+                          ),
+                          onPressed: () {},
+                        ),
                       ),
                     ),
                   ),

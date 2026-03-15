@@ -23,20 +23,18 @@ class UnlocksFromLevel {
     2: [Ingridient.eggs, Ingridient.milk, Ingridient.butter],
     3: [Ingridient.flour],
     5: [Ingridient.onion, Ingridient.groundPork, Ingridient.riceGrains],
-    6: [
-      Ingridient.yeast,
-      Ingridient.flour,
-      Ingridient.tomato,
-      Ingridient.olives,
-    ],
+    6: [Ingridient.puddingCream, Ingridient.pancakeBatter],
+    7: [Ingridient.choppedOnions, Ingridient.cookedRice],
+    8: [Ingridient.yeast, Ingridient.tomato, Ingridient.olives],
+    9: [Ingridient.puddingBatter, Ingridient.patty],
+    11: [Ingridient.dough, Ingridient.pizzaToppings],
   };
 
   static Map<int, PurinVars> acquiredPurinVars = {
     1: PurinVars.boku,
-    2: PurinVars.yana,
     4: PurinVars.pumpkin,
-    5: PurinVars.pika,
-    6: PurinVars.summer,
-    7: PurinVars.bee,
+    9: PurinVars.pika,
+    12: PurinVars.bee,
+    16: PurinVars.summer,
   };
 }

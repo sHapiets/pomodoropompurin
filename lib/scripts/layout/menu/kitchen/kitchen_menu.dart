@@ -72,19 +72,19 @@ class KitchenMenu extends StatelessWidget {
                           childAspectRatio: 0.5,
                         ),
                     itemBuilder: (context, index) {
-                      if (index < consumables.length) {
-                        final entry = consumables[index];
-                        return ConsumableTile(
-                          consumable: entry.key,
+                      if (index < ingridients.length) {
+                        final entry = ingridients[index];
+                        return IngridientTile(
+                          ingridient: entry.key,
                           ingridientIngridients: entry.value,
                           processorIcon: kitchenProcessor.processIcon,
                           processorColor: kitchenProcessor.processColor,
                         );
                       } else {
-                        final adjustedIndex = index - consumables.length;
-                        final entry = ingridients[adjustedIndex];
-                        return IngridientTile(
-                          ingridient: entry.key,
+                        final adjustedIndex = index - ingridients.length;
+                        final entry = consumables[adjustedIndex];
+                        return ConsumableTile(
+                          consumable: entry.key,
                           ingridientIngridients: entry.value,
                           processorIcon: kitchenProcessor.processIcon,
                           processorColor: kitchenProcessor.processColor,

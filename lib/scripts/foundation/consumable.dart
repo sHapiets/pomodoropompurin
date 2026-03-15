@@ -3,7 +3,7 @@ enum Consumable {
     displayName: "Mama's Pudding",
     price: 0,
     totalBites: 2,
-    oshiriPointsPerBite: 400,
+    oshiriPointsPerBite: 350,
     iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pudding/1.png',
@@ -14,7 +14,7 @@ enum Consumable {
     displayName: "Pizza",
     price: 0,
     totalBites: 4,
-    oshiriPointsPerBite: 300,
+    oshiriPointsPerBite: 250,
     iconFlutterPath: 'assets/images/consumable_sprites/pizza/4.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pizza/1.png',
@@ -27,7 +27,7 @@ enum Consumable {
     displayName: "Pancakes",
     price: 0,
     totalBites: 3,
-    oshiriPointsPerBite: 250,
+    oshiriPointsPerBite: 200,
     iconFlutterPath: 'assets/images/consumable_sprites/pancakes/3.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pancakes/1.png',
@@ -39,7 +39,7 @@ enum Consumable {
     displayName: "Hamburg Steak",
     price: 0,
     totalBites: 5,
-    oshiriPointsPerBite: 250,
+    oshiriPointsPerBite: 160,
     iconFlutterPath: 'assets/images/consumable_sprites/hamburg_steak/5.png',
     biteSpritesFlamePath: [
       'consumable_sprites/hamburg_steak/1.png',
