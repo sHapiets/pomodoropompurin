@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
@@ -11,6 +12,7 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
+import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// "Conqueror of Nations, Destructor of Worlds"
 ///
@@ -50,6 +52,8 @@ class Purin extends ChangeNotifier {
   final equipManager = PurinEquipManager.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final acquirables = Acquirables.singleton;
+  final databaseManager = DatabaseManager.singleton;
   final progSystem = ProgSystem.singleton;
 
   void changeAction(PurinAction action) {
@@ -114,8 +118,10 @@ class Purin extends ChangeNotifier {
   /// EQUIP LOGIC
   ///
   ///
-  void equip(PurinVar purinVar) {
+  Future<void> equip(PurinVars purinVars) async {
+    final purinVar = acquirables.purinVars[purinVars]!;
     equipManager.equip(purinVar);
+    databaseManager.configPurinVarSave(purinVars);
     notifyListeners();
   }
 

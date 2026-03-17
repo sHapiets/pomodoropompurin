@@ -140,23 +140,16 @@ class DatabaseManager {
     return selectablesConfigDoc.data()!;
   }
 
+  Future<dynamic> configPurinVarLoad() async {
+    final purinVarConfigRef = userRef.collection('config').doc('purin');
+    final purinVarConfigDoc = await purinVarConfigRef.get();
+    return purinVarConfigDoc['purinVar'];
+  }
+
   /// Save Functions
   /// -> to be called by other classes (mostly core singletons) to save data in Koupen
   /// -> instance of the DatabaseManager must be called before using
   /// -> each function takes the paramaters to be stored
-
-  Future<void> userConfigTimerSave(
-    int timeWorkSeconds,
-    int timeBreakSeconds,
-    int loopsSet,
-  ) async {
-    final configTimerRef = userRef.collection('config').doc('pomTimer');
-    await configTimerRef.set({
-      'timeSetWorkSeconds': timeWorkSeconds,
-      'timeSetBreakSeconds': timeBreakSeconds,
-      'loopsSet': loopsSet,
-    });
-  }
 
   Future<void> userDataSave(String userData, dynamic data) async {
     await userRef.update({userData: data});
@@ -234,6 +227,19 @@ class DatabaseManager {
     }
   }
 
+  Future<void> userConfigTimerSave(
+    int timeWorkSeconds,
+    int timeBreakSeconds,
+    int loopsSet,
+  ) async {
+    final configTimerRef = userRef.collection('config').doc('pomTimer');
+    await configTimerRef.set({
+      'timeSetWorkSeconds': timeWorkSeconds,
+      'timeSetBreakSeconds': timeBreakSeconds,
+      'loopsSet': loopsSet,
+    });
+  }
+
   Future<void> configKotatsuSave(KotatsuDesigns design) async {
     final selectablesConfigRef = userRef
         .collection('config')
@@ -247,5 +253,10 @@ class DatabaseManager {
         .doc('selectables');
     await selectablesConfigRef.update({'feedable': consumable.name});
     await selectablesConfigRef.update({'feedableBitesLeft': bitesLeft});
+  }
+
+  Future<void> configPurinVarSave(PurinVars purinVar) async {
+    final purinVarConfigRef = userRef.collection('config').doc('purin');
+    await purinVarConfigRef.set({'purinVar': purinVar.name});
   }
 }

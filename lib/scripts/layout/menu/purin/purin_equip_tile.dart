@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 
@@ -166,7 +167,7 @@ class _PurinEquipTileState extends State<PurinEquipTile>
                         ),
                         child: MaterialButton(
                           onPressed: () {
-                            purin.equip(widget.purinVar);
+                            purin.equip(widget.purinVar.id as PurinVars);
                           },
                         ),
                       ),

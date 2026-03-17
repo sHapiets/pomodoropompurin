@@ -3,6 +3,7 @@ import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
@@ -26,6 +27,7 @@ class _SplashPageState extends State<SplashPage> {
   final _pomTimer = PomTimer.singleton;
   final _progSystem = ProgSystem.singleton;
   final acquirables = Acquirables.singleton;
+  final purin = Purin.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late final Widget preloadedMainPage;
@@ -198,6 +200,12 @@ class _SplashPageState extends State<SplashPage> {
         purinAreaEquipManager.addFeedable(feedable, bitesLeft);
       });
     });
+
+    final PurinVars purinVars = PurinVars.values.byName(
+      await _databaseManager.configPurinVarLoad(),
+    );
+
+    purin.equip(purinVars);
   }
 
   Future<void> _preloadAssets() async {
