@@ -1,4 +1,5 @@
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
 class ScriptsMap {
@@ -219,14 +220,141 @@ class ScriptsMap {
       ],
     ),
 
-    22: ScriptDialog(
+    10: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
-        AssetManager.singleton.flutterAssetPaths["pP_icon"]!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
       ],
       dialogues: [
-        {"Purin": "Hi nice to meet you"},
-        {"Purin": "22"},
+        {"Purin": "I like going to bed early."},
+        {
+          "Purin":
+              "Though it's kinda because there's not much for me to do anyways.",
+        },
+        {
+          "Purin":
+              "Maybe if I get a job someday, I would get to do lots of things during the day.",
+        },
+        {
+          "Purin":
+              "It would be... such a good use.... of my several talents.....",
+        },
+        {"Purin": "....but until then....."},
+        {"Purin": "..........Zz....."},
+        {"Purin": "...ZzZzzZzzZ....ZzzzZ...."},
+      ],
+    ),
+
+    11: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "There's been a rumor that cheese is just processed milk."},
+        {
+          "Purin":
+              "But I've never really thought about where cheese comes from before the milk bit.",
+        },
+        {
+          "Purin":
+              "Then I realized that if cheese needs milk, then you would also need cows.",
+        },
+        {"Purin": "Aliens don't have cows, don't they?"},
+        {
+          "Purin":
+              "Imagine going through life without having eaten at least a slice of pizza.",
+        },
+        {
+          "Purin":
+              "If I become president one day, and aliens happen to be invading us....",
+        },
+        {
+          "Purin":
+              "I would gladly serve them the cheesiest pizza the world has ever seen!",
+        },
+        {
+          "Purin":
+              "Then, we would celebrate Pizza Day as a remembrance of our peace treaty!",
+        },
+        {"Purin": "..."},
+        {"Purin": "I think... I'm getting ahead of myself."},
+        {"Purin": "I mean, it's kinda unlikely after all...."},
+        {"Purin": "..that cheese is made of processed milk."},
+      ],
+    ),
+
+    12: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "I don't really get how trees work."},
+        {"Purin": "You just give them water, and they get really, REALLY BIG."},
+        {
+          "Purin":
+              "I've been eating all my life, and yet I don't grow as myuch...",
+        },
+        {"Purin": "Maybe drinking water is the trick?"},
+        {
+          "Purin":
+              "But I just lose my appetite real quick, and end up not eating much anyways.",
+        },
+        {"Purin": "Hmmm...."},
+        {"Purin": "Well now, I kinda feel lucky not being a tree then."},
+        {
+          "Purin":
+              "Anyone would rather be smol than only drink water for the rest of their lives.",
+        },
+        {"Purin": "Though it WOULD have been nice to have both!"},
+      ],
+    ),
+  };
+
+  static Map<ShoeAchievement, ScriptDialog> fromShoeAchievement = {
+    ShoeAchievement.slippers: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "I love mama-owner a lot!"},
+        {
+          "Purin":
+              "She does study a lot these days, and I'm super proud of her!",
+        },
+        {"Purin": "Though I'd like to get her attention from time to time..."},
+        {"Purin": "Sooooo...."},
+        {"Purin": "I may or may not have taken in some of her shoes."},
       ],
     ),
   };
