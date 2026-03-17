@@ -13,7 +13,7 @@ class Feedable extends PurinAreaSelectable {
   Feedable()
     : super(
         //TODO change hitbox and position
-        position: Vector2(180, 180),
+        position: Vector2(180, 150),
         hitbox: PolygonHitbox(
           [
             Vector2(-30, 30),
