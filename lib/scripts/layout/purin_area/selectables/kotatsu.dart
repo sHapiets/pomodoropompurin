@@ -19,7 +19,7 @@ class Kotatsu extends PurinAreaSelectable {
   /// properties is necessity for each selectable
   Kotatsu()
     : super(
-        position: Vector2(180, 220),
+        position: Vector2(180, 190),
         hitbox: PolygonHitbox(
           [
             Vector2(0, 90),

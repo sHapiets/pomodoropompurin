@@ -106,8 +106,8 @@ class Acquirables {
       iconAssetPath: "",
 
       purinPositionVectors: {
-        PurinPosition.kotatsuLeft: Vector2(110, 160),
-        PurinPosition.kotatsuRight: Vector2(250, 160),
+        PurinPosition.kotatsuLeft: Vector2(110, 130),
+        PurinPosition.kotatsuRight: Vector2(250, 130),
       },
       spriteFlamePath: "kotatsu_sprites/pudding.png",
     ),
@@ -118,8 +118,8 @@ class Acquirables {
       iconAssetPath: "",
 
       purinPositionVectors: {
-        PurinPosition.kotatsuLeft: Vector2(110, 160),
-        PurinPosition.kotatsuRight: Vector2(250, 160),
+        PurinPosition.kotatsuLeft: Vector2(110, 130),
+        PurinPosition.kotatsuRight: Vector2(250, 130),
       },
       spriteFlamePath: "kotatsu_sprites/aqua.png",
     ),
