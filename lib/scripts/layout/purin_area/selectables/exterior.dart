@@ -44,6 +44,5 @@ class Exterior extends PurinAreaSelectable {
   void onLongTapDown(TapDownEvent event) {
     super.onLongTapDown(event);
     // TODO: Add overlay equip menu
-    game.overlays.add('');
   }
 }

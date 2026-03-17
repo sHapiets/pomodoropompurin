@@ -44,6 +44,5 @@ class InteriorWall extends PurinAreaSelectable {
   void onLongTapDown(TapDownEvent event) {
     super.onLongTapDown(event);
     // TODO: Add overlay for equip?
-    game.overlays.add('');
   }
 }

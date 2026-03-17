@@ -8,18 +8,16 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class ShopEntity extends PurinAreaSelectable {
   ShopEntity()
     : super(
-        position: Vector2(400, 50),
+        position: Vector2(375, 95),
         hitbox: PolygonHitbox(
           [
-            Vector2(0, 90),
-            Vector2(105, 25),
-            Vector2(90, 0),
-            Vector2(0, -50),
-            Vector2(-90, 0),
-            Vector2(-105, 25),
+            Vector2(-45, -30),
+            Vector2(45, -30),
+            Vector2(45, 30),
+            Vector2(-45, 30),
           ],
           anchor: Anchor.center,
-          position: Vector2(0, -10),
+          position: Vector2(0, 0),
         ),
         priority: 50,
       );
@@ -29,7 +27,7 @@ class ShopEntity extends PurinAreaSelectable {
     // IMPORTANT: Edit for every changeable RoomDesign (imagepath and size)
     sprite = SpriteComponent(
       sprite: Sprite(Flame.images.fromCache("shop_sprites/shop.png")),
-      size: Vector2.all(100),
+      size: Vector2.all(150),
       anchor: anchor,
     );
 

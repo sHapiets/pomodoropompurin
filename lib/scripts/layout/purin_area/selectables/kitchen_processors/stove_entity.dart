@@ -19,7 +19,7 @@ class StoveEntity extends PurinAreaSelectable {
             Vector2(-50, -8),
           ],
           anchor: Anchor.center,
-          position: Vector2(0, -5),
+          position: Vector2(0, 0),
         ),
         priority: 50,
       );

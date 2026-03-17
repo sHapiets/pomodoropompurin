@@ -12,18 +12,7 @@ class Floor extends PurinAreaSelectable {
         position: Vector2(0, 0),
 
         /// TODO: CHANGE FLOOR HITBOX
-        hitbox: PolygonHitbox(
-          [
-            Vector2(0, 75),
-            Vector2(90, 30),
-            Vector2(70, 10),
-            Vector2(0, -30),
-            Vector2(-70, 10),
-            Vector2(-90, 30),
-          ],
-          anchor: Anchor.center,
-          position: Vector2(0, -10),
-        ),
+        hitbox: PolygonHitbox([Vector2(1, 1), Vector2(0, 1), Vector2(0, 0)]),
         priority: 20,
       );
 
@@ -57,6 +46,5 @@ class Floor extends PurinAreaSelectable {
   void onLongTapDown(TapDownEvent event) {
     super.onLongTapDown(event);
     // IMPORTANT: Edit for every changeable RoomDesign
-    game.overlays.add('kotatsuMenu');
   }
 }

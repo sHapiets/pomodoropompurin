@@ -9,18 +9,7 @@ class Blanket extends PurinAreaSelectable {
   Blanket()
     : super(
         position: Vector2(-15, 380),
-        hitbox: PolygonHitbox(
-          [
-            Vector2(0, 75),
-            Vector2(90, 30),
-            Vector2(70, 10),
-            Vector2(0, -30),
-            Vector2(-70, 10),
-            Vector2(-90, 30),
-          ],
-          anchor: Anchor.center,
-          position: Vector2(0, -10),
-        ),
+        hitbox: PolygonHitbox([Vector2(1, 1), Vector2(0, 1), Vector2(0, 0)]),
         priority: 50,
       );
 
@@ -54,6 +43,5 @@ class Blanket extends PurinAreaSelectable {
   void onLongTapDown(TapDownEvent event) {
     super.onLongTapDown(event);
     // TODO: Overlay , should be the same as Futon!
-    game.overlays.add('');
   }
 }
