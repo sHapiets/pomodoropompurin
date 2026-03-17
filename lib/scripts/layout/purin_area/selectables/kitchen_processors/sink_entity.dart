@@ -41,5 +41,6 @@ class SinkEntity extends PurinAreaSelectable {
       2.0,
     );
     game.overlays.add("sinkMenu");
+    addOnLoadAnim();
   }
 }

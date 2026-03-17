@@ -8,7 +8,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class ChoppingBoardEntity extends PurinAreaSelectable {
   ChoppingBoardEntity()
     : super(
-        position: Vector2(250, -25),
+        position: Vector2(240, -30),
         hitbox: PolygonHitbox(
           [
             Vector2(-15, 60),
@@ -46,5 +46,6 @@ class ChoppingBoardEntity extends PurinAreaSelectable {
       2.0,
     );
     game.overlays.add("choppingMenu");
+    addOnLoadAnim();
   }
 }

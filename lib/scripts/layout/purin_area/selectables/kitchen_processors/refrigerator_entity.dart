@@ -58,5 +58,6 @@ class RefrigeratorEntity extends PurinAreaSelectable {
       2.0,
     );
     game.overlays.add("refrigeratorMenu");
+    addOnLoadAnim();
   }
 }

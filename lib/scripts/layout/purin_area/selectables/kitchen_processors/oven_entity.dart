@@ -41,5 +41,6 @@ class OvenEntity extends PurinAreaSelectable {
       2.0,
     );
     game.overlays.add("ovenMenu");
+    addOnLoadAnim();
   }
 }

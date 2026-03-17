@@ -44,5 +44,6 @@ class ShopEntity extends PurinAreaSelectable {
       2.0,
     );
     game.overlays.add("shopMenu");
+    addOnLoadAnim();
   }
 }

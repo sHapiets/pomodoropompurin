@@ -48,5 +48,6 @@ class MixerEntity extends PurinAreaSelectable {
       2.0,
     );
     game.overlays.add("mixerMenu");
+    addOnLoadAnim();
   }
 }

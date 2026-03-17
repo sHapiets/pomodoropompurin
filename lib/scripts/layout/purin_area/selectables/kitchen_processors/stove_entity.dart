@@ -8,7 +8,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class StoveEntity extends PurinAreaSelectable {
   StoveEntity()
     : super(
-        position: Vector2(320, 5),
+        position: Vector2(310, 0),
         hitbox: PolygonHitbox(
           [
             Vector2(0, 10),
@@ -48,5 +48,6 @@ class StoveEntity extends PurinAreaSelectable {
       2.0,
     );
     game.overlays.add("stoveMenu");
+    addOnLoadAnim();
   }
 }
