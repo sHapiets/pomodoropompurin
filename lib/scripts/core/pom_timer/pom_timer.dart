@@ -181,6 +181,7 @@ class PomTimer {
     _progSystem.addDayTimeSeconds(timeTotalSeconds);
     _progSystem.addAccTotalTime(timeTotalSeconds);
     _progSystem.addPomPoints(rewardPomPoints);
+    _progSystem.addOshiriPoints(rewardOshiriPoints);
     pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
 
     await showGeneralDialog(
