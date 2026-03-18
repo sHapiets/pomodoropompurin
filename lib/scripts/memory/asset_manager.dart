@@ -78,7 +78,6 @@ class AssetManager {
       'SamplePurinArea.png',
       'SamplePurin.png',
       'L7.png',
-      "purinEntity.png",
       "L8.jpg",
       'test_bg.png',
       "purinAreaHome_floor.png",
@@ -132,9 +131,7 @@ class AssetManager {
       "shop_sprites/shop.png",
     ];
 
-    for (String imagePath in allFlameImages) {
-      await Flame.images.load(imagePath);
-    }
+    await Flame.images.loadAll(allFlameImages);
   }
 
   /// Lazy-load a shop image only when needed
