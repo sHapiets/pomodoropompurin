@@ -1,13 +1,23 @@
+import 'dart:async';
+
 import 'package:flame/game.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
+import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
+import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
+import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
+import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
+import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 class ScriptsMap {
   static Map<int, ScriptDialog> fromLevelUp = {
@@ -466,6 +476,9 @@ class ScriptsMap {
     ),
 
     3: ScriptDialog(
+      onBegin: () {
+        BackgroundMusic().play('audio/track_playful.mp3');
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
@@ -500,9 +513,6 @@ class ScriptsMap {
         {"Purin": "...if the mixer is making noises, that could only mean..."},
         {"Purin": "MAMA-OWNER'S HOME!"},
       ],
-      onBegin: () {
-        BackgroundMusic().play('audio/track_playful.mp3');
-      },
       onFinished: () {
         TutorialManager.singleton.nextTutorialSection(delayMs: 1000);
       },
@@ -549,7 +559,7 @@ class ScriptsMap {
         {"....": "Hi there! Im Koupen-chan!"},
         {
           "Koupen":
-              "My hobby is colleting four-leaf clovers, smelling flowers, and playing with my friends!",
+              "My hobby is collecting four-leaf clovers, smelling flowers, and playing with my friends!",
         },
         {
           "Koupen":
@@ -571,7 +581,7 @@ class ScriptsMap {
         },
         {
           "Koupen":
-              "Just the other day, I was waddling around with Ballon-san...",
+              "Just the other day, I was waddling around with Balloon-san...",
         },
         {
           "Koupen":
@@ -579,11 +589,11 @@ class ScriptsMap {
         },
         {
           "Koupen":
-              "But suddenly, my hand slipped, and Ballon-san started flying!",
+              "But suddenly, my hand slipped, and Balloon-san started flying!",
         },
         {
           "Koupen":
-              "Thankfully, unlike Koupen, Enaga-san could fly, and brought Ballon-san back to me!",
+              "Thankfully, unlike Koupen, Enaga-san could fly, and brought Balloon-san back to me!",
         },
         {"Koupen": "Which is why I think---"},
         {"Koupen": "....."},
@@ -602,15 +612,377 @@ class ScriptsMap {
           "Koupen":
               "You can prepare him MEALS, and PET him anytime to show your affection.",
         },
-        {"Koupen": "To start, how about we make some pancakes"},
+        {"Koupen": "To start, how about we make some pancakes!"},
       ],
-
       onFinished: () {
-        TutorialManager.singleton.nextTutorialSection();
+        TutorialManager.singleton.nextTutorialSection(delayMs: 500);
+      },
+    ),
+
+    5: ScriptDialog(
+      onBegin: () {
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Vector2.zero(),
+          Vector2.zero(),
+          0.4,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "Welcome to Purin's lovely home!"},
+        {"Koupen": "...."},
+        {
+          "Koupen":
+              "... what do you mean dog houses in your dimension aren't this fancy?",
+        },
+        {"Koupen": "Isn't it common to have...."},
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 100);
+      },
+    ),
+
+    6: ScriptDialog(
+      onBegin: () {
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Vector2(190, 30),
+          Vector2.zero(),
+          1.0,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "....a fully-functioning KITCHEN,..."},
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 100);
+      },
+    ),
+
+    7: ScriptDialog(
+      onBegin: () {
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Vector2(180, 190),
+          Vector2.zero(),
+          1.0,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "....a KOTATSU to eat and relax..."},
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 100);
+      },
+    ),
+
+    8: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "....a room with a cozy FUTON to sleep on..."},
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 100);
+      },
+    ),
+
+    9: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "....and a STUDY AREA to focus on your work?..."},
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 100);
       },
     ),
 
     10: ScriptDialog(
+      onBegin: () {
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Vector2.zero(),
+          Vector2.zero(),
+          0.4,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "Hmmm....."},
+        {
+          "Koupen":
+              "Well, at least in this dimension, you have now options to spend your time with Purin!",
+        },
+        {
+          "Koupen":
+              "Speaking of TIME, there's also one thing you need to know about this dimension...",
+        },
+        {
+          "Koupen":
+              "In order to purchase stuff, you have to acquire PomPoints!",
+        },
+        {
+          "Koupen":
+              "PomPoints are really simple to get, and that's by using the---",
+        },
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 100);
+      },
+    ),
+
+    11: ScriptDialog(
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.futon);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "**stomach growls**"},
+        {"Purin": "~ aaHh ~.. pancakesss ~...."},
+        {"Purin": "...aHh ~ zzZZzz.... ZzzZ..."},
+        {
+          "Koupen":
+              "It seems Purin-chan might be a bit too excited to eat now...",
+        },
+        {
+          "Koupen":
+              "Let's talk about the rest later. So now, let's try cooking up some pancakes...",
+        },
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 100);
+      },
+    ),
+
+    12: ScriptDialog(
+      onBegin: () {
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Vector2.zero(),
+          Vector2.zero(),
+          0.4,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {
+          "Koupen":
+              "To MOVE around the room, simply TAP DOWN ONCE THEN PAN across the screen.",
+        },
+        {
+          "Koupen":
+              "To see more stuff around, you could ZOOM OUT by TAPPING DOWN TWICE THEN SLIDE DOWNWARDS",
+        },
+        {
+          "Koupen":
+              "To see Purin's rounded-mushy-fur up close, you can ZOOM IN is by TAPPING DOWN TWICE THEN SLIDE UPWARDS",
+        },
+        {"Koupen": "Let's try these out!"},
+        {
+          "Koupen":
+              "Once you start feeling comfy moving around, simply LONG PRESS on the MIXER to use it...",
+        },
+        {"Koupen": "And start making these pancakes!"},
+        {"Koupen": ".... at least before Purin-chan eats them in his dream..."},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeTutorialScript();
+        UIDisplayState.singleton.hide.value = false;
+        Timer.periodic(Duration(milliseconds: 200), (timer) {
+          if (purinAreaKey.currentState!.currentGame.overlays.activeOverlays
+              .contains("mixerMenu")) {
+            TutorialManager.singleton.nextTutorialSection();
+            timer.cancel();
+          }
+        });
+      },
+    ),
+
+    13: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {
+          "Koupen":
+              "Using the mixer, you can make PANCAKE BATTER using the INGRIDIENTS in the recipe tile.",
+        },
+        {
+          "Koupen":
+              "Try making one PANCAKE BATTER by HOLDING DOWN on the process button.",
+        },
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeTutorialScript();
+        final initPancakeBatterCount = ProgSystem
+            .singleton
+            .ingridientInventory[Ingridient.pancakeBatter]!
+            .value;
+        Timer.periodic(Duration(milliseconds: 200), (timer) {
+          final pancakeBatterCount = ProgSystem
+              .singleton
+              .ingridientInventory[Ingridient.pancakeBatter]!
+              .value;
+          if (pancakeBatterCount > initPancakeBatterCount) {
+            TutorialManager.singleton.nextTutorialSection();
+            timer.cancel();
+          }
+        });
+      },
+    ),
+
+    14: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {
+          "Koupen":
+              "Good job! Now, we just need to cook the batter to get our fluffy pancakes!",
+        },
+        {"Koupen": "Select the stove to start cooking!"},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeTutorialScript();
+        final initPancakesCount =
+            ProgSystem.singleton.consumableInventory[Consumable.pancake]!.value;
+        Timer.periodic(Duration(milliseconds: 200), (timer) {
+          final pancakesCount = ProgSystem
+              .singleton
+              .consumableInventory[Consumable.pancake]!
+              .value;
+          if (pancakesCount > initPancakesCount) {
+            TutorialManager.singleton.nextTutorialSection();
+            timer.cancel();
+          }
+        });
+      },
+    ),
+
+    15: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "Well done!"},
+        {
+          "Koupen":
+              "Now, we just need to place these pancakes in the dining area...",
+        },
+        {"Koupen": "Do a LONG PRESS on the KOTATSU to set your pancakes"},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeTutorialScript();
+        Timer.periodic(Duration(milliseconds: 200), (timer) {
+          final currentFeedable =
+              PurinAreaEquipManager.singleton.feedable.value;
+          final currentBitesLeft =
+              PurinAreaEquipManager.singleton.feedableBitesLeft.value;
+          if (currentFeedable == Consumable.pancake &&
+              currentBitesLeft == Consumable.pancake.totalBites) {
+            TutorialManager.singleton.nextTutorialSection();
+            timer.cancel();
+          }
+        });
+      },
+    ),
+
+    16: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "YAYY!! ~ ~ PANCAKES!!"},
+        {
+          "Koupen":
+              "To feed Purin, simply TAP on the pancakes, followed by a TAP on Purin-chan!",
+        },
+        {"Koupen": "And make sure he gets his fill!"},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeTutorialScript();
+        Timer.periodic(Duration(milliseconds: 200), (timer) {
+          final bitesLeft =
+              PurinAreaEquipManager.singleton.feedableBitesLeft.value;
+          if (bitesLeft == 0) {
+            TutorialManager.singleton.nextTutorialSection();
+            timer.cancel();
+          }
+        });
+      },
+    ),
+
+    17: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {
+          "Koupen":
+              "Way to go! Now, Purin-chan has enough energy to get through the day!",
+        },
+        {"Purin": "....~ that was delicious ~..."},
+        {"Purin": "... I wonder if I could eat that again...."},
+        {"Purin": "... if I go back to sleep...."},
+        {"Koupen": "....."},
+        {"Koupen": ".... I might take that back."},
+        {"Koupen": "Well, Purin-chan is Purin-chan after all!"},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeTutorialScript();
+        UIDisplayState.singleton.hide.value = false;
+      },
+    ),
+
+    200: ScriptDialog(
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,

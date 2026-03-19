@@ -100,6 +100,18 @@ class _ScriptDialogState extends State<ScriptDialog>
     }
   }
 
+  void _skipAll() {
+    _typingTimer?.cancel();
+
+    setState(() {
+      _visible = false;
+    });
+
+    if (widget.onFinished != null) {
+      widget.onFinished!();
+    }
+  }
+
   @override
   void dispose() {
     _typingTimer?.cancel();
@@ -120,62 +132,87 @@ class _ScriptDialogState extends State<ScriptDialog>
     final currentCharacter = currentDialogue.keys.first;
     final currentImage = widget.imagePaths[_currentIndex];
 
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: GestureDetector(
-        onTap: _nextDialogue,
-        child: SizedBox(
-          width: dialogWidth,
-          child: FadeTransition(
-            opacity: _fadeController,
-            child: Card(
-              color: const Color.fromARGB(217, 255, 255, 255),
-              elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  children: [
-                    Stack(
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: GestureDetector(
+            onTap: _nextDialogue,
+            child: SizedBox(
+              width: dialogWidth,
+              child: FadeTransition(
+                opacity: _fadeController,
+                child: Card(
+                  color: const Color.fromARGB(217, 255, 255, 255),
+                  elevation: 8,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
                       children: [
-                        CircleAvatar(radius: 30),
-                        SizedBox(width: 60, child: Image.asset(currentImage)),
+                        Stack(
+                          children: [
+                            CircleAvatar(radius: 30),
+                            SizedBox(
+                              width: 60,
+                              child: Image.asset(currentImage),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                currentCharacter,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Fredoka',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                _displayedText,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'Fredoka',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            currentCharacter,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Fredoka',
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            _displayedText,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontFamily: 'Fredoka',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
+
+        Positioned(
+          top: 40,
+          right: 20,
+          child: ElevatedButton.icon(
+            onPressed: _skipAll,
+            icon: const Icon(Icons.skip_next, size: 18),
+            label: const Text("Skip", style: TextStyle(fontSize: 12)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black54,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
+import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/chopping_board.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/mixer.dart';
@@ -55,6 +56,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void initState() {
     levelUpManager.addListener(showLevelUpDialog);
     shoeAchievementManager.addListener(showShoeAchievementDialog);
+    BackgroundMusic().load('audio/track_playful.mp3');
     super.initState();
   }
 

@@ -28,6 +28,8 @@ class _TutorialPageBlockerState extends State<TutorialPageBlocker> {
         showBlocker(tutorialState.section.value);
       });
     });
+
+    showBlocker(tutorialState.section.value);
   }
 
   void showBlocker(int currentSection) {
