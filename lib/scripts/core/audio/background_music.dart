@@ -1,4 +1,4 @@
-import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
 
 class BackgroundMusic {
   // Singleton instance
@@ -14,13 +14,19 @@ class BackgroundMusic {
   Future<void> init() async {
     if (_isInitialized) return;
 
-    await _player.setReleaseMode(ReleaseMode.loop);
+    await _player.setLoopMode(LoopMode.one);
     _isInitialized = true;
   }
 
   Future<void> play(String assetPath) async {
     await init();
-    _player.play(AssetSource(assetPath));
+
+    try {
+      await _player.setAsset(assetPath);
+      await _player.play();
+    } catch (e) {
+      print('Error playing audio: $e');
+    }
   }
 
   Future<void> stop() async {
@@ -32,7 +38,8 @@ class BackgroundMusic {
   }
 
   Future<void> resume() async {
-    await _player.resume();
+    // just_audio resumes with play()
+    await _player.play();
   }
 
   Future<void> setVolume(double volume) async {
