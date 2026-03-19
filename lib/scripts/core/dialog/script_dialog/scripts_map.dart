@@ -477,7 +477,7 @@ class ScriptsMap {
 
     3: ScriptDialog(
       onBegin: () {
-        BackgroundMusic().play('audio/track_playful.mp3');
+        BackgroundMusic().play('assets/audio/track_playful.mp3');
       },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,

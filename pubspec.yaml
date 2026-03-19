@@ -17,6 +17,7 @@ dependencies:
   flame: ^1.15.0
   firebase_auth: ^6.2.0
   just_audio: ^0.10.5
+  just_audio_web: ^0.4.10
 
 dev_dependencies:
   flutter_test:

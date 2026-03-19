@@ -1,7 +1,7 @@
 import 'package:just_audio/just_audio.dart';
 
 class BackgroundMusic {
-  // Singleton instance
+  // Singleton
   static final BackgroundMusic _instance = BackgroundMusic._internal();
   factory BackgroundMusic() => _instance;
 
@@ -10,11 +10,14 @@ class BackgroundMusic {
   final AudioPlayer _player = AudioPlayer();
 
   bool _isInitialized = false;
+  String? _currentAsset;
 
   Future<void> init() async {
     if (_isInitialized) return;
 
     await _player.setLoopMode(LoopMode.one);
+    await _player.setVolume(1.0);
+
     _isInitialized = true;
   }
 
@@ -22,24 +25,24 @@ class BackgroundMusic {
     await init();
 
     try {
-      await _player.setAsset(assetPath);
+      if (_currentAsset != assetPath) {
+        await _player.setAsset(assetPath);
+        _currentAsset = assetPath;
+      }
+
       await _player.play();
     } catch (e) {
-      print('Error playing audio: $e');
+      print('BGM ERROR: $e');
     }
-  }
-
-  Future<void> stop() async {
-    await _player.stop();
   }
 
   Future<void> pause() async {
     await _player.pause();
   }
 
-  Future<void> resume() async {
-    // just_audio resumes with play()
-    await _player.play();
+  Future<void> stop() async {
+    await _player.stop();
+    _currentAsset = null; // reset so next play reloads
   }
 
   Future<void> setVolume(double volume) async {
