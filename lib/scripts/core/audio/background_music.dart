@@ -39,11 +39,6 @@ class BackgroundMusic {
     await _player.setVolume(volume);
   }
 
-  Future<void> load(String assetPath) async {
-    await play(assetPath);
-    await stop();
-  }
-
   Future<void> dispose() async {
     await _player.dispose();
   }

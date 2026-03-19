@@ -56,7 +56,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void initState() {
     levelUpManager.addListener(showLevelUpDialog);
     shoeAchievementManager.addListener(showShoeAchievementDialog);
-    BackgroundMusic().load('audio/track_playful.mp3');
     super.initState();
   }
 
