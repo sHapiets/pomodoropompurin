@@ -51,6 +51,7 @@ flutter:
     - assets/images/purin_sprites/
     - assets/images/character_icons/purin/
     - assets/images/character_icons/koupen/
+    - assets/images/character_icons/objects/
     - assets/audio/
   fonts:
     - family: Fredoka

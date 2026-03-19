@@ -32,7 +32,6 @@ class AssetManager {
     'pT_WP': 'assets/images/pomTimer/pomTimer_work_pointer.png',
     'pT_BP': 'assets/images/pomTimer/pomTimer_break_pointer.png',
     'pT_SB': 'assets/images/pomTimer/pomTimer_start_button.png',
-
     'pP_icon': 'assets/images/pomPoints_icon.png',
 
     'curious_purin_icon': 'assets/images/character_icons/purin/curious.png',
@@ -42,6 +41,14 @@ class AssetManager {
     'thinking_purin_icon': 'assets/images/character_icons/purin/thinking.png',
     'down_purin_icon': 'assets/images/character_icons/purin/down.png',
     'please_purin_icon': 'assets/images/character_icons/purin/please.png',
+    'shadow_purin_icon': 'assets/images/character_icons/purin/shadow.png',
+    'excited_purin_icon': 'assets/images/character_icons/purin/excited.png',
+    'pumped_purin_icon': 'assets/images/character_icons/purin/pumped.png',
+    'calm_purin_icon': 'assets/images/character_icons/purin/calm.png',
+
+    'mixer_objects_icon': 'assets/images/character_icons/objects/mixer.png',
+    'mixer_shadow_objects_icon':
+        'assets/images/character_icons/objects/mixer_shadow.png',
 
     ...{for (final ing in Ingridient.values) ing.name: ing.spriteFlutterPath},
     ...{for (final con in Consumable.values) con.name: con.iconFlutterPath},
