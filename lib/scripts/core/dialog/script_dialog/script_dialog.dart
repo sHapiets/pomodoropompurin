@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
+import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 
 class ScriptDialog extends StatefulWidget {
   final List<String> imagePaths;
@@ -9,7 +9,8 @@ class ScriptDialog extends StatefulWidget {
   final bool isStatic;
   final Duration charDelay;
   final Duration transitionDuration;
-  VoidCallback? onFinished;
+  final VoidCallback? onFinished;
+  final VoidCallback? onBegin;
 
   ScriptDialog({
     Key? key,
@@ -19,6 +20,7 @@ class ScriptDialog extends StatefulWidget {
     this.isStatic = false,
     this.charDelay = const Duration(milliseconds: 40),
     this.transitionDuration = const Duration(milliseconds: 300),
+    this.onBegin,
     this.onFinished,
   }) : super(key: key);
 
@@ -42,6 +44,11 @@ class _ScriptDialogState extends State<ScriptDialog>
       vsync: this,
       duration: widget.transitionDuration,
     );
+
+    if (widget.onBegin != null) {
+      widget.onBegin!();
+    }
+
     _startTyping();
   }
 

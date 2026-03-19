@@ -1,5 +1,12 @@
+import 'package:flame/game.dart';
+import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
+import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
 class ScriptsMap {
@@ -34,6 +41,9 @@ class ScriptsMap {
         {"Purin": "....."},
         {"Purin": "Talking about being hungry makes me hungry even more!"},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     4: ScriptDialog(
@@ -60,6 +70,9 @@ class ScriptsMap {
         {"Purin": "......"},
         {"Purin": "HELP IS ON THE WAY!!!"},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     5: ScriptDialog(
@@ -92,6 +105,17 @@ class ScriptsMap {
               "Orrrr... at least I keep one of them company while we find for the other one!",
         },
       ],
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.futon);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     6: ScriptDialog(
@@ -120,8 +144,11 @@ class ScriptsMap {
         {"Purin": "Well, I do become bigger in my dreams sometimes..."},
         {"Purin": "...but I get disappointed waking up."},
         {"Purin": "Hmm..."},
-        {"Purin": "Let's make it a tie for now!"},
+        {"Purin": "Let's make it a draw for now!"},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     7: ScriptDialog(
@@ -153,6 +180,9 @@ class ScriptsMap {
         },
         {"Purin": "...which is why I end up taking TWO snacks instead!"},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     8: ScriptDialog(
@@ -187,6 +217,9 @@ class ScriptsMap {
         {"Purin": "Thinking about this porkchop makes me just as hungry!"},
         {"Purin": "A pizza right now would be nice ~pom-u~."},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     9: ScriptDialog(
@@ -218,6 +251,9 @@ class ScriptsMap {
         {"Purin": "..."},
         {"Purin": "I hope mama-owner gets us raincoats soon."},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     10: ScriptDialog(
@@ -250,6 +286,17 @@ class ScriptsMap {
         {"Purin": "..........Zz....."},
         {"Purin": "...ZzZzzZzzZ....ZzzzZ...."},
       ],
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.futon);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     11: ScriptDialog(
@@ -296,6 +343,9 @@ class ScriptsMap {
         {"Purin": "I mean, it's kinda unlikely after all...."},
         {"Purin": "..that cheese is made of processed milk."},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
 
     12: ScriptDialog(
@@ -330,6 +380,9 @@ class ScriptsMap {
         },
         {"Purin": "Though it WOULD have been nice to have both!"},
       ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
     ),
   };
 
@@ -359,34 +412,250 @@ class ScriptsMap {
     ),
   };
 
-  static ScriptDialog tutorial = ScriptDialog(
-    imagePaths: [],
-    dialogues: [
-      {"Koupen": "..."},
-      {"Koupen": "In this unknown dimension..."},
-      {"Koupen": "...TIME is your best friend!"},
-      {"Koupen": "Take it from me. I play with TIME everyday, too."},
-      {
-        "Koupen":
-            "I spend a lot of my time with my friends, my family, and myself.",
+  static Map<int, ScriptDialog> fromTutorialSections = {
+    1: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"....": "...zZzzZZzz...."},
+        {"....": "..zZzz.... What..do you mean ..zZ.."},
+        {"....": "....all the snacks... Zzzz.. are gone?..."},
+        {"....": "..zZz.... there's... no need.. ZzZ.. to panic..."},
+        {"....": "...I'll rescue them... ZzZ.. no matter the odds..."},
+        {"....": "... I swear... ZzzZz... on my bu--"},
+      ],
+      onFinished: () {
+        Purin.singleton.changePosition(PurinPosition.futon);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+        TutorialManager.singleton.nextTutorialSection();
       },
-      {"Koupen": "I always get to do a lot of exciting things!"},
-      {"Koupen": "Like smelling the fragrant flowers during spring..."},
-      {"Koupen": "...sometimes playing games with my fellow penguins..."},
-      {"Koupen": "...or maybe going for a walk to smell some flowers..."},
-      {"Koupen": "...helping Adelie-san in the farm is also fun..."},
-      {
-        "Koupen":
-            "...I also get in the mood to gather flowers to smell them...",
+    ),
+
+    2: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"!!!": "**whirring noises**"},
+        {"....": "... huh? What's that sound? "},
+        {"!!!": "**whirring noises continues...**"},
+        {"....": "Could it be my snacks crying for help!?"},
+        {"!!!": "**whirring noises continues...**"},
+        {"....": "No, it sounds a bit too familiar...."},
+        {"....": "It kinda sounds like...."},
+      ],
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection();
       },
-      {"Koupen": "...hmmm..."},
-      {"Koupen": "...did I mention smelling flowers?"},
-      {"Koupen": "Anyways, TIME is always a joy to have."},
-      {
-        "Koupen":
-            "But TIME is not only our best friend during the fun times...",
+    ),
+
+    3: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"....": "....that it might just be the mixer."},
+        {"Mixer": "**whirring noises continues...**"},
+        {"....": "**deep sigh of relief**"},
+        {
+          "Purin":
+              "So about the snacks getting lost. It was all just a dream...",
+        },
+        {
+          "Purin":
+              "Thank goodness.... for a second, I really thought they're in danger.",
+        },
+        {"Purin": "No one harms Purin's snacks!"},
+        {"Purin": "...."},
+        {"Purin": "Or at least, no one eats them without me!"},
+        {"Mixer": "**whirring noises continues...**"},
+        {"Purin": "Wait a second..."},
+        {"Purin": "...if the mixer is making noises, that could only mean..."},
+        {"Purin": "MAMA-OWNER'S HOME!"},
+      ],
+      onBegin: () {
+        BackgroundMusic().play('audio/track_playful.mp3');
       },
-      {"Koupen": "...but also our best friend to achieve our goals."},
-    ],
-  );
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection(delayMs: 1000);
+      },
+    ),
+
+    4: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"....": "Let me explain..."},
+        {"....": "...in this alternate dimension..."},
+        {"....": "...you are..."},
+        {"....": "...~dun ~dun ~dun ~dun ~dunnnn~..."},
+        {"....": "...Purin's MAMA-OWNER!"},
+        {"....": "Oh, I forgot to introduce myself..."},
+        {"....": "Hi there! Im Koupen-chan!"},
+        {
+          "Koupen":
+              "My hobby is colleting four-leaf clovers, smelling flowers, and playing with my friends!",
+        },
+        {
+          "Koupen":
+              "Speaking of friends, yesterday, I met up with my friend, Yokoshima Enaga-san...",
+        },
+        {
+          "Koupen":
+              "He was talking about 'taking over the world' or something...",
+        },
+        {"Koupen": ".... and that's...."},
+        {"Koupen": "... ACTUALLY SO COOL!"},
+        {
+          "Koupen":
+              "I don't really know what that means, but he really seems into it, so I'm really happy for him.",
+        },
+        {
+          "Koupen":
+              "A lot of people think he's evil for that, but Koupen doesn't think so.",
+        },
+        {
+          "Koupen":
+              "Just the other day, I was waddling around with Ballon-san...",
+        },
+        {
+          "Koupen":
+              "...while Enaga-san was telling me something about 'eliminating' it or whatever.",
+        },
+        {
+          "Koupen":
+              "But suddenly, my hand slipped, and Ballon-san started flying!",
+        },
+        {
+          "Koupen":
+              "Thankfully, unlike Koupen, Enaga-san could fly, and brought Ballon-san back to me!",
+        },
+        {"Koupen": "Which is why I think---"},
+        {"Koupen": "....."},
+        {"Koupen": "Uhm, I feel like I lost track of something important..."},
+        {"Koupen": "OH, I completely forgot."},
+        {
+          "Koupen":
+              "That's right! Today, I will waddle you through the different things you could do as Mama-owner.",
+        },
+        {"Koupen": "And yes. In this dimension..."},
+        {
+          "Koupen":
+              "...you get to take care of the most pudding-shaped creature in the universe, Purin-chan!",
+        },
+        {
+          "Koupen":
+              "You can prepare him MEALS, and PET him anytime to show your affection.",
+        },
+        {"Koupen": "To start, how about we make some pancakes"},
+      ],
+
+      onFinished: () {
+        TutorialManager.singleton.nextTutorialSection();
+      },
+    ),
+
+    10: ScriptDialog(
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "..."},
+        {"Koupen": "In this alternate dimension..."},
+        {"Koupen": "...TIME is your best friend!"},
+        {"Koupen": "Take it from me. I play with TIME everyday, too."},
+        {
+          "Koupen":
+              "I spend a lot of my time with my friends, my family, and myself.",
+        },
+        {"Koupen": "I always get to do a lot of exciting things!"},
+        {"Koupen": "Like smelling the fragrant flowers during spring..."},
+        {"Koupen": "...sometimes playing games with my fellow penguins..."},
+        {"Koupen": "...or maybe going for a walk to sniff on some flowers..."},
+        {"Koupen": "...helping Adelie-san in the farm is also fun..."},
+        {
+          "Koupen":
+              "...I also get in the mood to gather flowers to smell them...",
+        },
+        {"Koupen": "...hmmm..."},
+        {"Koupen": "...did I mention smelling flowers?"},
+        {"Koupen": "Anyways, TIME is always a joy to have."},
+        {
+          "Koupen":
+              "But TIME is not only our best friend during the fun times...",
+        },
+        {"Koupen": "...but also our best friend to achieve our goals."},
+      ],
+    ),
+  };
 }

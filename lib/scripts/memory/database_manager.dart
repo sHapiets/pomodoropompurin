@@ -146,6 +146,12 @@ class DatabaseManager {
     return purinVarConfigDoc['purinVar'];
   }
 
+  Future<dynamic> statusLoadTutorialLoad() async {
+    final statusTutorialRef = statusRef.doc('tutorial');
+    final statusTutorialDoc = await statusTutorialRef.get();
+    return statusTutorialDoc['loadTutorial'];
+  }
+
   /// Save Functions
   /// -> to be called by other classes (mostly core singletons) to save data in Koupen
   /// -> instance of the DatabaseManager must be called before using
@@ -258,5 +264,10 @@ class DatabaseManager {
   Future<void> configPurinVarSave(PurinVars purinVar) async {
     final purinVarConfigRef = userRef.collection('config').doc('purin');
     await purinVarConfigRef.set({'purinVar': purinVar.name});
+  }
+
+  Future<void> statusLoadTutorialSave(bool loadTutorial) async {
+    final statusTutorialRef = statusRef.doc('tutorial');
+    await statusTutorialRef.set({'loadTutorial': loadTutorial});
   }
 }

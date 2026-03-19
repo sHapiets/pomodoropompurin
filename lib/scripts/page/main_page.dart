@@ -11,6 +11,8 @@ import 'package:pomodoropompurin/scripts/core/kitchen/sink.dart' as sink;
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement_manager.dart';
+import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
+import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_consumable_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
@@ -21,6 +23,7 @@ import 'package:pomodoropompurin/scripts/layout/script_dialog/feed_script_widget
 import 'package:pomodoropompurin/scripts/layout/script_dialog/level_up_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/pet_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/purin_menu_script_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/script_dialog/tutorial_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
@@ -28,6 +31,7 @@ import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
+import 'package:pomodoropompurin/scripts/page/tutorial_page_blocker.dart';
 
 final purinAreaKey = GlobalKey<GameWidgetState>();
 
@@ -44,6 +48,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final levelUpManager = LevelUpManager.singleton;
   final shoeAchievementManager = ShoeAchievementManager.singleton;
   final scriptManager = ScriptManager.singleton;
+  final tutorialManager = TutorialManager.singleton;
+  final tutorialState = TutorialState.singleton;
 
   @override
   void initState() {
@@ -131,6 +137,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           FeedScriptWidget(),
           PetScriptWidget(),
           PurinMenuScriptWidget(),
+          TutorialPageBlocker(),
+          TutorialScriptWidget(),
         ],
       ),
     );

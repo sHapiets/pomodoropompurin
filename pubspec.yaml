@@ -9,13 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.1
+  intl: ^0.20.2
   contribution_heatmap: ^0.5.2
-  syncfusion_flutter_gauges: ^32.1.21
+  syncfusion_flutter_gauges: ^33.1.44
   firebase_core: ^4.3.0
   cloud_firestore: ^6.1.2
   flame: ^1.15.0
   firebase_auth: ^6.2.0
+  audioplayers: ^6.6.0
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,7 @@ flutter:
     - assets/images/purin_sprites/
     - assets/images/character_icons/purin/
     - assets/images/character_icons/koupen/
+    - assets/audio/
   fonts:
     - family: Fredoka
       fonts:

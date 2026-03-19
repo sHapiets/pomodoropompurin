@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
@@ -163,10 +164,8 @@ class AssetManager {
   /// Check if preloaded
   bool isPreloaded(String assetPath) => _images.containsKey(assetPath);
 
-  /*
   final Map<String, AudioPlayer> _audioPlayers = {};
 
-  /// Preload a short audio clip
   Future<void> preloadAudio(String assetPath) async {
     if (_audioPlayers.containsKey(assetPath)) return;
 
@@ -178,7 +177,7 @@ class AssetManager {
       debugPrint('Failed to preload audio $assetPath: $e');
     }
   }
-
+  /*
   /// Play an audio clip
   Future<void> playAudio(String assetPath) async {
     final player = _audioPlayers[assetPath];

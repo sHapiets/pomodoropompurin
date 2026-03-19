@@ -5,6 +5,7 @@ import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/layout/account_manager/login_widget.dart';
@@ -50,11 +51,12 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
 
+  /* 
   Future<void> initialize() async {
     _accountManager.loggedIn.addListener(_preloadAll);
     _accountManager.loggedIn.value = true;
     _accountManager.autoLogin();
-  }
+  } */
 
   Future<void> _runStep(String label, Future<void> Function() task) async {
     if (!mounted) return;
@@ -204,8 +206,9 @@ class _SplashPageState extends State<SplashPage> {
     final PurinVars purinVars = PurinVars.values.byName(
       await _databaseManager.configPurinVarLoad(),
     );
-
     purin.equip(purinVars);
+
+    await TutorialManager.singleton.initialize();
   }
 
   Future<void> _preloadAssets() async {

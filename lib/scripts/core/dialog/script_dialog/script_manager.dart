@@ -5,7 +5,7 @@ import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/scripts_map.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
-class ScriptManager extends ChangeNotifier {
+class ScriptManager {
   ScriptManager._();
   static final singleton = ScriptManager._();
 
@@ -23,6 +23,9 @@ class ScriptManager extends ChangeNotifier {
   ValueNotifier<ScriptDialog> petScriptDialog = ValueNotifier(
     ScriptDialog(imagePaths: [], dialogues: []),
   );
+  ValueNotifier<ScriptDialog> tutorialScriptDialog = ValueNotifier(
+    ScriptDialog(imagePaths: [], dialogues: []),
+  );
 
   void startUpDialog() {}
 
@@ -30,25 +33,20 @@ class ScriptManager extends ChangeNotifier {
     purinMenuScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
     feedScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
     petScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
-    notifyListeners();
   }
 
   void removeLevelUpDialog() {
     levelUpScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
-    notifyListeners();
   }
 
   void addLevelUpDialog(int newLevel) {
     if (ScriptsMap.fromLevelUp.containsKey(newLevel)) {
-      levelUpScriptDialog.value = ScriptsMap.fromLevelUp[newLevel]!
-        ..onFinished = removeLevelUpDialog;
-      notifyListeners();
+      levelUpScriptDialog.value = ScriptsMap.fromLevelUp[newLevel]!;
     }
   }
 
   void removePurinMenuDialog() {
     purinMenuScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
-    notifyListeners();
   }
 
   void addPurinMenuDialog() {
@@ -59,12 +57,10 @@ class ScriptManager extends ChangeNotifier {
       ],
       isStatic: true,
     );
-    notifyListeners();
   }
 
   void removeFeedDialog() {
     feedScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
-    notifyListeners();
   }
 
   final List<String> purinFeedRandomScripts = [
@@ -84,12 +80,10 @@ class ScriptManager extends ChangeNotifier {
       ],
       isStatic: true,
     );
-    notifyListeners();
   }
 
   void removePetDialog() {
     petScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
-    notifyListeners();
   }
 
   void addPetDialog() {
@@ -100,6 +94,15 @@ class ScriptManager extends ChangeNotifier {
       ],
       isStatic: true,
     );
-    notifyListeners();
+  }
+
+  void removeTutorialScript() {
+    tutorialScriptDialog.value = ScriptDialog(imagePaths: [], dialogues: []);
+  }
+
+  void addTutorialScript(int part) {
+    if (ScriptsMap.fromTutorialSections.containsKey(part)) {
+      tutorialScriptDialog.value = ScriptsMap.fromTutorialSections[part]!;
+    }
   }
 }
