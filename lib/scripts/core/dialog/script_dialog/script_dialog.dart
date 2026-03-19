@@ -201,7 +201,10 @@ class _ScriptDialogState extends State<ScriptDialog>
           child: ElevatedButton.icon(
             onPressed: _skipAll,
             icon: const Icon(Icons.skip_next, size: 18),
-            label: const Text("Skip", style: TextStyle(fontSize: 12)),
+            label: const Text(
+              "skip",
+              style: TextStyle(fontSize: 11, fontFamily: 'Fredoka'),
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black54,
               foregroundColor: Colors.white,
