@@ -286,7 +286,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(197, 200, 107, 53),
+                      color: const Color.fromARGB(159, 204, 117, 70),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
@@ -347,7 +347,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       verticalOffset: 10,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(221, 255, 255, 255),
+                          color: const Color.fromARGB(221, 166, 220, 28),
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -360,7 +360,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                         width: 30,
                         child: Icon(
                           Icons.today_rounded,
-                          color: const Color.fromARGB(255, 50, 50, 50),
+                          color: const Color.fromARGB(255, 255, 255, 255),
                           shadows: [
                             Shadow(
                               color: const Color.fromARGB(66, 139, 139, 139),
@@ -377,7 +377,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(209, 191, 140, 57),
+                      color: const Color.fromARGB(147, 179, 205, 84),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(

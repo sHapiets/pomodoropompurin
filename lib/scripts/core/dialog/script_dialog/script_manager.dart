@@ -53,7 +53,7 @@ class ScriptManager {
     purinMenuScriptDialog.value = ScriptDialog(
       imagePaths: [assetManager.flutterAssetPaths['curious_purin_icon']!],
       dialogues: [
-        {"Purin": "What's up? (^ ω ^ )"},
+        {"Purin": "Pom~u! What should we do..."},
       ],
       isStatic: true,
     );

@@ -101,103 +101,106 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
   @override
   Widget build(BuildContext context) {
     return
-    // -- PANEL
-    SizedBox(
-      width: panelWidth.toDouble(),
-      height: panelFullHeight.toDouble(),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          AnimatedPositioned(
-            duration: Duration(milliseconds: 600),
-            curve: Curves.easeInOut,
-            left: 0,
-            right: 0,
-            bottom: position,
-            child: AnimatedScale(
+    // PANEL
+    FittedBox(
+      fit: BoxFit.contain,
+      child: SizedBox(
+        width: panelWidth.toDouble(),
+        height: panelFullHeight.toDouble(),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            AnimatedPositioned(
               duration: Duration(milliseconds: 600),
-              scale: scale,
-              curve: Curves.easeInOutCirc,
-              child: SizedBox(
-                width: panelWidth.toDouble(),
-                height: panelHeight.toDouble(),
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    /// Pudding BACKGROUND
-                    AnimatedPositioned(
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.easeInOut,
-                      right: 0,
-                      left: 0,
-                      bottom: backgroundPostion,
-                      child: SizedBox(
-                        width: panelWidth.toDouble(),
-                        height: panelHeight.toDouble(),
-                        child: Image.asset(
-                          assetManager.flutterAssetPaths['pT_BG']!,
+              curve: Curves.easeInOut,
+              left: 0,
+              right: 0,
+              bottom: position,
+              child: AnimatedScale(
+                duration: Duration(milliseconds: 600),
+                scale: scale,
+                curve: Curves.easeInOutCirc,
+                child: SizedBox(
+                  width: panelWidth.toDouble(),
+                  height: panelHeight.toDouble(),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      /// Pudding BACKGROUND
+                      AnimatedPositioned(
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.easeInOut,
+                        right: 0,
+                        left: 0,
+                        bottom: backgroundPostion,
+                        child: SizedBox(
+                          width: panelWidth.toDouble(),
+                          height: panelHeight.toDouble(),
+                          child: Image.asset(
+                            assetManager.flutterAssetPaths['pT_BG']!,
+                          ),
                         ),
                       ),
-                    ),
 
-                    /// Pudding FOREGROUND
-                    Positioned(
-                      right: 0,
-                      left: 0,
-                      bottom: 0,
-                      child: SizedBox(
-                        width: panelWidth.toDouble(),
-                        height: panelHeight.toDouble(),
-                        child: Image.asset(
-                          assetManager.flutterAssetPaths['pT_FG']!,
+                      /// Pudding FOREGROUND
+                      Positioned(
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                        child: SizedBox(
+                          width: panelWidth.toDouble(),
+                          height: panelHeight.toDouble(),
+                          child: Image.asset(
+                            assetManager.flutterAssetPaths['pT_FG']!,
+                          ),
                         ),
                       ),
-                    ),
 
-                    /// PomTimerWidget
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: SizedBox(
-                        width: panelWidth.toDouble(),
-                        height: panelHeight.toDouble(),
-                        child: AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 300),
-                          switchInCurve: Curves.easeOut,
-                          switchOutCurve: Curves.easeIn,
-                          layoutBuilder: (currentChild, previousChildren) {
-                            return Stack(
-                              alignment: Alignment.bottomCenter,
-                              children: [
-                                ...previousChildren,
-                                if (currentChild != null) currentChild,
-                              ],
-                            );
-                          },
-                          transitionBuilder: (child, animation) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: ScaleTransition(
+                      /// PomTimerWidget
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: SizedBox(
+                          width: panelWidth.toDouble(),
+                          height: panelHeight.toDouble(),
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            switchInCurve: Curves.easeOut,
+                            switchOutCurve: Curves.easeIn,
+                            layoutBuilder: (currentChild, previousChildren) {
+                              return Stack(
                                 alignment: Alignment.bottomCenter,
-                                scale: Tween(
-                                  begin: 0.1,
-                                  end: 1.0,
-                                ).animate(animation),
-                                child: child,
-                              ),
-                            );
-                          },
-                          child: pomTimerWidget,
+                                children: [
+                                  ...previousChildren,
+                                  if (currentChild != null) currentChild,
+                                ],
+                              );
+                            },
+                            transitionBuilder: (child, animation) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: ScaleTransition(
+                                  alignment: Alignment.bottomCenter,
+                                  scale: Tween(
+                                    begin: 0.1,
+                                    end: 1.0,
+                                  ).animate(animation),
+                                  child: child,
+                                ),
+                              );
+                            },
+                            child: pomTimerWidget,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

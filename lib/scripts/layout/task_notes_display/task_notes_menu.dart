@@ -58,128 +58,135 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 330,
-      height: 300,
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(0, 151, 148, 120),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: Container(
+        width: 330,
+        height: 300,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(0, 151, 148, 120),
+          borderRadius: BorderRadius.circular(10),
+        ),
 
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: -5,
-            right: 15,
-            child: Container(
-              width: 310,
-              height: 250,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 238, 171, 89),
-                borderRadius: BorderRadius.circular(10),
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: -5,
+              right: 15,
+              child: Container(
+                width: 310,
+                height: 250,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 191, 104, 41),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: -10,
-            left: 0,
-            child: Container(
-              width: 320,
-              height: 260,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(143, 206, 113, 51),
-                borderRadius: BorderRadius.circular(10),
+            Positioned(
+              bottom: -10,
+              left: 0,
+              child: Container(
+                width: 320,
+                height: 260,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(167, 231, 183, 100),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 10,
-            left: 10,
-            child: Text(
-              'task notes',
-              style: TextStyle(
-                fontFamily: 'Fredoka',
-                fontWeight: FontWeight.w500,
-                fontSize: 30,
-                color: Colors.white,
-                shadows: [Shadow(color: Colors.black38, offset: Offset(3, 3))],
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Text(
+                'task notes',
+                style: TextStyle(
+                  fontFamily: 'Fredoka',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 30,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(color: Colors.black38, offset: Offset(3, 3)),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          Positioned(
-            top: 12,
-            right: 10,
-            child: IconButton(
-              iconSize: 28,
-              onPressed: () {
-                Navigator.pop((context));
-              },
-              icon: Icon(
-                Icons.arrow_drop_down_circle_sharp,
-                color: const Color.fromARGB(255, 255, 255, 255),
-                shadows: [Shadow(color: Colors.black26, offset: Offset(3, 3))],
+            Positioned(
+              top: 12,
+              right: 10,
+              child: IconButton(
+                iconSize: 28,
+                onPressed: () {
+                  Navigator.pop((context));
+                },
+                icon: Icon(
+                  Icons.arrow_drop_down_circle_sharp,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  shadows: [
+                    Shadow(color: Colors.black26, offset: Offset(3, 3)),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          Positioned(
-            top: 75,
-            left: 20,
-            child: Container(
-              width: 280,
-              height: 230,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: ListenableBuilder(
-                listenable: taskNotesManager,
-                builder: (context, child) {
-                  return (taskNotesManager.noTasks)
-                      ? Column(
-                          children: [
-                            Center(child: addTaskNoteButton),
-                            Center(
-                              child: Text(
-                                'add your task notes here',
-                                style: TextStyle(
-                                  fontFamily: 'Fredoka',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: const Color.fromARGB(
-                                    183,
-                                    255,
-                                    161,
-                                    53,
+            Positioned(
+              top: 75,
+              left: 20,
+              child: Container(
+                width: 280,
+                height: 230,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: ListenableBuilder(
+                  listenable: taskNotesManager,
+                  builder: (context, child) {
+                    return (taskNotesManager.noTasks)
+                        ? Column(
+                            children: [
+                              Center(child: addTaskNoteButton),
+                              Center(
+                                child: Text(
+                                  'add your task notes here',
+                                  style: TextStyle(
+                                    fontFamily: 'Fredoka',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                    color: const Color.fromARGB(
+                                      183,
+                                      255,
+                                      161,
+                                      53,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-                      : ListView.separated(
-                          padding: EdgeInsets.all(10),
-                          itemCount: taskNotesManager.taskNotes.length + 1,
-                          itemBuilder: (context, index) {
-                            if (index == taskNotesManager.taskNotes.length) {
-                              return addTaskNoteButton;
-                            }
+                            ],
+                          )
+                        : ListView.separated(
+                            padding: EdgeInsets.all(10),
+                            itemCount: taskNotesManager.taskNotes.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == taskNotesManager.taskNotes.length) {
+                                return addTaskNoteButton;
+                              }
 
-                            return TaskNoteItem(
-                              taskNote: taskNotesManager.taskNotes[index],
-                              positionIndex: index,
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Divider(height: 5, thickness: 3);
-                          },
-                        );
-                },
+                              return TaskNoteItem(
+                                taskNote: taskNotesManager.taskNotes[index],
+                                positionIndex: index,
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Divider(height: 5, thickness: 3);
+                            },
+                          );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
