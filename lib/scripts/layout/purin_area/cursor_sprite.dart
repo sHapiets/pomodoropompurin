@@ -5,8 +5,9 @@ class CursorMovingSprite extends SpriteComponent {
   CursorMovingSprite({required Vector2 position, required int priority})
     : super(
         position: position,
-        sprite: Sprite(Flame.images.fromCache('L8.jpg')),
-        size: Vector2.all(20),
+        sprite: Sprite(Flame.images.fromCache('cursors/move.png')),
+        size: Vector2.all(60),
+        anchor: Anchor.center,
         priority: priority,
       );
 }
@@ -16,7 +17,8 @@ class CursorScalingSprite extends SpriteComponent {
     : super(
         position: position,
         sprite: Sprite(Flame.images.fromCache('SamplePurin.png')),
-        size: Vector2.all(20),
+        size: Vector2.all(60),
+        anchor: Anchor.center,
         priority: priority,
       );
 }

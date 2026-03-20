@@ -212,17 +212,24 @@ class _PurchaseTileState extends State<PurchaseTile>
                     color: const Color.fromARGB(197, 200, 107, 53),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Text(
-                    '${widget.ingridient.price}',
-                    style: const TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 11,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(color: Colors.black26, offset: Offset(1, 1)),
-                      ],
-                    ),
+                  child: ValueListenableBuilder(
+                    valueListenable: progSystem.pomPoints,
+                    builder: (context, value, child) {
+                      return Text(
+                        '${widget.ingridient.price}',
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 11,
+                          fontWeight: FontWeight.w800,
+                          color: (insufficientPomPoints)
+                              ? const Color.fromARGB(255, 123, 23, 16)
+                              : Colors.green,
+                          shadows: [
+                            Shadow(color: Colors.black26, offset: Offset(1, 1)),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -231,23 +238,33 @@ class _PurchaseTileState extends State<PurchaseTile>
             const Spacer(),
 
             /// PURCHASE BUTTON
-            ScaleTransition(
-              scale: buttonScale,
-              child: GestureDetector(
-                onTapDown: (_) => buttonHold(),
-                onTapUp: (_) => buttonCancel(),
-                onTapCancel: buttonCancel,
-                child: Container(
-                  height: buttonSize,
-                  width: buttonSize,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.amber,
-                  ),
-                  child: const Icon(
-                    Icons.shopping_cart_outlined,
-                    color: Colors.black,
-                    size: 22,
+            ValueListenableBuilder(
+              valueListenable: progSystem.pomPoints,
+              builder: (context, value, child) {
+                if (insufficientPomPoints) {
+                  return Icon(Icons.close, size: 45, color: Colors.black26);
+                } else {
+                  return child!;
+                }
+              },
+              child: ScaleTransition(
+                scale: buttonScale,
+                child: GestureDetector(
+                  onTapDown: (_) => buttonHold(),
+                  onTapUp: (_) => buttonCancel(),
+                  onTapCancel: buttonCancel,
+                  child: Container(
+                    height: buttonSize,
+                    width: buttonSize,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.amber,
+                    ),
+                    child: const Icon(
+                      Icons.shopping_cart_outlined,
+                      color: Colors.black,
+                      size: 22,
+                    ),
                   ),
                 ),
               ),

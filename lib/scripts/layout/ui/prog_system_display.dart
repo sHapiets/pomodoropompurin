@@ -259,7 +259,17 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                           color: Color.fromARGB(255, 255, 255, 255),
                         ),
                         verticalOffset: 10,
-                        child: SizedBox(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(0, 255, 255, 255),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(3, 3),
+                              ),
+                            ],
+                          ),
                           height: 30,
                           width: 30,
                           child: Image.asset(
@@ -270,6 +280,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     ),
                   ),
                   Container(
+                    constraints: BoxConstraints(minWidth: 50),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
@@ -277,26 +288,34 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(197, 200, 107, 53),
                       borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(57, 175, 114, 33),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
                     ),
                     child: ValueListenableBuilder(
                       valueListenable: progSystem.pomPoints,
                       builder: (context, value, child) {
-                        return Text(
-                          NumberFormat(
-                            '#,##0',
-                            'en_US',
-                          ).format(progSystem.pomPoints.value),
-                          style: const TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 1),
-                              ),
-                            ],
+                        return Center(
+                          child: Text(
+                            NumberFormat(
+                              '#,##0',
+                              'en_US',
+                            ).format(progSystem.pomPoints.value),
+                            style: const TextStyle(
+                              fontFamily: 'Nunito',
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black26,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -326,14 +345,27 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                         color: Color.fromARGB(255, 255, 255, 255),
                       ),
                       verticalOffset: 10,
-                      child: SizedBox(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(221, 255, 255, 255),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(3, 3),
+                            ),
+                          ],
+                        ),
                         height: 30,
                         width: 30,
                         child: Icon(
                           Icons.today_rounded,
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 50, 50, 50),
                           shadows: [
-                            Shadow(color: Colors.black26, offset: Offset(2, 2)),
+                            Shadow(
+                              color: const Color.fromARGB(66, 139, 139, 139),
+                              offset: Offset(2, 2),
+                            ),
                           ],
                         ),
                       ),
@@ -345,8 +377,14 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(209, 179, 193, 24),
+                      color: const Color.fromARGB(209, 191, 140, 57),
                       borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(57, 175, 114, 33),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
                     ),
                     child: ValueListenableBuilder(
                       valueListenable: progSystem.dayTimeSeconds,

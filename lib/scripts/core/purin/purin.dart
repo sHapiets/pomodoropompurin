@@ -157,7 +157,6 @@ class Purin extends ChangeNotifier {
       Vector2.zero(),
       2.0,
     );
-    ScriptManager.singleton.addPetDialog();
     petCooldown.cancel();
     petCooldown = async_lib.Timer.periodic(Duration(milliseconds: 700), (
       timer,

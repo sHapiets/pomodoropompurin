@@ -195,26 +195,30 @@ class _ScriptDialogState extends State<ScriptDialog>
           ),
         ),
 
-        Positioned(
-          top: 40,
-          right: 20,
-          child: ElevatedButton.icon(
-            onPressed: _skipAll,
-            icon: const Icon(Icons.skip_next, size: 18),
-            label: const Text(
-              "skip",
-              style: TextStyle(fontSize: 11, fontFamily: 'Fredoka'),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black54,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+        if (!widget.isStatic)
+          Positioned(
+            top: 40,
+            right: 20,
+            child: ElevatedButton.icon(
+              onPressed: _skipAll,
+              icon: const Icon(Icons.skip_next, size: 18),
+              label: const Text(
+                "skip",
+                style: TextStyle(fontSize: 11, fontFamily: 'Fredoka'),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black54,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

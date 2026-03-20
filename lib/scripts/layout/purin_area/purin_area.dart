@@ -68,12 +68,12 @@ class PurinArea extends FlameGame
     overlays.removeAll(overlays.activeOverlays);
     scriptManager.removeAllDialogs();
 
-    cursorSprite.removeFromParent();
+    /* cursorSprite.removeFromParent();
     cursorSprite = CursorMovingSprite(
       position: event.canvasPosition,
       priority: 999,
     );
-    add(cursorSprite);
+    add(cursorSprite); */
     purinAreaStateManager.state.value = "Transforming";
   }
 
@@ -93,11 +93,12 @@ class PurinArea extends FlameGame
   @override
   void onDoubleTapDown(DoubleTapDownEvent event) {
     cursorSprite.removeFromParent();
+    /*
     cursorSprite = CursorScalingSprite(
       position: event.canvasPosition,
       priority: 999,
     );
-    add(cursorSprite);
+    add(cursorSprite); */
     purinAreaStateManager.state.value = "Transforming";
   }
 

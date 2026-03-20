@@ -46,6 +46,15 @@ class AssetManager {
     'pumped_purin_icon': 'assets/images/character_icons/purin/pumped.png',
     'calm_purin_icon': 'assets/images/character_icons/purin/calm.png',
 
+    'thinking_koupen_icon': 'assets/images/character_icons/koupen/thinking.png',
+    'blank_koupen_icon': 'assets/images/character_icons/koupen/blank.png',
+    'curious_koupen_icon': 'assets/images/character_icons/koupen/curious.png',
+    'dazzle_koupen_icon': 'assets/images/character_icons/koupen/dazzle.png',
+    'happy_koupen_icon': 'assets/images/character_icons/koupen/happy.png',
+    'shadow_koupen_icon': 'assets/images/character_icons/koupen/shadow.png',
+    'troubled_koupen_icon': 'assets/images/character_icons/koupen/troubled.png',
+    'shocked_koupen_icon': 'assets/images/character_icons/koupen/shocked.png',
+
     'mixer_objects_icon': 'assets/images/character_icons/objects/mixer.png',
     'mixer_shadow_objects_icon':
         'assets/images/character_icons/objects/mixer_shadow.png',
@@ -97,6 +106,8 @@ class AssetManager {
       "Kotatsu_default.png",
       "Kotatsu_blue.png",
       "pomPoints_icon.png",
+
+      "cursors/move.png",
 
       "consumable_sprites/pudding/1.png",
       "consumable_sprites/pudding/2.png",

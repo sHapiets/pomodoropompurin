@@ -9,7 +9,7 @@ class Mixer extends KitchenProcessor {
     : super(
         displayName: "mixer",
         ingridientIngridients: {
-          Ingridient.puddingCream: {Ingridient.eggs: 1, Ingridient.milk: 1},
+          Ingridient.puddingCream: {Ingridient.eggs: 2, Ingridient.milk: 1},
           Ingridient.pancakeBatter: {Ingridient.flour: 1, Ingridient.eggs: 2},
           Ingridient.patty: {
             Ingridient.choppedOnions: 1,

@@ -80,7 +80,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                 width: value ? 60 : 0,
                 height: value ? 200 : 0,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(183, 150, 130, 86),
+                  color: const Color.fromARGB(183, 118, 116, 110),
                   borderRadius: BorderRadius.circular(40),
                 ),
               );
@@ -147,6 +147,12 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                   icon: const Icon(
                     Icons.list_alt_rounded,
                     color: Color.fromARGB(255, 255, 255, 255),
+                    shadows: [
+                      Shadow(
+                        color: Color.fromARGB(57, 59, 59, 59),
+                        offset: Offset(3, 3),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -189,6 +195,12 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                   icon: const Icon(
                     Icons.calendar_today_rounded,
                     color: Color.fromARGB(255, 255, 255, 255),
+                    shadows: [
+                      Shadow(
+                        color: Color.fromARGB(57, 59, 59, 59),
+                        offset: Offset(3, 3),
+                      ),
+                    ],
                   ),
                 ),
               ),
