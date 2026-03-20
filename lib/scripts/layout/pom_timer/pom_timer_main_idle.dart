@@ -208,8 +208,6 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                     gaugeAnimController.forward(),
                                 child: Image.asset(
                                   assetManager.flutterAssetPaths['pT_WP']!,
-                                  cacheHeight: 100,
-                                  cacheWidth: 100,
                                 ),
                               ),
                             ),
@@ -399,8 +397,6 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                                     gaugeAnimController.reverse(),
                                 child: Image.asset(
                                   assetManager.flutterAssetPaths['pT_BP']!,
-                                  cacheHeight: 100,
-                                  cacheWidth: 100,
                                 ),
                               ),
                             ),
@@ -486,8 +482,6 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                     },
                     child: Image.asset(
                       assetManager.flutterAssetPaths['pT_SB']!,
-                      cacheHeight: 93,
-                      cacheWidth: 93,
                     ),
                   ),
                 ),
