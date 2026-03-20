@@ -41,92 +41,141 @@ class PurchaseMenu extends StatelessWidget {
       child: Container(
         width: menuWidth,
         height: menuHeight,
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(226, 224, 247, 250),
+          color: const Color.fromARGB(0, 224, 247, 250),
           borderRadius: BorderRadius.circular(32),
         ),
-        child: Stack(
+        child: Column(
           children: [
-            /// HEADER
-            Positioned(
-              top: 18,
-              left: 24,
-              child: Text(
-                'grocery',
-                style: TextStyle(
-                  fontFamily: 'Fredoka',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 28,
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                ),
+            /// HEADER + CURRENCY ROW
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(214, 163, 201, 199),
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(color: Colors.black12, offset: Offset(3, 3)),
+                ],
               ),
-            ),
 
-            /// CURRENCY DISPLAY
-            Positioned(
-              top: 24,
-              right: 40,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: Image.asset(
-                        assetManager.flutterAssetPaths['pP_icon']!,
+                  /// HEADER
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromARGB(255, 91, 147, 185),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.receipt_long_rounded,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'grocery',
+                        style: TextStyle(
+                          fontFamily: 'Fredoka',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(color: Colors.black45, offset: Offset(2, 2)),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(197, 200, 107, 53),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: ValueListenableBuilder(
-                      valueListenable: progSystem.pomPoints,
-                      builder: (context, value, child) {
-                        return Text(
-                          NumberFormat(
-                            '#,##0',
-                            'en_US',
-                          ).format(progSystem.pomPoints.value),
-                          style: const TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 1),
+
+                  /// CURRENCY DISPLAY
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(3, 3),
                               ),
                             ],
                           ),
-                        );
-                      },
-                    ),
+                          height: 24,
+                          width: 24,
+                          child: Image.asset(
+                            assetManager.flutterAssetPaths['pP_icon']!,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(0, 200, 107, 53),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: ValueListenableBuilder(
+                          valueListenable: progSystem.pomPoints,
+                          builder: (context, value, child) {
+                            return Text(
+                              NumberFormat(
+                                '#,##0',
+                                'en_US',
+                              ).format(progSystem.pomPoints.value),
+                              style: const TextStyle(
+                                fontFamily: 'Nunito',
+                                fontSize: 13,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black26,
+                                    offset: Offset(1, 1),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
 
+            const SizedBox(height: 8),
+
             /// GRID AREA
-            Positioned.fill(
-              top: 70,
-              bottom: 20,
-              left: 20,
-              right: 20,
+            Expanded(
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFB2EBF2), // soft aqua panel
+                  color: const Color(0xFFB2EBF2),
                   borderRadius: BorderRadius.circular(24),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(255, 123, 161, 167),
+                      offset: Offset(5, 5),
+                    ),
+                  ],
                 ),
                 child: GridView.builder(
                   itemCount: purchasableList.length,

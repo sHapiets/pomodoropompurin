@@ -50,14 +50,27 @@ class StopPomTimerDialog extends StatelessWidget {
 
             const SizedBox(height: 18),
 
-            const Text(
-              "Stop your PomTimer?",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Fredoka',
-                fontSize: 22,
-                fontWeight: FontWeight.w900,
-                color: Color(0xFF6D4C41),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF6D4C41).withOpacity(0.3),
+                    offset: const Offset(3, 3),
+                  ),
+                ],
+              ),
+              child: const Text(
+                "Stop your PomTimer?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Fredoka',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF6D4C41),
+                ),
               ),
             ),
 

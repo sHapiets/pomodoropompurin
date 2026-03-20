@@ -89,9 +89,9 @@ class _PurchaseTileState extends State<PurchaseTile>
         purchaseIndicator = (purchaseIndicator + purchaseSpeed).clamp(0.0, 1.0);
         if (purchaseIndicator == 1.0) {
           purchase();
-          purchaseSpeed = (purchaseSpeed >= 0.05)
-              ? 0.05
-              : purchaseSpeed + 0.006;
+          purchaseSpeed = (purchaseSpeed >= 0.036)
+              ? 0.036
+              : purchaseSpeed + 0.003;
           purchaseIndicator = 0;
         }
       });
@@ -203,34 +203,21 @@ class _PurchaseTileState extends State<PurchaseTile>
                   ),
                 ),
                 const SizedBox(width: 4),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 1,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(197, 200, 107, 53),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: ValueListenableBuilder(
-                    valueListenable: progSystem.pomPoints,
-                    builder: (context, value, child) {
-                      return Text(
-                        '${widget.ingridient.price}',
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 11,
-                          fontWeight: FontWeight.w800,
-                          color: (insufficientPomPoints)
-                              ? const Color.fromARGB(255, 123, 23, 16)
-                              : Colors.green,
-                          shadows: [
-                            Shadow(color: Colors.black26, offset: Offset(1, 1)),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: progSystem.pomPoints,
+                  builder: (context, value, child) {
+                    return Text(
+                      '${widget.ingridient.price}',
+                      style: TextStyle(
+                        fontFamily: 'Fredoka',
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: (insufficientPomPoints)
+                            ? Colors.red
+                            : Colors.green,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

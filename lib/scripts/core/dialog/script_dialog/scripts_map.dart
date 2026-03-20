@@ -12,7 +12,6 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
-import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
@@ -846,7 +845,7 @@ class ScriptsMap {
       dialogues: [
         {
           "Koupen":
-              "Using the mixer, you can make PANCAKE BATTER using the INGRIDIENTS in the recipe tile.",
+              "Using the mixer, you can make PANCAKE BATTER using the INGREDIENTS in the recipe tile.",
         },
         {
           "Koupen":

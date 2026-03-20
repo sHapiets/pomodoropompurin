@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/kitchen/ingridient_icon.dart';
 
 class IngridientTile extends StatefulWidget {
   const IngridientTile({
@@ -146,7 +147,7 @@ class _IngridientTileState extends State<IngridientTile>
           cookIndicator = 0;
           processIngridients();
           updateMaxProcessableCount();
-          cookSpeed = (cookSpeed >= 0.05) ? 0.05 : cookSpeed + 0.006;
+          cookSpeed = (cookSpeed >= 0.036) ? 0.036 : cookSpeed + 0.003;
         }
       });
     });
@@ -324,19 +325,7 @@ class _IngridientTileState extends State<IngridientTile>
               alignment: AlignmentGeometry.topRight,
               child: Transform.translate(
                 offset: Offset(-5, 5),
-                child: Container(
-                  height: 20,
-                  width: 20,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: const Color.fromARGB(255, 91, 147, 185),
-                  ),
-                  child: Icon(
-                    Icons.receipt_long_rounded,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    size: 15,
-                  ),
-                ),
+                child: ingridientIcon,
               ),
             ),
 

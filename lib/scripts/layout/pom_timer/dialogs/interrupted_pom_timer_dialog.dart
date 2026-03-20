@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
-class EndPomTimerDialog extends StatelessWidget {
+class InterruptedPomTimerDialog extends StatelessWidget {
   final int seconds;
   final int pomPoints;
   final int oshiriPoints;
@@ -10,7 +10,7 @@ class EndPomTimerDialog extends StatelessWidget {
 
   final assetManager = AssetManager.singleton;
 
-  EndPomTimerDialog({
+  InterruptedPomTimerDialog({
     Key? key,
     required this.seconds,
     required this.pomPoints,
@@ -42,11 +42,11 @@ class EndPomTimerDialog extends StatelessWidget {
         width: 400,
         padding: const EdgeInsets.all(26),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFF3B0), // pudding yellow
+          color: const Color.fromARGB(255, 69, 69, 69),
           borderRadius: BorderRadius.circular(32),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF6D4C41).withOpacity(0.3),
+              color: const Color.fromARGB(255, 182, 103, 77).withOpacity(0.3),
               blurRadius: 25,
               offset: const Offset(0, 12),
             ),
@@ -59,11 +59,11 @@ class EndPomTimerDialog extends StatelessWidget {
               height: 200,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
-                color: Color(0xFFFFE08A),
+                color: Color.fromARGB(255, 226, 226, 226),
                 shape: BoxShape.circle,
               ),
               child: Image.asset(
-                assetManager.flutterAssetPaths['pumped_purin_icon']!,
+                assetManager.flutterAssetPaths['happy_koupen_icon']!,
               ),
             ),
 
@@ -76,19 +76,24 @@ class EndPomTimerDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF6D4C41).withOpacity(0.3),
+                    color: const Color.fromARGB(
+                      255,
+                      214,
+                      214,
+                      214,
+                    ).withOpacity(0.3),
                     offset: const Offset(3, 3),
                   ),
                 ],
               ),
               child: const Text(
-                "- SESSION ENDED -",
+                "- REWARDS SECURED -",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Fredoka',
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF6D4C41),
+                  color: Color.fromARGB(255, 65, 65, 65),
                 ),
               ),
             ),
@@ -96,13 +101,13 @@ class EndPomTimerDialog extends StatelessWidget {
             const SizedBox(height: 15),
 
             const Text(
-              "Nothing beats a productive session!\nTake a short break with Purin. You've earned it!",
+              "Koupen has detected an interrupted session!\nLuckily, your rewards were kept intact. Good job on your previous work!",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Nunito',
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF8D6E63),
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
             ),
 
@@ -111,7 +116,7 @@ class EndPomTimerDialog extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(153, 246, 178, 75),
+                color: const Color.fromARGB(153, 225, 225, 225),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -124,11 +129,16 @@ class EndPomTimerDialog extends StatelessWidget {
                       horizontal: 20,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFD166),
+                      color: const Color.fromARGB(255, 209, 163, 174),
                       borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF6D4C41).withOpacity(0.3),
+                          color: const Color.fromARGB(
+                            255,
+                            101,
+                            83,
+                            94,
+                          ).withOpacity(0.3),
                           offset: const Offset(3, 3),
                         ),
                       ],
@@ -139,7 +149,10 @@ class EndPomTimerDialog extends StatelessWidget {
                         fontFamily: 'Fredoka',
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF5D4037),
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        shadows: [
+                          Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                        ],
                       ),
                     ),
                   ),
@@ -189,7 +202,7 @@ class EndPomTimerDialog extends StatelessWidget {
                           fontFamily: 'Fredoka',
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 255, 255, 255),
                           shadows: [
                             Shadow(color: Colors.black12, offset: Offset(2, 2)),
                           ],
@@ -209,8 +222,8 @@ class EndPomTimerDialog extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onClose,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6D4C41),
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 215, 215, 215),
+                  foregroundColor: const Color.fromARGB(255, 45, 45, 45),
                   elevation: 8,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
@@ -218,7 +231,7 @@ class EndPomTimerDialog extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  "Alright!",
+                  "Thanks, Koupen-chan!",
                   style: TextStyle(
                     fontFamily: 'Fredoka',
                     fontSize: 16,

@@ -3,6 +3,7 @@ import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_interrupted_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
@@ -27,6 +28,7 @@ class _SplashPageState extends State<SplashPage> {
   final _accountManager = AccountManager.singleton;
   final _databaseManager = DatabaseManager.singleton;
   final _pomTimer = PomTimer.singleton;
+  final pomTimerInterruptedManager = PomTimerInterruptedManager.singleton;
   final _progSystem = ProgSystem.singleton;
   final acquirables = Acquirables.singleton;
   final purin = Purin.singleton;
@@ -173,7 +175,7 @@ class _SplashPageState extends State<SplashPage> {
       _progSystem.dayTimeSeconds.value = dayDateLog.timeSeconds;
     });
 
-    await _runStep("Loading Timer Settings...", () async {
+    await _runStep("Loading PomTimer Settings...", () async {
       _pomTimer.timeSetWorkSeconds = await _databaseManager.userConfigTimerLoad(
         'timeSetWorkSeconds',
       );
@@ -182,6 +184,14 @@ class _SplashPageState extends State<SplashPage> {
       _pomTimer.loopsSet = await _databaseManager.userConfigTimerLoad(
         'loopsSet',
       );
+
+      final statusPomTimer = await _databaseManager.statusPomTimerLoad();
+
+      if (statusPomTimer['wasActive'] == true) {
+        pomTimerInterruptedManager.wasActive = true;
+        pomTimerInterruptedManager.wasTimeTotalSeconds =
+            statusPomTimer["wasTimeTotalSeconds"];
+      }
     });
 
     await _runStep("Loading Equipped Items...", () async {

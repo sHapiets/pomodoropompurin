@@ -22,7 +22,7 @@ import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 /// - updating Koupen of rewards and DateLog data
 /// -
 class PomTimer {
-  PomTimer._(); // singleton-ing
+  PomTimer._();
   static final PomTimer singleton = PomTimer._();
 
   final purin = Purin.singleton;
@@ -89,6 +89,9 @@ class PomTimer {
       /// Update initial Display via ValueNotifier
       pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
 
+      int wasActiveTimeSaverStep = 0;
+      int saverStepsCount = 60;
+
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         timeLeftSeconds--;
 
@@ -96,8 +99,6 @@ class PomTimer {
         if (timeLeftSeconds < 0) {
           if (onBreak == false) {
             // loops is decreased only when a worktime is complete
-            ///////  ADD EVENT TRIGGER ///
-            /// Like purin being like, "BREAK TIME!!" or sum shz
 
             loopsLeft--;
             timeLeftSeconds = timeSetBreakSeconds;
@@ -114,8 +115,6 @@ class PomTimer {
             }
           } else {
             // onBreak, switch to worktime
-            ///////  ADD EVENT TRIGGER ///
-            /// Like purin being like, "Let's do our best again" or sum shz
 
             timeLeftSeconds = timeSetWorkSeconds;
             onBreak = false;
@@ -125,17 +124,21 @@ class PomTimer {
           }
         }
 
-        /// Update Koupen of current TimeTotalSeconds
-        if (onBreak) {
-          _databaseManager.statusPomTimerSave(
-            'wasTimeTotalSeconds',
-            timeTotalSeconds,
-          );
-        } else {
-          _databaseManager.statusPomTimerSave(
-            'wasTimeTotalSeconds',
-            timeTotalSeconds + (timeSetWorkSeconds - timeLeftSeconds),
-          );
+        /// Update Koupen of current TimeTotalSeconds every saverStepsCount
+        wasActiveTimeSaverStep += 1;
+        if (wasActiveTimeSaverStep >= saverStepsCount) {
+          wasActiveTimeSaverStep = 0;
+          if (onBreak) {
+            _databaseManager.statusPomTimerSave(
+              'wasTimeTotalSeconds',
+              timeTotalSeconds,
+            );
+          } else {
+            _databaseManager.statusPomTimerSave(
+              'wasTimeTotalSeconds',
+              timeTotalSeconds + (timeSetWorkSeconds - timeLeftSeconds),
+            );
+          }
         }
 
         /// Periodical Updates to update PomTimerDisplay
@@ -187,7 +190,6 @@ class PomTimer {
     await showGeneralDialog(
       context: navigatorKey.currentContext!,
       barrierDismissible: false,
-      barrierLabel: "Pomodoro End",
       barrierColor: Colors.black54,
       transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (context, animation, secondaryAnimation) {

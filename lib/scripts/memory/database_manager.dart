@@ -95,6 +95,13 @@ class DatabaseManager {
     return configTimerDoc[configTimerData];
   }
 
+  Future<DocumentSnapshot> statusPomTimerLoad() async {
+    final statusPomTimerRef = statusRef.doc('pomTimer');
+    final statusPomTimerDoc = await statusPomTimerRef.get();
+
+    return statusPomTimerDoc;
+  }
+
   //
   Future<Map<int, Map<int, List<DateLog>>>> calendarLoad() async {
     Map<int, Map<int, List<DateLog>>> calendarMap = {};

@@ -10,6 +10,7 @@ import 'package:pomodoropompurin/scripts/core/kitchen/refrigerator.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/stove.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/sink.dart' as sink;
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
+import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_interrupted_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
@@ -46,6 +47,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final assetManager = AssetManager.singleton;
   final pomTimer = PomTimer.singleton;
+  final pomTimerInterruptedManager = PomTimerInterruptedManager.singleton;
   final levelUpManager = LevelUpManager.singleton;
   final shoeAchievementManager = ShoeAchievementManager.singleton;
   final scriptManager = ScriptManager.singleton;
@@ -57,6 +59,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     levelUpManager.addListener(showLevelUpDialog);
     shoeAchievementManager.addListener(showShoeAchievementDialog);
     super.initState();
+    pomTimerInterruptedManager.rewardInterruptedTime();
   }
 
   void showLevelUpDialog() async {
