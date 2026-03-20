@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
@@ -220,8 +221,9 @@ class _SplashPageState extends State<SplashPage> {
       await _assetManager.preloadFlameImages();
     });
 
-    await _runStep("Loading Fonts...", () async {
+    await _runStep("Loading Fonts and Audio...", () async {
       await _assetManager.loadFonts();
+      await BackgroundMusic().load('assets/audio/track_playful.mp3');
     });
   }
 

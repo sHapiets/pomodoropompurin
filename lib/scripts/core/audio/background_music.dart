@@ -18,13 +18,6 @@ class BackgroundMusic {
     await _player.setLoopMode(LoopMode.one);
     await _player.setVolume(1.0);
 
-    _player.processingStateStream.listen((state) {
-      if (state == ProcessingState.completed) {
-        _player.seek(Duration.zero);
-        _player.play();
-      }
-    });
-
     _isInitialized = true;
   }
 
@@ -54,6 +47,17 @@ class BackgroundMusic {
 
   Future<void> setVolume(double volume) async {
     await _player.setVolume(volume);
+  }
+
+  Future<void> load(String assetPath) async {
+    await init();
+
+    if (_currentAsset == assetPath) return;
+
+    await _player.setAsset(assetPath);
+    _currentAsset = assetPath;
+
+    // IMPORTANT: do NOT pause or play
   }
 
   Future<void> dispose() async {
