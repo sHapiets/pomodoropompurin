@@ -34,12 +34,16 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
 
   late double position;
   final double inputPosition = 0;
-  final double playPostion = 160;
+  double get playPositionDynamic {
+    final screenHeight = MediaQuery.of(context).size.height;
+    return (screenHeight - panelHeight) / 2;
+  }
+
   final double pausePosition = -120;
 
   double get backgroundPostion {
-    switch (position) {
-      case 160:
+    switch (pomTimerDisplayStateManager.pomTimerState.value) {
+      case PomTimerStates.play:
         return 35;
       default:
         return 0;
@@ -74,7 +78,7 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
           case PomTimerStates.play:
             pomTimerWidget = PomTimerActiveWidget();
             scale = playScale;
-            position = playPostion;
+            position = playPositionDynamic;
           case PomTimerStates.onBreak:
             pomTimerWidget = PomTimerBreakWidget();
             scale = pausedScale;
@@ -132,8 +136,6 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
                         height: panelHeight.toDouble(),
                         child: Image.asset(
                           assetManager.flutterAssetPaths['pT_BG']!,
-                          cacheHeight: 538,
-                          cacheWidth: 500,
                         ),
                       ),
                     ),
@@ -148,8 +150,6 @@ class _PomTimerMainWidgetState extends State<PomTimerMainWidget>
                         height: panelHeight.toDouble(),
                         child: Image.asset(
                           assetManager.flutterAssetPaths['pT_FG']!,
-                          cacheHeight: 538,
-                          cacheWidth: 500,
                         ),
                       ),
                     ),

@@ -18,6 +18,13 @@ class BackgroundMusic {
     await _player.setLoopMode(LoopMode.one);
     await _player.setVolume(1.0);
 
+    _player.processingStateStream.listen((state) {
+      if (state == ProcessingState.completed) {
+        _player.seek(Duration.zero);
+        _player.play();
+      }
+    });
+
     _isInitialized = true;
   }
 
