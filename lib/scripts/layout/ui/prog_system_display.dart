@@ -379,11 +379,11 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(178, 184, 208, 87),
+                      color: const Color.fromARGB(188, 169, 197, 58),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromARGB(160, 56, 174, 89),
+                          color: const Color.fromARGB(104, 69, 153, 93),
                           offset: Offset(3, 3),
                         ),
                       ],
