@@ -43,7 +43,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
           duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           top: 30,
-          left: (value) ? -200 : 0,
+          left: (value) ? -200 : 5,
           child: child!,
         );
       },
@@ -161,6 +161,8 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                           );
                         },
                       ),
+
+                      /// LEVEL TEXT
                       Align(
                         alignment: Alignment.center,
                         child: Padding(
@@ -186,7 +188,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       /// OSHIRILEVEL TEXT
                       Center(
                         child: Padding(
-                          padding: EdgeInsetsGeometry.only(top: 15),
+                          padding: EdgeInsetsGeometry.only(top: 20),
                           child: ListenableBuilder(
                             listenable: progSystem.oshiriLevel,
                             builder: (context, child) {
@@ -243,7 +245,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 5),
+                    padding: const EdgeInsets.only(right: 10),
                     child: GestureDetector(
                       onTap: () => progSystem.addOshiriPoints(100),
                       child: Tooltip(
@@ -286,11 +288,11 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(159, 204, 117, 70),
+                      color: const Color.fromARGB(191, 204, 117, 70),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromARGB(57, 175, 114, 33),
+                          color: const Color.fromARGB(102, 175, 113, 33),
                           offset: Offset(3, 3),
                         ),
                       ],
@@ -331,7 +333,7 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 5),
+                    padding: const EdgeInsets.only(right: 10),
                     child: Tooltip(
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(133, 99, 99, 99),
@@ -377,11 +379,11 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(147, 179, 205, 84),
+                      color: const Color.fromARGB(178, 184, 208, 87),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromARGB(57, 175, 114, 33),
+                          color: const Color.fromARGB(160, 56, 174, 89),
                           offset: Offset(3, 3),
                         ),
                       ],

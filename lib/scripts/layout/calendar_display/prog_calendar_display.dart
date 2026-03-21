@@ -44,7 +44,7 @@ class _ProgCalendarDisplayState extends State<ProgCalendarDisplay> {
                     width: 290,
                     height: 290,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(183, 192, 255, 167),
+                      color: const Color.fromARGB(183, 182, 243, 158),
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(

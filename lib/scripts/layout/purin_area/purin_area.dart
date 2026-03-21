@@ -10,6 +10,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/cursor_sprite.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/dotted_background.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/effects/heart_particles.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_home.dart';
 
@@ -31,7 +32,7 @@ class PurinArea extends FlameGame
   /// Assets paths (from assets/images/->...)
   ///
   @override
-  Color backgroundColor() => const Color.fromARGB(255, 190, 179, 149);
+  Color backgroundColor() => const Color.fromARGB(255, 189, 174, 133);
   /* const Color.fromARGB(255, 163, 210, 200) */
   /* const Color.fromARGB(255, 190, 179, 149) */
   SpriteComponent cursorSprite = CursorMovingSprite(
@@ -48,7 +49,7 @@ class PurinArea extends FlameGame
         jumpCenterPositionAndScaled;
 
     newPosition = camera.viewfinder.position.clone();
-    newScale = Vector2.all(1);
+    newScale = Vector2.all(0.4);
     world.add(purinAreaHome);
   }
 

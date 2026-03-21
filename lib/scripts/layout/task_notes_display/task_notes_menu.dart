@@ -77,7 +77,7 @@ class _TaskNotesMenuState extends State<TaskNotesMenu> {
                 width: 310,
                 height: 250,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 160, 66, 29),
+                  color: const Color.fromARGB(255, 196, 120, 49),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
