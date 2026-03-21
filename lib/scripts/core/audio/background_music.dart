@@ -42,7 +42,7 @@ class BackgroundMusic {
 
   Future<void> stop() async {
     await _player.stop();
-    _currentAsset = null; // reset so next play reloads
+    _currentAsset = null;
   }
 
   Future<void> setVolume(double volume) async {
@@ -56,8 +56,6 @@ class BackgroundMusic {
 
     await _player.setAsset(assetPath);
     _currentAsset = assetPath;
-
-    // IMPORTANT: do NOT pause or play
   }
 
   Future<void> dispose() async {

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui_web';
 
+import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
@@ -38,9 +39,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   late final Widget preloadedMainPage;
 
-  final minimumDuration = const Duration(seconds: 1);
-  final startTime = DateTime.now();
-
   double _progress = 0;
   String _currentStep = "Starting...";
   int _totalSteps = 0;
@@ -51,6 +49,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late Timer? koupenSwitchTimer;
   AnimationController? koupenPositionController;
   Animation<Offset>? koupenPositionAnimation;
+
+  final int maxDots = 3;
+  final ValueNotifier dotCounter = ValueNotifier(0);
+  late final Timer dotCounterTimer;
 
   @override
   void initState() {
@@ -96,7 +98,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         );
       }),
 
-      MapEntry('Saving Date Logs...', () async {
+      MapEntry('Colletcing Date Logs...', () async {
         _progSystem.dateLogList = await _databaseManager.calendarLoad();
       }),
 
@@ -192,6 +194,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
       MapEntry('Initializing...', () async {
         await PurinArea.gameSingleton.onLoad();
+        await Future.delayed(Duration(seconds: 3));
       }),
     ];
 
@@ -223,22 +226,24 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     await loadKoupenAnimation();
 
+    dotCounterTimer = Timer.periodic(Duration(milliseconds: 400), (timer) {
+      if (dotCounter.value == 3) {
+        dotCounter.value = 0;
+        return;
+      }
+      dotCounter.value = dotCounter.value + 1;
+    });
+
     for (final step in loadSteps) {
       await _runStep(step.key, step.value);
     }
 
-    final elapsed = DateTime.now().difference(startTime);
-
-    if (elapsed < minimumDuration) {
-      await Future.delayed(minimumDuration - elapsed);
-    }
-
     if (!mounted) return;
 
-    /* Navigator.pushReplacement(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (_) => preloadedMainPage),
-    ); */
+    );
   }
 
   Future<void> loadKoupenAnimation() async {
@@ -267,9 +272,22 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    dotCounterTimer.cancel();
     koupenPositionController?.dispose();
     koupenSwitchTimer?.cancel();
     super.dispose();
+  }
+
+  Widget loadingDot(int count, int disappearLimit) {
+    final double size = 20;
+    if (count < disappearLimit) {
+      return SizedBox.square(dimension: size);
+    }
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+    );
   }
 
   @override
@@ -304,8 +322,29 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 200),
+                const SizedBox(height: 50),
+                ValueListenableBuilder(
+                  valueListenable: dotCounter,
+                  builder: (context, value, child) {
+                    return loadingDot(value, 1);
+                  },
+                ),
+                const SizedBox(height: 50),
+                ValueListenableBuilder(
+                  valueListenable: dotCounter,
+                  builder: (context, value, child) {
+                    return loadingDot(value, 2);
+                  },
+                ),
+                const SizedBox(height: 50),
+                ValueListenableBuilder(
+                  valueListenable: dotCounter,
+                  builder: (context, value, child) {
+                    return loadingDot(value, 3);
+                  },
+                ),
 
+                const SizedBox(height: 50),
                 Text(
                   _currentStep,
                   textAlign: TextAlign.center,
@@ -327,10 +366,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                       return LinearProgressIndicator(
                         value: value,
                         minHeight: 10,
-                        backgroundColor: Colors.white.withOpacity(0.08),
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          Colors.white,
+                        backgroundColor: const Color.fromARGB(
+                          89,
+                          255,
+                          255,
+                          255,
                         ),
+                        color: Colors.white,
                       );
                     },
                   ),
