@@ -26,7 +26,7 @@ class AssetManager {
   /// in directories of certain images, a map is created as a reliable way
   /// to lay a permanent set key per asset, such that the associated value (path) of
   /// the key is mutable.
-  Map<String, String> flutterAssetPaths = {
+  final Map<String, String> flutterAssetPaths = {
     'pT_FG': 'assets/images/pomTimer/pomTimer_foreground.png',
     'pT_BG': 'assets/images/pomTimer/pomTimer_background.png',
     'pT_WP': 'assets/images/pomTimer/pomTimer_work_pointer.png',
@@ -82,6 +82,20 @@ class AssetManager {
 
   Future<void> preloadImages(BuildContext context) async {
     List<String> assetPaths = flutterAssetPaths.values.toList();
+    await Future.wait(
+      assetPaths.map((assetPath) {
+        return preloadImage(assetPath, context);
+      }),
+    );
+  }
+
+  final Map<String, String> splashAssetPaths = {
+    'koupen_loading_1': 'assets/images/splash/koupen_loading_1.png',
+    'koupen_loading_2': 'assets/images/splash/koupen_loading_2.png',
+  };
+
+  Future<void> preloadSplashImages(BuildContext context) async {
+    List<String> assetPaths = splashAssetPaths.values.toList();
     await Future.wait(
       assetPaths.map((assetPath) {
         return preloadImage(assetPath, context);

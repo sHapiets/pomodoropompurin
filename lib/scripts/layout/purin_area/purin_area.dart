@@ -49,7 +49,7 @@ class PurinArea extends FlameGame
 
     newPosition = camera.viewfinder.position.clone();
     newScale = Vector2.all(1);
-    await world.add(purinAreaHome);
+    world.add(purinAreaHome);
   }
 
   void jumpToPosition(Vector2 position, Vector2 offset, double scale) {

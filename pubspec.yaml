@@ -31,6 +31,7 @@ flutter:
     - assets/images/
     - assets/images/pomTimer/
     - assets/images/cursors/
+    - assets/images/splash/
     - assets/images/kotatsu_sprites/
     - assets/images/floor_sprites/
     - assets/images/interior_wall_sprites/

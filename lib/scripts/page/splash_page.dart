@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:ui_web';
+
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
@@ -10,7 +13,6 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
-import 'package:pomodoropompurin/scripts/layout/account_manager/login_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -23,7 +25,7 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   final _assetManager = AssetManager.singleton;
   final _accountManager = AccountManager.singleton;
   final _databaseManager = DatabaseManager.singleton;
@@ -35,7 +37,6 @@ class _SplashPageState extends State<SplashPage> {
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
 
   late final Widget preloadedMainPage;
-  Widget loginWidget = SizedBox.shrink();
 
   final minimumDuration = const Duration(seconds: 1);
   final startTime = DateTime.now();
@@ -44,22 +45,160 @@ class _SplashPageState extends State<SplashPage> {
   String _currentStep = "Starting...";
   int _totalSteps = 0;
   int _completedSteps = 0;
+  late final List<MapEntry<String, Future<void> Function()>> loadSteps;
+
+  Widget koupenAnimation = const SizedBox.shrink();
+  late Timer? koupenSwitchTimer;
+  AnimationController? koupenPositionController;
+  Animation<Offset>? koupenPositionAnimation;
 
   @override
   void initState() {
     super.initState();
+
     preloadedMainPage = const MainPage();
+
+    koupenPositionController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 350),
+    )..repeat(reverse: true);
+
+    koupenPositionAnimation =
+        Tween<Offset>(begin: Offset(0, 0), end: Offset(0, -0.7)).animate(
+          CurvedAnimation(
+            parent: koupenPositionController!,
+            curve: Curves.easeInOut,
+          ),
+        );
+
+    loadSteps = [
+      MapEntry('Restoring User Progress...', () async {
+        _progSystem.loadPomPoints(
+          await _databaseManager.userDataLoad('pomPoints'),
+        );
+        _progSystem.loadOshiriPoints(
+          await _databaseManager.userDataLoad('oshiriPoints'),
+        );
+        _progSystem.loadAccTotalTime(
+          await _databaseManager.userDataLoad('accTotalTime'),
+        );
+        _progSystem.loadAcquiredShoeAchievementBool(
+          await _databaseManager.acquiredShoeAchievementLoad(),
+        );
+      }),
+
+      MapEntry('Loading Inventory...', () async {
+        _progSystem.loadIngridientInventory(
+          await _databaseManager.ingridientInventoryLoad(),
+        );
+        _progSystem.loadConsumableInventory(
+          await _databaseManager.consumableInventoryLoad(),
+        );
+      }),
+
+      MapEntry('Saving Date Logs...', () async {
+        _progSystem.dateLogList = await _databaseManager.calendarLoad();
+      }),
+
+      MapEntry('Restoring Today Progress...', () async {
+        final monthDateLog = _progSystem.dateLogfromMonth(
+          DateTime.now().year,
+          DateTime.now().month,
+        );
+
+        if (monthDateLog == []) {
+          _progSystem.addDayTimeSeconds(0);
+          return;
+        }
+
+        bool dayDateLogExists = false;
+
+        final DateLog dayDateLog = monthDateLog.firstWhere(
+          (iterDateLog) {
+            dayDateLogExists = true;
+            return iterDateLog.dateLogDate.day == DateTime.now().day;
+          },
+          orElse: () {
+            return DateLog(dateLogDate: DateTime.now(), timeSeconds: 0);
+          },
+        );
+
+        if (!dayDateLogExists) {
+          _progSystem.addDayTimeSeconds(0);
+        }
+
+        _progSystem.dayTimeSeconds.value = dayDateLog.timeSeconds;
+      }),
+
+      MapEntry('Loading Configurations...', () async {
+        _pomTimer.timeSetWorkSeconds = await _databaseManager
+            .userConfigTimerLoad('timeSetWorkSeconds');
+        _pomTimer.timeSetBreakSeconds = await _databaseManager
+            .userConfigTimerLoad('timeSetBreakSeconds');
+        _pomTimer.loopsSet = await _databaseManager.userConfigTimerLoad(
+          'loopsSet',
+        );
+
+        final statusPomTimer = await _databaseManager.statusPomTimerLoad();
+
+        if (statusPomTimer['wasActive'] == true) {
+          pomTimerInterruptedManager.wasActive = true;
+          pomTimerInterruptedManager.wasTimeTotalSeconds =
+              statusPomTimer["wasTimeTotalSeconds"];
+        }
+
+        await TutorialManager.singleton.initialize();
+      }),
+
+      MapEntry("Setting up Purin's Home...", () async {
+        final selectableConfigString = await _databaseManager
+            .configSelectablesLoad();
+
+        final kotatsuDesign = KotatsuDesigns.values.byName(
+          selectableConfigString['kotatsuDesign'],
+        );
+
+        final feedable = Consumable.values.byName(
+          selectableConfigString['feedable'],
+        );
+
+        final bitesLeft = selectableConfigString['feedableBitesLeft'];
+
+        purinAreaEquipManager.changeKotatsu(
+          acquirables.kotatsus[kotatsuDesign]!,
+        );
+
+        purinAreaEquipManager.addFeedable(feedable, bitesLeft);
+
+        final PurinVars purinVars = PurinVars.values.byName(
+          await _databaseManager.configPurinVarLoad(),
+        );
+
+        purin.equip(purinVars);
+      }),
+
+      MapEntry('Caching Widget Images...', () async {
+        await _assetManager.preloadImages(context);
+      }),
+
+      MapEntry('Downloading Flame Assets...', () async {
+        await _assetManager.preloadFlameImages();
+      }),
+
+      MapEntry('Preparing Fonts and Audio...', () async {
+        await _assetManager.loadFonts();
+        await BackgroundMusic().load('assets/audio/track_playful.mp3');
+      }),
+
+      MapEntry('Initializing...', () async {
+        await PurinArea.gameSingleton.onLoad();
+      }),
+    ];
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _preloadAll();
     });
   }
-
-  /* 
-  Future<void> initialize() async {
-    _accountManager.loggedIn.addListener(_preloadAll);
-    _accountManager.loggedIn.value = true;
-    _accountManager.autoLogin();
-  } */
 
   Future<void> _runStep(String label, Future<void> Function() task) async {
     if (!mounted) return;
@@ -71,6 +210,7 @@ class _SplashPageState extends State<SplashPage> {
     await task();
 
     _completedSteps++;
+
     if (!mounted) return;
 
     setState(() {
@@ -79,168 +219,57 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _preloadAll() async {
-    _calculateTotalSteps();
+    _totalSteps = loadSteps.length;
 
-    await _preloadData();
-    await _preloadAssets();
-    await _preloadPurinArea();
+    await loadKoupenAnimation();
+
+    for (final step in loadSteps) {
+      await _runStep(step.key, step.value);
+    }
 
     final elapsed = DateTime.now().difference(startTime);
+
     if (elapsed < minimumDuration) {
       await Future.delayed(minimumDuration - elapsed);
     }
 
     if (!mounted) return;
 
-    Navigator.pushReplacement(
+    /* Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (_) => preloadedMainPage),
-    );
+    ); */
   }
 
-  void _calculateTotalSteps() {
-    _totalSteps = 13;
-    // 10 data loads
-    // 3 asset/purin loads
+  Future<void> loadKoupenAnimation() async {
+    await _assetManager.preloadSplashImages(context);
+    runKoupenAnimation();
   }
 
-  Future<void> _preloadData() async {
-    await _runStep("Loading Pom Points...", () async {
-      _progSystem.loadPomPoints(
-        await _databaseManager.userDataLoad('pomPoints'),
-      );
-    });
-
-    await _runStep("Loading Milk Jugs...", () async {
-      _progSystem.loadMilkJugs(await _databaseManager.userDataLoad('milkJugs'));
-    });
-
-    await _runStep("Loading Oshiri Points...", () async {
-      _progSystem.loadOshiriPoints(
-        await _databaseManager.userDataLoad('oshiriPoints'),
-      );
-      _progSystem.loadAccTotalTime(
-        await _databaseManager.userDataLoad('accTotalTime'),
-      );
-    });
-
-    await _runStep("Loading Ingredients...", () async {
-      _progSystem.loadIngridientInventory(
-        await _databaseManager.ingridientInventoryLoad(),
-      );
-    });
-
-    await _runStep("Loading Consumables...", () async {
-      _progSystem.loadConsumableInventory(
-        await _databaseManager.consumableInventoryLoad(),
-      );
-    });
-
-    await _runStep("Loading Purin Variables...", () async {
-      _progSystem.loadAcquiredShoeAchievementBool(
-        await _databaseManager.acquiredShoeAchievementLoad(),
-      );
-    });
-
-    await _runStep("Loading Calendar...", () async {
-      _progSystem.dateLogList = await _databaseManager.calendarLoad();
-    });
-
-    await _runStep("Restoring Today Progress...", () async {
-      final monthDateLog = _progSystem.dateLogfromMonth(
-        DateTime.now().year,
-        DateTime.now().month,
-      );
-
-      if (monthDateLog == []) {
-        _progSystem.addDayTimeSeconds(0);
-        return;
-      }
-
-      bool dayDateLogExists = false;
-      final DateLog dayDateLog = monthDateLog.firstWhere(
-        (iterDateLog) {
-          dayDateLogExists = true;
-          return iterDateLog.dateLogDate.day == DateTime.now().day;
-        },
-        orElse: () {
-          return DateLog(dateLogDate: DateTime.now(), timeSeconds: 0);
-        },
-      );
-
-      if (dayDateLogExists == false) {
-        _progSystem.addDayTimeSeconds(0);
-      }
-
-      _progSystem.dayTimeSeconds.value = dayDateLog.timeSeconds;
-    });
-
-    await _runStep("Loading PomTimer Settings...", () async {
-      _pomTimer.timeSetWorkSeconds = await _databaseManager.userConfigTimerLoad(
-        'timeSetWorkSeconds',
-      );
-      _pomTimer.timeSetBreakSeconds = await _databaseManager
-          .userConfigTimerLoad('timeSetBreakSeconds');
-      _pomTimer.loopsSet = await _databaseManager.userConfigTimerLoad(
-        'loopsSet',
-      );
-
-      final statusPomTimer = await _databaseManager.statusPomTimerLoad();
-
-      if (statusPomTimer['wasActive'] == true) {
-        pomTimerInterruptedManager.wasActive = true;
-        pomTimerInterruptedManager.wasTimeTotalSeconds =
-            statusPomTimer["wasTimeTotalSeconds"];
-      }
-    });
-
-    await _runStep("Loading Equipped Items...", () async {
-      await _databaseManager.configSelectablesLoad().then((
-        selectableConfigString,
-      ) {
-        final kotatsuDesign = KotatsuDesigns.values.byName(
-          selectableConfigString['kotatsuDesign'],
-        );
-        final feedable = Consumable.values.byName(
-          selectableConfigString['feedable'],
-        );
-        final bitesLeft = selectableConfigString['feedableBitesLeft'];
-
-        purinAreaEquipManager.changeKotatsu(
-          acquirables.kotatsus[kotatsuDesign]!,
-        );
-
-        purinAreaEquipManager.addFeedable(feedable, bitesLeft);
+  void runKoupenAnimation() {
+    final koupenSwitchDuration = Duration(milliseconds: 700);
+    bool koupenSwitcher = true;
+    koupenSwitchTimer = Timer.periodic(koupenSwitchDuration, (timer) {
+      setState(() {
+        if (koupenSwitcher) {
+          koupenAnimation = Image.asset(
+            _assetManager.splashAssetPaths['koupen_loading_1']!,
+          );
+        } else {
+          koupenAnimation = Image.asset(
+            _assetManager.splashAssetPaths['koupen_loading_2']!,
+          );
+        }
+        koupenSwitcher = !koupenSwitcher;
       });
     });
-
-    final PurinVars purinVars = PurinVars.values.byName(
-      await _databaseManager.configPurinVarLoad(),
-    );
-    purin.equip(purinVars);
-
-    await TutorialManager.singleton.initialize();
   }
 
-  Future<void> _preloadAssets() async {
-    await _runStep("Preloading Images...", () async {
-      await _assetManager.preloadImages(context);
-    });
-
-    await _runStep("Preloading Flame Assets...", () async {
-      await _assetManager.preloadFlameImages();
-    });
-
-    await _runStep("Loading Fonts and Audio...", () async {
-      await _assetManager.loadFonts();
-      await BackgroundMusic().load('assets/audio/track_playful.mp3');
-    });
-  }
-
-  Future<void> _preloadPurinArea() async {
-    await _runStep("Initializing Purin Area...", () async {
-      await PurinArea.gameSingleton.onLoad();
-    });
+  @override
+  void dispose() {
+    koupenPositionController?.dispose();
+    koupenSwitchTimer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -252,59 +281,67 @@ class _SplashPageState extends State<SplashPage> {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 36),
-            child: Stack(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Spacer(),
+                SlideTransition(
+                  position:
+                      koupenPositionAnimation ??
+                      AlwaysStoppedAnimation(Offset.zero),
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: SizedBox(height: 100, child: koupenAnimation),
+                  ),
+                ),
 
-                    Text(
-                      _currentStep,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                const SizedBox(height: 24),
+                Text(
+                  'Koupen-chan is fetching your data...',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 200),
 
-                    const SizedBox(height: 24),
+                Text(
+                  _currentStep,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
 
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: LinearProgressIndicator(
-                        value: _progress,
+                const SizedBox(height: 24),
+
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: TweenAnimationBuilder(
+                    tween: Tween<double>(begin: 0, end: _progress),
+                    duration: const Duration(milliseconds: 1200),
+                    curve: Curves.easeOutCirc,
+                    builder: (context, value, child) {
+                      return LinearProgressIndicator(
+                        value: value,
                         minHeight: 10,
                         backgroundColor: Colors.white.withOpacity(0.08),
                         valueColor: const AlwaysStoppedAnimation<Color>(
                           Colors.white,
                         ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 14),
-
-                    Text(
-                      "${(_progress * 100).toInt()}%",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
-                    ),
-
-                    const Spacer(),
-                  ],
+                      );
+                    },
+                  ),
                 ),
-                /* 
-                ValueListenableBuilder(
-                  valueListenable: _accountManager.loggedIn,
-                  builder: (context, value, child) {
-                    if (value == false) {
-                      return const LoginWidget();
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ), */
+
+                const SizedBox(height: 14),
+
+                Text(
+                  "${(_progress * 100).toInt()}%",
+                  style: const TextStyle(fontSize: 14, color: Colors.white70),
+                ),
               ],
             ),
           ),
