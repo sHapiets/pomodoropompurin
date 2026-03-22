@@ -118,6 +118,8 @@ class PurinEntity extends PositionComponent
     updateSprite();
     updatePostion();
 
+    purinSprite.paint.isAntiAlias = true;
+    purinSprite.paint.filterQuality = FilterQuality.medium;
     add(purinAnim);
     add(purinSprite);
     add(loadAnim);

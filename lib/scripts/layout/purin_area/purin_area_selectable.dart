@@ -52,6 +52,8 @@ class PurinAreaSelectable extends PositionComponent
     super.onMount();
     hitbox.paint.color = const Color.fromARGB(124, 68, 137, 255);
     //hitbox.renderShape = true;
+    sprite.paint.isAntiAlias = true;
+    sprite.paint.filterQuality = FilterQuality.medium;
     add(sprite);
     add(hitbox);
     addOnLoadAnim();
