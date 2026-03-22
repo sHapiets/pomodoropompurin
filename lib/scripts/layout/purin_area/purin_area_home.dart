@@ -29,82 +29,41 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   }
 
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
-
-  late Kotatsu kotatsuEntity;
-  late Blanket blanketEntity;
-  late Futon futonEntity;
-  late StudyTable studyTableEntity;
-  late StudyChair studyChairEntity;
-
-  late ShopEntity shopEntity;
-
-  late Kitchen kitchenEntity;
-  late RefrigeratorEntity refrigeratorEntity;
-  late StoveEntity stoveEntity;
-  late SinkEntity sinkEntity;
-  late OvenEntity ovenEntity;
-  late MixerEntity mixerEntity;
-  late ChoppingBoardEntity choppingBoardEntity;
-
-  late PurinEntity purinEntity;
-
-  late Floor floorEntity;
-  late Exterior exteriorEntity;
-  late InteriorWall interiorWallEntity;
-
   late SequenceEffect onLoadAnim;
 
   @override
   Future<void> onMount() async {
     super.onMount();
+    _addNextBatch();
+  }
 
-    onLoadAnim = LoadAnimation();
+  Future<void> _addNextBatch() async {
+    final components = [
+      Floor(),
+      Kotatsu(),
+      Futon(),
+      Blanket(),
+      RefrigeratorEntity(),
+      StudyTable(),
+      StudyChair(),
+      ShopEntity(),
+      Kitchen(),
+      StoveEntity(),
+      SinkEntity(),
+      OvenEntity(),
+      MixerEntity(),
+      ChoppingBoardEntity(),
+      PurinEntity(),
+      InteriorWall(),
+      Exterior(),
+    ];
 
-    kotatsuEntity = Kotatsu();
-    blanketEntity = Blanket();
-    futonEntity = Futon();
-    studyTableEntity = StudyTable();
-    studyChairEntity = StudyChair();
-
-    shopEntity = ShopEntity();
-
-    kitchenEntity = Kitchen();
-    refrigeratorEntity = RefrigeratorEntity();
-    stoveEntity = StoveEntity();
-    sinkEntity = SinkEntity();
-    ovenEntity = OvenEntity();
-    mixerEntity = MixerEntity();
-    choppingBoardEntity = ChoppingBoardEntity();
-
-    purinEntity = PurinEntity();
-
-    floorEntity = Floor();
-    exteriorEntity = Exterior();
-    interiorWallEntity = InteriorWall();
-
-    await add(floorEntity);
-    await add(kotatsuEntity);
-    await add(futonEntity);
-    await add(blanketEntity);
-    await add(refrigeratorEntity);
-    await add(studyTableEntity);
-    await add(studyChairEntity);
-    await add(shopEntity);
-    await add(kitchenEntity);
-    await add(stoveEntity);
-    await add(sinkEntity);
-    await add(ovenEntity);
-    await add(mixerEntity);
-    await add(choppingBoardEntity);
-
-    await add(purinEntity);
-    await add(interiorWallEntity);
-    await add(exteriorEntity);
-
-    await add(onLoadAnim);
+    for (final c in components) {
+      add(c);
+      await Future.delayed(Duration(milliseconds: 2));
+    }
 
     await addFeedable();
-    purinAreaEquipManager.addFeedableEntity = addFeedable;
   }
 
   Future<void> addFeedable() async {
