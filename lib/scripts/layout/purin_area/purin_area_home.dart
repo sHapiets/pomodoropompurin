@@ -1,7 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/blanket.dart';
@@ -34,36 +36,50 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
   @override
   Future<void> onMount() async {
     super.onMount();
-    _addNextBatch();
+    addSequentialEntities();
+    purinAreaEquipManager.addFeedableEntity = addFeedable;
   }
 
-  Future<void> _addNextBatch() async {
-    final components = [
-      Floor(),
-      Kotatsu(),
-      Futon(),
-      Blanket(),
-      RefrigeratorEntity(),
-      StudyTable(),
-      StudyChair(),
-      ShopEntity(),
-      Kitchen(),
-      StoveEntity(),
-      SinkEntity(),
-      OvenEntity(),
-      MixerEntity(),
-      ChoppingBoardEntity(),
-      PurinEntity(),
-      InteriorWall(),
-      Exterior(),
+  Future<void> addSequentialEntities() async {
+    final List<Future<void> Function()> entitiesAdder = [
+      () async => add(Floor()),
+      () async => add(Kotatsu()),
+
+      () async {
+        add(Futon());
+        add(Blanket());
+      },
+
+      () async => add(RefrigeratorEntity()),
+      () async => add(StudyTable()),
+      () async => add(StudyChair()),
+      () async => add(ShopEntity()),
+      () async => add(Kitchen()),
+      () async => add(StoveEntity()),
+      () async => add(SinkEntity()),
+      () async => add(OvenEntity()),
+      () async => add(MixerEntity()),
+      () async => add(ChoppingBoardEntity()),
+
+      () async {
+        add(InteriorWall());
+        add(Exterior());
+      },
+
+      () async {
+        await addFeedable();
+      },
+
+      () async {
+        await Future.delayed(Duration(seconds: 1));
+        add(PurinEntity());
+      },
     ];
 
-    for (final c in components) {
-      add(c);
-      await Future.delayed(Duration(milliseconds: 2));
+    for (final adderFunction in entitiesAdder) {
+      await adderFunction();
+      await Future.delayed(Duration(milliseconds: 30));
     }
-
-    await addFeedable();
   }
 
   Future<void> addFeedable() async {

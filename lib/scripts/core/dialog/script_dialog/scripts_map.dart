@@ -312,12 +312,13 @@ class ScriptsMap {
     11: ScriptDialog(
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['eating_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
@@ -328,33 +329,37 @@ class ScriptsMap {
         {"Purin": "There's been a rumor that cheese is just processed milk."},
         {
           "Purin":
-              "But I've never really thought about where cheese comes from before the milk bit.",
+              "I've never really thought about it, only that pizza wouldn't be as yummy if it weren't for cheese.",
         },
         {
           "Purin":
               "Then I realized that if cheese needs milk, then you would also need cows.",
         },
-        {"Purin": "Aliens don't have cows, don't they?"},
+        {"Purin": "But aliens don't have cows, don't they?"},
         {
           "Purin":
-              "Imagine going through life without having eaten at least a slice of pizza.",
+              "Imagine going through life without having eaten at least a slice of pizza....",
         },
         {
           "Purin":
-              "If I become president one day, and aliens happen to be invading us....",
+              "If I become president one day, and aliens plan to invade us....",
         },
         {
           "Purin":
-              "I would gladly serve them the cheesiest pizza the world has ever seen!",
+              "I would gladly respond..... with a full-serving of the CHEESIEST pizza the world has ever seen!",
         },
         {
           "Purin":
-              "Then, we would celebrate Pizza Day as a remembrance of our peace treaty!",
+              "Then, we would celebrate Pizza Day every year as a memorial of our peace treaty!",
+        },
+        {
+          "Purin":
+              "So that Purin is honored as a hero, and gets a lifetime supply of pizza!",
         },
         {"Purin": "..."},
         {"Purin": "I think... I'm getting ahead of myself."},
         {"Purin": "I mean, it's kinda unlikely after all...."},
-        {"Purin": "..that cheese is made of processed milk."},
+        {"Purin": "...that cheese is made of processed milk."},
       ],
       onFinished: () {
         ScriptManager.singleton.removeLevelUpDialog();

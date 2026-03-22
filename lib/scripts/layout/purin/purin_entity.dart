@@ -79,7 +79,6 @@ class PurinEntity extends PositionComponent
   @override
   void onMount() {
     super.onMount();
-    position = Vector2(130, 160);
 
     purinSheets = {
       PurinVars.boku: SpriteSheet(
