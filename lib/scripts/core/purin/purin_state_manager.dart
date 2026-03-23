@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// A singleton class that manages the state of PurinEntity
 class PurinStateManager {
   PurinStateManager._();
@@ -5,6 +7,10 @@ class PurinStateManager {
 
   PurinAction action = PurinAction.idle;
   PurinPosition position = PurinPosition.kotatsuLeft;
+
+  PurinMood mood = PurinMood.stable;
+  ValueNotifier<int> energy = ValueNotifier(30);
+  ValueNotifier<int> hunger = ValueNotifier(100);
 
   void changeAction(PurinAction action) {
     this.action = action;
@@ -18,3 +24,5 @@ class PurinStateManager {
 enum PurinAction { idle, pet, feed }
 
 enum PurinPosition { kotatsuLeft, kotatsuRight, futon, study }
+
+enum PurinMood { down, stable }

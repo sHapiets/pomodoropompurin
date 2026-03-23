@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
+import 'package:pomodoropompurin/scripts/layout/ui/energy_ui.dart';
+import 'package:pomodoropompurin/scripts/layout/ui/hunger_ui.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -409,6 +412,19 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                       },
                     ),
                   ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            Transform.translate(
+              offset: Offset(-4, 0),
+              child: Column(
+                children: [
+                  SizedBox(child: HungerUI()),
+                  const SizedBox(width: 10, height: 10),
+                  EnergyUI(),
                 ],
               ),
             ),

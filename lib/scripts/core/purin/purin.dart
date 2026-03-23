@@ -45,7 +45,10 @@ import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 /// Widget (Input) -> Purin -> Managers -> Display (Output)
 ///
 class Purin extends ChangeNotifier {
-  Purin._();
+  Purin._() {
+    initializeHungerTimer();
+    initializeEnergyDepletion();
+  }
   static final singleton = Purin._();
 
   final stateManager = PurinStateManager.singleton;
@@ -147,9 +150,9 @@ class Purin extends ChangeNotifier {
     },
   );
   void pet() {
-    final bool addOshiri = random.nextBoolean(odds: 0.1);
-    int reward = addOshiri ? 1 : 0;
-    progSystem.addOshiriPoints(reward);
+    final bool addEnergy = random.nextBoolean(odds: 0.1);
+    int energy = addEnergy ? 1 : 0;
+    stateManager.energy.value += energy;
 
     stateManager.action = PurinAction.pet;
     purinAreaStateManager.jumpToPosition(
@@ -217,6 +220,30 @@ class Purin extends ChangeNotifier {
       PurinStateManager.singleton.action = PurinAction.idle;
       notifyListeners();
       timer.cancel();
+    });
+    notifyListeners();
+  }
+
+  /// HUNGER LOGIC
+  ///
+  ///
+  ///
+  Duration hungerTimerDelta = const Duration(minutes: 2);
+  late async_lib.Timer? hungerTimer;
+  void initializeHungerTimer() {
+    hungerTimer = async_lib.Timer.periodic(hungerTimerDelta, (timer) {
+      stateManager.hunger.value -= 1;
+    });
+  }
+
+  /// ENERGY LOGIC
+  ///
+  ///
+  Duration energyDepletionDelta = const Duration(minutes: 2);
+  late async_lib.Timer? energyDepletion;
+  void initializeEnergyDepletion() {
+    energyDepletion = async_lib.Timer.periodic(energyDepletionDelta, (timer) {
+      stateManager.energy.value -= 1;
     });
     notifyListeners();
   }
