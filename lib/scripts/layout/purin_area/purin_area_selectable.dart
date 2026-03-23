@@ -86,7 +86,7 @@ class PurinAreaSelectable extends PositionComponent
         Vector2.all(1),
         EffectController(duration: 0.15, curve: Curves.easeOut),
       ),
-    ]);
+    ])..removeOnFinish = true;
     add(onLoadAnim);
   }
 
