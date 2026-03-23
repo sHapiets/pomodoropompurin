@@ -43,7 +43,7 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
       builder: (context, value, child) {
         return AnimatedPositioned(
           duration: Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
+          curve: Curves.easeInOutBack,
           bottom: value ? -400 : 0,
           left: 0,
           right: 0,

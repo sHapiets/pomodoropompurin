@@ -64,7 +64,7 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
       builder: (context, value, child) {
         return AnimatedPositioned(
           duration: Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
+          curve: Curves.easeInOutBack,
           left: 0,
           right: 0,
           top: value ? -200 : 0,

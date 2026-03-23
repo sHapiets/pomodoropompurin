@@ -59,7 +59,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
       builder: (context, value, child) {
         return AnimatedPositioned(
           duration: Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
+          curve: Curves.easeInOutBack,
           top: 40,
           right: (value) ? -200 : 40,
           child: child!,
