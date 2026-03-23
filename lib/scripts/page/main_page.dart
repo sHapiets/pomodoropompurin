@@ -27,6 +27,8 @@ import 'package:pomodoropompurin/scripts/layout/script_dialog/pet_script_widget.
 import 'package:pomodoropompurin/scripts/layout/script_dialog/purin_menu_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/tutorial_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
+import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/purin_metrics_main_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/purin_metrics_ui.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/prog_system_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
@@ -135,6 +137,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ProgSystemDisplay(),
           CurrentDatetimeDisplay(),
           MenuDial(),
+          PurinMetricsMainWidget(),
+          PurinMetricsUI(),
           UIBlock(),
           PomTimerDisplay(),
           LevelUpScriptWidget(),

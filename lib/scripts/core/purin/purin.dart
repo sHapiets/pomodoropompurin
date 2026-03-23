@@ -10,6 +10,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
@@ -47,7 +48,7 @@ import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 class Purin extends ChangeNotifier {
   Purin._() {
     initializeHungerTimer();
-    initializeEnergyDepletion();
+    initializeEnergyDepletionLoop();
   }
   static final singleton = Purin._();
 
@@ -150,9 +151,9 @@ class Purin extends ChangeNotifier {
     },
   );
   void pet() {
-    final bool addEnergy = random.nextBoolean(odds: 0.1);
-    int energy = addEnergy ? 1 : 0;
-    stateManager.energy.value += energy;
+    final bool energyFromPet = random.nextBoolean(odds: 0.05);
+    int energy = energyFromPet ? 1 : 0;
+    addEnergyPoints(energy: energy);
 
     stateManager.action = PurinAction.pet;
     purinAreaStateManager.jumpToPosition(
@@ -176,7 +177,7 @@ class Purin extends ChangeNotifier {
       petDeltaX = delta.x;
       pet();
     }
-    if ((delta.y > 0 && petDeltaY <= 0) || delta.y < 0 && petDeltaY >= 0) {
+    if ((delta.y > 0 && petDeltaY <= 0) || (delta.y < 0 && petDeltaY >= 0)) {
       petDeltaY = delta.y;
       pet();
     }
@@ -198,9 +199,13 @@ class Purin extends ChangeNotifier {
       timer.cancel();
     },
   );
-  void feed() {
+  void feedFeedable() {
     final reward = purinAreaEquipManager.feedable.value.oshiriPointsPerBite;
     progSystem.addOshiriPoints(reward);
+
+    final hungerPoints =
+        purinAreaEquipManager.feedable.value.hungerPointsPerBite;
+    addHungerPoints(hunger: hungerPoints);
 
     stateManager.changeAction(PurinAction.feed);
     stateManager.changePostion(PurinPosition.kotatsuLeft);
@@ -211,11 +216,13 @@ class Purin extends ChangeNotifier {
     );
     ScriptManager.singleton.removeFeedDialog();
     ScriptManager.singleton.addFeedDialog();
+    PurinMetricsUIState.singleton.showWidget();
     UIDisplayState.singleton.hide.value = true;
     feedCooldown.cancel();
     feedCooldown = async_lib.Timer.periodic(Duration(milliseconds: 2500), (
       timer,
     ) {
+      PurinMetricsUIState.singleton.hideWidget();
       ScriptManager.singleton.removeFeedDialog();
       PurinStateManager.singleton.action = PurinAction.idle;
       notifyListeners();
@@ -232,20 +239,59 @@ class Purin extends ChangeNotifier {
   late async_lib.Timer? hungerTimer;
   void initializeHungerTimer() {
     hungerTimer = async_lib.Timer.periodic(hungerTimerDelta, (timer) {
-      stateManager.hunger.value -= 1;
+      depleteHungerPoints(hunger: 1);
     });
+  }
+
+  void addHungerPoints({int hunger = 1}) {
+    final newHunger = (stateManager.hunger.value + hunger).clamp(0, 100);
+    stateManager.hunger.value = newHunger;
+  }
+
+  void depleteHungerPoints({int hunger = 1}) {
+    final newHunger = (stateManager.hunger.value - hunger).clamp(0, 100);
+    stateManager.hunger.value = newHunger;
   }
 
   /// ENERGY LOGIC
   ///
   ///
-  Duration energyDepletionDelta = const Duration(minutes: 2);
-  late async_lib.Timer? energyDepletion;
-  void initializeEnergyDepletion() {
-    energyDepletion = async_lib.Timer.periodic(energyDepletionDelta, (timer) {
-      stateManager.energy.value -= 1;
-    });
-    notifyListeners();
+  bool _energyLoopActive = false;
+
+  void addEnergyPoints({int energy = 1}) {
+    final newEnergy = (stateManager.energy.value + energy).clamp(0, 100);
+    stateManager.energy.value = newEnergy;
+  }
+
+  void depleteEnergyPoints({int energy = 1}) {
+    final newEnergy = (stateManager.energy.value - energy).clamp(0, 100);
+    stateManager.energy.value = newEnergy;
+  }
+
+  void initializeEnergyDepletionLoop() {
+    if (_energyLoopActive) return;
+    _energyLoopActive = true;
+
+    _energyDepletionLoop();
+  }
+
+  Future<void> _energyDepletionLoop() async {
+    while (_energyLoopActive) {
+      final delay = energyDepletionDeltaFromHunger();
+      await Future.delayed(delay);
+
+      depleteEnergyPoints(energy: 1);
+    }
+  }
+
+  Duration energyDepletionDeltaFromHunger() {
+    final hunger = stateManager.hunger.value.clamp(0, 100);
+    const minSeconds = 75;
+    const maxSeconds = 120;
+    final t = hunger / 100;
+    final seconds = minSeconds + ((maxSeconds - minSeconds) * t);
+
+    return Duration(seconds: seconds.round());
   }
 
   void idle() {

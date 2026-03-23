@@ -9,8 +9,8 @@ class PurinStateManager {
   PurinPosition position = PurinPosition.kotatsuLeft;
 
   PurinMood mood = PurinMood.stable;
-  ValueNotifier<int> energy = ValueNotifier(30);
-  ValueNotifier<int> hunger = ValueNotifier(100);
+  ValueNotifier<int> energy = ValueNotifier(40);
+  ValueNotifier<int> hunger = ValueNotifier(10);
 
   void changeAction(PurinAction action) {
     this.action = action;

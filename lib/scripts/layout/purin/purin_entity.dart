@@ -184,7 +184,7 @@ class PurinEntity extends PositionComponent
   @override
   void onTapDown(TapDownEvent event) {
     if (purinAreaStateManager.state.value == "Feed") {
-      purin.feed();
+      purin.feedFeedable();
       purinAreaStateManager.state.value = "Idle";
     } else {
       purinAreaStateManager.state.value = "Pet";

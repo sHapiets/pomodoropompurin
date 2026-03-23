@@ -147,6 +147,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           pomTimerInterruptedManager.wasActive = true;
           pomTimerInterruptedManager.wasTimeTotalSeconds =
               statusPomTimer["wasTimeTotalSeconds"];
+          pomTimerInterruptedManager.wasMultiplierTotal =
+              statusPomTimer["wasMultiplierTotal"];
         }
 
         await TutorialManager.singleton.initialize();

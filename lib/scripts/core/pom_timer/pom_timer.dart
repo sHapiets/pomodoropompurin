@@ -39,6 +39,7 @@ class PomTimer {
 
   int timeTotalSeconds =
       0; // Total time for rewards (max is loopsSet * timeSetWork)
+  double multiplierTotal = 0;
   int timeLeftSeconds = 0; // A counter for time left
   int loopsLeft = 0;
 
@@ -95,6 +96,12 @@ class PomTimer {
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         timeLeftSeconds--;
 
+        if (!onBreak) {
+          multiplierTotal += PointMultiplier.fromEnergy(
+            purin.stateManager.energy.value,
+          );
+        }
+
         //// LOOPSSET: Break-Work Switching (or end if no more loops)
         if (timeLeftSeconds < 0) {
           if (onBreak == false) {
@@ -138,6 +145,10 @@ class PomTimer {
               'wasTimeTotalSeconds',
               timeTotalSeconds + (timeSetWorkSeconds - timeLeftSeconds),
             );
+            _databaseManager.statusPomTimerSave(
+              'wasMultiplierTotal',
+              multiplierTotal,
+            );
           }
         }
 
@@ -165,9 +176,14 @@ class PomTimer {
       timeTotalSeconds += (timeSetWorkSeconds - timeLeftSeconds);
     }
 
-    int rewardPomPoints = PomPointsConversion.fromSeconds(timeTotalSeconds);
+    double multiplierAverage = multiplierTotal / timeTotalSeconds;
+    int rewardPomPoints = PomPointsConversion.fromSeconds(
+      timeTotalSeconds,
+      multiplierAverage,
+    );
     int rewardOshiriPoints = OshiriPointsConversion.fromSeconds(
       timeTotalSeconds,
+      multiplierAverage,
     );
 
     pomTimerDisplayStateManager.closePomTimer();
@@ -177,6 +193,7 @@ class PomTimer {
     /// and rewards was already awarded...
     _databaseManager.statusPomTimerSave('wasActive', false);
     _databaseManager.statusPomTimerSave('wasTimeTotalSeconds', 0);
+    _databaseManager.statusPomTimerSave('wasMultiplierTotal', 0);
 
     timer.cancel();
 

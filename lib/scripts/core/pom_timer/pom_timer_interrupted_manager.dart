@@ -13,6 +13,7 @@ class PomTimerInterruptedManager {
 
   bool wasActive = false;
   int wasTimeTotalSeconds = 0;
+  double wasMultiplierTotal = 0;
 
   final databaseManager = DatabaseManager.singleton;
   final progSystem = ProgSystem.singleton;
@@ -22,13 +23,19 @@ class PomTimerInterruptedManager {
       return;
     }
 
-    int rewardPomPoints = PomPointsConversion.fromSeconds(wasTimeTotalSeconds);
+    double multiplierAverage = wasMultiplierTotal / wasTimeTotalSeconds;
+    int rewardPomPoints = PomPointsConversion.fromSeconds(
+      wasTimeTotalSeconds,
+      multiplierAverage,
+    );
     int rewardOshiriPoints = OshiriPointsConversion.fromSeconds(
       wasTimeTotalSeconds,
+      multiplierAverage,
     );
 
     databaseManager.statusPomTimerSave('wasActive', false);
     databaseManager.statusPomTimerSave('wasTimeTotalSeconds', 0);
+    databaseManager.statusPomTimerSave('wasMultiplierTotal', 0);
 
     progSystem.addDayTimeSeconds(wasTimeTotalSeconds);
     progSystem.addAccTotalTime(wasTimeTotalSeconds);
@@ -75,5 +82,6 @@ class PomTimerInterruptedManager {
 
     wasActive = false;
     wasTimeTotalSeconds = 0;
+    wasMultiplierTotal = 0;
   }
 }
