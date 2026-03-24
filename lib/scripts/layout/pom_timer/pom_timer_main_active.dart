@@ -176,6 +176,21 @@ class _PomTimerActiveWidgetState extends State<PomTimerActiveWidget>
           bottom: 150,
           child: Column(
             children: [
+              Text(
+                "${_pomTimer.loopsSet - _pomTimer.loopsLeft + 1} / ${_pomTimer.loopsSet}",
+                style: TextStyle(
+                  fontFamily: 'Fredoka',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  shadows: [
+                    Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 40),
+
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 600),
                 transitionBuilder: (child, animation) {
