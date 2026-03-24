@@ -38,7 +38,9 @@ class _TutorialScriptWidgetState extends State<TutorialScriptWidget> {
         dialog = const SizedBox.shrink();
         showBarrier = false;
       } else {
-        uiDisplayState.hide.value = true;
+        if (tutorialScriptDialog.value.hideUIonBegin) {
+          uiDisplayState.hide.value = true;
+        }
         dialog = tutorialScriptDialog.value;
         if (tutorialScriptDialog.value.isStatic) {
           showBarrier = false;

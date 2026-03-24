@@ -9,6 +9,7 @@ class ScriptDialog extends StatefulWidget {
   final bool isStatic;
   final Duration charDelay;
   final Duration transitionDuration;
+  final bool hideUIonBegin;
   final VoidCallback? onFinished;
   final VoidCallback? onBegin;
 
@@ -22,6 +23,7 @@ class ScriptDialog extends StatefulWidget {
     this.transitionDuration = const Duration(milliseconds: 300),
     this.onBegin,
     this.onFinished,
+    this.hideUIonBegin = true,
   }) : super(key: key);
 
   @override
