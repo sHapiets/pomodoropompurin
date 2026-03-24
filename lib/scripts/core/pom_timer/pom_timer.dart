@@ -64,15 +64,8 @@ class PomTimer {
       );
 
       if (restart) {
-        // Not a 'resume', set INITIAL INPUT times
-        if (onBreak) {
-          // Set time to initial BREAK time
-          timeLeftSeconds = timeSetBreakSeconds;
-        } else {
-          // Set time to initial WORK time
-          timeLeftSeconds = timeSetWorkSeconds;
-        }
-
+        onBreak = false;
+        timeLeftSeconds = timeSetWorkSeconds;
         loopsLeft = loopsSet;
 
         /// Save latest PomTimerConfig to database
@@ -135,14 +128,11 @@ class PomTimer {
         wasActiveTimeSaverStep += 1;
         if (wasActiveTimeSaverStep >= saverStepsCount) {
           wasActiveTimeSaverStep = 0;
-          if (onBreak) {
-          } else {
-            _databaseManager.statusPomTimerSave(
-              wasActive: true,
-              wasTimeTotalSeconds: timeTotalSeconds,
-              wasMultiplierTotal: multiplierTotal,
-            );
-          }
+          _databaseManager.statusPomTimerSave(
+            wasActive: true,
+            wasTimeTotalSeconds: timeTotalSeconds,
+            wasMultiplierTotal: multiplierTotal,
+          );
         }
 
         /// Periodical Updates to update PomTimerDisplay
@@ -165,6 +155,7 @@ class PomTimer {
   void skipBreak() {
     if (onBreak) {
       timeLeftSeconds = -1;
+      onBreak = true;
       playTimer();
     }
   }
@@ -240,6 +231,7 @@ class PomTimer {
     isPlaying = false;
     onBreak = false;
     pomTimerDisplayStateManager.onBreak.value = false;
+    multiplierTotal = 0;
     timeLeftSeconds = 0;
     timeTotalSeconds = 0;
   }
