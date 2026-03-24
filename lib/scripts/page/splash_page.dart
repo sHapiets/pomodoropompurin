@@ -5,6 +5,7 @@ import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/activity/activity_manager.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_interrupted_manager.dart';
@@ -33,6 +34,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   final _pomTimer = PomTimer.singleton;
   final pomTimerInterruptedManager = PomTimerInterruptedManager.singleton;
   final _progSystem = ProgSystem.singleton;
+  final activityManager = ActivityManager.singleton;
   final acquirables = Acquirables.singleton;
   final purin = Purin.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
@@ -98,7 +100,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         );
       }),
 
-      MapEntry('Colletcing Date Logs...', () async {
+      MapEntry('Collecting Date Logs and Activity...', () async {
         _progSystem.dateLogList = await _databaseManager.calendarLoad();
       }),
 
@@ -130,6 +132,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         }
 
         _progSystem.dayTimeSeconds.value = dayDateLog.timeSeconds;
+      }),
+
+      MapEntry('Initializing Activity Manager...', () async {
+        activityManager.initialize(
+          await _databaseManager.latestActivityLoad(),
+          _databaseManager.latestActivitySave,
+        );
       }),
 
       MapEntry('Loading Configurations...', () async {

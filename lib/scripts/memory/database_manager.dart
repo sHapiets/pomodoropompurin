@@ -43,6 +43,21 @@ class DatabaseManager {
     return dataDoc[userData];
   }
 
+  Future<DateTime> latestActivityLoad() async {
+    final dataDoc = await userRef.collection('activity').doc('latest').get();
+    final latestActivityDateMap = dataDoc['log'];
+
+    final DateTime latestActivityDateTime = DateTime(
+      latestActivityDateMap['year'],
+      latestActivityDateMap['month'],
+      latestActivityDateMap['day'],
+      latestActivityDateMap['hour'],
+      latestActivityDateMap['minute'],
+    );
+
+    return latestActivityDateTime;
+  }
+
   Future<Map<ShoeAchievement, bool>> acquiredShoeAchievementLoad() async {
     final Map<ShoeAchievement, bool> shoeAchievementMap = {};
     shoeAchievementMap.addAll({ShoeAchievement.none: true});
@@ -206,9 +221,17 @@ class DatabaseManager {
     });
   }
 
-  Future<void> statusPomTimerSave(String status, dynamic data) async {
+  Future<void> statusPomTimerSave({
+    required bool wasActive,
+    required int wasTimeTotalSeconds,
+    required double wasMultiplierTotal,
+  }) async {
     final statusPomTimerRef = statusRef.doc('pomTimer');
-    await statusPomTimerRef.update({status: data});
+    await statusPomTimerRef.update({
+      'wasActive': wasActive,
+      'wasTimeTotalSeconds': wasTimeTotalSeconds,
+      'wasMultiplierTotal': wasMultiplierTotal,
+    });
   }
 
   Future<void> dayTimeSecondsSave(int timeTotalSeconds) async {
@@ -238,6 +261,20 @@ class DatabaseManager {
     } else {
       await dayRef.update({'timeSeconds': timeTotalSeconds});
     }
+  }
+
+  Future<void> latestActivitySave() async {
+    final now = DateTime.now();
+    final latestActivityDateMap = {
+      'year': now.year,
+      'month': now.month,
+      'day': now.day,
+      'hour': now.hour,
+      'minute': now.minute,
+    };
+    final latestActivityRef = userRef.collection('activity').doc('latest');
+
+    await latestActivityRef.set({'log': latestActivityDateMap});
   }
 
   Future<void> userConfigTimerSave(

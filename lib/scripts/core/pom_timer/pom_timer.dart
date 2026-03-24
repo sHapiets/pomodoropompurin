@@ -80,8 +80,6 @@ class PomTimer {
           loopsSet,
         );
 
-        /// Note that PomTimer is active in case of disconnection
-        _databaseManager.statusPomTimerSave('wasActive', true);
         restart = false;
       } else {
         // if restart is false, just resume...
@@ -136,18 +134,12 @@ class PomTimer {
         if (wasActiveTimeSaverStep >= saverStepsCount) {
           wasActiveTimeSaverStep = 0;
           if (onBreak) {
-            _databaseManager.statusPomTimerSave(
-              'wasTimeTotalSeconds',
-              timeTotalSeconds,
-            );
           } else {
             _databaseManager.statusPomTimerSave(
-              'wasTimeTotalSeconds',
-              timeTotalSeconds + (timeSetWorkSeconds - timeLeftSeconds),
-            );
-            _databaseManager.statusPomTimerSave(
-              'wasMultiplierTotal',
-              multiplierTotal,
+              wasActive: true,
+              wasTimeTotalSeconds:
+                  (timeTotalSeconds + (timeSetWorkSeconds - timeLeftSeconds)),
+              wasMultiplierTotal: multiplierTotal,
             );
           }
         }
@@ -191,9 +183,11 @@ class PomTimer {
 
     /// Tell Koupen that the timer was stopped before connection is severed;
     /// and rewards was already awarded...
-    _databaseManager.statusPomTimerSave('wasActive', false);
-    _databaseManager.statusPomTimerSave('wasTimeTotalSeconds', 0);
-    _databaseManager.statusPomTimerSave('wasMultiplierTotal', 0);
+    _databaseManager.statusPomTimerSave(
+      wasActive: false,
+      wasTimeTotalSeconds: 0,
+      wasMultiplierTotal: 0.0,
+    );
 
     timer.cancel();
 

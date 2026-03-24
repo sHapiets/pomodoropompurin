@@ -33,9 +33,11 @@ class PomTimerInterruptedManager {
       multiplierAverage,
     );
 
-    databaseManager.statusPomTimerSave('wasActive', false);
-    databaseManager.statusPomTimerSave('wasTimeTotalSeconds', 0);
-    databaseManager.statusPomTimerSave('wasMultiplierTotal', 0);
+    databaseManager.statusPomTimerSave(
+      wasActive: false,
+      wasTimeTotalSeconds: 0,
+      wasMultiplierTotal: 0.0,
+    );
 
     progSystem.addDayTimeSeconds(wasTimeTotalSeconds);
     progSystem.addAccTotalTime(wasTimeTotalSeconds);
