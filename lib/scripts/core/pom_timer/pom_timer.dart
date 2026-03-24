@@ -53,7 +53,9 @@ class PomTimer {
       // already playing...
     } else {
       isPlaying = true;
-      pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.play;
+      pomTimerDisplayStateManager.pomTimerState.value = onBreak
+          ? PomTimerStates.onBreak
+          : PomTimerStates.play;
       purin.changePosition(PurinPosition.study);
       purinAreaStateManager.jumpToPosition(
         purin.purinPositionVect2,
@@ -73,7 +75,7 @@ class PomTimer {
 
         loopsLeft = loopsSet;
 
-        /// Save latest PomTimerInput to database
+        /// Save latest PomTimerConfig to database
         _databaseManager.userConfigTimerSave(
           timeSetWorkSeconds,
           timeSetBreakSeconds,
@@ -98,6 +100,7 @@ class PomTimer {
           multiplierTotal += PointMultiplier.fromEnergy(
             purin.stateManager.energy.value,
           );
+          timeTotalSeconds++;
         }
 
         //// LOOPSSET: Break-Work Switching (or end if no more loops)
@@ -107,7 +110,6 @@ class PomTimer {
 
             loopsLeft--;
             timeLeftSeconds = timeSetBreakSeconds;
-            timeTotalSeconds += timeSetWorkSeconds; // add to totalSeconds
             onBreak = true; // switch to break
             pomTimerDisplayStateManager.pomTimerState.value =
                 PomTimerStates.onBreak;
@@ -137,8 +139,7 @@ class PomTimer {
           } else {
             _databaseManager.statusPomTimerSave(
               wasActive: true,
-              wasTimeTotalSeconds:
-                  (timeTotalSeconds + (timeSetWorkSeconds - timeLeftSeconds)),
+              wasTimeTotalSeconds: timeTotalSeconds,
               wasMultiplierTotal: multiplierTotal,
             );
           }
@@ -154,7 +155,17 @@ class PomTimer {
     if (isPlaying) {
       isPlaying = false;
       timer.cancel();
+    }
+
+    if (!onBreak) {
       pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.pause;
+    }
+  }
+
+  void skipBreak() {
+    if (onBreak) {
+      timeLeftSeconds = -1;
+      playTimer();
     }
   }
 
@@ -163,12 +174,9 @@ class PomTimer {
       return;
     }
 
-    if (onBreak) {
-    } else {
-      timeTotalSeconds += (timeSetWorkSeconds - timeLeftSeconds);
-    }
-
-    double multiplierAverage = multiplierTotal / timeTotalSeconds;
+    double multiplierAverage = timeTotalSeconds > 0
+        ? multiplierTotal / timeTotalSeconds
+        : 0;
     int rewardPomPoints = PomPointsConversion.fromSeconds(
       timeTotalSeconds,
       multiplierAverage,

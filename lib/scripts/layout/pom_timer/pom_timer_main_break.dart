@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/stop_pom_timer_dialog.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -107,6 +108,93 @@ class _PomTimerBreakWidgetState extends State<PomTimerBreakWidget>
                       imageUrl: assetManager.flutterAssetPaths['pT_WP'],
                     ), */
                   ],
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 220,
+          child: SizedBox(
+            width: 320,
+            height: 250,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  iconSize: 100,
+                  onPressed: () {
+                    pomTimer.skipBreak();
+                  },
+                  icon: Icon(
+                    Icons.skip_next_rounded,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        color: const Color.fromARGB(130, 146, 105, 11),
+                        offset: Offset(3, 3),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 30, width: 150),
+
+                IconButton(
+                  iconSize: 100,
+                  onPressed: () {
+                    pomTimer.pauseTimer();
+                    showGeneralDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      barrierLabel: "Pomodoro End",
+                      barrierColor: Colors.black54,
+                      transitionDuration: const Duration(milliseconds: 400),
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return StopPomTimerDialog(
+                          onCancel: () {
+                            Navigator.of(context).pop(); // just close dialog
+                          },
+                          onConfirm: () {
+                            Navigator.of(context).pop();
+                            // Add your stop timer logic here
+                          },
+                        );
+                      },
+                      transitionBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                            final curved = CurvedAnimation(
+                              parent: animation,
+                              curve: Curves.easeInOutBack,
+                              reverseCurve: Curves.easeInOutBack,
+                            );
+
+                            return FadeTransition(
+                              opacity: animation,
+                              child: ScaleTransition(
+                                scale: Tween<double>(
+                                  begin: 0.7,
+                                  end: 1,
+                                ).animate(curved),
+                                child: child,
+                              ),
+                            );
+                          },
+                    );
+                  },
+                  icon: Icon(
+                    Icons.stop_rounded,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        color: const Color.fromARGB(130, 146, 105, 11),
+                        offset: Offset(3, 3),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
