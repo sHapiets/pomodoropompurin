@@ -100,7 +100,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         );
       }),
 
-      MapEntry('Collecting Date Logs and Activity...', () async {
+      MapEntry('Collecting Date Logs...', () async {
         _progSystem.dateLogList = await _databaseManager.calendarLoad();
       }),
 
