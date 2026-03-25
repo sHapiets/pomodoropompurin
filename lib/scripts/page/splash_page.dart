@@ -330,7 +330,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                 offset: Offset(0, 20),
                 child: SizedBox(
                   height: 700,
-                  width: 400,
+                  width: 300,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -381,7 +381,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                         _currentStep,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          fontSize: 18,
+                          fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -397,7 +397,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                           builder: (context, value, child) {
                             return LinearProgressIndicator(
                               value: value,
-                              minHeight: 10,
+                              minHeight: 7,
                               backgroundColor: const Color.fromARGB(
                                 89,
                                 255,
