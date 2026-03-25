@@ -168,6 +168,12 @@ class DatabaseManager {
     return purinVarConfigDoc['purinVar'];
   }
 
+  Future<dynamic> configVolumeLoad() async {
+    final audioRef = userRef.collection('config').doc('audio');
+    final audioDoc = await audioRef.get();
+    return audioDoc['volume'];
+  }
+
   Future<dynamic> statusLoadTutorialLoad() async {
     final statusTutorialRef = statusRef.doc('tutorial');
     final statusTutorialDoc = await statusTutorialRef.get();
@@ -308,6 +314,11 @@ class DatabaseManager {
   Future<void> configPurinVarSave(PurinVars purinVar) async {
     final purinVarConfigRef = userRef.collection('config').doc('purin');
     await purinVarConfigRef.set({'purinVar': purinVar.name});
+  }
+
+  Future<void> configVolumeSave(double volume) async {
+    final audioRef = userRef.collection('config').doc('audio');
+    await audioRef.set({'volume': volume});
   }
 
   Future<void> statusLoadTutorialSave(bool loadTutorial) async {

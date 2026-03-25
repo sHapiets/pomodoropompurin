@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
+import 'package:pomodoropompurin/scripts/layout/audio/volume_control_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/calendar_display/prog_calendar_display.dart';
 import 'package:pomodoropompurin/scripts/layout/task_notes_display/task_notes_menu.dart';
 
@@ -78,7 +79,7 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.easeInOutCubic,
                 width: value ? 60 : 0,
-                height: value ? 200 : 0,
+                height: value ? 270 : 0,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(183, 118, 116, 110),
                   borderRadius: BorderRadius.circular(40),
@@ -194,6 +195,53 @@ class _MenuDialState extends State<MenuDial> with TickerProviderStateMixin {
                   },
                   icon: const Icon(
                     Icons.calendar_today_rounded,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shadows: [
+                      Shadow(
+                        color: Color.fromARGB(57, 59, 59, 59),
+                        offset: Offset(3, 3),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              /// CALENDAR BUTTON
+              ValueListenableBuilder(
+                valueListenable: toggle,
+                builder: (context, value, child) {
+                  return AnimatedScale(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOutCirc,
+                    scale: value ? 1 : 0,
+                    child: child,
+                  );
+                },
+                child: IconButton(
+                  iconSize: 30,
+                  onPressed: () {
+                    showGeneralDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      barrierColor: Colors.black26,
+                      barrierLabel: '',
+                      transitionDuration: const Duration(milliseconds: 300),
+                      transitionBuilder: (context, animation, _, child) {
+                        return ScaleTransition(
+                          scale: CurvedAnimation(
+                            parent: animation,
+                            curve: Curves.easeOutBack,
+                          ),
+                          child: child,
+                        );
+                      },
+                      pageBuilder: (_, __, ___) => VolumeControlWidget(),
+                    );
+                    toggleMenu();
+                  },
+                  icon: const Icon(
+                    Icons.volume_up_rounded,
                     color: Color.fromARGB(255, 255, 255, 255),
                     shadows: [
                       Shadow(

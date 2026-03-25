@@ -37,6 +37,7 @@ import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
+import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/tutorial_page_blocker.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
@@ -72,10 +73,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     WakelockPlus.enable();
   }
 
-  void playBackgroundMusic() {
+  Future<void> playBackgroundMusic() async {
     if (tutorialState.loadTutorial == true || widget.enableAudio == false) {
       return;
     }
+    final savedVolume = await DatabaseManager.singleton.configVolumeLoad();
+    await BackgroundMusic().setVolume(savedVolume);
     BackgroundMusic().play('assets/audio/track_playful.mp3');
   }
 

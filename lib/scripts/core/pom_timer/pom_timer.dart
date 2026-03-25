@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
+import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
@@ -48,6 +49,8 @@ class PomTimer {
   bool isPlaying = false;
   bool onBreak = false;
 
+  double initVolume = 1.0;
+
   void playTimer() {
     if (isPlaying) {
       // already playing...
@@ -62,6 +65,9 @@ class PomTimer {
         Vector2(0, 50),
         2.0,
       );
+
+      initVolume = BackgroundMusic().volume;
+      BackgroundMusic().fadeTo(targetVolume: 0.12, duration: 2.0);
 
       if (restart) {
         onBreak = false;
@@ -146,6 +152,7 @@ class PomTimer {
   void pauseTimer() {
     if (isPlaying) {
       isPlaying = false;
+      BackgroundMusic().fadeIn(targetVolume: initVolume, duration: 2.0);
       timer.cancel();
     }
 
@@ -190,6 +197,7 @@ class PomTimer {
       wasMultiplierTotal: 0.0,
     );
 
+    BackgroundMusic().fadeIn(targetVolume: initVolume, duration: 2.0);
     timer.cancel();
 
     // Update outside
