@@ -14,6 +14,7 @@ import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
+import 'package:pomodoropompurin/scripts/foundation/snack.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// "Conqueror of Nations, Destructor of Worlds"
@@ -235,8 +236,8 @@ class Purin extends ChangeNotifier {
     notifyListeners();
   }
 
-  void feedSnack(Consumable snack) {
-    final oshiriPoints = snack.biteSpritesFlamePath;
+  void feedSnack(Snack snack) {
+    final oshiriPoints = snack.oshiriPoints;
   }
 
   /// HUNGER LOGIC
@@ -254,11 +255,18 @@ class Purin extends ChangeNotifier {
   void addHungerPoints({int hunger = 1}) {
     final newHunger = (stateManager.hunger.value + hunger).clamp(0, 100);
     stateManager.hunger.value = newHunger;
+    databaseManager.statusHungerSave(newHunger);
   }
 
   void depleteHungerPoints({int hunger = 1}) {
     final newHunger = (stateManager.hunger.value - hunger).clamp(0, 100);
     stateManager.hunger.value = newHunger;
+    databaseManager.statusHungerSave(newHunger);
+  }
+
+  void setHungerPoints(int hunger) {
+    stateManager.hunger.value = hunger;
+    databaseManager.statusHungerSave(hunger);
   }
 
   /// ENERGY LOGIC
@@ -269,11 +277,18 @@ class Purin extends ChangeNotifier {
   void addEnergyPoints({int energy = 1}) {
     final newEnergy = (stateManager.energy.value + energy).clamp(0, 100);
     stateManager.energy.value = newEnergy;
+    databaseManager.statusEnergySave(newEnergy);
   }
 
   void depleteEnergyPoints({int energy = 1}) {
     final newEnergy = (stateManager.energy.value - energy).clamp(0, 100);
     stateManager.energy.value = newEnergy;
+    databaseManager.statusEnergySave(newEnergy);
+  }
+
+  void setEnergyPoints(int energy) {
+    stateManager.energy.value = energy;
+    databaseManager.statusEnergySave(energy);
   }
 
   void initializeEnergyDepletionLoop() {

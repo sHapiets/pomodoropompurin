@@ -11,6 +11,7 @@ import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/end_pom_timer_dialog.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 /// Logic class for the Pomodoro Timer and its events
 ///
@@ -52,6 +53,7 @@ class PomTimer {
   double initVolume = 1.0;
 
   void playTimer() {
+    WakelockPlus.enable();
     if (isPlaying) {
       // already playing...
     } else {

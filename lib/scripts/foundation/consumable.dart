@@ -5,6 +5,7 @@ enum Consumable {
     totalBites: 2,
     oshiriPointsPerBite: 350,
     hungerPointsPerBite: 10,
+    energyPointsPerBite: 15,
     iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pudding/1.png',
@@ -17,6 +18,7 @@ enum Consumable {
     totalBites: 4,
     oshiriPointsPerBite: 250,
     hungerPointsPerBite: 10,
+    energyPointsPerBite: 8,
     iconFlutterPath: 'assets/images/consumable_sprites/pizza/4.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pizza/1.png',
@@ -31,6 +33,7 @@ enum Consumable {
     totalBites: 3,
     oshiriPointsPerBite: 200,
     hungerPointsPerBite: 8,
+    energyPointsPerBite: 10,
     iconFlutterPath: 'assets/images/consumable_sprites/pancakes/3.png',
     biteSpritesFlamePath: [
       'consumable_sprites/pancakes/1.png',
@@ -44,6 +47,7 @@ enum Consumable {
     totalBites: 5,
     oshiriPointsPerBite: 160,
     hungerPointsPerBite: 5,
+    energyPointsPerBite: 5,
     iconFlutterPath: 'assets/images/consumable_sprites/hamburg_steak/5.png',
     biteSpritesFlamePath: [
       'consumable_sprites/hamburg_steak/1.png',
@@ -60,6 +64,7 @@ enum Consumable {
     required this.totalBites,
     required this.oshiriPointsPerBite,
     required this.hungerPointsPerBite,
+    required this.energyPointsPerBite,
     required this.iconFlutterPath,
     required this.biteSpritesFlamePath,
   });
@@ -68,6 +73,7 @@ enum Consumable {
   final int totalBites;
   final int oshiriPointsPerBite;
   final int hungerPointsPerBite;
+  final int energyPointsPerBite;
 
   final String iconFlutterPath;
   final List<String> biteSpritesFlamePath;

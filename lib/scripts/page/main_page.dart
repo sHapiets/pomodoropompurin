@@ -156,6 +156,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               "shopMenu": (BuildContext context, PurinArea game) {
                 return PurchaseMenu();
               },
+              "snackShopMenu": (BuildContext context, PurinArea game) {
+                return PurchaseMenu();
+              },
             },
           ),
           ProgSystemDisplay(),

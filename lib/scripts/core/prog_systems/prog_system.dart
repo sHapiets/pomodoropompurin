@@ -6,6 +6,7 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/foundation/snack.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// A core singleton that contains all userData
@@ -51,6 +52,10 @@ class ProgSystem {
   Set<KotatsuDesigns> acquiredKotatsus = {
     KotatsuDesigns.pudding,
     KotatsuDesigns.aqua,
+  };
+
+  Map<Snack, ValueNotifier<int>> snacksInventory = {
+    for (final snack in Snack.values) snack: ValueNotifier(0),
   };
 
   Map<Consumable, ValueNotifier<int>> consumableInventory = {

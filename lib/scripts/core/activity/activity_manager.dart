@@ -8,6 +8,7 @@ class ActivityManager {
   DateTime latestActivityLog = DateTime.now();
 
   Timer? activityLogger;
+  Future<void> Function() databaseLoggerFunction = () async {};
   final Duration activityLoggerInterval = const Duration(minutes: 5);
 
   void initialize(
@@ -15,11 +16,15 @@ class ActivityManager {
     Future<void> Function() databaseLogger,
   ) {
     latestActivityLog = initLatestActivity;
+    databaseLoggerFunction = databaseLogger;
+    logActivity();
     Timer activityLogger = Timer.periodic(activityLoggerInterval, (timer) {
-      final now = DateTime.now();
-      latestActivityLog = now;
-      databaseLogger();
+      logActivity();
     });
+  }
+
+  void logActivity() {
+    databaseLoggerFunction();
   }
 
   Duration getDurationFromLatestActivity() {

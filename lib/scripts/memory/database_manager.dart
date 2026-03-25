@@ -105,6 +105,18 @@ class DatabaseManager {
     return loadedInventory;
   }
 
+  Future<Map<String, dynamic>> statusPurinMetricsLoad() async {
+    final purinStatusRef = statusRef.doc('purin');
+    final purinStatusDoc = await purinStatusRef.get();
+
+    final purinStatus = {
+      'hunger': purinStatusDoc['hunger'],
+      'energy': purinStatusDoc['energy'],
+    };
+
+    return purinStatus;
+  }
+
   Future<dynamic> userConfigTimerLoad(String configTimerData) async {
     final configTimerDoc = await configRef.doc('pomTimer').get();
     return configTimerDoc[configTimerData];
@@ -227,6 +239,16 @@ class DatabaseManager {
     });
   }
 
+  Future<void> statusHungerSave(int hungerPoints) async {
+    final purinStatusRef = statusRef.doc('purin');
+    purinStatusRef.update({'hunger': hungerPoints});
+  }
+
+  Future<void> statusEnergySave(int energyPoints) async {
+    final purinStatusRef = statusRef.doc('purin');
+    purinStatusRef.update({'energy': energyPoints});
+  }
+
   Future<void> statusPomTimerSave({
     required bool wasActive,
     required int wasTimeTotalSeconds,
@@ -280,7 +302,7 @@ class DatabaseManager {
     };
     final latestActivityRef = userRef.collection('activity').doc('latest');
 
-    await latestActivityRef.set({'log': latestActivityDateMap});
+    await latestActivityRef.update({'log': latestActivityDateMap});
   }
 
   Future<void> userConfigTimerSave(
@@ -313,16 +335,16 @@ class DatabaseManager {
 
   Future<void> configPurinVarSave(PurinVars purinVar) async {
     final purinVarConfigRef = userRef.collection('config').doc('purin');
-    await purinVarConfigRef.set({'purinVar': purinVar.name});
+    await purinVarConfigRef.update({'purinVar': purinVar.name});
   }
 
   Future<void> configVolumeSave(double volume) async {
     final audioRef = userRef.collection('config').doc('audio');
-    await audioRef.set({'volume': volume});
+    await audioRef.update({'volume': volume});
   }
 
   Future<void> statusLoadTutorialSave(bool loadTutorial) async {
     final statusTutorialRef = statusRef.doc('tutorial');
-    await statusTutorialRef.set({'loadTutorial': loadTutorial});
+    await statusTutorialRef.update({'loadTutorial': loadTutorial});
   }
 }

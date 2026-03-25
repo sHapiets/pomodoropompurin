@@ -21,6 +21,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_p
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kotatsu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/kitchen_processors/refrigerator_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/shop/shop_entity.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/shop/snack_shop_entity.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/study_chair.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/study_table.dart';
 
@@ -51,6 +52,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
       },
 
       () async => add(RefrigeratorEntity()),
+      () async => add(SnackShopEntity()),
       () async => add(StudyTable()),
       () async => add(StudyChair()),
       () async => add(ShopEntity()),

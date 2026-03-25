@@ -15,6 +15,7 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
+import 'package:pomodoropompurin/scripts/foundation/status_conversion.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -101,7 +102,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         );
       }),
 
-      MapEntry('Loading Inventory...', () async {
+      MapEntry('Loading Inventories...', () async {
         _progSystem.loadIngridientInventory(
           await _databaseManager.ingridientInventoryLoad(),
         );
@@ -149,6 +150,29 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           await _databaseManager.latestActivityLoad(),
           _databaseManager.latestActivitySave,
         );
+      }),
+
+      MapEntry('Calculating Current Status...', () async {
+        final savedPurinMetrics = await _databaseManager
+            .statusPurinMetricsLoad();
+
+        final inactiveDuration = activityManager
+            .getDurationFromLatestActivity();
+
+        final int savedHungerPoints = savedPurinMetrics['hunger'];
+        final int savedEnergyPoints = savedPurinMetrics['energy'];
+
+        final initHungerPoints = HungerPointsConversion.fromInactiveDuration(
+          savedHungerPoints,
+          inactiveDuration,
+        );
+        final initEnergyPoints = EnergyPointsConversion.fromInactiveDuration(
+          savedEnergyPoints,
+          inactiveDuration,
+        );
+
+        purin.setHungerPoints(initHungerPoints);
+        purin.setEnergyPoints(initEnergyPoints);
       }),
 
       MapEntry('Loading Configurations...', () async {
