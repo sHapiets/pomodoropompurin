@@ -55,6 +55,13 @@ class BackgroundMusic {
     if (_currentAsset == assetPath) return;
 
     await _player.setAsset(assetPath);
+
+    await _player.processingStateStream.firstWhere(
+      (state) => state == ProcessingState.ready,
+    );
+
+    _currentAsset = assetPath;
+
     _currentAsset = assetPath;
   }
 

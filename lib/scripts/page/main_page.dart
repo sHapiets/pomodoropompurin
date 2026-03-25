@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
@@ -62,6 +64,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     shoeAchievementManager.addListener(showShoeAchievementDialog);
     super.initState();
     pomTimerInterruptedManager.rewardInterruptedTime();
+    playBackgroundMusic();
+  }
+
+  void playBackgroundMusic() {
+    if (tutorialState.loadTutorial == true) {
+      return;
+    }
+    BackgroundMusic().play('assets/audio/track_playful.mp3');
   }
 
   void showLevelUpDialog() async {

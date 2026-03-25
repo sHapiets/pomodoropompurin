@@ -13,6 +13,7 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager
 import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
+import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 /// "Conqueror of Nations, Destructor of Worlds"
@@ -199,6 +200,9 @@ class Purin extends ChangeNotifier {
       timer.cancel();
     },
   );
+
+  void feed() {}
+
   void feedFeedable() {
     final reward = purinAreaEquipManager.feedable.value.oshiriPointsPerBite;
     progSystem.addOshiriPoints(reward);
@@ -229,6 +233,10 @@ class Purin extends ChangeNotifier {
       timer.cancel();
     });
     notifyListeners();
+  }
+
+  void feedSnack(Consumable snack) {
+    final oshiriPoints = snack.biteSpritesFlamePath;
   }
 
   /// HUNGER LOGIC

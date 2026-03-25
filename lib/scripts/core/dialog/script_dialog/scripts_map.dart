@@ -17,10 +17,11 @@ import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
+import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
 class ScriptsMap {
-  static Map<int, ScriptDialog> fromLevelUp = {
+  static final Map<int, ScriptDialog> fromLevelUp = {
     3: ScriptDialog(
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
@@ -644,7 +645,7 @@ class ScriptsMap {
         AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
       ],
       dialogues: [
-        {"Koupen": "Welcome to Purin's lovely home!"},
+        {"Koupen": "Welcome to Purin-chan's lovely home!"},
         {"Koupen": "...."},
         {
           "Koupen":
@@ -656,7 +657,7 @@ class ScriptsMap {
         TutorialManager.singleton.nextTutorialSection(delayMs: 100);
       },
     ),
-    /*
+
     6: ScriptDialog(
       onBegin: () {
         PurinAreaStateManager.singleton.jumpToPosition(
@@ -696,6 +697,13 @@ class ScriptsMap {
     ),
 
     8: ScriptDialog(
+      onBegin: () {
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Vector2(-15, 380),
+          Vector2.zero(),
+          1.0,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
       ],
@@ -708,6 +716,13 @@ class ScriptsMap {
     ),
 
     9: ScriptDialog(
+      onBegin: () {
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Vector2(-215, 455),
+          Vector2.zero(),
+          1.0,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
       ],
@@ -718,7 +733,7 @@ class ScriptsMap {
         TutorialManager.singleton.nextTutorialSection(delayMs: 100);
       },
     ),
-*/
+
     10: ScriptDialog(
       onBegin: () {
         PurinAreaStateManager.singleton.jumpToPosition(
@@ -738,7 +753,7 @@ class ScriptsMap {
         {"Koupen": "Hmmm....."},
         {
           "Koupen":
-              "Well, at least in this dimension, you have now options to spend your time with Purin!",
+              "Well, at least in this dimension, you now have options to spend your time with Purin!",
         },
         {
           "Koupen":
@@ -820,7 +835,7 @@ class ScriptsMap {
         },
         {
           "Koupen":
-              "To see Purin's rounded-mushy-fur up close, you can ZOOM IN is by TAPPING DOWN TWICE THEN SLIDE UPWARDS",
+              "To see Purin-chan's rounded-mushy-fur up close, you can ZOOM IN is by TAPPING DOWN TWICE THEN SLIDE UPWARDS",
         },
         {"Koupen": "Let's try these out!"},
         {
@@ -881,13 +896,18 @@ class ScriptsMap {
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
       ],
       dialogues: [
         {
           "Koupen":
               "Good job! Now, we just need to cook the batter to get our fluffy pancakes!",
         },
-        {"Koupen": "Select the stove to start cooking!"},
+        {"Koupen": "To close a menu, TAP anywhere outside it."},
+        {
+          "Koupen":
+              "Then, select the stove and cook the pancakes under the CONSUMABLES recipe!",
+        },
       ],
       onFinished: () {
         ScriptManager.singleton.removeTutorialScript();
@@ -1007,7 +1027,7 @@ class ScriptsMap {
         {"Koupen": "Now, let's talk about the other stuff you can do here!"},
         {
           "Koupen":
-              "How about we start with the stuff that appears in the sides?",
+              "How about we start with the stuff that suddenly appear at the corners?",
         },
         {"Koupen": "I'm talking about...."},
       ],
@@ -1020,7 +1040,7 @@ class ScriptsMap {
       hideUIonBegin: false,
       onBegin: () {
         Future.delayed(
-          Duration(seconds: 1),
+          Duration(milliseconds: 100),
           () => UIDisplayState.singleton.hide.value = false,
         );
       },
@@ -1106,7 +1126,7 @@ class ScriptsMap {
         },
         {"Koupen": ".... so kindly accept it with a grain of salt."},
         {"Koupen": "At some levels, you might unlock a new ingridient, or...."},
-        {"Koupen": "~ Fufu ~... things that will be revealed later!"},
+        {"Koupen": "~ Fufu ~... a new PURIN VARIANT perhaps?!"},
         {"Koupen": "Next on our list is something I mentioned earlier..."},
         {
           "Koupen":
@@ -1181,10 +1201,10 @@ class ScriptsMap {
       },
     ),
 
-    6: ScriptDialog(
+    20: ScriptDialog(
       onBegin: () {
         Future.delayed(
-          Duration(milliseconds: 1000),
+          Duration(milliseconds: 100),
           () => UIDisplayState.singleton.hide.value = false,
         );
       },
@@ -1231,29 +1251,42 @@ class ScriptsMap {
       },
     ),
 
-    7: ScriptDialog(
+    21: ScriptDialog(
       onBegin: () {
         Future.delayed(
-          Duration(milliseconds: 1000),
+          Duration(milliseconds: 100),
           () => UIDisplayState.singleton.hide.value = false,
         );
       },
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['dazzle_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['shocked_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
         AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
-        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
-        AssetManager.singleton.flutterAssetPaths['dazzle_koupen_icon']!,
         AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['dazzle_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
       ],
       dialogues: [
-        {"Koupen": "The PomTimer is also a PUDDING??"},
-        {"Koupen": "... is what I thought before..."},
-        {"Koupen": "It's kinda better than just a plain old alarm clock, no?"},
+        {"Koupen": "The PomTimer..... is also a PUDDING??"},
+        {"Koupen": "... is what I thought to myself before..."},
         {
           "Koupen":
-              "Anyways, you are free to set your PomTimer session from these configurations.",
+              "... but it's kinda better than just a plain old alarm clock, no?",
+        },
+        {
+          "Koupen":
+              "Anyways, you are free to set your PomTimer session using this pudding.",
+        },
+        {
+          "Koupen":
+              "You can CLICK & DRAG the DIALS to move the minute-handles, or CLICK on the BUTTONS for fine-adjustments.",
         },
         {
           "Koupen":
@@ -1267,26 +1300,87 @@ class ScriptsMap {
           "Koupen":
               "So, using LOOPS gives you the amount of times you want to repeat this cycle automatically.",
         },
-        {"Koupen": "I heard that 25:5 is recommended... "},
         {
           "Koupen":
-              "But you can consider a longer focus time when you feel pumped...",
+              "I once heard that 25:5 is the recommended focus-break times... ",
+        },
+        {
+          "Koupen":
+              "But you can consider a longer focus time when you feel extra pumped...",
         },
         {
           "Koupen":
               "... or a longer break time for a slower but still productive pace!",
         },
+        {"Koupen": "Now, let's try taking the PomTimer for a spin!."},
+        {
+          "Koupen":
+              "Accomplish 5 minutes of Focus time before we wrap-up our smol waddle-through.",
+        },
       ],
       onFinished: () {
         ScriptManager.singleton.removeTutorialScript();
+        final initAccTime = ProgSystem.singleton.accTotalTime.value;
+        final targetAccTime = initAccTime + 300;
         Timer.periodic(Duration(milliseconds: 200), (timer) {
-          final pomTimerState =
-              PomTimerDisplayStateManager.singleton.pomTimerState.value;
-          if (pomTimerState == PomTimerStates.idle) {
+          final accTime = ProgSystem.singleton.accTotalTime.value;
+          if (accTime >= targetAccTime) {
             TutorialManager.singleton.nextTutorialSection();
             timer.cancel();
           }
         });
+      },
+    ),
+
+    22: ScriptDialog(
+      onBegin: () {
+        Future.delayed(
+          Duration(milliseconds: 100),
+          () => UIDisplayState.singleton.hide.value = false,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['troubled_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['dazzle_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+      ],
+      dialogues: [
+        {"Koupen": "Well done!"},
+        {"Koupen": "And to top this off, Purin wants to greet you a....."},
+        {"Purin": "~ HAPPY BIRTHDAY!! ~"},
+        {"Purin": "Wha-. You're birthday has already passed?"},
+        {"Purin": "That's unfortunate... "},
+        {
+          "Koupen":
+              "Well, we might have missed it, but we wish you well nonetheless!",
+        },
+        {"Purin": "That's right! And I won't miss it the second time around!"},
+        {"Purin": "After all, I'll be with Mama-owner forever!"},
+        {"Koupen": "~ Fufu ~~"},
+        {
+          "Koupen":
+              "Now, with that, I'm now off to my own adventure.... to my own cozy home!",
+        },
+        {
+          "Koupen":
+              "I'll be fetching you whenever you visit, so you can come at any time.",
+        },
+        {"Koupen": "With that said...."},
+        {"Purin": "I'll be in you care, Mama-owner!"},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeTutorialScript();
+        DatabaseManager.singleton.statusLoadTutorialSave(false);
       },
     ),
   };

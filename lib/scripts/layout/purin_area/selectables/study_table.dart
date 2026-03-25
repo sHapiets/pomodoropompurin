@@ -8,7 +8,6 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class StudyTable extends PurinAreaSelectable {
   StudyTable()
     : super(
-        //TODO change hitbox and position
         position: Vector2(-215, 455),
         hitbox: PolygonHitbox([Vector2(1, 1), Vector2(0, 1), Vector2(0, 0)]),
         priority: 100,
