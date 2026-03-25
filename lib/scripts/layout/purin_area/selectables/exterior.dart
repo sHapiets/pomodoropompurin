@@ -30,7 +30,7 @@ class Exterior extends PurinAreaSelectable {
     );
 
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.exterior.addListener(updateExteriorDesign);
+    // purinAreaEquipManager.exterior.addListener(updateExteriorDesign);
 
     super.onMount();
   }

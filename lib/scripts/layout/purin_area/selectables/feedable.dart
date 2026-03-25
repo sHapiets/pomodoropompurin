@@ -81,6 +81,7 @@ class Feedable extends PurinAreaSelectable {
     purinAreaStateManager.state.value = 'Feed';
     UIDisplayState.singleton.hide.value = true;
     PurinMetricsUIState.singleton.showWidget();
+    game.overlays.removeAll(game.overlays.activeOverlays);
   }
 
   @override

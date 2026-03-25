@@ -32,7 +32,7 @@ class Floor extends PurinAreaSelectable {
     );
 
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.floor.addListener(updateFloorDesign);
+    // purinAreaEquipManager.floor.addListener(updateFloorDesign);
 
     super.onMount();
   }

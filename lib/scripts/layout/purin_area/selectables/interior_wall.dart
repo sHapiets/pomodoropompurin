@@ -30,7 +30,7 @@ class InteriorWall extends PurinAreaSelectable {
     );
 
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.interiorWall.addListener(updateInteriorWallDesign);
+    // purinAreaEquipManager.interiorWall.addListener(updateInteriorWallDesign);
 
     super.onMount();
   }

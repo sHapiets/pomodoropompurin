@@ -29,7 +29,7 @@ class Blanket extends PurinAreaSelectable {
     );
 
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.blanket.addListener(updateBlanketDesign);
+    //purinAreaEquipManager.blanket.addListener(updateBlanketDesign);
 
     super.onMount();
   }

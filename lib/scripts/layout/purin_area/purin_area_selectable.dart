@@ -99,7 +99,6 @@ class PurinAreaSelectable extends PositionComponent
   void changeDesign(RoomDesign newRoomDesign) {
     final assetPath = newRoomDesign.spriteFlamePath;
     sprite.sprite = Sprite(Flame.images.fromCache(assetPath));
-    addOnLoadAnim();
   }
 
   /// Added to pass on any normal tap events. This is to still allow camera movement

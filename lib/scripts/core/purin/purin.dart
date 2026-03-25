@@ -49,6 +49,7 @@ import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 ///
 class Purin extends ChangeNotifier {
   Purin._() {
+    initializeRandomPosition();
     initializeHungerTimer();
     initializeEnergyDepletionLoop();
   }
@@ -140,6 +141,13 @@ class Purin extends ChangeNotifier {
       case PurinPosition.sofaRest:
         return 90;
     }
+  }
+
+  void initializeRandomPosition() {
+    final random = Random();
+    final randomPurinPosition =
+        PurinPosition.values[random.nextInt(PurinPosition.values.length)];
+    changePosition(randomPurinPosition);
   }
 
   /// EQUIP LOGIC
@@ -239,7 +247,10 @@ class Purin extends ChangeNotifier {
     addEnergyPoints(energy: energyRewards);
 
     stateManager.changeAction(PurinAction.feed);
-    stateManager.changePostion(PurinPosition.kotatsuLeft);
+    if (stateManager.position != PurinPosition.kotatsuLeft ||
+        stateManager.position != PurinPosition.kotatsuRight) {
+      stateManager.changePostion(PurinPosition.kotatsuLeft);
+    }
     purinAreaStateManager.jumpToPosition(
       purinPositionVect2,
       Vector2(25, 0),

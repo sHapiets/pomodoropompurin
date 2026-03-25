@@ -189,23 +189,23 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               setState(() {});
                             },
                             offset: -45 * gaugeTween.value,
-                            child: Container(
-                              width: 60 * gaugeTween.value,
-                              height: 60 * gaugeTween.value,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    offset: Offset(2, 2),
-                                  ),
-                                ],
-                              ),
-                              padding: EdgeInsets.all(5),
-                              child: GestureDetector(
-                                onTapDown: (details) =>
-                                    gaugeAnimController.forward(),
+                            child: GestureDetector(
+                              onTapDown: (details) =>
+                                  gaugeAnimController.forward(),
+                              child: Container(
+                                width: 60 * gaugeTween.value,
+                                height: 60 * gaugeTween.value,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                                padding: EdgeInsets.all(5),
                                 child: Image.asset(
                                   assetManager.flutterAssetPaths['pT_WP']!,
                                 ),
@@ -220,6 +220,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             offset: -48 * gaugeTween.value,
                             child: GestureDetector(
                               onTap: () {
+                                gaugeAnimController.forward();
                                 setState(() {
                                   if (timeSetWorkMinutes < 90) {
                                     timeSetWorkMinutes += 1;
@@ -254,6 +255,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             offset: -48 * gaugeTween.value,
                             child: GestureDetector(
                               onTap: () {
+                                gaugeAnimController.forward();
                                 setState(() {
                                   if (timeSetWorkMinutes > 1) {
                                     timeSetWorkMinutes -= 1;
@@ -378,23 +380,23 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                               setState(() {});
                             },
                             offset: -45 * (1.2 - gaugeTween.value),
-                            child: Container(
-                              width: 60 * (1.2 - gaugeTween.value),
-                              height: 60 * (1.2 - gaugeTween.value),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    offset: Offset(2, 2),
-                                  ),
-                                ],
-                              ),
-                              padding: EdgeInsets.all(5),
-                              child: GestureDetector(
-                                onTapDown: (details) =>
-                                    gaugeAnimController.reverse(),
+                            child: GestureDetector(
+                              onTapDown: (details) =>
+                                  gaugeAnimController.reverse(),
+                              child: Container(
+                                width: 60 * (1.2 - gaugeTween.value),
+                                height: 60 * (1.2 - gaugeTween.value),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                                padding: EdgeInsets.all(5),
                                 child: Image.asset(
                                   assetManager.flutterAssetPaths['pT_BP']!,
                                 ),
@@ -409,6 +411,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             offset: -48 * (1.2 - gaugeTween.value),
                             child: GestureDetector(
                               onTap: () {
+                                gaugeAnimController.reverse();
                                 setState(() {
                                   if (timeSetBreakMinutes < 30) {
                                     timeSetBreakMinutes += 1;
@@ -438,6 +441,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                             offset: -48 * (1.2 - gaugeTween.value),
                             child: GestureDetector(
                               onTap: () {
+                                gaugeAnimController.reverse();
                                 setState(() {
                                   if (timeSetBreakMinutes > 1) {
                                     timeSetBreakMinutes -= 1;
@@ -511,7 +515,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
             Align(
               alignment: AlignmentGeometry.bottomCenter,
               child: Padding(
-                padding: const EdgeInsetsGeometry.fromLTRB(70, 0, 0, 125),
+                padding: const EdgeInsetsGeometry.fromLTRB(70, 0, 0, 145),
                 child: IconButton(
                   onPressed: () {
                     if (_pomTimer.loopsSet < 9) {
@@ -533,7 +537,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
             Align(
               alignment: AlignmentGeometry.bottomCenter,
               child: Padding(
-                padding: const EdgeInsetsGeometry.fromLTRB(0, 0, 70, 125),
+                padding: const EdgeInsetsGeometry.fromLTRB(0, 0, 70, 145),
                 child: IconButton(
                   onPressed: () {
                     if (_pomTimer.loopsSet > 1) {
@@ -555,7 +559,7 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsetsGeometry.only(bottom: 120),
+                padding: const EdgeInsetsGeometry.only(bottom: 140),
                 child: Text(
                   '${_pomTimer.loopsSet}',
                   style: TextStyle(
@@ -574,10 +578,35 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
               ),
             ),
 
+            /// TOGGLE FOCUS-BREAK DIALS
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsetsGeometry.only(bottom: 110),
+                padding: const EdgeInsetsGeometry.only(bottom: 90),
+                child: IconButton(
+                  onPressed: () {
+                    if (gaugeTween.status == AnimationStatus.dismissed) {
+                      gaugeAnimController.forward();
+                    } else {
+                      gaugeAnimController.reverse();
+                    }
+                  },
+                  icon: Icon(
+                    Icons.swap_horizontal_circle_rounded,
+                    size: 30,
+                    color: Colors.white,
+                    shadows: [
+                      const Shadow(color: Colors.black12, offset: Offset(2, 2)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(bottom: 130),
                 child: Text(
                   '-loops-',
                   style: TextStyle(

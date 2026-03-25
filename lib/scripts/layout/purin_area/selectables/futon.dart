@@ -29,7 +29,7 @@ class Futon extends PurinAreaSelectable {
     );
 
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.futon.addListener(updateFutonDesign);
+    // purinAreaEquipManager.futon.addListener(updateFutonDesign);
 
     super.onMount();
   }

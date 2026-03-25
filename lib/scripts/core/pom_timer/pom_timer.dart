@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
@@ -161,6 +162,17 @@ class PomTimer {
     if (!onBreak) {
       pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.pause;
     }
+
+    final random = Random();
+    final randomPurinPosition =
+        PurinPosition.values[random.nextInt(PurinPosition.values.length)];
+    final purin = Purin.singleton;
+    purin.changePosition(randomPurinPosition);
+    PurinAreaStateManager.singleton.jumpToPosition(
+      purin.purinPositionVect2,
+      Vector2.zero(),
+      1.2,
+    );
   }
 
   void skipBreak() {

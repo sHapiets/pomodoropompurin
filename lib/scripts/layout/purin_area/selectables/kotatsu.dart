@@ -51,7 +51,7 @@ class Kotatsu extends PurinAreaSelectable {
     );
 
     // IMPORTANT: Edit for every changeable RoomDesign
-    purinAreaEquipManager.kotatsu.addListener(updateKotatsuDesign);
+    // purinAreaEquipManager.kotatsu.addListener(updateKotatsuDesign);
 
     super.onMount();
   }

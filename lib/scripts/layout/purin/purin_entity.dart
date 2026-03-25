@@ -83,6 +83,8 @@ class PurinEntity extends PositionComponent
     PurinPosition.sofaRest: false,
   };
 
+  late PurinVars lastPurinVars;
+
   @override
   void onMount() {
     super.onMount();
@@ -128,6 +130,7 @@ class PurinEntity extends PositionComponent
       position: Vector2(0, 0),
       anchor: Anchor.center,
     );
+    lastPurinVars = purin.equipManager.equippedPurinVar.id;
     updateSprite();
     updatePostion();
 
@@ -148,6 +151,11 @@ class PurinEntity extends PositionComponent
 
     purin.addListener(updatePostion);
     purin.addListener(updateSprite);
+    PurinAreaStateManager.singleton.jumpToPosition(
+      purin.purinPositionVect2,
+      Vector2.zero(),
+      1.2,
+    );
 
     currentOshiriPoints = progSystem.oshiriPoints.value;
     progSystem.oshiriPoints.addListener(addFloatingPlusOshiri);
@@ -176,6 +184,11 @@ class PurinEntity extends PositionComponent
       purinSprite.flipHorizontally();
     } else if (!flip && purinSprite.isFlippedHorizontally) {
       purinSprite.flipHorizontally();
+    }
+
+    if (purinVar as PurinVars != lastPurinVars) {
+      lastPurinVars = purinVar;
+      reloadLoadAnimation();
     }
   }
 
