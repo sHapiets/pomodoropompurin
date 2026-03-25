@@ -49,7 +49,7 @@ class _HungerUIState extends State<HungerUI>
 
   void _checkDelta(int value) {
     if (value > _previousValue) {
-      _delta = _previousValue - value;
+      _delta = value - _previousValue;
       _controller.forward(from: 0);
     }
 
