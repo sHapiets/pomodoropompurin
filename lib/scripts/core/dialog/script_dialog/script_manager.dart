@@ -69,16 +69,15 @@ class ScriptManager {
     "Anything mama-owner prepares is delicious!",
     "Maybe I should diet.... starting never!",
     "~ Fufu ~ One more bite… for balance!",
-    "Nom~nom~no-- wait, where did it all go?!",
-    "My belly says thank you kindly!",
+    "Nom~nom~nom-- wait, where did it all go?!",
     "I regret nothing… except not having more!",
-    "Hehe~ I’ll burn it off… eventually!",
-    "If loving food is wrong, I don’t wanna be right!",
+    "Hehe~ I'll burn it off… eventually!",
+    "If loving food is wrong, I don't wanna be right!",
     "I could eat this forever and ever!",
-    "I’m not stuffed… just efficiently filled!",
+    "I'm not stuffed… just efficiently filled!",
     "Every bite is a masterpiece!",
     "Mmm~ this hits different!",
-    "I could wrestle a bear after this! …Or nap.",
+    "I could wrestle a bear after this! …Or nap....",
   ];
   final random = Random();
 
