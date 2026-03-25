@@ -52,7 +52,10 @@ class _EnergyUIState extends State<EnergyUI>
       _delta = value - _previousValue;
       _controller.forward(from: 0);
     }
-    _previousValue = value;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _previousValue = value;
+    });
   }
 
   @override
@@ -71,10 +74,20 @@ class _EnergyUIState extends State<EnergyUI>
                 SizedBox(
                   width: 40,
                   height: 40,
-                  child: CircularProgressIndicator(
-                    color: uiColor,
-                    value: (value / 100).clamp(0.0, 1.0),
-                    strokeWidth: 3,
+                  child: TweenAnimationBuilder<double>(
+                    tween: Tween(
+                      begin: (_previousValue / 100).clamp(0.0, 1.0),
+                      end: (value / 100).clamp(0.0, 1.0),
+                    ),
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOutBack,
+                    builder: (context, animatedValue, _) {
+                      return CircularProgressIndicator(
+                        color: uiColor,
+                        value: animatedValue,
+                        strokeWidth: 3,
+                      );
+                    },
                   ),
                 ),
 

@@ -6,6 +6,10 @@ class HungerPointsConversion {
     const int minInactiveHunger = 25;
     const int maxInactiveHunger = 100;
 
+    if (currentHungerPoints <= minInactiveHunger) {
+      return currentHungerPoints;
+    }
+
     final consumedHungerPoints = (totalMinutes / minutesPerHungerPoint).floor();
     final newHungerPoints = (currentHungerPoints - consumedHungerPoints).clamp(
       minInactiveHunger,

@@ -205,12 +205,17 @@ class Purin extends ChangeNotifier {
   void feed() {}
 
   void feedFeedable() {
-    final reward = purinAreaEquipManager.feedable.value.oshiriPointsPerBite;
-    progSystem.addOshiriPoints(reward);
+    final oshiriRewards =
+        purinAreaEquipManager.feedable.value.oshiriPointsPerBite;
+    progSystem.addOshiriPoints(oshiriRewards);
 
-    final hungerPoints =
+    final hungerRewards =
         purinAreaEquipManager.feedable.value.hungerPointsPerBite;
-    addHungerPoints(hunger: hungerPoints);
+    addHungerPoints(hunger: hungerRewards);
+
+    final energyRewards =
+        purinAreaEquipManager.feedable.value.energyPointsPerBite;
+    addEnergyPoints(energy: energyRewards);
 
     stateManager.changeAction(PurinAction.feed);
     stateManager.changePostion(PurinPosition.kotatsuLeft);
@@ -223,6 +228,7 @@ class Purin extends ChangeNotifier {
     ScriptManager.singleton.addFeedDialog();
     PurinMetricsUIState.singleton.showWidget();
     UIDisplayState.singleton.hide.value = true;
+    PurinMetricsUIState.singleton.showWidget();
     feedCooldown.cancel();
     feedCooldown = async_lib.Timer.periodic(Duration(milliseconds: 2500), (
       timer,
