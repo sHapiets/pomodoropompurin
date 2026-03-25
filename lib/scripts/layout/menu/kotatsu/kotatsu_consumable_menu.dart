@@ -88,13 +88,14 @@ class KotatsuConsumableMenu extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: GridView.builder(
+                    scrollDirection: Axis.horizontal,
                     itemCount: acquiredConsumables.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                          crossAxisCount: 1,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
-                          childAspectRatio: 0.8,
+                          childAspectRatio: 2,
                         ),
                     itemBuilder: (context, index) {
                       final consumable = acquiredConsumables.keys

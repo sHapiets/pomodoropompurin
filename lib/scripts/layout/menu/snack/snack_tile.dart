@@ -102,8 +102,8 @@ class _SnackTileState extends State<SnackTile> with TickerProviderStateMixin {
                 alignment: Alignment.center,
                 children: [
                   SizedBox(
-                    width: iconSize - 10,
-                    height: iconSize - 10,
+                    width: iconSize,
+                    height: iconSize,
                     child: Image.asset(widget.snack.iconFlutterPath),
                   ),
 
@@ -141,9 +141,94 @@ class _SnackTileState extends State<SnackTile> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 3),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "+ ${widget.snack.oshiriPoints} *",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 3),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "+ ${widget.snack.hungerPoints}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(width: 3),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 184, 93, 84),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.restaurant_rounded,
+                    color: Colors.white,
+                    size: 15,
+                    shadows: const [
+                      Shadow(color: Colors.black26, offset: Offset(2, 2)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 3),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "+ ${widget.snack.energyPoints}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(width: 3),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 49, 141, 151),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.bolt_rounded,
+                    color: Colors.white,
+                    size: 15,
+                    shadows: const [
+                      Shadow(color: Colors.black26, offset: Offset(2, 2)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
             const Spacer(),
 
-            /// PURCHASE BUTTON
+            /// SNACK BUTTON
             ValueListenableBuilder(
               valueListenable: progSystem.snacksInventory[widget.snack]!,
               builder: (context, value, child) {
@@ -165,7 +250,7 @@ class _SnackTileState extends State<SnackTile> with TickerProviderStateMixin {
                       color: Colors.amber,
                     ),
                     child: const Icon(
-                      Icons.restaurant,
+                      Icons.cookie_rounded,
                       color: Colors.black,
                       size: 22,
                     ),

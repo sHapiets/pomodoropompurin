@@ -33,11 +33,15 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
   final purin = Purin.singleton;
   final progSystem = ProgSystem.singleton;
 
-  final double iconSides = 70;
+  final double iconSize = 60;
+  final double buttonSize = 45;
   final double tileHeight = 135;
   final double tileWidth = 80;
   final double buttonHeight = 20;
   final double buttonWidth = 50;
+
+  late final AnimationController tileOnLoadController;
+  late final Animation<double> tileScale;
 
   final equippedButtonTextStyle = const TextStyle(
     fontFamily: 'Fredoka',
@@ -77,11 +81,6 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
     );
   }
 
-  late final AnimationController tileOnLoadAnimationController;
-  late final Animation<double> tileOnLoadTween;
-
-  late final AnimationController buttonAnimationController;
-  late final Animation<double> buttonTween;
   bool showOccupiedButton = false;
 
   @override
@@ -90,31 +89,14 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
     changeOccupiedButton();
     purinAreaEquipManager.feedableBitesLeft.addListener(changeOccupiedButton);
 
-    buttonAnimationController =
-        AnimationController(
-            vsync: this,
-            duration: const Duration(milliseconds: 1200),
-          )
-          ..forward()
-          ..repeat(reverse: true);
-    buttonTween = Tween<double>(begin: 0.9, end: 1).animate(
-      CurvedAnimation(
-        parent: buttonAnimationController,
-        curve: Curves.easeInOut,
-      ),
-    );
-
-    final int random = Random().nextInt(300);
-    final randomDuration = Duration(milliseconds: (400 + random));
-    tileOnLoadAnimationController = AnimationController(
+    final random = Random().nextInt(300);
+    tileOnLoadController = AnimationController(
       vsync: this,
-      duration: randomDuration,
+      duration: Duration(milliseconds: 400 + random),
     )..forward();
-    tileOnLoadTween = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: tileOnLoadAnimationController,
-        curve: Curves.easeOutBack,
-      ),
+
+    tileScale = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: tileOnLoadController, curve: Curves.easeOutBack),
     );
   }
 
@@ -129,148 +111,206 @@ class _KotatsuConsumableTileState extends State<KotatsuConsumableTile>
     purinAreaEquipManager.feedableBitesLeft.removeListener(
       changeOccupiedButton,
     );
-    buttonAnimationController.dispose();
-    tileOnLoadAnimationController.dispose();
+    tileOnLoadController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: tileOnLoadAnimationController,
-      builder: (context, child) {
-        return ScaleTransition(scale: tileOnLoadTween, child: child);
-      },
+    return ScaleTransition(
+      scale: tileScale,
       child: Container(
-        width: tileWidth,
-        height: tileHeight,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(4),
-          boxShadow: [BoxShadow(color: Colors.black12, offset: Offset(2, 2))],
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(2, 3),
+            ),
+          ],
         ),
-        child: Stack(
+        child: Column(
           children: [
-            Align(
-              alignment: AlignmentGeometry.topCenter,
-              child: Container(
-                width: iconSides,
-                height: iconSides,
-                color: Colors.white,
-                child: Image.asset(widget.consumable.iconFlutterPath),
+            /// TOP ICON + PROGRESS
+            SizedBox(
+              height: iconSize,
+              width: iconSize,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Transform.translate(
+                    offset: const Offset(0, 5),
+                    child: SizedBox(
+                      width: iconSize,
+                      height: iconSize,
+                      child: Image.asset(widget.consumable.iconFlutterPath),
+                    ),
+                  ),
+
+                  /// ProcessConsumable Count
+                  ValueListenableBuilder(
+                    valueListenable:
+                        progSystem.consumableInventory[widget.consumable]!,
+                    builder: (context, value, child) {
+                      return Align(
+                        alignment: AlignmentGeometry.topLeft,
+                        child: Transform.translate(
+                          offset: Offset(-20, -5),
+                          child: SizedBox(
+                            child: Text("$value", style: displayCountTextStyle),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
 
-            /// Ingridient Name
-            Align(
-              alignment: AlignmentGeometry.topCenter,
-              child: Transform.translate(
-                offset: Offset(0, 70),
-                child: SizedBox(
-                  child: Text(
-                    widget.consumable.displayName,
-                    style: displayNameTextStyle,
+            const SizedBox(height: 8),
+
+            /// NAME
+            Text(
+              widget.consumable.displayName,
+              textAlign: TextAlign.center,
+              style: displayNameTextStyle,
+            ),
+
+            const Spacer(),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "+ ${widget.consumable.oshiriPointsPerBite * widget.consumable.totalBites} *",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.black,
                   ),
                 ),
-              ),
+              ],
             ),
 
-            /// ProcessConsumable Count
-            Align(
-              alignment: AlignmentGeometry.topLeft,
-              child: Transform.translate(
-                offset: Offset(8, 5),
-                child: SizedBox(
-                  child: Text(
-                    "${progSystem.consumableInventory[widget.consumable]!.value}",
-                    style: displayCountTextStyle,
+            const SizedBox(height: 3),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "+ ${widget.consumable.hungerPointsPerBite * widget.consumable.totalBites}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.black,
                   ),
                 ),
-              ),
-            ),
-
-            Align(
-              alignment: AlignmentGeometry.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, -5),
-                child: ValueListenableBuilder(
-                  valueListenable: purinAreaEquipManager.feedableBitesLeft,
-                  builder: (context, value, child) {
-                    return AnimatedBuilder(
-                      animation: buttonTween,
-                      builder: (context, child) {
-                        return (showOccupiedButton)
-                            ? child!
-                            : ScaleTransition(scale: buttonTween, child: child);
-                      },
-                      child: Container(
-                        width: buttonWidth,
-                        height: buttonHeight,
-                        decoration: BoxDecoration(
-                          color: (showOccupiedButton)
-                              ? const Color.fromARGB(141, 144, 167, 179)
-                              : const Color.fromARGB(255, 105, 194, 15),
-                          borderRadius: BorderRadius.circular(3),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(2, 2),
-                            ),
-                          ],
-                        ),
-                        child: MaterialButton(
-                          onPressed: () {
-                            if (showOccupiedButton) {
-                              return;
-                            }
-                            placeConsumable();
-                            UIDisplayState.singleton.hide.value = false;
-                            purinAreaKey.currentState!.currentGame.overlays
-                                .removeAll(
-                                  purinAreaKey
-                                      .currentState!
-                                      .currentGame
-                                      .overlays
-                                      .activeOverlays,
-                                );
-                            ScriptManager.singleton.removeAllDialogs();
-                          },
-                        ),
-                      ),
-                    );
-                  },
+                const SizedBox(width: 3),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 184, 93, 84),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.restaurant_rounded,
+                    color: Colors.white,
+                    size: 15,
+                    shadows: const [
+                      Shadow(color: Colors.black26, offset: Offset(2, 2)),
+                    ],
+                  ),
                 ),
-              ),
+              ],
+            ),
+            const SizedBox(height: 3),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "+ ${widget.consumable.energyPointsPerBite * widget.consumable.totalBites}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'Fredoka',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(width: 3),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 49, 141, 151),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.bolt_rounded,
+                    color: Colors.white,
+                    size: 15,
+                    shadows: const [
+                      Shadow(color: Colors.black26, offset: Offset(2, 2)),
+                    ],
+                  ),
+                ),
+              ],
             ),
 
-            Align(
-              alignment: AlignmentGeometry.bottomCenter,
-              child: Transform.translate(
-                offset: Offset(0, -5),
-                child: IgnorePointer(
-                  child: SizedBox(
-                    width: buttonWidth - 20,
-                    height: buttonHeight,
-                    child: Center(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: ValueListenableBuilder(
-                          valueListenable:
-                              purinAreaEquipManager.feedableBitesLeft,
-                          builder: (context, value, child) {
-                            return Text(
-                              (showOccupiedButton) ? "OCCUPIED" : "PLACE",
-                              style: (showOccupiedButton)
-                                  ? equippedButtonTextStyle
-                                  : equipButtonTextStyle,
-                            );
-                          },
-                        ),
+            const Spacer(),
+
+            ValueListenableBuilder(
+              valueListenable: purinAreaEquipManager.feedableBitesLeft,
+              builder: (context, value, child) {
+                return Container(
+                  width: buttonWidth,
+                  height: buttonHeight,
+                  decoration: BoxDecoration(
+                    color: (showOccupiedButton)
+                        ? const Color.fromARGB(141, 144, 167, 179)
+                        : const Color.fromARGB(255, 105, 194, 15),
+                    borderRadius: BorderRadius.circular(3),
+                    boxShadow: [
+                      BoxShadow(color: Colors.black12, offset: Offset(2, 2)),
+                    ],
+                  ),
+                  child: MaterialButton(
+                    onPressed: () {
+                      if (showOccupiedButton) {
+                        return;
+                      }
+                      placeConsumable();
+                      UIDisplayState.singleton.hide.value = false;
+                      purinAreaKey.currentState!.currentGame.overlays.removeAll(
+                        purinAreaKey
+                            .currentState!
+                            .currentGame
+                            .overlays
+                            .activeOverlays,
+                      );
+                      ScriptManager.singleton.removeAllDialogs();
+                    },
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text(
+                        (showOccupiedButton) ? "OCCUPIED" : "PLACE",
+                        style: (showOccupiedButton)
+                            ? equippedButtonTextStyle
+                            : equipButtonTextStyle,
                       ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),

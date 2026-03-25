@@ -8,7 +8,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class SnackShopEntity extends PurinAreaSelectable {
   SnackShopEntity()
     : super(
-        position: Vector2(-80, 95),
+        position: Vector2(-120, 130),
         hitbox: PolygonHitbox(
           [
             Vector2(-45, -30),
@@ -26,8 +26,8 @@ class SnackShopEntity extends PurinAreaSelectable {
   void onMount() {
     // IMPORTANT: Edit for every changeable RoomDesign (imagepath and size)
     sprite = SpriteComponent(
-      sprite: Sprite(Flame.images.fromCache("shop_sprites/shop.png")),
-      size: Vector2.all(150),
+      sprite: Sprite(Flame.images.fromCache("snack_shop_sprites/default.png")),
+      size: Vector2.all(120),
       anchor: anchor,
     );
 

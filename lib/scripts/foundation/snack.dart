@@ -5,7 +5,7 @@ enum Snack {
     oshiriPoints: 10,
     hungerPoints: 15,
     energyPoints: 5,
-    iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
+    iconFlutterPath: 'assets/images/snack_sprites/potatoChips.png',
   ),
   hotCocoa(
     displayName: "Hot Cocoa",
@@ -13,7 +13,7 @@ enum Snack {
     oshiriPoints: 5,
     hungerPoints: 3,
     energyPoints: 20,
-    iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
+    iconFlutterPath: 'assets/images/snack_sprites/hotCocoa.png',
   ),
   cheeseIceCream(
     displayName: "Cheese Ice Cream",
@@ -21,7 +21,7 @@ enum Snack {
     oshiriPoints: 20,
     hungerPoints: 10,
     energyPoints: 15,
-    iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
+    iconFlutterPath: 'assets/images/snack_sprites/cheeseIceCream.png',
   ),
   chocolateCupcake(
     displayName: "Chocolate Cupcake",
@@ -29,7 +29,7 @@ enum Snack {
     oshiriPoints: 10,
     hungerPoints: 30,
     energyPoints: 20,
-    iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
+    iconFlutterPath: 'assets/images/snack_sprites/chocolateCupcake.png',
   ),
   strawberryCupcake(
     displayName: "Strawberry Cupcake",
@@ -37,7 +37,7 @@ enum Snack {
     oshiriPoints: 10,
     hungerPoints: 20,
     energyPoints: 30,
-    iconFlutterPath: 'assets/images/consumable_sprites/pudding/2.png',
+    iconFlutterPath: 'assets/images/snack_sprites/strawberryCupcake.png',
   );
 
   const Snack({

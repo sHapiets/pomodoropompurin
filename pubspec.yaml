@@ -42,6 +42,7 @@ flutter:
     - assets/images/refrigerator_sprites/
     - assets/images/study_table_sprites/
     - assets/images/study_chair_sprites/
+    - assets/images/snack_shop_sprites/
     - assets/images/kitchen_sprites/
     - assets/images/ingridient_sprites/
     - assets/images/consumable_sprites/pudding/
@@ -52,6 +53,7 @@ flutter:
     - assets/images/shop_sprites/
     - assets/images/consumable_sprites/pudding/
     - assets/images/purin_sprites/
+    - assets/images/snack_sprites/
     - assets/images/character_icons/purin/
     - assets/images/character_icons/koupen/
     - assets/images/character_icons/objects/

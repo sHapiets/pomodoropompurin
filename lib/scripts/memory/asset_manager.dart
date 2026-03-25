@@ -5,6 +5,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/foundation/snack.dart';
 
 /// Singleton class to manage all materials in the assets folder
 ///
@@ -62,6 +63,7 @@ class AssetManager {
 
     ...{for (final ing in Ingridient.values) ing.name: ing.spriteFlutterPath},
     ...{for (final con in Consumable.values) con.name: con.iconFlutterPath},
+    ...{for (final sna in Snack.values) sna.name: sna.iconFlutterPath},
     ...{
       for (final purinVar in Acquirables.singleton.purinVars.values)
         purinVar.displayName: purinVar.iconAssetPath,
@@ -156,6 +158,7 @@ class AssetManager {
       "refrigerator_sprites/default.png",
       "study_table_sprites/wooden.png",
       "study_chair_sprites/default.png",
+      "snack_shop_sprites/default.png",
       "kitchen_sprites/default.png",
       "kitchen_processors_sprites/stove.png",
       "kitchen_processors_sprites/sink.png",

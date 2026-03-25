@@ -54,7 +54,7 @@ class SnackPurchaseMenu extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(214, 163, 201, 199),
+                color: const Color.fromARGB(210, 239, 189, 128),
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(color: Colors.black12, offset: Offset(3, 3)),
@@ -71,7 +71,7 @@ class SnackPurchaseMenu extends StatelessWidget {
                         padding: const EdgeInsets.all(8),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color.fromARGB(255, 91, 147, 185),
+                          color: Color.fromARGB(255, 225, 168, 53),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
@@ -80,18 +80,18 @@ class SnackPurchaseMenu extends StatelessWidget {
                           ],
                         ),
                         child: const Icon(
-                          Icons.receipt_long_rounded,
+                          Icons.fastfood,
                           color: Colors.white,
                           size: 20,
                         ),
                       ),
                       const SizedBox(width: 10),
                       const Text(
-                        'grocery',
+                        'snack shop',
                         style: TextStyle(
                           fontFamily: 'Fredoka',
                           fontWeight: FontWeight.w600,
-                          fontSize: 24,
+                          fontSize: 22,
                           color: Colors.white,
                           shadows: [
                             Shadow(color: Colors.black45, offset: Offset(2, 2)),
@@ -170,11 +170,11 @@ class SnackPurchaseMenu extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFB2EBF2),
+                  color: const Color.fromARGB(255, 251, 199, 171),
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color.fromARGB(255, 123, 161, 167),
+                      color: const Color.fromARGB(255, 227, 179, 149),
                       offset: Offset(5, 5),
                     ),
                   ],
