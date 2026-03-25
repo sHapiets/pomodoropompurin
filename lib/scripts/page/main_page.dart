@@ -38,11 +38,14 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:pomodoropompurin/scripts/page/tutorial_page_blocker.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 final purinAreaKey = GlobalKey<GameWidgetState>();
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  const MainPage({super.key, required this.enableAudio});
+
+  final bool enableAudio;
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -65,10 +68,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     super.initState();
     pomTimerInterruptedManager.rewardInterruptedTime();
     playBackgroundMusic();
+
+    WakelockPlus.enable();
   }
 
   void playBackgroundMusic() {
-    if (tutorialState.loadTutorial == true) {
+    if (tutorialState.loadTutorial == true || widget.enableAudio == false) {
       return;
     }
     BackgroundMusic().play('assets/audio/track_playful.mp3');
@@ -92,6 +97,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         return shoeAchievementManager.shoeAchievementDialog;
       },
     );
+  }
+
+  @override
+  void dispose() {
+    WakelockPlus.enable();
+    super.dispose();
   }
 
   @override

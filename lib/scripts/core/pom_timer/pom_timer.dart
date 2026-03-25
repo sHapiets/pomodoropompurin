@@ -89,13 +89,6 @@ class PomTimer {
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         timeLeftSeconds--;
 
-        if (!onBreak) {
-          multiplierTotal += PointMultiplier.fromEnergy(
-            purin.stateManager.energy.value,
-          );
-          timeTotalSeconds++;
-        }
-
         //// LOOPSSET: Break-Work Switching (or end if no more loops)
         if (timeLeftSeconds < 0) {
           if (onBreak == false) {
@@ -112,6 +105,7 @@ class PomTimer {
               timeLeftSeconds = timeSetWorkSeconds;
               endTimer(); // Award Maximum Points
               timer.cancel();
+              return;
             }
           } else {
             // onBreak, switch to worktime
@@ -122,6 +116,14 @@ class PomTimer {
                 PomTimerStates.play;
             pomTimerDisplayStateManager.onBreak.value = false;
           }
+        }
+
+        /// Adding to timeTotal and multiplerFromEnergy
+        if (!onBreak) {
+          multiplierTotal += PointMultiplier.fromEnergy(
+            purin.stateManager.energy.value,
+          );
+          timeTotalSeconds++;
         }
 
         /// Update Koupen of current TimeTotalSeconds every saverStepsCount

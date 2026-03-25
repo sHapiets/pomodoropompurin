@@ -47,6 +47,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   int _completedSteps = 0;
   late final List<MapEntry<String, Future<void> Function()>> loadSteps;
 
+  Completer<bool>? _audioCompleter;
+  ValueNotifier<bool> showEnableAudioBool = ValueNotifier(false);
+  bool enableAudio = false;
+
   Widget koupenAnimation = const SizedBox.shrink();
   late Timer? koupenSwitchTimer;
   AnimationController? koupenPositionController;
@@ -56,11 +60,17 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   final ValueNotifier dotCounter = ValueNotifier(0);
   late final Timer dotCounterTimer;
 
+  Future<void> showEnableAudioButton() async {
+    _audioCompleter = Completer<bool>();
+    showEnableAudioBool.value = true;
+
+    enableAudio = await _audioCompleter!.future;
+    showEnableAudioBool.value = false;
+  }
+
   @override
   void initState() {
     super.initState();
-
-    preloadedMainPage = const MainPage();
 
     koupenPositionController = AnimationController(
       vsync: this,
@@ -203,6 +213,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         await BackgroundMusic().load('assets/audio/track_playful.mp3');
       }),
 
+      MapEntry('.....', () async {
+        await showEnableAudioButton();
+      }),
+
       MapEntry('Initializing...', () async {
         await PurinArea.gameSingleton.onLoad();
         await Future.delayed(Duration(seconds: 3));
@@ -253,7 +267,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => preloadedMainPage),
+      MaterialPageRoute(builder: (_) => MainPage(enableAudio: enableAudio)),
     );
   }
 
@@ -290,7 +304,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   Widget loadingDot(int count, int disappearLimit) {
-    final double size = 20;
+    final double size = 15;
     if (count < disappearLimit) {
       return SizedBox.square(dimension: size);
     }
@@ -310,92 +324,155 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 36),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SlideTransition(
-                  position:
-                      koupenPositionAnimation ??
-                      AlwaysStoppedAnimation(Offset.zero),
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: SizedBox(height: 100, child: koupenAnimation),
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-                Text(
-                  'Koupen-chan is fetching your data...',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 50),
-                ValueListenableBuilder(
-                  valueListenable: dotCounter,
-                  builder: (context, value, child) {
-                    return loadingDot(value, 1);
-                  },
-                ),
-                const SizedBox(height: 50),
-                ValueListenableBuilder(
-                  valueListenable: dotCounter,
-                  builder: (context, value, child) {
-                    return loadingDot(value, 2);
-                  },
-                ),
-                const SizedBox(height: 50),
-                ValueListenableBuilder(
-                  valueListenable: dotCounter,
-                  builder: (context, value, child) {
-                    return loadingDot(value, 3);
-                  },
-                ),
-
-                const SizedBox(height: 50),
-                Text(
-                  _currentStep,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: TweenAnimationBuilder(
-                    tween: Tween<double>(begin: 0, end: _progress),
-                    duration: const Duration(milliseconds: 1200),
-                    curve: Curves.easeOutCirc,
-                    builder: (context, value, child) {
-                      return LinearProgressIndicator(
-                        value: value,
-                        minHeight: 10,
-                        backgroundColor: const Color.fromARGB(
-                          89,
-                          255,
-                          255,
-                          255,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Transform.translate(
+                offset: Offset(0, 20),
+                child: SizedBox(
+                  height: 700,
+                  width: 400,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SlideTransition(
+                        position:
+                            koupenPositionAnimation ??
+                            AlwaysStoppedAnimation(Offset.zero),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: SizedBox(height: 100, child: koupenAnimation),
                         ),
-                        color: Colors.white,
-                      );
-                    },
+                      ),
+
+                      const SizedBox(height: 24),
+                      Text(
+                        'Koupen-chan is fetching your data...',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      ValueListenableBuilder(
+                        valueListenable: dotCounter,
+                        builder: (context, value, child) {
+                          return loadingDot(value, 1);
+                        },
+                      ),
+                      const SizedBox(height: 50),
+                      ValueListenableBuilder(
+                        valueListenable: dotCounter,
+                        builder: (context, value, child) {
+                          return loadingDot(value, 2);
+                        },
+                      ),
+                      const SizedBox(height: 50),
+                      ValueListenableBuilder(
+                        valueListenable: dotCounter,
+                        builder: (context, value, child) {
+                          return loadingDot(value, 3);
+                        },
+                      ),
+
+                      const SizedBox(height: 50),
+                      Text(
+                        _currentStep,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: TweenAnimationBuilder(
+                          tween: Tween<double>(begin: 0, end: _progress),
+                          duration: const Duration(milliseconds: 1200),
+                          curve: Curves.easeOutCirc,
+                          builder: (context, value, child) {
+                            return LinearProgressIndicator(
+                              value: value,
+                              minHeight: 10,
+                              backgroundColor: const Color.fromARGB(
+                                89,
+                                255,
+                                255,
+                                255,
+                              ),
+                              color: Colors.white,
+                            );
+                          },
+                        ),
+                      ),
+
+                      const SizedBox(height: 14),
+
+                      Text(
+                        "${(_progress * 100).toInt()}%",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white70,
+                        ),
+                      ),
+
+                      const SizedBox(height: 14),
+
+                      ValueListenableBuilder(
+                        valueListenable: showEnableAudioBool,
+                        builder: (context, show, child) {
+                          return AnimatedScale(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOutBack,
+                            scale: show ? 1 : 0,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                const Text(
+                                  "enable audio....?",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        _audioCompleter?.complete(true);
+                                      },
+                                      icon: Icon(
+                                        Icons.volume_up_rounded,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    IconButton(
+                                      onPressed: () {
+                                        _audioCompleter?.complete(false);
+                                      },
+                                      icon: Icon(
+                                        Icons.volume_off_rounded,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
-
-                const SizedBox(height: 14),
-
-                Text(
-                  "${(_progress * 100).toInt()}%",
-                  style: const TextStyle(fontSize: 14, color: Colors.white70),
-                ),
-              ],
+              ),
             ),
           ),
         ),
