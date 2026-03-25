@@ -808,13 +808,13 @@ class ScriptsMap {
         );
       },
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['dazzle_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['mixer_objects_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['troubled_koupen_icon']!,
       ],
       dialogues: [
         {
@@ -852,8 +852,8 @@ class ScriptsMap {
 
     13: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['dazzle_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
       ],
       dialogues: [
         {
@@ -886,9 +886,9 @@ class ScriptsMap {
 
     14: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['stove_objects_icon']!,
       ],
       dialogues: [
         {
@@ -920,12 +920,12 @@ class ScriptsMap {
 
     15: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['dazzle_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
       ],
       dialogues: [
-        {"Koupen": "Well done!"},
+        {"Purin": "~ Is it ready? ~"},
         {
           "Koupen":
               "Now, we just need to place these pancakes in the dining area...",
@@ -950,9 +950,9 @@ class ScriptsMap {
 
     16: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_koupen_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_koupen_icon']!,
       ],
       dialogues: [
         {"Purin": "YAYY!! ~ ~ PANCAKES!!"},
@@ -1348,7 +1348,7 @@ class ScriptsMap {
       ],
       dialogues: [
         {"Koupen": "Well done!"},
-        {"Koupen": "And to top this off, Purin wants to greet you a....."},
+        {"Koupen": "And to top this off, Purin-chan wants to greet you a....."},
         {"Purin": "~ HAPPY BIRTHDAY!! ~"},
         {"Purin": "Wha-. You're birthday has already passed?"},
         {"Purin": "That's unfortunate... "},

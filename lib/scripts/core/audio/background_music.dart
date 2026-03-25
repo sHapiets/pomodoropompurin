@@ -8,6 +8,7 @@ class BackgroundMusic {
   BackgroundMusic._internal();
 
   final AudioPlayer _player = AudioPlayer();
+  bool _enabled = false;
 
   bool _isInitialized = false;
   String? _currentAsset;
@@ -25,7 +26,14 @@ class BackgroundMusic {
     _isInitialized = true;
   }
 
+  void setEnabled(bool enableBool) {
+    _enabled = enableBool;
+  }
+
+  bool get enabled => _enabled;
+
   Future<void> play(String assetPath) async {
+    if (!_enabled) return;
     await init();
 
     try {
@@ -41,15 +49,18 @@ class BackgroundMusic {
   }
 
   Future<void> pause() async {
+    if (!_enabled) return;
     await _player.pause();
   }
 
   Future<void> stop() async {
+    if (!_enabled) return;
     await _player.stop();
     _currentAsset = null;
   }
 
   Future<void> setVolume(double volume) async {
+    if (!_enabled) return;
     _volume = volume; // update stored value
     await _player.setVolume(_volume);
   }
@@ -58,6 +69,7 @@ class BackgroundMusic {
     double targetVolume = 1.0,
     double duration = 2.0,
   }) async {
+    if (!_enabled) return;
     const int steps = 20;
     double stepVolume = targetVolume / steps;
     double stepDuration = duration / steps;
@@ -82,6 +94,7 @@ class BackgroundMusic {
   }
 
   Future<void> fadeOut({double duration = 2.0}) async {
+    if (!_enabled) return;
     const int steps = 20;
     double stepVolume = _volume / steps;
     double stepDuration = duration / steps;
@@ -104,6 +117,7 @@ class BackgroundMusic {
     required double targetVolume,
     double duration = 2.0,
   }) async {
+    if (!_enabled) return;
     const int steps = 20; // number of increments
     double startVolume = _volume;
     double stepDuration = duration / steps;

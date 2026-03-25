@@ -58,6 +58,7 @@ class AssetManager {
     'mixer_objects_icon': 'assets/images/character_icons/objects/mixer.png',
     'mixer_shadow_objects_icon':
         'assets/images/character_icons/objects/mixer_shadow.png',
+    'stove_objects_icon': 'assets/images/character_icons/objects/stove.png',
 
     ...{for (final ing in Ingridient.values) ing.name: ing.spriteFlutterPath},
     ...{for (final con in Consumable.values) con.name: con.iconFlutterPath},

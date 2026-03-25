@@ -63,6 +63,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     showEnableAudioBool.value = true;
 
     enableAudio = await _audioCompleter!.future;
+    BackgroundMusic().setEnabled(enableAudio);
     showEnableAudioBool.value = false;
   }
 
@@ -291,7 +292,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => MainPage(enableAudio: enableAudio)),
+      MaterialPageRoute(builder: (_) => MainPage()),
     );
   }
 

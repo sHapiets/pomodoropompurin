@@ -46,9 +46,7 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 final purinAreaKey = GlobalKey<GameWidgetState>();
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, required this.enableAudio});
-
-  final bool enableAudio;
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -76,7 +74,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   Future<void> playBackgroundMusic() async {
-    if (tutorialState.loadTutorial == true || widget.enableAudio == false) {
+    if (tutorialState.loadTutorial == true) {
+      return;
+    }
+    if (BackgroundMusic().enabled == false) {
       return;
     }
     final savedVolume = await DatabaseManager.singleton.configVolumeLoad();

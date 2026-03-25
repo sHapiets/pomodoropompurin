@@ -69,7 +69,7 @@ class PomTimer {
       );
 
       initVolume = BackgroundMusic().volume;
-      BackgroundMusic().fadeTo(targetVolume: 0.12, duration: 2.0);
+      BackgroundMusic().fadeTo(targetVolume: 0.05, duration: 2.0);
 
       if (restart) {
         onBreak = false;
