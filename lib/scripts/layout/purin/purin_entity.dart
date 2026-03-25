@@ -55,6 +55,7 @@ class PurinEntity extends PositionComponent
   late SequenceEffect loadAnim;
   late IdleBreathingAnimation purinAnim;
   late SpriteComponent purinSprite;
+  late SpriteComponent purinShadow;
   late Map<PurinVars, SpriteSheet> purinSheets;
   late CircleHitbox purinHitbox;
 
@@ -63,6 +64,9 @@ class PurinEntity extends PositionComponent
     PurinPosition.kotatsuRight: 0,
     PurinPosition.study: 0,
     PurinPosition.futon: 1,
+    PurinPosition.sofaSitLeft: 0,
+    PurinPosition.sofaSitRight: 0,
+    PurinPosition.sofaRest: 1,
   };
   final spriteSheetColumnFromAction = {
     PurinAction.idle: 0,
@@ -74,6 +78,9 @@ class PurinEntity extends PositionComponent
     PurinPosition.kotatsuRight: true,
     PurinPosition.futon: false,
     PurinPosition.study: true,
+    PurinPosition.sofaSitLeft: false,
+    PurinPosition.sofaSitRight: true,
+    PurinPosition.sofaRest: false,
   };
 
   @override
@@ -111,6 +118,12 @@ class PurinEntity extends PositionComponent
     purinAnim = IdleBreathingAnimation();
     purinSprite = SpriteComponent(
       sprite: Sprite(Flame.images.fromCache('purinEntity.png')),
+      size: Vector2.all(70),
+      position: Vector2(0, 0),
+      anchor: Anchor.center,
+    );
+    purinShadow = SpriteComponent(
+      sprite: Sprite(Flame.images.fromCache('purin_sprites/purin_shadow.png')),
       size: Vector2.all(70),
       position: Vector2(0, 0),
       anchor: Anchor.center,

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 
@@ -104,7 +105,10 @@ class _PurinMainMenuState extends State<PurinMainMenu>
               _floatingButton(
                 icon: Icons.fastfood_outlined,
                 label: "snacks",
-                onTap: () => _openOverlay("snackMenu"),
+                onTap: () {
+                  PurinMetricsUIState.singleton.showWidget();
+                  _openOverlay("snackMenu");
+                },
               ),
               const SizedBox(height: 9),
 

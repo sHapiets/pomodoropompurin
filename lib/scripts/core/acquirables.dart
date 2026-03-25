@@ -206,6 +206,21 @@ class Acquirables {
       spriteFlamePath: "study_table_sprites/wooden.png",
     ),
   };
+
+  Map<SofaDesigns, RoomDesign> sofas = {
+    SofaDesigns.pink: RoomDesign(
+      id: SofaDesigns.pink,
+      displayName: "Pink",
+      cost: 0,
+      iconAssetPath: "",
+      purinPositionVectors: {
+        PurinPosition.sofaSitLeft: Vector2(-315, 260),
+        PurinPosition.sofaSitRight: Vector2(-280, 250),
+        PurinPosition.sofaRest: Vector2(-305, 275),
+      },
+      spriteFlamePath: "sofa_sprites/default.png",
+    ),
+  };
 }
 
 enum PurinVars { boku, pumpkin, summer, bee, pika, yana, pol }
@@ -219,6 +234,8 @@ enum FutonDesigns { cyan }
 enum RefrigeratorDesigns { silver }
 
 enum StudyTableDesigns { wooden }
+
+enum SofaDesigns { pink }
 
 enum FloorDesigns { smooth }
 

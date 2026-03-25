@@ -147,6 +147,7 @@ class AssetManager {
       "purin_sprites/bee_spritesheet.png",
       "purin_sprites/pika_spritesheet.png",
       "purin_sprites/yana_spritesheet.png",
+      "purin_sprites/purin_shadow.png",
 
       "kotatsu_sprites/pudding.png",
       "kotatsu_sprites/aqua.png",
@@ -158,6 +159,7 @@ class AssetManager {
       "refrigerator_sprites/default.png",
       "study_table_sprites/wooden.png",
       "study_chair_sprites/default.png",
+      "sofa_sprites/default.png",
       "snack_shop_sprites/default.png",
       "kitchen_sprites/default.png",
       "kitchen_processors_sprites/stove.png",

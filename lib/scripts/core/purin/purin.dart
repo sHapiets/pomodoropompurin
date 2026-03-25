@@ -105,6 +105,21 @@ class Purin extends ChangeNotifier {
             .studyTable
             .value
             .purinPositionVectors[PurinPosition.study]!;
+      case PurinPosition.sofaSitLeft:
+        return purinAreaEquipManager
+            .sofa
+            .value
+            .purinPositionVectors[PurinPosition.sofaSitLeft]!;
+      case PurinPosition.sofaSitRight:
+        return purinAreaEquipManager
+            .sofa
+            .value
+            .purinPositionVectors[PurinPosition.sofaSitRight]!;
+      case PurinPosition.sofaRest:
+        return purinAreaEquipManager
+            .sofa
+            .value
+            .purinPositionVectors[PurinPosition.sofaRest]!;
     }
   }
 
@@ -117,6 +132,12 @@ class Purin extends ChangeNotifier {
       case PurinPosition.futon:
         return 40;
       case PurinPosition.study:
+        return 90;
+      case PurinPosition.sofaSitLeft:
+        return 90;
+      case PurinPosition.sofaSitRight:
+        return 90;
+      case PurinPosition.sofaRest:
         return 90;
     }
   }

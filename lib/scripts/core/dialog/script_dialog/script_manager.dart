@@ -64,10 +64,21 @@ class ScriptManager {
   }
 
   final List<String> purinFeedRandomScripts = [
-    "That hits the spot ~ !",
+    "~ That hits the spot ~ !",
     "I'm just warming up, keep it coming!",
-    "Anything mama-owner make is delicious!",
-    "Maybe I should diet.... never!",
+    "Anything mama-owner prepares is delicious!",
+    "Maybe I should diet.... starting never!",
+    "~ Fufu ~ One more bite… for balance!",
+    "Nom~nom~no-- wait, where did it all go?!",
+    "My belly says thank you kindly!",
+    "I regret nothing… except not having more!",
+    "Hehe~ I’ll burn it off… eventually!",
+    "If loving food is wrong, I don’t wanna be right!",
+    "I could eat this forever and ever!",
+    "I’m not stuffed… just efficiently filled!",
+    "Every bite is a masterpiece!",
+    "Mmm~ this hits different!",
+    "I could wrestle a bear after this! …Or nap.",
   ];
   final random = Random();
 

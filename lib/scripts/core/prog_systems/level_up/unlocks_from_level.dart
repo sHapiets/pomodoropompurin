@@ -45,5 +45,6 @@ class UnlocksFromLevel {
     9: PurinVars.pika,
     12: PurinVars.bee,
     16: PurinVars.summer,
+    17: PurinVars.yana,
   };
 }
