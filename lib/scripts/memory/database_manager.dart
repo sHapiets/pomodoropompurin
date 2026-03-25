@@ -5,6 +5,7 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/foundation/snack.dart';
 
 class DatabaseManager {
   DatabaseManager._();
@@ -100,6 +101,18 @@ class DatabaseManager {
     for (final amountMapEntry in amountMap.entries) {
       final consumable = Consumable.values.asNameMap()[amountMapEntry.key]!;
       loadedInventory.addAll({consumable: amountMapEntry.value});
+    }
+
+    return loadedInventory;
+  }
+
+  Future<Map<Snack, int>> snacksInventoryLoad() async {
+    Map<Snack, int> loadedInventory = {};
+
+    final amountMap = await userDataLoad('snacksInventory');
+    for (final amountMapEntry in amountMap.entries) {
+      final snack = Snack.values.asNameMap()[amountMapEntry.key]!;
+      loadedInventory.addAll({snack: amountMapEntry.value});
     }
 
     return loadedInventory;
@@ -222,6 +235,19 @@ class DatabaseManager {
       final amount = consumableEntry.value;
 
       updateMap.addAll({'consumableInventory.${consumable.name}': amount});
+    }
+
+    await userRef.update(updateMap);
+  }
+
+  Future<void> snacksInventorySave(Map<Snack, int> amountMap) async {
+    Map<String, int> updateMap = {};
+
+    for (MapEntry<Snack, int> snackEntry in amountMap.entries) {
+      final snack = snackEntry.key;
+      final amount = snackEntry.value;
+
+      updateMap.addAll({'snacksInventory.${snack.name}': amount});
     }
 
     await userRef.update(updateMap);

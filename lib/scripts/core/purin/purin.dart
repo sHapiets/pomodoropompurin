@@ -243,7 +243,31 @@ class Purin extends ChangeNotifier {
   }
 
   void feedSnack(Snack snack) {
-    final oshiriPoints = snack.oshiriPoints;
+    final oshiriRewards = snack.oshiriPoints;
+    final hungerRewards = snack.hungerPoints;
+    final energyRewards = snack.energyPoints;
+
+    progSystem.addOshiriPoints(oshiriRewards);
+    addHungerPoints(hunger: hungerRewards);
+    addEnergyPoints(energy: energyRewards);
+
+    stateManager.changeAction(PurinAction.feed);
+    ScriptManager.singleton.removePurinMenuDialog();
+    ScriptManager.singleton.addFeedDialog();
+    PurinMetricsUIState.singleton.showWidget();
+    UIDisplayState.singleton.hide.value = true;
+    PurinMetricsUIState.singleton.showWidget();
+    feedCooldown.cancel();
+    feedCooldown = async_lib.Timer.periodic(Duration(milliseconds: 2500), (
+      timer,
+    ) {
+      PurinMetricsUIState.singleton.hideWidget();
+      ScriptManager.singleton.removeFeedDialog();
+      PurinStateManager.singleton.action = PurinAction.idle;
+      notifyListeners();
+      timer.cancel();
+    });
+    notifyListeners();
   }
 
   /// HUNGER LOGIC

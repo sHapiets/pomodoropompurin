@@ -20,8 +20,10 @@ import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_consumable_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/menu/snack/snack_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/position_menu/purin_position_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/purchase_menu/snack_purchase_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_main_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/feed_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/level_up_script_widget.dart';
@@ -152,12 +154,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               "ovenMenu": (BuildContext context, PurinArea game) {
                 return KitchenMenu(kitchenProcessor: Oven.singleton);
               },
+              "snackMenu": (BuildContext context, PurinArea game) {
+                return SnackMenu();
+              },
 
               "shopMenu": (BuildContext context, PurinArea game) {
                 return PurchaseMenu();
               },
               "snackShopMenu": (BuildContext context, PurinArea game) {
-                return PurchaseMenu();
+                return SnackPurchaseMenu();
               },
             },
           ),

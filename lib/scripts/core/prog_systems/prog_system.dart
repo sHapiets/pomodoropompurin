@@ -122,7 +122,6 @@ class ProgSystem {
     _databaseManager.userDataSave('oshiriPoints', oshiriPoints.value);
   }
 
-  /// Inventory
   void addConsumable(Consumable consumable, int amount) {
     consumableInventory[consumable]!.value =
         consumableInventory[consumable]!.value + amount;
@@ -139,6 +138,13 @@ class ProgSystem {
     });
   }
 
+  void addSnack(Snack snack, int amount) {
+    snacksInventory[snack]!.value = snacksInventory[snack]!.value + amount;
+    _databaseManager.snacksInventorySave({
+      snack: snacksInventory[snack]!.value,
+    });
+  }
+
   void useConsumable(Consumable consumable, int amount) {
     consumableInventory[consumable]!.value =
         consumableInventory[consumable]!.value - amount;
@@ -152,6 +158,13 @@ class ProgSystem {
         ingridientInventory[ingridient]!.value - amount;
     _databaseManager.ingridientInventorySave({
       ingridient: ingridientInventory[ingridient]!.value,
+    });
+  }
+
+  void useSnack(Snack snack, int amount) {
+    snacksInventory[snack]!.value = snacksInventory[snack]!.value - amount;
+    _databaseManager.snacksInventorySave({
+      snack: snacksInventory[snack]!.value,
     });
   }
 
@@ -188,6 +201,12 @@ class ProgSystem {
   void loadConsumableInventory(Map<Consumable, int> amountMap) {
     for (MapEntry<Consumable, int> amountMapEntry in amountMap.entries) {
       consumableInventory[amountMapEntry.key]!.value = amountMapEntry.value;
+    }
+  }
+
+  void loadSnacksInventory(Map<Snack, int> amountMap) {
+    for (MapEntry<Snack, int> amountMapEntry in amountMap.entries) {
+      snacksInventory[amountMapEntry.key]!.value = amountMapEntry.value;
     }
   }
 

@@ -119,14 +119,6 @@ class ScriptsMap {
               "Orrrr... at least I keep one of them company while we find for the other one!",
         },
       ],
-      onBegin: () {
-        Purin.singleton.changePosition(PurinPosition.futon);
-        PurinAreaStateManager.singleton.jumpToPosition(
-          Purin.singleton.purinPositionVect2,
-          Vector2.zero(),
-          2.2,
-        );
-      },
       onFinished: () {
         ScriptManager.singleton.removeLevelUpDialog();
       },
@@ -200,36 +192,40 @@ class ScriptsMap {
     ),
 
     8: ScriptDialog(
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.futon);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
       ],
       dialogues: [
-        {"Purin": "..."},
-        {"Purin": "I'm a bit sad right now..."},
+        {"Purin": "I like going to bed early."},
         {
           "Purin":
-              "Just a while ago, I was saving this perfect slice of porkchop.",
+              "Though it's kinda because there's not much for me to do anyways.",
         },
         {
           "Purin":
-              "I hid it somewhere in the fridge, but now, I couldn't find it...",
+              "Maybe if I get a job someday, I would get to do lots of things during the day.",
         },
         {
           "Purin":
-              "I'm thinking that maybe I should have eaten it while I had the chance",
+              "It would be... such a good use.... of my several talents.....",
         },
-        {"Purin": "Or maybe it was just never meant to fill me up..."},
-        {"Purin": "...."},
-        {"Purin": "Thinking about this porkchop makes me just as hungry!"},
-        {"Purin": "A pizza right now would be nice ~pom-u~."},
+        {"Purin": "....but until then....."},
+        {"Purin": "..........Zz....."},
+        {"Purin": "...ZzZzzZzzZ....ZzzzZ...."},
       ],
       onFinished: () {
         ScriptManager.singleton.removeLevelUpDialog();
@@ -272,40 +268,36 @@ class ScriptsMap {
 
     10: ScriptDialog(
       imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
       ],
       dialogues: [
-        {"Purin": "I like going to bed early."},
+        {"Purin": "..."},
+        {"Purin": "I'm a bit sad right now..."},
         {
           "Purin":
-              "Though it's kinda because there's not much for me to do anyways.",
+              "Just a while ago, I was saving this perfect slice of porkchop.",
         },
         {
           "Purin":
-              "Maybe if I get a job someday, I would get to do lots of things during the day.",
+              "I hid it somewhere in the fridge, but now, I couldn't find it...",
         },
         {
           "Purin":
-              "It would be... such a good use.... of my several talents.....",
+              "I'm thinking that maybe I should have eaten it while I had the chance",
         },
-        {"Purin": "....but until then....."},
-        {"Purin": "..........Zz....."},
-        {"Purin": "...ZzZzzZzzZ....ZzzzZ...."},
+        {"Purin": "Or maybe it was just never meant to fill me up..."},
+        {"Purin": "...."},
+        {"Purin": "Thinking about this porkchop makes me just as hungry!"},
+        {"Purin": "A pizza right now would be nice ~pom-u~."},
       ],
-      onBegin: () {
-        Purin.singleton.changePosition(PurinPosition.futon);
-        PurinAreaStateManager.singleton.jumpToPosition(
-          Purin.singleton.purinPositionVect2,
-          Vector2.zero(),
-          2.2,
-        );
-      },
       onFinished: () {
         ScriptManager.singleton.removeLevelUpDialog();
       },

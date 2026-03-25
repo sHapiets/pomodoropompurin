@@ -1,5 +1,6 @@
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/foundation/snack.dart';
 
 /// A class collection of unlock maps that are awarded to the user
 /// after reaching a certain oshiriLevel
@@ -22,12 +23,20 @@ class UnlocksFromLevel {
   static Map<int, List<Ingridient>> purchasableIngridients = {
     2: [Ingridient.eggs, Ingridient.milk, Ingridient.butter],
     3: [Ingridient.flour],
-    5: [Ingridient.onion, Ingridient.groundPork, Ingridient.riceGrains],
-    6: [Ingridient.puddingCream, Ingridient.pancakeBatter],
-    7: [Ingridient.choppedOnions, Ingridient.cookedRice],
-    8: [Ingridient.yeast, Ingridient.tomato, Ingridient.olives],
-    9: [Ingridient.puddingBatter, Ingridient.patty],
-    11: [Ingridient.dough, Ingridient.pizzaToppings],
+    6: [Ingridient.onion, Ingridient.groundPork, Ingridient.riceGrains],
+    7: [Ingridient.puddingCream, Ingridient.pancakeBatter],
+    8: [Ingridient.choppedOnions, Ingridient.cookedRice],
+    10: [Ingridient.yeast, Ingridient.tomato, Ingridient.olives],
+    11: [Ingridient.puddingBatter, Ingridient.patty],
+    13: [Ingridient.dough, Ingridient.pizzaToppings],
+  };
+
+  static Map<int, List<Snack>> purchaseableSnack = {
+    2: [Snack.potatoChips],
+    5: [Snack.hotCocoa],
+    9: [Snack.cheeseIceCream],
+    14: [Snack.chocolateCupcake],
+    15: [Snack.strawberryCupcake],
   };
 
   static Map<int, PurinVars> acquiredPurinVars = {

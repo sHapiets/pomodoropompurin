@@ -101,6 +101,12 @@ class _PurinMainMenuState extends State<PurinMainMenu>
               ),
 
               const SizedBox(height: 18),
+              _floatingButton(
+                icon: Icons.fastfood_outlined,
+                label: "snacks",
+                onTap: () => _openOverlay("snackMenu"),
+              ),
+              const SizedBox(height: 9),
 
               _floatingButton(
                 icon: Icons.transform_rounded,
@@ -119,7 +125,7 @@ class _PurinMainMenuState extends State<PurinMainMenu>
 
               _floatingButton(
                 icon: Icons.chat_bubble_outline,
-                label: "thoughts",
+                label: "words of wisdom",
                 onTap: () => _openOverlay("purinPositionMenu"),
               ),
             ],

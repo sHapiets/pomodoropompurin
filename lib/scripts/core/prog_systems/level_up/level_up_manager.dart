@@ -55,6 +55,17 @@ class LevelUpManager extends ChangeNotifier {
         ],
       ]);
     }
+    if (UnlocksFromLevel.purchaseableSnack[currentLevel] != null) {
+      unlockedPurchasables.addAll(
+        UnlocksFromLevel.purchaseableSnack[currentLevel]!.map((snack) {
+          return [
+            snack.displayName,
+            "New Purchasable Snack!",
+            snack.iconFlutterPath,
+          ];
+        }).toList(),
+      );
+    }
 
     if (UnlocksFromLevel.purchasableIngridients[currentLevel] != null) {
       unlockedPurchasables.addAll(

@@ -67,6 +67,7 @@ class PurinArea extends FlameGame
   @override
   void onTapDown(TapDownEvent event) {
     UIDisplayState.singleton.hide.value = false;
+    PurinMetricsUIState.singleton.hideWidget();
     overlays.removeAll(overlays.activeOverlays);
     scriptManager.removeAllDialogs();
 
@@ -118,6 +119,7 @@ class PurinArea extends FlameGame
   @override
   void onPanUpdate(DragUpdateInfo info) {
     UIDisplayState.singleton.hide.value = false;
+    PurinMetricsUIState.singleton.hideWidget();
     overlays.removeAll(overlays.activeOverlays);
     scriptManager.removeAllDialogs();
     if (purinAreaStateManager.state.value == "Moving") {

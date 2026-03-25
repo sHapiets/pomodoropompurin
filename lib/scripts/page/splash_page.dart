@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:ui_web';
-
-import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
@@ -108,6 +105,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         );
         _progSystem.loadConsumableInventory(
           await _databaseManager.consumableInventoryLoad(),
+        );
+        _progSystem.loadSnacksInventory(
+          await _databaseManager.snacksInventoryLoad(),
         );
       }),
 

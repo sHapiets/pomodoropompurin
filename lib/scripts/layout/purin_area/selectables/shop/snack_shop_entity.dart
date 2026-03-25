@@ -8,7 +8,7 @@ import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable
 class SnackShopEntity extends PurinAreaSelectable {
   SnackShopEntity()
     : super(
-        position: Vector2(0, 95),
+        position: Vector2(-80, 95),
         hitbox: PolygonHitbox(
           [
             Vector2(-45, -30),
