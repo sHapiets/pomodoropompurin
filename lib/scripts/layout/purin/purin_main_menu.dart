@@ -113,14 +113,7 @@ class _PurinMainMenuState extends State<PurinMainMenu>
               const SizedBox(height: 9),
 
               _floatingButton(
-                icon: Icons.transform_rounded,
-                label: "move",
-                onTap: () => _openOverlay("purinPositionMenu"),
-              ),
-              const SizedBox(height: 9),
-
-              _floatingButton(
-                icon: Icons.checkroom_rounded,
+                icon: Icons.pets_rounded,
                 label: "collection",
                 onTap: () => _openOverlay("purinEquipMenu"),
               ),
@@ -130,6 +123,20 @@ class _PurinMainMenuState extends State<PurinMainMenu>
               _floatingButton(
                 icon: Icons.chat_bubble_outline,
                 label: "words of wisdom",
+                onTap: () => _openOverlay("wordsOfWisdomMenu"),
+              ),
+              const SizedBox(height: 9),
+
+              _floatingButton(
+                icon: Icons.military_tech_rounded,
+                label: "shoe achievements",
+                onTap: () => _openOverlay("shoeAchievementMenu"),
+              ),
+              const SizedBox(height: 9),
+
+              _floatingButton(
+                icon: Icons.transform_rounded,
+                label: "move",
                 onTap: () => _openOverlay("purinPositionMenu"),
               ),
             ],

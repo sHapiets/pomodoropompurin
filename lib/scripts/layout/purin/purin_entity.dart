@@ -13,6 +13,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/effects/floating_plus_oshiri.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
@@ -220,6 +221,7 @@ class PurinEntity extends PositionComponent
   @override
   void onLongTapDown(TapDownEvent event) {
     UIDisplayState.singleton.hide.value = true;
+    PurinMetricsUIState.singleton.hideWidget();
     game.overlays.removeAll(game.overlays.activeOverlays);
     purinAreaStateManager.jumpToPosition(
       absolutePosition,

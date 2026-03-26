@@ -15,7 +15,7 @@ class ShoeAchievementManager extends ChangeNotifier {
   final progSystem = ProgSystem.singleton;
   final databaseManager = DatabaseManager.singleton;
   Widget shoeAchievementDialog = ShoeAchievementDialog(
-    newShoeAchievement: ShoeAchievement.none,
+    newShoeAchievement: ShoeAchievement.slippers,
   );
 
   int accTotalTime = 0;

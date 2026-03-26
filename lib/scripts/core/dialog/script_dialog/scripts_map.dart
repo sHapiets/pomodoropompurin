@@ -23,6 +23,15 @@ import 'package:pomodoropompurin/scripts/page/main_page.dart';
 class ScriptsMap {
   static final Map<int, ScriptDialog> fromLevelUp = {
     3: ScriptDialog(
+      title: "A Snack-y Thought....",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuLeft);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
@@ -61,6 +70,15 @@ class ScriptsMap {
     ),
 
     4: ScriptDialog(
+      title: "A Refrigerator's Best Friend!",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.sofaRest);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
@@ -90,6 +108,15 @@ class ScriptsMap {
     ),
 
     5: ScriptDialog(
+      title: "A Shoe's for Two's",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuRight);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
@@ -125,6 +152,15 @@ class ScriptsMap {
     ),
 
     6: ScriptDialog(
+      title: "Eating vs Sleeping: The Final Showdown",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuLeft);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
@@ -158,6 +194,15 @@ class ScriptsMap {
     ),
 
     7: ScriptDialog(
+      title: "The friends we made along the way....",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.sofaSitLeft);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
@@ -192,6 +237,7 @@ class ScriptsMap {
     ),
 
     8: ScriptDialog(
+      title: "-eepy...zZzZ....-head",
       onBegin: () {
         Purin.singleton.changePosition(PurinPosition.futon);
         PurinAreaStateManager.singleton.jumpToPosition(
@@ -233,6 +279,15 @@ class ScriptsMap {
     ),
 
     9: ScriptDialog(
+      title: "A Nasty Moisty Dilemma",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuLeft);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
@@ -267,6 +322,15 @@ class ScriptsMap {
     ),
 
     10: ScriptDialog(
+      title: "Save the Best for Last",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuRight);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
@@ -304,6 +368,15 @@ class ScriptsMap {
     ),
 
     11: ScriptDialog(
+      title: "Do cows drink milk.....?",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.study);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
@@ -361,6 +434,15 @@ class ScriptsMap {
     ),
 
     12: ScriptDialog(
+      title: "Trees be like BRRRRTTT!",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuLeft);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
       imagePaths: [
         AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
         AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,

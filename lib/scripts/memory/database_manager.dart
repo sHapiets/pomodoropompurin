@@ -61,7 +61,6 @@ class DatabaseManager {
 
   Future<Map<ShoeAchievement, bool>> acquiredShoeAchievementLoad() async {
     final Map<ShoeAchievement, bool> shoeAchievementMap = {};
-    shoeAchievementMap.addAll({ShoeAchievement.none: true});
 
     final acquiredShoeAchievementDoc = await userRef
         .collection('acquired')

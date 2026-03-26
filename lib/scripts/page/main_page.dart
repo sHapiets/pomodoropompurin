@@ -30,6 +30,7 @@ import 'package:pomodoropompurin/scripts/layout/script_dialog/level_up_script_wi
 import 'package:pomodoropompurin/scripts/layout/script_dialog/pet_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/purin_menu_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/tutorial_script_widget.dart';
+import 'package:pomodoropompurin/scripts/layout/shoe_achievement/shoe_achievement_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/purin_metrics_main_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/purin_metrics_ui.dart';
@@ -38,6 +39,7 @@ import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
+import 'package:pomodoropompurin/scripts/layout/words_of_wisdom/words_of_wisdom_menu.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/tutorial_page_blocker.dart';
@@ -132,6 +134,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               },
               "purinMainMenu": (BuildContext context, PurinArea game) {
                 return PurinMainMenu();
+              },
+              "wordsOfWisdomMenu": (BuildContext context, PurinArea game) {
+                return WordsOfWisdomMenu();
+              },
+              "shoeAchievementMenu": (BuildContext context, PurinArea game) {
+                return ShoeAchievementMenu();
               },
 
               "kotatsuMenu": (BuildContext context, PurinArea game) {

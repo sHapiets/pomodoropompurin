@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
 import 'package:pomodoropompurin/scripts/foundation/snack.dart';
@@ -60,10 +61,12 @@ class AssetManager {
     'mixer_shadow_objects_icon':
         'assets/images/character_icons/objects/mixer_shadow.png',
     'stove_objects_icon': 'assets/images/character_icons/objects/stove.png',
+    'shoe_icon': 'assets/images/shoe_achievement_icons/shoe_icon.png',
 
     ...{for (final ing in Ingridient.values) ing.name: ing.spriteFlutterPath},
     ...{for (final con in Consumable.values) con.name: con.iconFlutterPath},
     ...{for (final sna in Snack.values) sna.name: sna.iconFlutterPath},
+    ...{for (final sA in ShoeAchievement.values) sA.name: sA.flutterAssetPath},
     ...{
       for (final purinVar in Acquirables.singleton.purinVars.values)
         purinVar.displayName: purinVar.iconAssetPath,

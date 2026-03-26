@@ -23,7 +23,6 @@ class ProgSystem {
 
   ValueNotifier<int> accTotalTime = ValueNotifier(0);
   Map<ShoeAchievement, bool> acquiredShoeAchievementBool = {
-    ShoeAchievement.none: true,
     ShoeAchievement.slippers: false,
     ShoeAchievement.sneakers: false,
   };

@@ -10,6 +10,7 @@ import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart
 import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/energy_ui.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/hunger_ui.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
+import 'package:pomodoropompurin/scripts/page/main_page.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class ProgSystemDisplay extends StatefulWidget {
@@ -249,37 +250,34 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: GestureDetector(
-                      onTap: () => progSystem.addOshiriPoints(100),
-                      child: Tooltip(
+                    child: Tooltip(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(133, 99, 99, 99),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      message: "PomPoints",
+                      textStyle: const TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      verticalOffset: 10,
+                      child: Container(
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(133, 99, 99, 99),
-                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromARGB(0, 255, 255, 255),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(3, 3),
+                            ),
+                          ],
                         ),
-                        message: "PomPoints",
-                        textStyle: const TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                        verticalOffset: 10,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(0, 255, 255, 255),
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12,
-                                offset: Offset(3, 3),
-                              ),
-                            ],
-                          ),
-                          height: 30,
-                          width: 30,
-                          child: Image.asset(
-                            assetManager.flutterAssetPaths['pP_icon']!,
-                          ),
+                        height: 30,
+                        width: 30,
+                        child: Image.asset(
+                          assetManager.flutterAssetPaths['pP_icon']!,
                         ),
                       ),
                     ),

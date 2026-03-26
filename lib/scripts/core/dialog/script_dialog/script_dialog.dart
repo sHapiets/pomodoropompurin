@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 
 class ScriptDialog extends StatefulWidget {
+  final String title;
   final List<String> imagePaths;
   final List<Map<String, String>> dialogues;
   final int mode;
@@ -15,6 +16,7 @@ class ScriptDialog extends StatefulWidget {
 
   ScriptDialog({
     Key? key,
+    this.title = "",
     required this.imagePaths,
     required this.dialogues,
     this.mode = 0,
