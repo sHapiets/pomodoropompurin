@@ -23,6 +23,10 @@ class DatabaseManager {
   CollectionReference get statusRef => userRef.collection('status');
   CollectionReference get configRef => userRef.collection('config');
 
+  void changeUser(String user) {
+    userRef = FirebaseFirestore.instance.collection('users').doc(user);
+  }
+
   void reloadUserDocRef() {
     if (accountManager.currentUser == null) {
       return;

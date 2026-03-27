@@ -10,7 +10,6 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
-import 'package:pomodoropompurin/scripts/page/debug/debug_splash_page.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/foundation/status_conversion.dart';
@@ -19,14 +18,15 @@ import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+class DebugSplashPage extends StatefulWidget {
+  const DebugSplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<DebugSplashPage> createState() => _DebugSplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
+class _DebugSplashPageState extends State<DebugSplashPage>
+    with TickerProviderStateMixin {
   final _assetManager = AssetManager.singleton;
   final _accountManager = AccountManager.singleton;
   final _databaseManager = DatabaseManager.singleton;
@@ -45,7 +45,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   int _totalSteps = 0;
   int _completedSteps = 0;
   late final List<MapEntry<String, Future<void> Function()>> loadSteps;
-  bool _isCancelled = false;
 
   Completer<bool>? _audioCompleter;
   ValueNotifier<bool> showEnableAudioBool = ValueNotifier(false);
@@ -88,8 +87,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     loadSteps = [
       MapEntry('Declaring User....', () async {
-        _databaseManager.changeUser('yana');
+        _databaseManager.changeUser('jd-debug');
       }),
+
       MapEntry('Restoring User Progress...', () async {
         _progSystem.loadPomPoints(
           await _databaseManager.userDataLoad('pomPoints'),
@@ -259,7 +259,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   Future<void> _runStep(String label, Future<void> Function() task) async {
-    if (!mounted || _isCancelled) return;
+    if (!mounted) return;
 
     setState(() {
       _currentStep = label;
@@ -282,7 +282,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     await loadKoupenAnimation();
 
     dotCounterTimer = Timer.periodic(Duration(milliseconds: 400), (timer) {
-      if (_isCancelled) return;
       if (dotCounter.value == 3) {
         dotCounter.value = 0;
         return;
@@ -291,11 +290,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
 
     for (final step in loadSteps) {
-      if (_isCancelled) return;
       await _runStep(step.key, step.value);
     }
 
-    if (!mounted || _isCancelled) return;
+    if (!mounted) return;
 
     Navigator.pushReplacement(
       context,
@@ -327,17 +325,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
   }
 
-  void switchToDebug() {
-    _isCancelled = true;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => DebugSplashPage()),
-    );
-  }
-
   @override
   void dispose() {
-    _isCancelled = true;
     dotCounterTimer.cancel();
     koupenPositionController?.dispose();
     koupenSwitchTimer?.cancel();
@@ -372,162 +361,153 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                 child: SizedBox(
                   height: 700,
                   width: 300,
-                  child: Stack(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SlideTransition(
-                            position:
-                                koupenPositionAnimation ??
-                                AlwaysStoppedAnimation(Offset.zero),
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: SizedBox(
-                                height: 100,
-                                child: koupenAnimation,
+                      SlideTransition(
+                        position:
+                            koupenPositionAnimation ??
+                            AlwaysStoppedAnimation(Offset.zero),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: SizedBox(height: 100, child: koupenAnimation),
+                        ),
+                      ),
+
+                      const SizedBox(height: 24),
+                      Text(
+                        'Koupen-chan is fetching your data...',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        '- WARNING: ENTERING DEBUG MODE - ',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.red,
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      ValueListenableBuilder(
+                        valueListenable: dotCounter,
+                        builder: (context, value, child) {
+                          return loadingDot(value, 1);
+                        },
+                      ),
+                      const SizedBox(height: 50),
+                      ValueListenableBuilder(
+                        valueListenable: dotCounter,
+                        builder: (context, value, child) {
+                          return loadingDot(value, 2);
+                        },
+                      ),
+                      const SizedBox(height: 50),
+                      ValueListenableBuilder(
+                        valueListenable: dotCounter,
+                        builder: (context, value, child) {
+                          return loadingDot(value, 3);
+                        },
+                      ),
+
+                      const SizedBox(height: 50),
+                      Text(
+                        _currentStep,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: TweenAnimationBuilder(
+                          tween: Tween<double>(begin: 0, end: _progress),
+                          duration: const Duration(milliseconds: 1200),
+                          curve: Curves.easeOutCirc,
+                          builder: (context, value, child) {
+                            return LinearProgressIndicator(
+                              value: value,
+                              minHeight: 7,
+                              backgroundColor: const Color.fromARGB(
+                                89,
+                                255,
+                                255,
+                                255,
                               ),
-                            ),
-                          ),
+                              color: Colors.white,
+                            );
+                          },
+                        ),
+                      ),
 
-                          const SizedBox(height: 24),
-                          Text(
-                            'Koupen-chan is fetching your data...',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 50),
-                          ValueListenableBuilder(
-                            valueListenable: dotCounter,
-                            builder: (context, value, child) {
-                              return loadingDot(value, 1);
-                            },
-                          ),
-                          const SizedBox(height: 50),
-                          ValueListenableBuilder(
-                            valueListenable: dotCounter,
-                            builder: (context, value, child) {
-                              return loadingDot(value, 2);
-                            },
-                          ),
-                          const SizedBox(height: 50),
-                          ValueListenableBuilder(
-                            valueListenable: dotCounter,
-                            builder: (context, value, child) {
-                              return loadingDot(value, 3);
-                            },
-                          ),
+                      const SizedBox(height: 14),
 
-                          const SizedBox(height: 50),
-                          Text(
-                            _currentStep,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                      Text(
+                        "${(_progress * 100).toInt()}%",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white70,
+                        ),
+                      ),
 
-                          const SizedBox(height: 24),
+                      const SizedBox(height: 14),
 
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: TweenAnimationBuilder(
-                              tween: Tween<double>(begin: 0, end: _progress),
-                              duration: const Duration(milliseconds: 1200),
-                              curve: Curves.easeOutCirc,
-                              builder: (context, value, child) {
-                                return LinearProgressIndicator(
-                                  value: value,
-                                  minHeight: 7,
-                                  backgroundColor: const Color.fromARGB(
-                                    89,
-                                    255,
-                                    255,
-                                    255,
+                      ValueListenableBuilder(
+                        valueListenable: showEnableAudioBool,
+                        builder: (context, show, child) {
+                          return AnimatedScale(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOutBack,
+                            scale: show ? 1 : 0,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                const Text(
+                                  "enable audio....?",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  color: Colors.white,
-                                );
-                              },
-                            ),
-                          ),
-
-                          const SizedBox(height: 14),
-
-                          Text(
-                            "${(_progress * 100).toInt()}%",
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
-                          ),
-
-                          const SizedBox(height: 14),
-
-                          ValueListenableBuilder(
-                            valueListenable: showEnableAudioBool,
-                            builder: (context, show, child) {
-                              return AnimatedScale(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOutBack,
-                                scale: show ? 1 : 0,
-                                child: Column(
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const SizedBox(height: 20),
-                                    const Text(
-                                      "enable audio....?",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
+                                    IconButton(
+                                      onPressed: () {
+                                        _audioCompleter?.complete(true);
+                                      },
+                                      icon: Icon(
+                                        Icons.volume_up_rounded,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            _audioCompleter?.complete(true);
-                                          },
-                                          icon: Icon(
-                                            Icons.volume_up_rounded,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 12),
-                                        IconButton(
-                                          onPressed: () {
-                                            _audioCompleter?.complete(false);
-                                          },
-                                          icon: Icon(
-                                            Icons.volume_off_rounded,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
+                                    const SizedBox(width: 12),
+                                    IconButton(
+                                      onPressed: () {
+                                        _audioCompleter?.complete(false);
+                                      },
+                                      icon: Icon(
+                                        Icons.volume_off_rounded,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ],
                                 ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          onPressed: switchToDebug,
-                          icon: Icon(
-                            Icons.computer_rounded,
-                            color: Colors.white,
-                          ),
-                        ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
