@@ -10,7 +10,7 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
-import 'package:pomodoropompurin/scripts/page/debug/debug_splash_page.dart';
+import 'package:pomodoropompurin/scripts/page/devmode/devmode_splash_page.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/foundation/status_conversion.dart';
@@ -198,6 +198,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               statusPomTimer["wasTimeTotalSeconds"];
           pomTimerInterruptedManager.wasMultiplierTotal =
               statusPomTimer["wasMultiplierTotal"];
+        } else {
+          pomTimerInterruptedManager.wasActive = false;
         }
 
         await TutorialManager.singleton.initialize();
@@ -327,11 +329,113 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
   }
 
-  void switchToDebug() {
+  void switchToDevMode() {
     _isCancelled = true;
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => DebugSplashPage()),
+      MaterialPageRoute(builder: (_) => DevModeSplashPage()),
+    );
+  }
+
+  Future<void> showDebugSwitcherDialog() async {
+    await showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.6),
+      builder: (context) {
+        return Dialog(
+          constraints: BoxConstraints(maxWidth: 300, minWidth: 300),
+          backgroundColor: const Color.fromARGB(255, 40, 40, 40),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: DefaultTextStyle.merge(
+            style: TextStyle(fontFamily: 'Nunito'),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Icon
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.05),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.computer_rounded,
+                      color: Colors.white,
+                      size: 26,
+                    ),
+                  ),
+
+                  const SizedBox(height: 18),
+
+                  const Text(
+                    "Enter Developer-Mode?",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  const Text(
+                    "This switches your current session to developer-mode, which uses the Koupen's debug-user dataset. Note that proceeding with an outdated client might cause errors due to backend mismatch.\n\nContinue?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white70,
+                      height: 1.4,
+                    ),
+                  ),
+
+                  const SizedBox(height: 22),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white70,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Cancel"),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            switchToDevMode();
+                          },
+                          child: const Text(
+                            "Switch",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -522,7 +626,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                       Align(
                         alignment: Alignment.topRight,
                         child: IconButton(
-                          onPressed: switchToDebug,
+                          onPressed: showDebugSwitcherDialog,
                           icon: Icon(
                             Icons.computer_rounded,
                             color: Colors.white,

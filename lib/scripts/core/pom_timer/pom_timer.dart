@@ -36,9 +36,12 @@ class PomTimer {
   final pomTimerDisplayStateManager = PomTimerDisplayStateManager.singleton;
 
   Timer timer = Timer.periodic(const Duration(seconds: 0), (timer) {});
+  DateTime playStartDateTime = DateTime.now();
   int loopsSet = 3;
   int timeSetWorkSeconds = 0; // The initialized values
   int timeSetBreakSeconds = 0;
+
+  int totalSessionTimeSeconds = 0;
 
   int timeTotalSeconds =
       0; // Total time for rewards (max is loopsSet * timeSetWork)
@@ -93,10 +96,38 @@ class PomTimer {
       pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
 
       int wasActiveTimeSaverStep = 0;
-      int saverStepsCount = 60;
+      int saverStepsCount = 1200;
 
-      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        timeLeftSeconds--;
+      DateTime recordedDateTime = DateTime.now();
+      int recordedTimeLeftSeconds = timeLeftSeconds;
+      int recordedDeltaMilli = 0;
+
+      timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
+        final currenDateTime = DateTime.now();
+        final deltaMilli = currenDateTime
+            .difference(recordedDateTime)
+            .inMilliseconds;
+        recordedDateTime = currenDateTime;
+        recordedDeltaMilli += deltaMilli;
+
+        int deltaSeconds = (recordedDeltaMilli / 1000).floor();
+        timeLeftSeconds -= deltaSeconds;
+        recordedDeltaMilli -= deltaSeconds * 1000;
+
+        if (timeLeftSeconds < -1) {
+          timeLeftSeconds = -1;
+          deltaSeconds = recordedTimeLeftSeconds;
+        }
+
+        /// Adding to timeTotal and multiplerFromEnergy
+        if (!onBreak && deltaSeconds >= 1) {
+          multiplierTotal +=
+              PointMultiplier.fromEnergy(purin.stateManager.energy.value) *
+              deltaSeconds;
+          timeTotalSeconds += deltaSeconds;
+        }
+
+        recordedTimeLeftSeconds = timeLeftSeconds;
 
         //// LOOPSSET: Break-Work Switching (or end if no more loops)
         if (timeLeftSeconds < 0) {
@@ -127,14 +158,6 @@ class PomTimer {
           }
         }
 
-        /// Adding to timeTotal and multiplerFromEnergy
-        if (!onBreak) {
-          multiplierTotal += PointMultiplier.fromEnergy(
-            purin.stateManager.energy.value,
-          );
-          timeTotalSeconds++;
-        }
-
         /// Update Koupen of current TimeTotalSeconds every saverStepsCount
         wasActiveTimeSaverStep += 1;
         if (wasActiveTimeSaverStep >= saverStepsCount) {
@@ -147,7 +170,9 @@ class PomTimer {
         }
 
         /// Periodical Updates to update PomTimerDisplay
-        pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
+        if (deltaSeconds > 0) {
+          pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;
+        }
       });
     }
   }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pomodoropompurin/scripts/page/debug/debug_splash_page.dart';
+import 'package:pomodoropompurin/scripts/page/devmode/devmode_splash_page.dart';
 import 'package:pomodoropompurin/scripts/page/splash_page.dart';
 
 import 'firebase_options.dart';
@@ -26,7 +26,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: "PomodoroPomPurin",
       navigatorKey: navigatorKey,
-      home: SplashPage(),
+      home: DevModeSplashPage(),
     );
   }
 }

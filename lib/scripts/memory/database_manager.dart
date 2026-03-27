@@ -14,12 +14,9 @@ class DatabaseManager {
   final accountManager = AccountManager.singleton;
 
   // Easy access references, if ever needed...
-  /// NOTE: userRef only points to YANA's data, while debugRef points to JOSEPH
   DocumentReference userRef = FirebaseFirestore.instance
       .collection("users")
       .doc("yana");
-  // final userRef = FirebaseFirestore.instance.collection("users").doc("jd");
-
   CollectionReference get statusRef => userRef.collection('status');
   CollectionReference get configRef => userRef.collection('config');
 

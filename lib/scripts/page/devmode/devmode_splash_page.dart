@@ -18,14 +18,14 @@ import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 
-class DebugSplashPage extends StatefulWidget {
-  const DebugSplashPage({super.key});
+class DevModeSplashPage extends StatefulWidget {
+  const DevModeSplashPage({super.key});
 
   @override
-  State<DebugSplashPage> createState() => _DebugSplashPageState();
+  State<DevModeSplashPage> createState() => _DevModeSplashPageState();
 }
 
-class _DebugSplashPageState extends State<DebugSplashPage>
+class _DevModeSplashPageState extends State<DevModeSplashPage>
     with TickerProviderStateMixin {
   final _assetManager = AssetManager.singleton;
   final _accountManager = AccountManager.singleton;
@@ -198,6 +198,8 @@ class _DebugSplashPageState extends State<DebugSplashPage>
               statusPomTimer["wasTimeTotalSeconds"];
           pomTimerInterruptedManager.wasMultiplierTotal =
               statusPomTimer["wasMultiplierTotal"];
+        } else {
+          pomTimerInterruptedManager.wasActive = false;
         }
 
         await TutorialManager.singleton.initialize();
@@ -386,7 +388,7 @@ class _DebugSplashPageState extends State<DebugSplashPage>
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        '- WARNING: ENTERING DEBUG MODE - ',
+                        '- WARNING: ENTERING DEVELOPER MODE - ',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 14,
