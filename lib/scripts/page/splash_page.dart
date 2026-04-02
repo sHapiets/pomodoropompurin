@@ -10,6 +10,8 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
+import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
+import 'package:pomodoropompurin/scripts/foundation/client_version.dart';
 import 'package:pomodoropompurin/scripts/page/devmode/devmode_splash_page.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
@@ -34,6 +36,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   final pomTimerInterruptedManager = PomTimerInterruptedManager.singleton;
   final _progSystem = ProgSystem.singleton;
   final activityManager = ActivityManager.singleton;
+  final clientVersionManager = ClientVersionManager.singleton;
   final acquirables = Acquirables.singleton;
   final purin = Purin.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
@@ -158,6 +161,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         );
       }),
 
+      MapEntry('Coordinating VCS...', () async {
+        final recordedVersion = ClientVersion.fromVersionNumber(
+          await _databaseManager.versionClientLoad(),
+        );
+        clientVersionManager.initialize(recordedVersion);
+      }),
+
       MapEntry('Calculating Current Status...', () async {
         final savedPurinMetrics = await _databaseManager
             .statusPurinMetricsLoad();
@@ -251,6 +261,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
       MapEntry('Initializing...', () async {
         await PurinArea.gameSingleton.onLoad();
+        if (clientVersionManager.wasOutdated) {
+          await _databaseManager.versionClientSave(
+            clientVersionManager.clientVersion,
+          );
+        }
         await Future.delayed(Duration(seconds: 3));
       }),
     ];

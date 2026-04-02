@@ -36,6 +36,7 @@ class _DevModeSplashPageState extends State<DevModeSplashPage>
   final pomTimerInterruptedManager = PomTimerInterruptedManager.singleton;
   final _progSystem = ProgSystem.singleton;
   final activityManager = ActivityManager.singleton;
+  final clientVersionManager = ClientVersionManager.singleton;
   final acquirables = Acquirables.singleton;
   final purin = Purin.singleton;
   final purinAreaEquipManager = PurinAreaEquipManager.singleton;
@@ -161,16 +162,10 @@ class _DevModeSplashPageState extends State<DevModeSplashPage>
       }),
 
       MapEntry('Coordinating VCS...', () async {
-        final clientVersionManager = ClientVersionManager.singleton;
         final recordedVersion = ClientVersion.fromVersionNumber(
           await _databaseManager.versionClientLoad(),
         );
         clientVersionManager.initialize(recordedVersion);
-        if (clientVersionManager.wasOutdated) {
-          await _databaseManager.versionClientSave(
-            clientVersionManager.clientVersion,
-          );
-        }
       }),
 
       MapEntry('Calculating Current Status...', () async {
@@ -266,6 +261,11 @@ class _DevModeSplashPageState extends State<DevModeSplashPage>
 
       MapEntry('Initializing...', () async {
         await PurinArea.gameSingleton.onLoad();
+        if (clientVersionManager.wasOutdated) {
+          await _databaseManager.versionClientSave(
+            clientVersionManager.clientVersion,
+          );
+        }
         await Future.delayed(Duration(seconds: 3));
       }),
     ];
