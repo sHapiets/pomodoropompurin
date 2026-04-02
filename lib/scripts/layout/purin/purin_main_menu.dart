@@ -135,7 +135,7 @@ class _PurinMainMenuState extends State<PurinMainMenu>
               const SizedBox(height: 9),
 
               _floatingButton(
-                icon: Icons.transform_rounded,
+                icon: Icons.open_with_rounded,
                 label: "move",
                 onTap: () => _openOverlay("purinPositionMenu"),
               ),

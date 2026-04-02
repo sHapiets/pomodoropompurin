@@ -1,12 +1,7 @@
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/kitchen/kitchen_processor.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
-import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/snack.dart';
-import 'package:pomodoropompurin/scripts/layout/menu/kitchen/consumable_tile.dart';
-import 'package:pomodoropompurin/scripts/layout/menu/kitchen/ingridient_tile.dart';
-import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_consumable_tile.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/snack/snack_tile.dart';
 
 class SnackMenu extends StatelessWidget {
@@ -31,84 +26,88 @@ class SnackMenu extends StatelessWidget {
     return Center(
       child: Transform.translate(
         offset: Offset(50, -50),
-        child: Container(
-          width: menuWidth,
-          height: menuHeight,
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(223, 255, 255, 255),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 20,
-                offset: const Offset(0, 8),
-              ),
-            ],
-          ),
+        child: FittedBox(
+          fit: BoxFit.contain,
+          child: Container(
+            width: menuWidth,
+            height: menuHeight,
+            padding: const EdgeInsets.all(14),
+            color: Colors.transparent,
 
-          child: Column(
-            children: [
-              /// HEADER
-              Row(
-                children: [
-                  Container(
-                    height: 30,
-                    width: 30,
+            child: Column(
+              children: [
+                _header(
+                  "snacks",
+                  Icons.fastfood_rounded,
+                  const Color.fromARGB(255, 225, 168, 53),
+                ),
+                const SizedBox(height: 14),
+
+                /// GRID AREA
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: const Color.fromARGB(255, 225, 168, 53),
+                      color: const Color.fromARGB(185, 255, 193, 7),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Icon(
-                      Icons.fastfood_rounded,
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      size: 18,
+                    child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: acquiredSnacks.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 2,
+                          ),
+                      itemBuilder: (context, index) {
+                        final snack = acquiredSnacks.keys.toList()[index];
+                        return SnackTile(snack: snack);
+                      },
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'snacks',
-                      style: const TextStyle(
-                        fontFamily: 'Fredoka',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 22,
-                        color: Color.fromARGB(255, 42, 42, 42),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 14),
-
-              /// GRID AREA
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: GridView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: acquiredSnacks.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 2,
-                        ),
-                    itemBuilder: (context, index) {
-                      final snack = acquiredSnacks.keys.toList()[index];
-                      return SnackTile(snack: snack);
-                    },
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _header(String menuTitle, IconData menuIcon, Color menuColor) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: menuColor.withOpacity(0.2).darken(0.3),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(spreadRadius: 4, color: menuColor.withOpacity(0.2)),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: menuColor),
+            child: Icon(menuIcon, color: Colors.white, size: 18),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              menuTitle,
+              style: const TextStyle(
+                fontFamily: 'Fredoka',
+                fontWeight: FontWeight.w600,
+                fontSize: 21,
+                color: Colors.white,
+                shadows: [Shadow(color: Colors.black38, offset: Offset(2, 2))],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

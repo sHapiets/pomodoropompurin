@@ -17,6 +17,7 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_man
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
+import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_consumable_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
@@ -39,6 +40,7 @@ import 'package:pomodoropompurin/scripts/layout/ui/menu_dial.dart';
 import 'package:pomodoropompurin/scripts/layout/pom_timer/pom_timer_display.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/ui_block.dart';
+import 'package:pomodoropompurin/scripts/layout/version_control/version_notes_dialog.dart';
 import 'package:pomodoropompurin/scripts/layout/words_of_wisdom/words_of_wisdom_menu.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
@@ -63,6 +65,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final scriptManager = ScriptManager.singleton;
   final tutorialManager = TutorialManager.singleton;
   final tutorialState = TutorialState.singleton;
+  final clientVersionManager = ClientVersionManager.singleton;
 
   @override
   void initState() {
@@ -73,6 +76,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     playBackgroundMusic();
 
     WakelockPlus.enable();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (clientVersionManager.wasOutdated) {
+        showLatestVersionNotes();
+      }
+    });
   }
 
   Future<void> playBackgroundMusic() async {
@@ -107,9 +115,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     );
   }
 
+  void showLatestVersionNotes() {
+    showDialog(
+      context: navigatorKey.currentContext!,
+      barrierDismissible: false,
+      builder: (context) {
+        return VersionNotesDialog();
+      },
+    );
+  }
+
   @override
   void dispose() {
-    WakelockPlus.enable();
+    WakelockPlus.disable();
     super.dispose();
   }
 

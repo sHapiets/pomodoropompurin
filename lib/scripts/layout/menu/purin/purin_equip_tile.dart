@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
@@ -106,7 +107,7 @@ class _PurinEquipTileState extends State<PurinEquipTile>
         width: tileWidth,
         height: tileHeight,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 255, 255),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(4),
           boxShadow: [BoxShadow(color: Colors.black12, offset: Offset(2, 2))],
         ),

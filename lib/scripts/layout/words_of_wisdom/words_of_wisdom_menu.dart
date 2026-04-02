@@ -11,7 +11,7 @@ class WordsOfWisdomMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const pudding = Color.fromARGB(255, 255, 255, 255);
+    const pudding = Color.fromARGB(207, 255, 255, 255);
     const caramel = Color(0xFFC87A2A);
     const softCaramel = Color(0xFFE8B77D);
 
@@ -24,62 +24,46 @@ class WordsOfWisdomMenu extends StatelessWidget {
           ..sort((a, b) => a.key.compareTo(b.key));
 
     return Center(
-      child: FittedBox(
-        fit: BoxFit.contain,
-        child: Transform.translate(
-          offset: Offset(50, -50),
-          child: Container(
-            width: 260,
-            height: 320,
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: pudding,
-              borderRadius: BorderRadius.circular(28),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.brown.withOpacity(.2),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
+      child: Transform.translate(
+        offset: const Offset(50, -50),
+        child: Container(
+          width: 260,
+          height: 320,
+          padding: const EdgeInsets.all(14),
 
-            child: Column(
-              children: [
-                /// Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.chat_bubble, color: caramel),
-                    const SizedBox(width: 8),
-                    const Text(
-                      "Words of Wisdom",
-                      style: TextStyle(
-                        fontFamily: 'Fredoka',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: caramel,
-                      ),
-                    ),
-                  ],
-                ),
+          child: Column(
+            children: [
+              _header("words of wisdom", Icons.chat_bubble, caramel),
 
-                const SizedBox(height: 6),
+              const SizedBox(height: 8),
 
-                Text(
+              _softContent(
+                color: caramel,
+                child: const Text(
                   "Replay Purin's most random thoughts....",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Fredoka',
-                    fontSize: 14,
+                    fontSize: 11,
                     color: Colors.brown,
                   ),
                   textAlign: TextAlign.center,
                 ),
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 8),
 
-                /// List
-                Expanded(
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(
+                      239,
+                      255,
+                      220,
+                      177,
+                    ).withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: unlockedScripts.isEmpty
                       ? const Center(
                           child: Text(
@@ -94,7 +78,7 @@ class WordsOfWisdomMenu extends StatelessWidget {
                       : ListView.separated(
                           itemCount: unlockedScripts.length,
                           separatorBuilder: (_, __) =>
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 10),
                           itemBuilder: (context, index) {
                             final entry = unlockedScripts[index];
                             final level = entry.key;
@@ -110,15 +94,60 @@ class WordsOfWisdomMenu extends StatelessWidget {
                           },
                         ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  /// 🔹 Reusable tile builder (your "helper widget function")
+  Widget _header(String title, IconData icon, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.2).darken(0.3),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [BoxShadow(spreadRadius: 4, color: color.withOpacity(0.2))],
+      ),
+      child: Row(
+        children: [
+          Container(
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+            child: Icon(icon, color: Colors.white, size: 18),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontFamily: 'Fredoka',
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+                color: Colors.white,
+                shadows: [Shadow(color: Colors.black38, offset: Offset(2, 2))],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _softContent({required Widget child, required Color color}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: child,
+    );
+  }
+
   Widget _wisdomTile(
     BuildContext context, {
     required int level,
@@ -127,7 +156,7 @@ class WordsOfWisdomMenu extends StatelessWidget {
     required Color softCaramel,
   }) {
     return InkWell(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(12),
       onTap: () {
         purinAreaKey.currentState!.currentGame.overlays.removeAll(
           purinAreaKey.currentState!.currentGame.overlays.activeOverlays,
@@ -136,26 +165,26 @@ class WordsOfWisdomMenu extends StatelessWidget {
         ScriptManager.singleton.addLevelUpDialog(level);
       },
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: softCaramel.withOpacity(0.7),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(color: softCaramel.darken(0.3)),
         ),
         child: Row(
           children: [
-            /// Icon (first image)
+            /// Icon
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: pudding,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
               ),
-              width: 50,
+              width: 45,
               child: Image.asset(script.imagePaths.first),
             ),
 
-            const SizedBox(width: 12),
+            const SizedBox(width: 10),
 
             /// Text
             Expanded(
@@ -167,17 +196,15 @@ class WordsOfWisdomMenu extends StatelessWidget {
                     style: const TextStyle(
                       fontFamily: 'Fredoka',
                       fontWeight: FontWeight.w600,
-                      fontSize: 12,
+                      fontSize: 11,
                       color: Colors.brown,
                     ),
                   ),
                   Text(
                     "Level $level",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontFamily: 'Fredoka',
-                      fontSize: 12,
+                      fontSize: 10,
                       color: Color.fromARGB(255, 148, 117, 61),
                     ),
                   ),
@@ -185,7 +212,7 @@ class WordsOfWisdomMenu extends StatelessWidget {
               ),
             ),
 
-            const Icon(Icons.play_arrow, color: Colors.brown),
+            const Icon(Icons.play_arrow, color: Colors.brown, size: 16),
           ],
         ),
       ),

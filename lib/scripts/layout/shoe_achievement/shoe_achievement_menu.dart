@@ -9,69 +9,39 @@ class ShoeAchievementMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const sky = Color(0xFFF0F8FF); // soft white-blue
-    const ocean = Color(0xFF5DADE2); // main blue
-    const softBlue = Color(0xFFAED6F1); // pastel accent
+    const sky = Color.fromARGB(214, 240, 248, 255);
+    const ocean = Color(0xFF5DADE2);
+    const softBlue = Color(0xFFAED6F1);
 
     final shoeList = ShoeAchievement.values;
 
     return Center(
-      child: FittedBox(
-        fit: BoxFit.contain,
-        child: Transform.translate(
-          offset: const Offset(50, -50),
-          child: Container(
-            width: 260,
-            height: 320,
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: sky,
-              borderRadius: BorderRadius.circular(28),
-              boxShadow: [
-                BoxShadow(
-                  color: ocean.withOpacity(.25),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
+      child: Transform.translate(
+        offset: const Offset(50, -50),
+        child: Container(
+          width: 260,
+          height: 320,
+          padding: const EdgeInsets.all(14),
 
-            child: Column(
-              children: [
-                /// Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.emoji_events, color: ocean),
-                    SizedBox(width: 8),
-                    Text(
-                      "Shoe Achievements",
-                      style: TextStyle(
-                        fontFamily: 'Fredoka',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: ocean,
-                      ),
-                    ),
-                  ],
-                ),
+          child: Column(
+            children: [
+              _header('shoe achievements', Icons.emoji_events_rounded, ocean),
 
-                const SizedBox(height: 6),
+              const SizedBox(height: 8),
 
-                const Text(
-                  "....here lies your lost shoes....\n ....rest in pudding....",
-                  style: TextStyle(
-                    fontFamily: 'Fredoka',
-                    fontSize: 14,
-                    color: Colors.blueGrey,
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(
+                      255,
+                      202,
+                      234,
+                      255,
+                    ).withOpacity(0.80),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  textAlign: TextAlign.center,
-                ),
 
-                const SizedBox(height: 20),
-
-                /// List
-                Expanded(
                   child: shoeList.isEmpty
                       ? const Center(
                           child: Text(
@@ -85,7 +55,7 @@ class ShoeAchievementMenu extends StatelessWidget {
                         )
                       : ListView.separated(
                           separatorBuilder: (_, __) =>
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 10),
                           itemCount: shoeList.length,
                           itemBuilder: (context, index) {
                             final achievement = shoeList[index];
@@ -104,15 +74,88 @@ class ShoeAchievementMenu extends StatelessWidget {
                           },
                         ),
                 ),
-              ],
-            ),
+              ),
+
+              const SizedBox(height: 4),
+
+              accTotalTime(color: const Color.fromARGB(255, 76, 140, 192)),
+            ],
           ),
         ),
       ),
     );
   }
 
-  /// 🔹 Tile builder
+  Widget _header(String menuTitle, IconData menuIcon, Color menuColor) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: menuColor.withOpacity(0.2).darken(0.3),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(spreadRadius: 4, color: menuColor.withOpacity(0.2)),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: menuColor),
+            child: Icon(menuIcon, color: Colors.white, size: 18),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              menuTitle,
+              style: const TextStyle(
+                fontFamily: 'Fredoka',
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+                color: Colors.white,
+                shadows: [Shadow(color: Colors.black38, offset: Offset(2, 2))],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget accTotalTime({
+    required Color color,
+    EdgeInsets padding = const EdgeInsets.symmetric(
+      vertical: 3,
+      horizontal: 10,
+    ),
+  }) {
+    return Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.40),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withOpacity(0.60)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.alarm, color: Colors.white),
+          SizedBox(width: 4),
+          Text(
+            PomTimerExtensions.formatDuration(
+              ProgSystem.singleton.accTotalTime.value,
+            ),
+            style: TextStyle(
+              fontFamily: 'Fredoka',
+              fontSize: 14,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _shoeTile({
     required ShoeAchievement achievement,
     required bool isUnlocked,
@@ -120,12 +163,12 @@ class ShoeAchievementMenu extends StatelessWidget {
     required Color softBlue,
   }) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: isUnlocked
             ? softBlue.withOpacity(0.7)
             : Colors.grey.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isUnlocked
               ? softBlue.darken(0.3)
@@ -136,19 +179,19 @@ class ShoeAchievementMenu extends StatelessWidget {
         children: [
           /// Icon
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
               color: sky,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
             ),
-            width: 50,
+            width: 45,
             child: Opacity(
               opacity: isUnlocked ? 1 : 0.4,
               child: Image.asset(achievement.flutterAssetPath),
             ),
           ),
 
-          const SizedBox(width: 12),
+          const SizedBox(width: 10),
 
           /// Text
           Expanded(
@@ -160,7 +203,7 @@ class ShoeAchievementMenu extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Fredoka',
                     fontWeight: FontWeight.w600,
-                    fontSize: 12,
+                    fontSize: 11,
                     color: isUnlocked ? Colors.blueGrey[800] : Colors.grey,
                   ),
                 ),
@@ -168,7 +211,7 @@ class ShoeAchievementMenu extends StatelessWidget {
                   "Achieve ${PomTimerExtensions.formatDuration(achievement.secondsRequirement)}",
                   style: TextStyle(
                     fontFamily: 'Fredoka',
-                    fontSize: 12,
+                    fontSize: 10,
                     color: isUnlocked ? Colors.blueGrey[600] : Colors.grey,
                   ),
                 ),
@@ -180,7 +223,7 @@ class ShoeAchievementMenu extends StatelessWidget {
           Icon(
             isUnlocked ? Icons.emoji_events : Icons.lock,
             color: isUnlocked ? Colors.lightBlue : Colors.grey,
-            size: 18,
+            size: 16,
           ),
         ],
       ),

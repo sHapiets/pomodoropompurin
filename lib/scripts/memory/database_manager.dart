@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
+import 'package:pomodoropompurin/scripts/foundation/client_version.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
@@ -205,6 +207,11 @@ class DatabaseManager {
     return statusTutorialDoc['loadTutorial'];
   }
 
+  Future<dynamic> versionClientLoad() async {
+    final clientVCSDoc = await userRef.collection('vcs').doc('client').get();
+    return clientVCSDoc['version'];
+  }
+
   /// Save Functions
   /// -> to be called by other classes (mostly core singletons) to save data in Koupen
   /// -> instance of the DatabaseManager must be called before using
@@ -372,5 +379,10 @@ class DatabaseManager {
   Future<void> statusLoadTutorialSave(bool loadTutorial) async {
     final statusTutorialRef = statusRef.doc('tutorial');
     await statusTutorialRef.update({'loadTutorial': loadTutorial});
+  }
+
+  Future<void> versionClientSave(ClientVersion clientVersion) async {
+    final clientVCSRef = userRef.collection('vcs').doc('client');
+    await clientVCSRef.update({'version': clientVersion.versionNumber});
   }
 }

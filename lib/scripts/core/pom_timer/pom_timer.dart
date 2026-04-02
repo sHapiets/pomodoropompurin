@@ -111,6 +111,7 @@ class PomTimer {
         recordedDeltaMilli += deltaMilli;
 
         int deltaSeconds = (recordedDeltaMilli / 1000).floor();
+
         timeLeftSeconds -= deltaSeconds;
         recordedDeltaMilli -= deltaSeconds * 1000;
 
