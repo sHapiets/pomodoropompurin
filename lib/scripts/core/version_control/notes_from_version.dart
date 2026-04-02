@@ -32,8 +32,8 @@ class NotesFromVersion {
   Map<ClientVersion, String> foreword = {
     ClientVersion.emperorPenguin:
         "Heloo Yana!\n\n"
-        "Took me a while to get a bit of patches going. No new content for now though, "
-        "coz I primarily focused on UX and UI changes. It's more of the 'day-one patch', "
+        "Took me a while to get a bit of patches going. No new content for now though; "
+        "primarily focused on UX and UI changes. It's more of the 'day-one patch', "
         "which is kinda off given that its already been a week. \n\n"
         "I also needed my own space to work on, so I built a DevMode to the system. It simply allows me "
         "to test new features and content, basically like an uglier sandbox version that I can mess around with. \n\n"
