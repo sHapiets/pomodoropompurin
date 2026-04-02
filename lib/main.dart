@@ -26,7 +26,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: "PomodoroPomPurin",
       navigatorKey: navigatorKey,
-      home: DevModeSplashPage(),
+      home: SplashPage(),
     );
   }
 }
