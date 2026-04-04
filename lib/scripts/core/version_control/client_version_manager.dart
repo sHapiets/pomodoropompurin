@@ -7,7 +7,7 @@ class ClientVersionManager {
   final clientVersion = ClientVersion.greatWhiteShark;
   ClientVersion recordedClientVersion = ClientVersion.goldenRetriever;
   bool get wasOutdated =>
-      clientVersion.versionNumber != recordedClientVersion.versionNumber;
+      clientVersion.recencyTag > recordedClientVersion.recencyTag;
 
   void initialize(ClientVersion databaseClientVersion) {
     recordedClientVersion = databaseClientVersion;
