@@ -6,17 +6,22 @@ class StreakDisplay extends StatelessWidget {
   const StreakDisplay({super.key});
   String getStreakTimer(StreakSystem streak) {
     final now = DateTime.now();
-    final diff = now.difference(streak.latestCompletion);
 
-    final bool completedToday = diff.inDays == 0;
+    DateTime toDateOnly(DateTime dt) {
+      return DateTime(dt.year, dt.month, dt.day);
+    }
 
-    Duration remaining;
+    final today = toDateOnly(now);
+    final lastDay = toDateOnly(streak.latestCompletion);
 
-    if (completedToday) {
-      remaining = const Duration(hours: 24) - diff;
+    final difference = today.difference(lastDay).inDays;
+
+    final nextMidnight = today.add(const Duration(days: 1));
+    final remaining = nextMidnight.difference(now);
+
+    if (difference == 0) {
       return "next streak in ${formatDuration(remaining.inSeconds)}";
     } else {
-      remaining = const Duration(hours: 48) - diff;
       return "expires in ${formatDuration(remaining.inSeconds)}";
     }
   }
@@ -29,8 +34,13 @@ class StreakDisplay extends StatelessWidget {
     String hoursStr = hours.toString().padLeft(2, '0');
     String minutesStr = minutes.toString().padLeft(2, '0');
     String secondsStr = seconds.toString().padLeft(2, '0');
+    String ret = '$hoursStr:$minutesStr:$secondsStr';
 
-    return '$hoursStr:$minutesStr:$secondsStr';
+    if (hours == 0) {
+      ret = '$minutesStr:$secondsStr';
+    }
+
+    return ret;
   }
 
   @override
@@ -137,7 +147,7 @@ class StreakDisplay extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "focus time requirement",
+                    "daily focus time",
                     style: TextStyle(fontFamily: 'Fredoka', fontSize: 13),
                   ),
 
@@ -199,7 +209,7 @@ class StreakDisplay extends StatelessWidget {
                         ? "claimed"
                         : percent >= 1
                         ? "claim rewards"
-                        : "keep going",
+                        : "-accompish to claim rewards-",
                     style: const TextStyle(
                       fontFamily: 'Fredoka',
                       fontSize: 14,

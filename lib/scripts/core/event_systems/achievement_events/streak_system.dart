@@ -16,6 +16,10 @@ class StreakSystem {
   int focusTime = 0;
   bool claimed = false;
 
+  DateTime toDateOnly(DateTime dt) {
+    return DateTime(dt.year, dt.month, dt.day);
+  }
+
   void initialize(DocumentSnapshot streakDoc) {
     claimed = streakDoc['claimed'];
     current = streakDoc['current'];
@@ -25,11 +29,14 @@ class StreakSystem {
 
     focusTime = streakDoc['focusTime'];
 
-    final now = DateTime.now();
+    final today = toDateOnly(DateTime.now());
+    final lastDay = toDateOnly(latestCompletion);
 
-    if (now.difference(latestCompletion).inDays >= 2) {
+    final difference = today.difference(lastDay).inDays;
+
+    if (difference >= 2) {
       resetStreak();
-    } else if (now.difference(latestCompletion).inDays == 1) {
+    } else if (difference == 1) {
       focusTime = 0;
       claimed = false;
       databaseSave();
@@ -40,7 +47,12 @@ class StreakSystem {
     final now = DateTime.now();
     focusTime = (focusTime + sessionSeconds).clamp(0, minSessionSeconds);
 
-    if (now.difference(latestCompletion).inDays >= 1) {
+    final today = toDateOnly(now);
+    final lastDay = toDateOnly(latestCompletion);
+
+    final difference = today.difference(lastDay).inDays;
+
+    if (difference >= 1) {
       if (focusTime >= minSessionSeconds) {
         latestCompletion = now;
         current += 1;
