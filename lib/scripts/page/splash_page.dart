@@ -4,6 +4,8 @@ import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/activity/activity_manager.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/daily_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/streak_system.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_interrupted_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
@@ -36,6 +38,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   final pomTimerInterruptedManager = PomTimerInterruptedManager.singleton;
   final _progSystem = ProgSystem.singleton;
   final activityManager = ActivityManager.singleton;
+  final dailyAchievement = DailyAchievement.singleton;
+  final streakSystem = StreakSystem.singleton;
   final clientVersionManager = ClientVersionManager.singleton;
   final acquirables = Acquirables.singleton;
   final purin = Purin.singleton;
@@ -91,8 +95,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     loadSteps = [
       MapEntry('Declaring User....', () async {
-        _databaseManager.changeUser('yana');
+        _databaseManager.changeUser('jd-debug');
       }),
+
       MapEntry('Restoring User Progress...', () async {
         _progSystem.loadPomPoints(
           await _databaseManager.userDataLoad('pomPoints'),
@@ -106,6 +111,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         _progSystem.loadAcquiredShoeAchievementBool(
           await _databaseManager.acquiredShoeAchievementLoad(),
         );
+
+        dailyAchievement.initialize(
+          await _databaseManager.statusDailyAchievementLoad(),
+        );
+        streakSystem.initialize(await _databaseManager.statusStreakLoad());
       }),
 
       MapEntry('Loading Inventories...', () async {

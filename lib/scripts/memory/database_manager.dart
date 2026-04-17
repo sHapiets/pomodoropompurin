@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/focus_time_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/pet_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/client_version.dart';
@@ -142,6 +144,20 @@ class DatabaseManager {
     final statusPomTimerDoc = await statusPomTimerRef.get();
 
     return statusPomTimerDoc;
+  }
+
+  Future<DocumentSnapshot> statusDailyAchievementLoad() async {
+    final statusDailyAchievementRef = statusRef.doc('dailyAchievement');
+    final statusDailyAchievementDoc = await statusDailyAchievementRef.get();
+
+    return statusDailyAchievementDoc;
+  }
+
+  Future<DocumentSnapshot> statusStreakLoad() async {
+    final statusStreakRef = statusRef.doc('streak');
+    final statusStreakDoc = await statusStreakRef.get();
+
+    return statusStreakDoc;
   }
 
   //
@@ -292,6 +308,56 @@ class DatabaseManager {
       'wasActive': wasActive,
       'wasTimeTotalSeconds': wasTimeTotalSeconds,
       'wasMultiplierTotal': wasMultiplierTotal,
+    });
+  }
+
+  Future<void> statusDailyAchievementLatestRefreshSave(
+    DateTime latestRefresh,
+  ) async {
+    final dailyAchievementRef = statusRef.doc('dailyAchievement');
+    final refreshTimestamp = Timestamp.fromDate(latestRefresh);
+    dailyAchievementRef.update({'latestRefresh': refreshTimestamp});
+  }
+
+  Future<void> statusDailyAchievementFocusTimeSave(
+    FocusTimeAchievement focusTimeAchievement,
+  ) async {
+    final dailyAchievementRef = statusRef.doc('dailyAchievement');
+    dailyAchievementRef.update({
+      'focusTime': {
+        'claimed': focusTimeAchievement.claimed,
+        'goalSeconds': focusTimeAchievement.goal,
+        'progress': focusTimeAchievement.progress,
+      },
+    });
+  }
+
+  Future<void> statusDailyAchievementPetSave(
+    PetAchievement petAchievement,
+  ) async {
+    final dailyAchievementRef = statusRef.doc('dailyAchievement');
+    dailyAchievementRef.update({
+      'petEnergy': {
+        'claimed': petAchievement.claimed,
+        'goalEnergy': petAchievement.goal,
+        'progress': petAchievement.progress,
+      },
+    });
+  }
+
+  Future<void> statusStreakSave(
+    bool claimed,
+    int current,
+    int focusTime,
+    DateTime latestCompletion,
+  ) async {
+    Timestamp latestCompletionTimestamp = Timestamp.fromDate(latestCompletion);
+    final statusStreakRef = statusRef.doc('streak');
+    statusStreakRef.update({
+      'claimed': claimed,
+      'current': current,
+      'focusTime': focusTime,
+      'latestCompletion': latestCompletionTimestamp,
     });
   }
 

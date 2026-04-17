@@ -4,6 +4,8 @@ import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/daily_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/streak_system.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
@@ -30,6 +32,8 @@ class PomTimer {
 
   final purin = Purin.singleton;
   final purinAreaStateManager = PurinAreaStateManager.singleton;
+  final dailyAchievement = DailyAchievement.singleton;
+  final streakSystem = StreakSystem.singleton;
   final _progSystem = ProgSystem.singleton;
   final _databaseManager = DatabaseManager.singleton;
 
@@ -243,6 +247,8 @@ class PomTimer {
     // Update outside
     _progSystem.addDayTimeSeconds(timeTotalSeconds);
     _progSystem.addAccTotalTime(timeTotalSeconds);
+    dailyAchievement.addFocusTimeProgress(timeTotalSeconds);
+    streakSystem.registerFocusSession(timeTotalSeconds);
     _progSystem.addPomPoints(rewardPomPoints);
     _progSystem.addOshiriPoints(rewardOshiriPoints);
     pomTimerDisplayStateManager.timeLeftSeconds.value = timeLeftSeconds;

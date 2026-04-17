@@ -151,8 +151,8 @@ class _VersionNotesDialogState extends State<VersionNotesDialog> {
   Widget _buildContent() {
     final foreword = notes.foreword[selectedVersion];
     final patchMap = NotesFromVersion.patches[selectedVersion] ?? {};
-    final changes = notes.changes[selectedVersion] ?? [];
-    final additions = notes.additions[selectedVersion] ?? [];
+    final changeMap = notes.changes[selectedVersion] ?? {};
+    final additionMap = notes.additions[selectedVersion] ?? {};
 
     return Container(
       decoration: BoxDecoration(
@@ -221,16 +221,58 @@ class _VersionNotesDialogState extends State<VersionNotesDialog> {
                 }),
               ],
 
-              if (changes.isNotEmpty) ...[
-                const Divider(),
-                _sectionTitle("CHANGES", Icons.change_circle_outlined),
-                _bulletList(changes),
-              ],
-
-              if (additions.isNotEmpty) ...[
+              if (additionMap.isNotEmpty) ...[
                 const Divider(),
                 _sectionTitle("ADDITIONS", Icons.new_releases_outlined),
-                _bulletList(additions),
+                ...additionMap.entries.map((entry) {
+                  final header = entry.key;
+                  final bullets = entry.value;
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          header,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        _bulletList(bullets),
+                      ],
+                    ),
+                  );
+                }),
+              ],
+
+              if (changeMap.isNotEmpty) ...[
+                const Divider(),
+                _sectionTitle("CHANGES", Icons.change_circle_outlined),
+                ...changeMap.entries.map((entry) {
+                  final header = entry.key;
+                  final bullets = entry.value;
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          header,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        _bulletList(bullets),
+                      ],
+                    ),
+                  );
+                }),
               ],
             ],
           ),

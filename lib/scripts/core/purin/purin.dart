@@ -5,6 +5,7 @@ import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/daily_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
@@ -62,6 +63,7 @@ class Purin extends ChangeNotifier {
   final acquirables = Acquirables.singleton;
   final databaseManager = DatabaseManager.singleton;
   final progSystem = ProgSystem.singleton;
+  final dailyAchievement = DailyAchievement.singleton;
 
   void changeAction(PurinAction action) {
     stateManager.changeAction(action);
@@ -185,6 +187,7 @@ class Purin extends ChangeNotifier {
     final bool energyFromPet = random.nextBoolean(odds: 0.05);
     int energy = energyFromPet ? 1 : 0;
     addEnergyPoints(energy: energy);
+    dailyAchievement.addPetProgress(energy);
 
     stateManager.action = PurinAction.pet;
     purinAreaStateManager.jumpToPosition(
