@@ -95,7 +95,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     loadSteps = [
       MapEntry('Declaring User....', () async {
-        _databaseManager.changeUser('jd-debug');
+        _databaseManager.changeUser('yana');
       }),
 
       MapEntry('Restoring User Progress...', () async {
