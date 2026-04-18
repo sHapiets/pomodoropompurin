@@ -1,7 +1,8 @@
 enum ClientVersion {
   goldenRetriever(recencyTag: 0, versionNumber: "1.0.0"),
   emperorPenguin(recencyTag: 1, versionNumber: "1.0.1"),
-  greatWhiteShark(recencyTag: 2, versionNumber: "1.0.2");
+  greatWhiteShark(recencyTag: 2, versionNumber: "1.0.2"),
+  blackWingedMyna(recencyTag: 3, versionNumber: "1.0.3");
 
   const ClientVersion({required this.recencyTag, required this.versionNumber});
 

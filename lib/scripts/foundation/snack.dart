@@ -1,7 +1,7 @@
 enum Snack {
   potatoChips(
     displayName: "Potato Chips",
-    price: 10,
+    price: 5,
     oshiriPoints: 10,
     hungerPoints: 15,
     energyPoints: 5,
@@ -9,7 +9,7 @@ enum Snack {
   ),
   hotCocoa(
     displayName: "Hot Cocoa",
-    price: 15,
+    price: 10,
     oshiriPoints: 5,
     hungerPoints: 3,
     energyPoints: 20,
@@ -17,7 +17,7 @@ enum Snack {
   ),
   cheeseIceCream(
     displayName: "Cheese Ice Cream",
-    price: 30,
+    price: 20,
     oshiriPoints: 20,
     hungerPoints: 10,
     energyPoints: 15,
@@ -25,7 +25,7 @@ enum Snack {
   ),
   chocolateCupcake(
     displayName: "Chocolate Cupcake",
-    price: 50,
+    price: 30,
     oshiriPoints: 10,
     hungerPoints: 30,
     energyPoints: 20,
@@ -33,7 +33,7 @@ enum Snack {
   ),
   strawberryCupcake(
     displayName: "Strawberry Cupcake",
-    price: 50,
+    price: 30,
     oshiriPoints: 10,
     hungerPoints: 20,
     energyPoints: 30,
