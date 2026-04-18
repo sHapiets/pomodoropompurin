@@ -145,13 +145,16 @@ class _DailyAchievementDisplayState extends State<DailyAchievementDisplay> {
 
                                 showDialog(
                                   context: context,
-                                  builder: (_) => AchievementRewardDialog(
-                                    pomPoints:
-                                        rewards[RewardType.pomPoints] ?? 0,
-                                    oshiriPoints:
-                                        rewards[RewardType.oshiriPoints] ?? 0,
-                                    onClose: () => Navigator.pop(context),
-                                  ),
+                                  builder: (dialContext) =>
+                                      AchievementRewardDialog(
+                                        pomPoints:
+                                            rewards[RewardType.pomPoints] ?? 0,
+                                        oshiriPoints:
+                                            rewards[RewardType.oshiriPoints] ??
+                                            0,
+                                        onClose: () =>
+                                            Navigator.pop(dialContext),
+                                      ),
                                 );
                               });
                             }
@@ -176,13 +179,16 @@ class _DailyAchievementDisplayState extends State<DailyAchievementDisplay> {
 
                                 showDialog(
                                   context: context,
-                                  builder: (_) => AchievementRewardDialog(
-                                    pomPoints:
-                                        rewards[RewardType.pomPoints] ?? 0,
-                                    oshiriPoints:
-                                        rewards[RewardType.oshiriPoints] ?? 0,
-                                    onClose: () => Navigator.pop(context),
-                                  ),
+                                  builder: (dialContext) =>
+                                      AchievementRewardDialog(
+                                        pomPoints:
+                                            rewards[RewardType.pomPoints] ?? 0,
+                                        oshiriPoints:
+                                            rewards[RewardType.oshiriPoints] ??
+                                            0,
+                                        onClose: () =>
+                                            Navigator.pop(dialContext),
+                                      ),
                                 );
                               });
                             }

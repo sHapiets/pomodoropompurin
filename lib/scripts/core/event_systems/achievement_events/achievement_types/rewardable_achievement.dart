@@ -16,8 +16,10 @@ abstract class RewardableAchievement {
   }
 
   void addProgress(int progress) {
-    if (this.progress + progress > goal) return;
     this.progress += progress;
+    if (this.progress > goal) {
+      this.progress = goal;
+    }
   }
 
   void claimRewards() {

@@ -187,10 +187,10 @@ class StreakDisplay extends StatelessWidget {
 
                           showDialog(
                             context: context,
-                            builder: (_) => AchievementRewardDialog(
+                            builder: (dialContext) => AchievementRewardDialog(
                               pomPoints: pomPointsRewards,
                               oshiriPoints: oshiriPointsRewards,
-                              onClose: () => Navigator.pop(context),
+                              onClose: () => Navigator.pop(dialContext),
                             ),
                           );
                         }
