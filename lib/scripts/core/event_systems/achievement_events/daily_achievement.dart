@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/focus_time_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/pet_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/rewardable_achievement.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 class DailyAchievement {
@@ -15,6 +17,8 @@ class DailyAchievement {
     if (ret <= 0) return 0;
     return ret;
   }
+
+  ValueNotifier<bool> hasClaimable = ValueNotifier(false);
 
   FocusTimeAchievement focusTimeAchievement =
       FocusTimeAchievement.newFocusTimeAchievement(0);
@@ -36,6 +40,8 @@ class DailyAchievement {
     } else {
       loadAchievementStatus(dailyAchievementDoc);
     }
+
+    updateHasClaimable();
   }
 
   void loadAchievementStatus(DocumentSnapshot dailyAchievementDoc) {
@@ -54,6 +60,8 @@ class DailyAchievement {
     );
     petAchievement.progress = petEnergyAchievementStatus['progress'];
     petAchievement.claimed = petEnergyAchievementStatus['claimed'];
+
+    updateHasClaimable();
   }
 
   void refresh() {
@@ -71,25 +79,46 @@ class DailyAchievement {
     final randPetEnergy = petEnergyPool[rand.nextInt(petEnergyPool.length)];
     petAchievement = PetAchievement.newPetAchievement(randPetEnergy);
     databaseManager.statusDailyAchievementPetSave(petAchievement);
+
+    updateHasClaimable();
   }
 
   void addFocusTimeProgress(int progress) {
     focusTimeAchievement.addProgress(progress);
     databaseManager.statusDailyAchievementFocusTimeSave(focusTimeAchievement);
+    updateHasClaimable();
   }
 
   void addPetProgress(int progress) {
     petAchievement.addProgress(progress);
     databaseManager.statusDailyAchievementPetSave(petAchievement);
+    updateHasClaimable();
   }
 
   void claimFocusTimeRewards() {
     focusTimeAchievement.claimRewards();
     databaseManager.statusDailyAchievementFocusTimeSave(focusTimeAchievement);
+    updateHasClaimable();
   }
 
   void claimPetRewards() {
     petAchievement.claimRewards();
     databaseManager.statusDailyAchievementPetSave(petAchievement);
+    updateHasClaimable();
+  }
+
+  void updateHasClaimable() {
+    if (_isClaimable(focusTimeAchievement) || (_isClaimable(petAchievement))) {
+      hasClaimable.value = true;
+    } else {
+      hasClaimable.value = false;
+    }
+  }
+
+  bool _isClaimable(RewardableAchievement achievement) {
+    if (achievement.achieved == true && achievement.claimed == false) {
+      return true;
+    }
+    return false;
   }
 }

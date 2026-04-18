@@ -12,6 +12,10 @@ class NotesFromVersion {
             "especially when switching between FOCUS and BREAK times.",
       ],
     },
+    ClientVersion.blackWingedMyna: {
+      "Achievements Rewards Dialog": ["Fixed: disabled confirmation button"],
+      "Streak System": ["Fixed: progress overshooting bug"],
+    },
   };
 
   Map<ClientVersion, Map<String, List<String>>> changes = {
@@ -24,6 +28,14 @@ class NotesFromVersion {
     ClientVersion.greatWhiteShark: {
       "Menu Updates": ["ConsumablesMenu: matches unified appearance"],
       "Version Log Dialog": ["bulleted 'changes' and 'additions'"],
+    },
+    ClientVersion.blackWingedMyna: {
+      "Snack Price": [
+        "Deflation: Re-evaluation suggests slight imbalance. Price decrease ranged around 20~50%",
+      ],
+      "Icon Changes": [
+        "Event System: Sligthly saturated shadow for more visibility.",
+      ],
     },
   };
 
@@ -43,7 +55,13 @@ class NotesFromVersion {
       "Streak System": [
         "beta - linear rewards",
         "requirement time: 15 mins",
-        "resets only after 48hrs of non-completion of the requirement time ",
+        "resets after day of non-completion of the requirement time ",
+      ],
+    },
+    ClientVersion.blackWingedMyna: {
+      "Event Notification Dot": [
+        "added for event systems",
+        "simply creates a visual red dot on icons for claimable rewards",
       ],
     },
   };
@@ -74,5 +92,11 @@ class NotesFromVersion {
         "I actually tried playing some random idle-progression games to get some ideas I could add. Most of them, I plan for 1.2.0, so it's "
         "gonna take a while for a lot of them. Until then, I hope the regular updates will continue to make the app "
         "much to your liking.",
+    ClientVersion.blackWingedMyna:
+        "Helloo Yana!\n\n"
+        "These are just immediate patches from the previous update. It feels kind of weird "
+        "having to release this in a seperate version, but I also intend to follow the development "
+        "workflow quite strictly, just to make my life a bit less messy. \n\n"
+        "As always, thank you and sorry if you had already encountered the bugs.",
   };
 }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
@@ -15,6 +16,7 @@ class StreakSystem {
   int current = 0;
   int focusTime = 0;
   bool claimed = false;
+  ValueNotifier<bool> claimable = ValueNotifier(false);
 
   DateTime toDateOnly(DateTime dt) {
     return DateTime(dt.year, dt.month, dt.day);
@@ -22,6 +24,7 @@ class StreakSystem {
 
   void initialize(DocumentSnapshot streakDoc) {
     claimed = streakDoc['claimed'];
+    claimable.value = !claimed;
     current = streakDoc['current'];
 
     final Timestamp latestCompletionTimestamp = streakDoc['latestCompletion'];
@@ -39,6 +42,7 @@ class StreakSystem {
     } else if (difference == 1) {
       focusTime = 0;
       claimed = false;
+      claimable.value = false;
       databaseSave();
     }
   }
@@ -57,6 +61,7 @@ class StreakSystem {
         latestCompletion = now;
         current += 1;
         claimed = false;
+        claimable.value = true;
 
         databaseSave();
         return;
@@ -70,6 +75,7 @@ class StreakSystem {
     current = 0;
     focusTime = 0;
     claimed = false;
+    claimable.value = false;
     databaseSave();
   }
 
@@ -77,6 +83,7 @@ class StreakSystem {
     if (claimed) return;
 
     claimed = true;
+    claimable.value = false;
 
     final int pomPointsRewards = current * 60;
     final int oshiriPointsRewards = current * 50;
