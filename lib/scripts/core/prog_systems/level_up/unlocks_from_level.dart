@@ -34,17 +34,21 @@ class UnlocksFromLevel {
   static Map<int, List<Snack>> purchaseableSnack = {
     2: [Snack.potatoChips],
     5: [Snack.hotCocoa],
-    9: [Snack.cheeseIceCream],
+    9: [Snack.cheeseIceCream, Snack.cncIceCream, Snack.chocloateIceCream],
+    11: [Snack.caramelPretzel, Snack.creamPretzel],
     14: [Snack.chocolateCupcake],
     15: [Snack.strawberryCupcake],
   };
 
-  static Map<int, PurinVars> acquiredPurinVars = {
-    1: PurinVars.boku,
-    4: PurinVars.pumpkin,
-    9: PurinVars.pika,
-    12: PurinVars.bee,
-    16: PurinVars.summer,
-    17: PurinVars.yana,
+  static Map<int, List<PurinVars>> acquiredPurinVars = {
+    1: [PurinVars.boku],
+    4: [PurinVars.pumpkin],
+    9: [PurinVars.pika],
+    10: [PurinVars.fragaria],
+    12: [PurinVars.bee],
+    16: [PurinVars.summer],
+    17: [PurinVars.yana, PurinVars.pol, PurinVars.atenean],
+    18: [PurinVars.winter],
+    19: [PurinVars.beach],
   };
 }

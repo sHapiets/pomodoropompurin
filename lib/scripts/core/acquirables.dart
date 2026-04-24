@@ -96,6 +96,36 @@ class Acquirables {
       cost: 0,
       iconAssetPath: 'assets/images/purin_sprites/yana_icon.png',
     ),
+    PurinVars.pol: PurinVar(
+      id: PurinVars.pol,
+      displayName: "Pol-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/pol_icon.png',
+    ),
+    PurinVars.atenean: PurinVar(
+      id: PurinVars.atenean,
+      displayName: "Atenean-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/atenean_icon.png',
+    ),
+    PurinVars.beach: PurinVar(
+      id: PurinVars.beach,
+      displayName: "Beach-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/beach_icon.png',
+    ),
+    PurinVars.fragaria: PurinVar(
+      id: PurinVars.fragaria,
+      displayName: "Fragaria-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/fragaria_icon.png',
+    ),
+    PurinVars.winter: PurinVar(
+      id: PurinVars.winter,
+      displayName: "Winter-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/winter_icon.png',
+    ),
   };
 
   Map<KotatsuDesigns, RoomDesign> kotatsus = {
@@ -223,7 +253,19 @@ class Acquirables {
   };
 }
 
-enum PurinVars { boku, pumpkin, summer, bee, pika, yana, pol }
+enum PurinVars {
+  boku,
+  pumpkin,
+  summer,
+  bee,
+  pika,
+  yana,
+  pol,
+  fragaria,
+  winter,
+  atenean,
+  beach,
+}
 
 enum KotatsuDesigns { pudding, aqua }
 

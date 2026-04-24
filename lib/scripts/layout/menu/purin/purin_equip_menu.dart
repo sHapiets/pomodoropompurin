@@ -27,7 +27,7 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
 
     for (final entry in unlockPurinVarsMap.entries) {
       if (entry.key > oshiriLevel) continue;
-      acquiredPurinVars.add(entry.value);
+      acquiredPurinVars.addAll(entry.value);
     }
   }
 

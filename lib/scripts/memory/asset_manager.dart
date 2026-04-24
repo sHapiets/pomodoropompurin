@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
@@ -143,6 +142,11 @@ class AssetManager {
       'consumable_sprites/hamburg_steak/3.png',
       'consumable_sprites/hamburg_steak/4.png',
       'consumable_sprites/hamburg_steak/5.png',
+      'consumable_sprites/omurice/1.png',
+      'consumable_sprites/omurice/2.png',
+      'consumable_sprites/omurice/3.png',
+      'consumable_sprites/omurice/4.png',
+      'consumable_sprites/omurice/5.png',
 
       "purin_sprites/boku_spritesheet.png",
       "purin_sprites/pumpkin_spritesheet.png",
@@ -150,6 +154,12 @@ class AssetManager {
       "purin_sprites/bee_spritesheet.png",
       "purin_sprites/pika_spritesheet.png",
       "purin_sprites/yana_spritesheet.png",
+      "purin_sprites/pol_spritesheet.png",
+      "purin_sprites/atenean_spritesheet.png",
+      "purin_sprites/fragaria_spritesheet.png",
+      "purin_sprites/winter_spritesheet.png",
+      "purin_sprites/beach_spritesheet.png",
+
       "purin_sprites/purin_shadow.png",
 
       "kotatsu_sprites/pudding.png",

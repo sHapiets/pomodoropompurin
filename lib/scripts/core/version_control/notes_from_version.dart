@@ -16,6 +16,9 @@ class NotesFromVersion {
       "Achievements Rewards Dialog": ["Fixed: disabled confirmation button"],
       "Streak System": ["Fixed: progress overshooting bug"],
     },
+    ClientVersion.siberianHusky: {
+      "PurinVars": ["Fixed: Pol-Purin spritesheet corruption"],
+    },
   };
 
   Map<ClientVersion, Map<String, List<String>>> changes = {
@@ -64,6 +67,15 @@ class NotesFromVersion {
         "simply creates a visual red dot on icons for claimable rewards",
       ],
     },
+    ClientVersion.siberianHusky: {
+      "3 Unlockable PurinVars": [
+        "*******-Purin",
+        "*****-Purin",
+        "******-Purin",
+      ],
+      "1 Gifted PurinVars": ["Fragaria-Purin"],
+      "4 Snacks": ["Ice Cream: Chcolate and C&C", "Pretzel: Cream and Caramel"],
+    },
   };
 
   Map<ClientVersion, String> foreword = {
@@ -98,5 +110,24 @@ class NotesFromVersion {
         "having to release this in a seperate version, but I also intend to follow the development "
         "workflow quite strictly, just to make my life a bit less messy. \n\n"
         "As always, thank you and sorry if you had already encountered the bugs.",
+    ClientVersion.siberianHusky:
+        "Helloo Yana!\n\n"
+        "This update marks the beginning of the Content Extension Pack.\n\n"
+        "To give ample time towards developing 1.1.0, this month will only revolve around new content "
+        "for existing features and functionalities. This extension pack consists of four weekly updates, "
+        "mostly providing unlockables beyond the previous maximum level (Lv. 15). Kindly refer to the "
+        "version notes every week to see what's new!\n\n"
+        "Also, I just noticed that its been a month since the intial release (based on how many updates have "
+        "gone). As a token of appreciation, I have gifted you a special Purin in your collection. The original "
+        "design is from some game I saw online, but it was a too cool to pass on. Please consider it as a "
+        "reward for your efforts from the previous weeks as well.\n\n"
+        "As always, thank you for everything.\n\n",
+    /* "PS: To give you a bit of a tease for 1.1.0, I'm adding more stuff that you could do with Purin. "
+        "As I mentioned, the stuff like petting and feeding Purin was never "
+        "part of the original idea. It only hit me later in development when I vaguely remembered that you were into some "
+        "raising - digital - pet - thingies, which you reminded me were called Tamagotchis. Since these features "
+        "were least planned, I felt that the system for Purin interactions were half-baked and needed an immediate revamp. "
+        "Though I won't promise to meet the same level of experiences you may have with Tamagotchis, I will "
+        "certainly mark its own identity as part of the app for you to enjoy.", */
   };
 }

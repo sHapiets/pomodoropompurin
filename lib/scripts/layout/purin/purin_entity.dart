@@ -115,6 +115,26 @@ class PurinEntity extends PositionComponent
         image: Flame.images.fromCache('purin_sprites/yana_spritesheet.png'),
         srcSize: Vector2(500, 500),
       ),
+      PurinVars.pol: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/pol_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.atenean: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/atenean_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.fragaria: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/fragaria_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.winter: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/winter_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.beach: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/beach_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
     };
 
     loadAnim = LoadAnimation()..removeOnFinish = true;
