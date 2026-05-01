@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/pom_timer/dialogs/record_async_session_dialog.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -658,6 +659,72 @@ class _PomTimerIdleWidgetState extends State<PomTimerIdleWidget>
                         offset: Offset(2, 2),
                       ),
                     ],
+                  ),
+                ),
+              ),
+            ),
+
+            /// RecordAsyncSession Dialog
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(bottom: 20),
+                child: SizedBox(
+                  width: 70,
+                  height: 70,
+                  child: IconButton(
+                    iconSize: 45,
+                    onPressed: () {
+                      _pomTimer.timeSetWorkSeconds = timeSetWorkMinutes * 60;
+                      _pomTimer.timeSetBreakSeconds = timeSetBreakMinutes * 60;
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        barrierLabel: "Pomodoro End",
+                        barrierColor: Colors.black54,
+                        transitionDuration: const Duration(milliseconds: 400),
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return RecordAsyncSessionDialog(
+                            timeTotalSeconds:
+                                _pomTimer.timeSetWorkSeconds *
+                                _pomTimer.loopsSet,
+                            onCancel: () {},
+                            onConfirm: () {
+                              _pomTimer.recordAsyncSession();
+                            },
+                          );
+                        },
+                        transitionBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                              final curved = CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.easeInOutBack,
+                                reverseCurve: Curves.easeInOutBack,
+                              );
+
+                              return FadeTransition(
+                                opacity: animation,
+                                child: ScaleTransition(
+                                  scale: Tween<double>(
+                                    begin: 0.7,
+                                    end: 1,
+                                  ).animate(curved),
+                                  child: child,
+                                ),
+                              );
+                            },
+                      );
+                    },
+                    icon: Icon(
+                      Icons.edit_square,
+                      color: const Color.fromARGB(255, 255, 224, 130),
+                      shadows: [
+                        Shadow(
+                          color: const Color.fromARGB(172, 252, 165, 42),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

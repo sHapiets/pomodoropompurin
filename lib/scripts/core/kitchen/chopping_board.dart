@@ -14,6 +14,8 @@ class ChoppingBoard extends KitchenProcessor {
             Ingridient.tomato: 2,
             Ingridient.olives: 2,
           },
+          Ingridient.spaghetti: {Ingridient.dough: 1},
+          Ingridient.lasagnaSheets: {Ingridient.dough: 1},
         },
         consumableIngridients: {},
         processColor: const Color.fromARGB(255, 78, 78, 78),

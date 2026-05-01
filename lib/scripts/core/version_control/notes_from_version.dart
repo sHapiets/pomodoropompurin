@@ -76,6 +76,29 @@ class NotesFromVersion {
       "1 Gifted PurinVars": ["Fragaria-Purin"],
       "4 Snacks": ["Ice Cream: Chcolate and C&C", "Pretzel: Cream and Caramel"],
     },
+    ClientVersion.whiteTailedDeer: {
+      "PomTimer: Record Async. Session": [
+        "1: Input the focus time / loops of your unrecorded session, as you normally would in a PomTimer session",
+        "2: Select the button on the bottom right (pen-like icon) to open the record confirmation window.",
+        "3: Check the displayed focus time before confirming.",
+      ],
+      "5 Consumable Meals:": [
+        "Omurice: a homey, Japanese-style omelette rice bowl",
+        "Hamburger: the sandwich version....",
+        "Lasagna: finally, REAL food!",
+        "Pomodoro Pasta: coincidentally, a tomato-sauce pasta",
+        "Béchamel Pasta: an Italian creamy spaghetti, it just sounds fancy",
+      ],
+      "6 'Ingridients'": [
+        "Omelette",
+        "Spaghetti",
+        "Lasagna Sheets",
+        "Tomato Sauce",
+        "Creamy Sauce",
+        "Lasagna Sauce",
+      ],
+      "Scripts Map": ["5 Level-up Dialogs: Lv: 16 - 20"],
+    },
   };
 
   Map<ClientVersion, String> foreword = {
@@ -129,5 +152,20 @@ class NotesFromVersion {
         "were least planned, I felt that the system for Purin interactions were half-baked and needed an immediate revamp. "
         "Though I won't promise to meet the same level of experiences you may have with Tamagotchis, I will "
         "certainly mark its own identity as part of the app for you to enjoy.", */
+    ClientVersion.whiteTailedDeer:
+        "Helloo Yana!\n\n"
+        "This release delivers the 2nd installment of the Content Extension Pack.\n\n"
+        "In contrast to the previous update, this week focuses on new Consumable Meals, with additional 'Ingridients'. "
+        "Although, these do not necessarily 'extend' the content to future levels (since most of these "
+        "are already preparable), it is a partial set-up to the anticipated 1.1.0 update. "
+        "Additionally, new Level-up Scripts were added on top of the previous level cap.\n\n"
+        "As requested, the PomTimer is now allowing asynchronous records. Honestly, I don't think "
+        "you would ever 'exploit' this feature; and it's simply because you have been reasonably eager yet patient "
+        "throughout everything this app has to offer. That alone shows that you genuinely value "
+        "your experience. On top of that, it also makes the development process sustainable and "
+        "quite enjoyable, so I'm really glad that you do.\n\n"
+        "(PS: Though I say this, I may have made the confirmation window.... a bit silly. "
+        "I just found it kinda funny that you proposed some honesty-policy thing, sooooo I'm rolling with it. "
+        "You're welcome in advance mwahahaha)",
   };
 }

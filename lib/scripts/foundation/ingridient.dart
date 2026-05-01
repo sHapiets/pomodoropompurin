@@ -103,6 +103,36 @@ enum Ingridient {
     displayName: "Patty",
     price: 320,
     spriteFlutterPath: "assets/images/ingridient_sprites/patty.png",
+  ),
+  omelette(
+    displayName: "Omelette",
+    price: 230,
+    spriteFlutterPath: "assets/images/ingridient_sprites/omelette.png",
+  ),
+  tomatoSauce(
+    displayName: "Tomato Sauce",
+    price: 160,
+    spriteFlutterPath: "assets/images/ingridient_sprites/tomatoSauce.png",
+  ),
+  creamySauce(
+    displayName: "Creamy Sauce",
+    price: 160,
+    spriteFlutterPath: "assets/images/ingridient_sprites/creamySauce.png",
+  ),
+  lasagnaSauce(
+    displayName: "Lasagna Sauce",
+    price: 320,
+    spriteFlutterPath: "assets/images/ingridient_sprites/lasagnaSauce.png",
+  ),
+  lasagnaSheets(
+    displayName: "Lasagna Sheets",
+    price: 200,
+    spriteFlutterPath: "assets/images/ingridient_sprites/lasagnaSheets.png",
+  ),
+  spaghetti(
+    displayName: "Spaghetti",
+    price: 200,
+    spriteFlutterPath: "assets/images/ingridient_sprites/spaghetti.png",
   );
 
   const Ingridient({

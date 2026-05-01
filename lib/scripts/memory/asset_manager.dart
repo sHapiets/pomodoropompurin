@@ -55,6 +55,8 @@ class AssetManager {
     'shadow_koupen_icon': 'assets/images/character_icons/koupen/shadow.png',
     'troubled_koupen_icon': 'assets/images/character_icons/koupen/troubled.png',
     'shocked_koupen_icon': 'assets/images/character_icons/koupen/shocked.png',
+    'detective_koupen_icon':
+        'assets/images/character_icons/koupen/detective.png',
 
     'mixer_objects_icon': 'assets/images/character_icons/objects/mixer.png',
     'mixer_shadow_objects_icon':
@@ -147,6 +149,22 @@ class AssetManager {
       'consumable_sprites/omurice/3.png',
       'consumable_sprites/omurice/4.png',
       'consumable_sprites/omurice/5.png',
+      'consumable_sprites/hamburger/1.png',
+      'consumable_sprites/hamburger/2.png',
+      'consumable_sprites/hamburger/3.png',
+      'consumable_sprites/hamburger/4.png',
+      'consumable_sprites/lasagna/1.png',
+      'consumable_sprites/lasagna/2.png',
+      'consumable_sprites/lasagna/3.png',
+      'consumable_sprites/lasagna/4.png',
+      'consumable_sprites/pomodoro/1.png',
+      'consumable_sprites/pomodoro/2.png',
+      'consumable_sprites/pomodoro/3.png',
+      'consumable_sprites/pomodoro/4.png',
+      'consumable_sprites/bechamel/1.png',
+      'consumable_sprites/bechamel/2.png',
+      'consumable_sprites/bechamel/3.png',
+      'consumable_sprites/bechamel/4.png',
 
       "purin_sprites/boku_spritesheet.png",
       "purin_sprites/pumpkin_spritesheet.png",

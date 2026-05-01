@@ -15,6 +15,11 @@ class Stove extends KitchenProcessor {
             Ingridient.butter: 1,
           },
           Ingridient.cookedRice: {Ingridient.washedRice: 1},
+          Ingridient.omelette: {Ingridient.eggs: 2, Ingridient.butter: 1},
+          Ingridient.lasagnaSauce: {
+            Ingridient.creamySauce: 1,
+            Ingridient.tomatoSauce: 1,
+          },
         },
         consumableIngridients: {
           Consumable.pancake: {
@@ -24,6 +29,18 @@ class Stove extends KitchenProcessor {
           Consumable.hamburgSteak: {
             Ingridient.patty: 1,
             Ingridient.cookedRice: 1,
+          },
+          Consumable.omurice: {
+            Ingridient.omelette: 1,
+            Ingridient.cookedRice: 1,
+          },
+          Consumable.pomodoro: {
+            Ingridient.tomatoSauce: 1,
+            Ingridient.spaghetti: 1,
+          },
+          Consumable.bechamel: {
+            Ingridient.creamySauce: 1,
+            Ingridient.spaghetti: 1,
           },
         },
       );

@@ -51,6 +51,10 @@ flutter:
     - assets/images/consumable_sprites/hamburg_steak/
     - assets/images/consumable_sprites/pancakes/
     - assets/images/consumable_sprites/omurice/
+    - assets/images/consumable_sprites/hamburger/
+    - assets/images/consumable_sprites/lasagna/
+    - assets/images/consumable_sprites/pomodoro/
+    - assets/images/consumable_sprites/bechamel/
     - assets/images/kitchen_processors_sprites/
     - assets/images/shop_sprites/
     - assets/images/consumable_sprites/pudding/

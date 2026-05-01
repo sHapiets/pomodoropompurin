@@ -213,6 +213,20 @@ class PomTimer {
     }
   }
 
+  void recordAsyncSession() {
+    /// Save latest PomTimerConfig to database
+    _databaseManager.userConfigTimerSave(
+      timeSetWorkSeconds,
+      timeSetBreakSeconds,
+      loopsSet,
+    );
+
+    restart = false;
+    timeTotalSeconds = timeSetWorkSeconds * loopsSet;
+    multiplierTotal = timeTotalSeconds.toDouble();
+    endTimer();
+  }
+
   Future<void> endTimer() async {
     if (restart) {
       return;

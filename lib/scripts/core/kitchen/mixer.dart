@@ -16,6 +16,11 @@ class Mixer extends KitchenProcessor {
             Ingridient.groundPork: 1,
           },
           Ingridient.dough: {Ingridient.flour: 1, Ingridient.yeast: 1},
+          Ingridient.tomatoSauce: {
+            Ingridient.tomato: 2,
+            Ingridient.choppedOnions: 1,
+          },
+          Ingridient.creamySauce: {Ingridient.milk: 1},
         },
         consumableIngridients: {},
         processColor: const Color.fromARGB(255, 176, 211, 102),
