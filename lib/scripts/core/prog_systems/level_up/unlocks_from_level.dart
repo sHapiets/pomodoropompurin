@@ -7,7 +7,7 @@ import 'package:pomodoropompurin/scripts/foundation/snack.dart';
 ///
 /// Each map is constructed int the form
 ///
-///               {oshiriLevelRequirement : unlockable}
+///               {oshiriLevelRequirement : unlockable/s}
 ///
 /// This is to be used mostly for acquirables, where the available
 /// items are listed here, and displayed by iterating over the map.
@@ -36,8 +36,7 @@ class UnlocksFromLevel {
     5: [Snack.hotCocoa],
     9: [Snack.cheeseIceCream, Snack.cncIceCream, Snack.chocloateIceCream],
     11: [Snack.caramelPretzel, Snack.creamPretzel],
-    14: [Snack.chocolateCupcake],
-    15: [Snack.strawberryCupcake],
+    14: [Snack.chocolateCupcake, Snack.strawberryCupcake],
   };
 
   static Map<int, List<PurinVars>> acquiredPurinVars = {
@@ -46,8 +45,8 @@ class UnlocksFromLevel {
     9: [PurinVars.pika],
     10: [PurinVars.fragaria],
     12: [PurinVars.bee],
+    15: [PurinVars.yana, PurinVars.pol, PurinVars.atenean],
     16: [PurinVars.summer],
-    17: [PurinVars.yana, PurinVars.pol, PurinVars.atenean],
     18: [PurinVars.winter],
     19: [PurinVars.beach],
   };

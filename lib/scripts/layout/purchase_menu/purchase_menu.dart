@@ -4,6 +4,7 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/foundation/ingridient.dart';
+import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_panel.dart';
 import 'package:pomodoropompurin/scripts/layout/purchase_menu/purchase_tile.dart';
 import 'package:pomodoropompurin/scripts/memory/asset_manager.dart';
 import 'package:pomodoropompurin/scripts/page/main_page.dart';
@@ -177,17 +178,88 @@ class PurchaseMenu extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: GridView.builder(
-                  itemCount: purchasableList.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 0.62,
-                  ),
-                  itemBuilder: (context, index) {
-                    return PurchaseTile(ingridient: purchasableList[index]);
-                  },
+                child: CustomScrollView(
+                  slivers: [
+                    for (final type in IngridientType.values) ...[
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 3,
+                              vertical: 3,
+                            ),
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 30,
+                              vertical: 1,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(134, 91, 147, 185),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(type.icon, color: Colors.white),
+                                SizedBox(width: 5),
+                                Text(
+                                  type.displayName,
+                                  style: const TextStyle(
+                                    fontFamily: 'Fredoka',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.black26,
+                                        offset: Offset(2, 2),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SliverPadding(
+                        padding: EdgeInsetsGeometry.only(bottom: 15),
+                        sliver: SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final ing = purchasableList
+                                  .where((i) => i.type == type)
+                                  .toList()[index];
+
+                              return PurchaseTile(
+                                ingridient: ing,
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => PurchasePanel(
+                                      ingridient: ing,
+                                      onReturn: () => Navigator.pop(context),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            childCount: purchasableList
+                                .where((i) => i.type == type)
+                                .length,
+                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                childAspectRatio: 1,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),
