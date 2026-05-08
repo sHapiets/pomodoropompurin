@@ -480,6 +480,430 @@ class ScriptsMap {
         ScriptManager.singleton.removeLevelUpDialog();
       },
     ),
+
+    13: ScriptDialog(
+      title: "A Food-y Dream",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.study);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['eating_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "I've always love sweet and soft things!"},
+        {
+          "Purin":
+              "I remember how I used to wish to become a world-class baker!",
+        },
+        {"Purin": "But the idea also scared me a bit...."},
+        {"Purin": "Not really from baking.... "},
+        {
+          "Purin":
+              ".... but rather from 'accidentally' gobbling down my creation before it reaches the customer!",
+        },
+        {
+          "Purin":
+              "Maybe I'm really just meant to eat and get stuffed, rather than to cook or bake.",
+        },
+        {
+          "Purin":
+              "....or at least become a taste tester of new pudding flavors.",
+        },
+        {"Purin": "......"},
+        {"Purin": "How about I start right now!"},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+
+    14: ScriptDialog(
+      title: "Forbidden Sky Dessert",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuRight);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "Clouds look really tasty sometimes."},
+        {
+          "Purin":
+              "Especially the extreeeemely fluffy ones. They look like freshly whipped cream...",
+        },
+        {
+          "Purin":
+              "I wonder if they're secretly giant desserts floating in the sky.",
+        },
+        {"Purin": "Maybe that's why birds fly around so much all day..."},
+        {"Purin": "If I were taller, I'd probably take just one tiny bite."},
+        {"Purin": "...for research purposes only, of course."},
+        {"Purin": "Though if clouds WERE made of whipped cream..."},
+        {"Purin": "....rain would become a very sticky problem."},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+
+    15: ScriptDialog(
+      title: "The Third Nap Theory",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.futon);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "I took two naps earlier today."},
+        {"Purin": "The first one was because I was sleepy..."},
+        {"Purin": "And the second one was because the first nap felt lonely."},
+        {"Purin": "Then I started wondering about something very important..."},
+        {"Purin": "What happens if someone takes THREE naps in one day?"},
+        {
+          "Purin":
+              "Would that become too POWERFUL for a normal body to handle?....",
+        },
+        {"Purin": "Maybe that's how bears prepare for hibernation!"},
+        {"Purin": "Hehehe.... maybe I'm slowly unlocking my true potential."},
+        {"Purin": "...ZzZzZz...."},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+
+    16: ScriptDialog(
+      title: "A Spoon's Greatest Purpose",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.study);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+      ],
+      dialogues: [
+        {
+          "Purin":
+              "I was eating lunch when I stared at my spoon for a minute, then pondered:",
+        },
+        {"Purin": "'Do spoons have their own favorite food?'"},
+        {
+          "Purin":
+              "Like maybe those large soup spoons enjoy handling hot soup more than cold desserts.",
+        },
+        {
+          "Purin":
+              "Or maybe tiny spoons feel really proud whenever they help eat ice cream.",
+        },
+        {"Purin": "Though if I were a spoon..."},
+        {"Purin": "....I think I would choose pudding every single time!"},
+        {
+          "Purin":
+              "It's both jelly-liquidy like soup, but also cold and sweet like ice cream.",
+        },
+        {"Purin": "....."},
+        {"Purin": "Now I feel a little bad for forks though."},
+        {
+          "Purin":
+              "They'll never understand the joy of holding pudding ~pomu~.",
+        },
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+
+    17: ScriptDialog(
+      title: "The Beret-Wind Incident",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.kotatsuLeft);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['shadow_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "A strong breeze passed by me earlier today."},
+        {"Purin": "It almost carried my beret away into the distance..."},
+        {
+          "Purin":
+              "And for a moment, it felt like I was inside one of those dramatic movies.",
+        },
+        {
+          "Purin":
+              "I imagined myself running through a field in slow motion...",
+        },
+        {"Purin": "....while sad music played in the background."},
+        {"Purin": "Then Mama-owner would probably yell something like..."},
+        {"Purin": '"PURIN!! YOUR BERET IS FLYING INTO THE RIVER!!"'},
+        {
+          "Purin":
+              "....which kinda adds more emotion to the scene, but a bit funny to imagine at this point.",
+        },
+        {
+          "Purin":
+              "Still though, my beret would have looked very cool flying around.",
+        },
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+
+    18: ScriptDialog(
+      title: "The Coziness Meter",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.sofaSitLeft);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "I think weather forecasts are missing something important."},
+        {"Purin": "They always talk about rain, sunshine, or strong winds..."},
+        {
+          "Purin":
+              "But nobody ever tells you how cozy the day is going to feel.",
+        },
+        {
+          "Purin":
+              "Like rainy afternoons with blankets should count as EXTREMELY cozy weather.",
+        },
+        {"Purin": "And cold mornings where you don't want to leave bed..."},
+        {
+          "Purin":
+              "....those should automatically cancel all responsibilities.",
+        },
+        {
+          "Purin":
+              "Though sunny snack-eating days are also pretty cozy in their own way.",
+        },
+        {"Purin": "Maybe being cozy isn't really about the weather after all."},
+        {
+          "Purin":
+              "Maybe cozy is just wherever snacks and naps are waiting for you!",
+        },
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+
+    19: ScriptDialog(
+      title: "The Microwave Champion",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.study);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "I heated up a snack earlier today."},
+        {
+          "Purin":
+              "Usually I either make it too cold... or extremely volcanic.",
+        },
+        {
+          "Purin":
+              "One time, I bit into pizza and forgot cheese could attack people.",
+        },
+        {"Purin": "But today was different..."},
+        {"Purin": "The microwave beeped, and somehow everything was PERFECT."},
+        {"Purin": "Not too hot. Not too cold. Just soft, warm, and comfy."},
+        {"Purin": "For a moment, I felt like I had mastered cooking itself."},
+        {"Purin": "Maybe this is what true greatness feels like ~pomu~."},
+        {"Purin": "....though I still don't understand how microwaves work."},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+    19: ScriptDialog(
+      title: "Waving at the Night Sky",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.sofaRest);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "Sometimes I like staring at the stars before bedtime."},
+        {"Purin": "They always look so tiny and far away..."},
+        {
+          "Purin":
+              "But I still wave at them anyways, just in case they can see me.",
+        },
+        {"Purin": "Maybe stars get lonely too when everyone's asleep already."},
+        {"Purin": "So maybe waving back would make them happy."},
+        {"Purin": "Though if stars ARE alive..."},
+        {
+          "Purin":
+              "....they're probably wondering why a small pudding dog keeps staring at them every night.",
+        },
+        {"Purin": "Hehehe.... I hope they think I'm polite at least."},
+        {"Purin": "Goodnight, sky friends...."},
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
+
+    20: ScriptDialog(
+      title: "The Smell of Happiness",
+      onBegin: () {
+        Purin.singleton.changePosition(PurinPosition.sofaSitRight);
+        PurinAreaStateManager.singleton.jumpToPosition(
+          Purin.singleton.purinPositionVect2,
+          Vector2.zero(),
+          2.2,
+        );
+      },
+      imagePaths: [
+        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
+        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
+      ],
+      dialogues: [
+        {"Purin": "Passing by bakeries is very dangerous for me."},
+        {
+          "Purin":
+              "The smell always pulls me closer like some kind of tasty magic.",
+        },
+        {"Purin": "Fresh bread smells so warm and fluffy for some reason..."},
+        {"Purin": "It makes me feel like everything is going to be okay."},
+        {"Purin": "Then I started wondering something important, as usual:"},
+        {
+          "Purin":
+              "'What if bakery smells could be bottled and carried around everywhere?'",
+        },
+        {
+          "Purin":
+              "Whenever someone feels sad, they could just take one tiny sniff...",
+        },
+        {
+          "Purin":
+              "....and suddenly, you'd feel cozy and hungry at the same time.",
+        },
+        {"Purin": "......"},
+        {
+          "Purin":
+              "Actually nevermind, that sounds EVEN MORE dangerous for my wallet.",
+        },
+      ],
+      onFinished: () {
+        ScriptManager.singleton.removeLevelUpDialog();
+      },
+    ),
   };
 
   static Map<ShoeAchievement, ScriptDialog> fromShoeAchievement = {

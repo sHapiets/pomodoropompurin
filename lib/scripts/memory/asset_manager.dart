@@ -177,6 +177,12 @@ class AssetManager {
       "purin_sprites/fragaria_spritesheet.png",
       "purin_sprites/winter_spritesheet.png",
       "purin_sprites/beach_spritesheet.png",
+      "purin_sprites/tokimeki_spritesheet.png",
+      "purin_sprites/angel_spritesheet.png",
+      "purin_sprites/chef_spritesheet.png",
+      "purin_sprites/kimono_spritesheet.png",
+      "purin_sprites/vampire_spritesheet.png",
+      "purin_sprites/mama_spritesheet.png",
 
       "purin_sprites/purin_shadow.png",
 

@@ -19,6 +19,11 @@ class NotesFromVersion {
     ClientVersion.siberianHusky: {
       "PurinVars": ["Fixed: Pol-Purin spritesheet corruption"],
     },
+    ClientVersion.blueWhale: {
+      "Scripts Map": [
+        "Fixed: Lvl 13 - 15 Purin Scripts, kindly replay under the Words of Wisdom if missed!",
+      ],
+    },
   };
 
   Map<ClientVersion, Map<String, List<String>>> changes = {
@@ -38,6 +43,13 @@ class NotesFromVersion {
       ],
       "Icon Changes": [
         "Event System: Sligthly saturated shadow for more visibility.",
+      ],
+    },
+    ClientVersion.blueWhale: {
+      "Purchase Menu": [
+        "Ingridient Types: arranged for better QOL",
+        "Tiling: IMPORTANT - click the tiles to open the Purchase Panel to purchase an item.",
+        "Non-purchasables: incl. locked items for inventory count",
       ],
     },
   };
@@ -98,6 +110,19 @@ class NotesFromVersion {
         "Lasagna Sauce",
       ],
       "Scripts Map": ["5 Level-up Dialogs: Lv: 16 - 20"],
+    },
+    ClientVersion.blueWhale: {
+      "5 Unlockable PurinVars": [
+        "********-Purin",
+        "*****-Purin",
+        "****-Purin",
+        "******-Purin",
+        "*******-Purin",
+      ],
+      "1 Gifted PurinVars": ["Mama-Purin"],
+      "'Ingridient' Types": [
+        "simple categorization of ingridients, slightly akin to actual groceries",
+      ],
     },
   };
 
@@ -167,5 +192,14 @@ class NotesFromVersion {
         "(PS: Though I say this, I may have made the confirmation window.... a bit silly. "
         "I just found it kinda funny that you proposed some honesty-policy thing, sooooo I'm rolling with it. "
         "You're welcome in advance mwahahaha)",
+    ClientVersion.blueWhale:
+        "Helloo Yana!\n\n"
+        "This release delivers the 3rd installment of the Content Extension Pack.\n\n"
+        "In terms of content, only new unlockable Purins have been added. UI changes are also made for the Purchase "
+        "Menu, so kindly refer to the notes below. Purin Scripts for Level 13-15 apparently bugged out, so "
+        "you can now watch them under the Words of Wisdom had you missed them.\n\n"
+        "To celebrate MOTHER'S DAY, Mama-Purin has been invited to the Purin's home! (Check your Purin collection...) \n\n"
+        "Kindly send my greetings to your mom as well! Wishing Tita good health, and all the love she deserves! "
+        "Hope she continues being the endearing and lovable person that she is! <3",
   };
 }

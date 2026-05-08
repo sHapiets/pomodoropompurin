@@ -28,7 +28,13 @@ class UnlocksFromLevel {
     8: [Ingridient.choppedOnions, Ingridient.cookedRice],
     10: [Ingridient.yeast, Ingridient.tomato, Ingridient.olives],
     11: [Ingridient.puddingBatter, Ingridient.patty],
-    13: [Ingridient.dough, Ingridient.pizzaToppings],
+    13: [
+      Ingridient.dough,
+      Ingridient.pizzaToppings,
+      Ingridient.lasagnaSheets,
+      Ingridient.spaghetti,
+    ],
+    14: [Ingridient.creamySauce, Ingridient.tomatoSauce],
   };
 
   static Map<int, List<Snack>> purchaseableSnack = {
@@ -44,7 +50,7 @@ class UnlocksFromLevel {
     4: [PurinVars.pumpkin],
     9: [PurinVars.pika],
     10: [PurinVars.fragaria],
-    12: [PurinVars.bee],
+    12: [PurinVars.bee, PurinVars.mama],
     15: [PurinVars.yana, PurinVars.pol, PurinVars.atenean],
     16: [PurinVars.summer],
     18: [PurinVars.winter],

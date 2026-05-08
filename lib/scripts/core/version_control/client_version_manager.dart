@@ -4,7 +4,7 @@ class ClientVersionManager {
   ClientVersionManager._();
   static final singleton = ClientVersionManager._();
 
-  final clientVersion = ClientVersion.whiteTailedDeer;
+  final clientVersion = ClientVersion.blueWhale;
   ClientVersion recordedClientVersion = ClientVersion.goldenRetriever;
   bool get wasOutdated =>
       clientVersion.recencyTag > recordedClientVersion.recencyTag;

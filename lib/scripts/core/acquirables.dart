@@ -126,6 +126,42 @@ class Acquirables {
       cost: 0,
       iconAssetPath: 'assets/images/purin_sprites/winter_icon.png',
     ),
+    PurinVars.tokimeki: PurinVar(
+      id: PurinVars.tokimeki,
+      displayName: "Tokimeki-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/tokimeki_icon.png',
+    ),
+    PurinVars.angel: PurinVar(
+      id: PurinVars.angel,
+      displayName: "Angel-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/angel_icon.png',
+    ),
+    PurinVars.chef: PurinVar(
+      id: PurinVars.chef,
+      displayName: "Chef-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/chef_icon.png',
+    ),
+    PurinVars.kimono: PurinVar(
+      id: PurinVars.kimono,
+      displayName: "Kimono-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/kimono_icon.png',
+    ),
+    PurinVars.vampire: PurinVar(
+      id: PurinVars.vampire,
+      displayName: "Vampire-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/vampire_icon.png',
+    ),
+    PurinVars.mama: PurinVar(
+      id: PurinVars.mama,
+      displayName: "Mama-Purin",
+      cost: 0,
+      iconAssetPath: 'assets/images/purin_sprites/mama_icon.png',
+    ),
   };
 
   Map<KotatsuDesigns, RoomDesign> kotatsus = {
@@ -265,6 +301,12 @@ enum PurinVars {
   winter,
   atenean,
   beach,
+  tokimeki,
+  angel,
+  chef,
+  kimono,
+  vampire,
+  mama,
 }
 
 enum KotatsuDesigns { pudding, aqua }

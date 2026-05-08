@@ -228,12 +228,16 @@ class PurchaseMenu extends StatelessWidget {
                         sliver: SliverGrid(
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
-                              final ing = purchasableList
+                              final ing = Ingridient.values
                                   .where((i) => i.type == type)
                                   .toList()[index];
+                              final bool purchasableBool = purchasableList.any(
+                                (i) => i == ing,
+                              );
 
                               return PurchaseTile(
                                 ingridient: ing,
+                                purchasable: purchasableBool,
                                 onTap: () {
                                   showDialog(
                                     context: context,
@@ -245,7 +249,7 @@ class PurchaseMenu extends StatelessWidget {
                                 },
                               );
                             },
-                            childCount: purchasableList
+                            childCount: Ingridient.values
                                 .where((i) => i.type == type)
                                 .length,
                           ),

@@ -135,6 +135,30 @@ class PurinEntity extends PositionComponent
         image: Flame.images.fromCache('purin_sprites/beach_spritesheet.png'),
         srcSize: Vector2(500, 500),
       ),
+      PurinVars.tokimeki: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/tokimeki_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.angel: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/angel_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.chef: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/chef_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.kimono: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/kimono_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.vampire: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/vampire_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
+      PurinVars.mama: SpriteSheet(
+        image: Flame.images.fromCache('purin_sprites/mama_spritesheet.png'),
+        srcSize: Vector2(500, 500),
+      ),
     };
 
     loadAnim = LoadAnimation()..removeOnFinish = true;
