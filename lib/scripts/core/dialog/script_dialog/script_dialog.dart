@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 
 class ScriptDialog extends StatefulWidget {
   final String title;

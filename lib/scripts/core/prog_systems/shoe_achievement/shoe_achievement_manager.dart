@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
-import 'package:pomodoropompurin/scripts/layout/prog_dialog/level_up_dialog.dart';
 import 'package:pomodoropompurin/scripts/layout/prog_dialog/shoe_achievement_dialog.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 

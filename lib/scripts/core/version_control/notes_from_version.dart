@@ -24,6 +24,9 @@ class NotesFromVersion {
         "Fixed: Lvl 13 - 15 Purin Scripts, kindly replay under the Words of Wisdom if missed!",
       ],
     },
+    ClientVersion.violetCrownedHummingbird: {
+      "Scripts Map": ["Fixed: Lvl 19 Purin Script duplication"],
+    },
   };
 
   Map<ClientVersion, Map<String, List<String>>> changes = {

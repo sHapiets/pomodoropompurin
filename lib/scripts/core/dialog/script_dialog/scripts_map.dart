@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flame/game.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_dialog.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
@@ -766,48 +765,6 @@ class ScriptsMap {
       },
     ),
 
-    19: ScriptDialog(
-      title: "The Microwave Champion",
-      onBegin: () {
-        Purin.singleton.changePosition(PurinPosition.study);
-        PurinAreaStateManager.singleton.jumpToPosition(
-          Purin.singleton.purinPositionVect2,
-          Vector2.zero(),
-          2.2,
-        );
-      },
-      imagePaths: [
-        AssetManager.singleton.flutterAssetPaths['curious_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['thinking_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['blank_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['please_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['down_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['happy_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['excited_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['pumped_purin_icon']!,
-        AssetManager.singleton.flutterAssetPaths['calm_purin_icon']!,
-      ],
-      dialogues: [
-        {"Purin": "I heated up a snack earlier today."},
-        {
-          "Purin":
-              "Usually I either make it too cold... or extremely volcanic.",
-        },
-        {
-          "Purin":
-              "One time, I bit into pizza and forgot cheese could attack people.",
-        },
-        {"Purin": "But today was different..."},
-        {"Purin": "The microwave beeped, and somehow everything was PERFECT."},
-        {"Purin": "Not too hot. Not too cold. Just soft, warm, and comfy."},
-        {"Purin": "For a moment, I felt like I had mastered cooking itself."},
-        {"Purin": "Maybe this is what true greatness feels like ~pomu~."},
-        {"Purin": "....though I still don't understand how microwaves work."},
-      ],
-      onFinished: () {
-        ScriptManager.singleton.removeLevelUpDialog();
-      },
-    ),
     19: ScriptDialog(
       title: "Waving at the Night Sky",
       onBegin: () {

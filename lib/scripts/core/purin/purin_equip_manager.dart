@@ -1,6 +1,4 @@
-import 'package:flutter/widgets.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
-import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 
 /// ----------------------------------------------------------------------------------
 /// ----- Purin, despite his obnoxiously 'spherical' shape, certainly loves style
