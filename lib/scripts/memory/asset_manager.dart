@@ -69,7 +69,7 @@ class AssetManager {
     ...{for (final sna in Snack.values) sna.name: sna.iconFlutterPath},
     ...{for (final sA in ShoeAchievement.values) sA.name: sA.flutterAssetPath},
     ...{
-      for (final purinVar in Acquirables.singleton.purinVars.values)
+      for (final purinVar in PurinVar.values)
         purinVar.displayName: purinVar.iconAssetPath,
     },
   };

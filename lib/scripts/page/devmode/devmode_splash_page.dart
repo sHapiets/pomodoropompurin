@@ -244,7 +244,7 @@ class _DevModeSplashPageState extends State<DevModeSplashPage>
 
         purinAreaEquipManager.addFeedable(feedable, bitesLeft);
 
-        final PurinVars purinVars = PurinVars.values.byName(
+        final PurinVar purinVars = PurinVar.values.byName(
           await _databaseManager.configPurinVarLoad(),
         );
 

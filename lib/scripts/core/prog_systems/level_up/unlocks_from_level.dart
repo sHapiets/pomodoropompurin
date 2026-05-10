@@ -45,15 +45,15 @@ class UnlocksFromLevel {
     14: [Snack.chocolateCupcake, Snack.strawberryCupcake],
   };
 
-  static Map<int, List<PurinVars>> acquiredPurinVars = {
-    1: [PurinVars.boku],
-    4: [PurinVars.pumpkin],
-    9: [PurinVars.pika],
-    10: [PurinVars.fragaria],
-    12: [PurinVars.bee, PurinVars.mama],
-    15: [PurinVars.yana, PurinVars.pol, PurinVars.atenean],
-    16: [PurinVars.summer],
-    18: [PurinVars.winter],
-    19: [PurinVars.beach],
+  static Map<int, List<PurinVar>> acquiredPurinVars = {
+    1: [PurinVar.boku],
+    4: [PurinVar.pumpkin],
+    9: [PurinVar.pika],
+    10: [PurinVar.fragaria],
+    12: [PurinVar.bee, PurinVar.mama],
+    15: [PurinVar.yana, PurinVar.pol, PurinVar.atenean],
+    16: [PurinVar.summer],
+    18: [PurinVar.winter],
+    19: [PurinVar.beach],
   };
 }

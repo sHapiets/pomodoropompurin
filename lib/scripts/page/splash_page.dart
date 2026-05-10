@@ -245,11 +245,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
         purinAreaEquipManager.addFeedable(feedable, bitesLeft);
 
-        final PurinVars purinVars = PurinVars.values.byName(
+        final PurinVar purinVar = PurinVar.values.byName(
           await _databaseManager.configPurinVarLoad(),
         );
 
-        purin.equip(purinVars);
+        purin.equip(purinVar);
       }),
 
       MapEntry('Caching Widget Images...', () async {

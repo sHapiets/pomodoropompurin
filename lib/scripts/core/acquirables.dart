@@ -58,7 +58,7 @@ class Acquirables {
   Map<String, Top> acquirableTops = {};
   Map<String, Bottom> acquirableBottoms = {};
   Map<String, OutfitSet> acquirableOutfitSets = {}; */
-
+  /* 
   Map<PurinVars, PurinVar> purinVars = {
     PurinVars.boku: PurinVar(
       id: PurinVars.boku,
@@ -162,7 +162,7 @@ class Acquirables {
       cost: 0,
       iconAssetPath: 'assets/images/purin_sprites/mama_icon.png',
     ),
-  };
+  }; */
 
   Map<KotatsuDesigns, RoomDesign> kotatsus = {
     KotatsuDesigns.pudding: RoomDesign(
@@ -289,7 +289,7 @@ class Acquirables {
   };
 }
 
-enum PurinVars {
+enum PurinVar {
   boku,
   pumpkin,
   summer,
@@ -306,7 +306,14 @@ enum PurinVars {
   chef,
   kimono,
   vampire,
-  mama,
+  mama;
+
+  const PurinVar();
+
+  String get displayName =>
+      "${name[0].toUpperCase() + name.substring(1)}-Purin";
+  String get purinSpritesheetDir => 'purin_sprites/${name}_spritesheet.png';
+  String get iconAssetPath => 'assets/images/purin_sprites/${name}_icon.png';
 }
 
 enum KotatsuDesigns { pudding, aqua }

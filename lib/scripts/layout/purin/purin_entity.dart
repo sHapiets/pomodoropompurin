@@ -57,7 +57,6 @@ class PurinEntity extends PositionComponent
   late IdleBreathingAnimation purinAnim;
   late SpriteComponent purinSprite;
   late SpriteComponent purinShadow;
-  late Map<PurinVars, SpriteSheet> purinSheets;
   late CircleHitbox purinHitbox;
 
   final spriteSheetRowFromPosition = {
@@ -84,82 +83,11 @@ class PurinEntity extends PositionComponent
     PurinPosition.sofaRest: false,
   };
 
-  late PurinVars lastPurinVars;
+  late PurinVar lastPurinVar;
 
   @override
   void onMount() {
     super.onMount();
-
-    purinSheets = {
-      PurinVars.boku: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/boku_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.pumpkin: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/pumpkin_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.summer: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/summer_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.bee: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/bee_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.pika: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/pika_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.yana: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/yana_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.pol: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/pol_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.atenean: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/atenean_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.fragaria: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/fragaria_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.winter: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/winter_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.beach: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/beach_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.tokimeki: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/tokimeki_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.angel: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/angel_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.chef: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/chef_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.kimono: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/kimono_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.vampire: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/vampire_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-      PurinVars.mama: SpriteSheet(
-        image: Flame.images.fromCache('purin_sprites/mama_spritesheet.png'),
-        srcSize: Vector2(500, 500),
-      ),
-    };
 
     loadAnim = LoadAnimation()..removeOnFinish = true;
     purinAnim = IdleBreathingAnimation();
@@ -175,7 +103,7 @@ class PurinEntity extends PositionComponent
       position: Vector2(0, 0),
       anchor: Anchor.center,
     );
-    lastPurinVars = purin.equipManager.equippedPurinVar.id;
+    lastPurinVar = purin.equipManager.equippedPurinVar;
     updateSprite();
     updatePostion();
 
@@ -215,8 +143,11 @@ class PurinEntity extends PositionComponent
   }
 
   void updateSprite() {
-    final purinVar = purin.equipManager.equippedPurinVar.id;
-    final sheet = purinSheets[purinVar]!;
+    final purinVar = purin.equipManager.equippedPurinVar;
+    final sheet = SpriteSheet(
+      image: Flame.images.fromCache(purinVar.purinSpritesheetDir),
+      srcSize: Vector2(500, 500),
+    );
 
     final row = spriteSheetRowFromPosition[purin.stateManager.position]!;
     final col = spriteSheetColumnFromAction[purin.stateManager.action]!;
@@ -231,8 +162,8 @@ class PurinEntity extends PositionComponent
       purinSprite.flipHorizontally();
     }
 
-    if (purinVar as PurinVars != lastPurinVars) {
-      lastPurinVars = purinVar;
+    if (purinVar != lastPurinVar) {
+      lastPurinVar = purinVar;
       reloadLoadAnimation();
     }
   }

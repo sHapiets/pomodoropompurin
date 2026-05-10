@@ -432,7 +432,7 @@ class DatabaseManager {
     await selectablesConfigRef.update({'feedableBitesLeft': bitesLeft});
   }
 
-  Future<void> configPurinVarSave(PurinVars purinVar) async {
+  Future<void> configPurinVarSave(PurinVar purinVar) async {
     final purinVarConfigRef = userRef.collection('config').doc('purin');
     await purinVarConfigRef.update({'purinVar': purinVar.name});
   }

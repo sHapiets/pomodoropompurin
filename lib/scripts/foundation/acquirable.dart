@@ -74,15 +74,6 @@ class OutfitSet extends Acquirable {
   });
 } */
 
-class PurinVar extends Acquirable {
-  PurinVar({
-    required super.id,
-    required super.displayName,
-    required super.cost,
-    required super.iconAssetPath,
-  });
-}
-
 class RoomDesign extends Acquirable {
   RoomDesign({
     required super.id,

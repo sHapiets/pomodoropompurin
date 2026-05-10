@@ -47,11 +47,10 @@ class LevelUpManager extends ChangeNotifier {
     if (UnlocksFromLevel.acquiredPurinVars[currentLevel] != null) {
       unlockedPurchasables.addAll(
         UnlocksFromLevel.acquiredPurinVars[currentLevel]!.map((purinVar) {
-          final newPurin = acquirables.purinVars[purinVar]!;
           return [
-            newPurin.displayName,
+            purinVar.displayName,
             "New Purin Collected!",
-            newPurin.iconAssetPath,
+            purinVar.iconAssetPath,
           ];
         }).toList(),
       );

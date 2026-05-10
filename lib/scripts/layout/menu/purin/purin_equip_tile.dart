@@ -168,7 +168,7 @@ class _PurinEquipTileState extends State<PurinEquipTile>
                         ),
                         child: MaterialButton(
                           onPressed: () {
-                            purin.equip(widget.purinVar.id as PurinVars);
+                            purin.equip(widget.purinVar);
                           },
                         ),
                       ),

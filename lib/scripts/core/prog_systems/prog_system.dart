@@ -46,7 +46,7 @@ class ProgSystem {
   List<String> acquiredHatsIds = [];
   List<String> acquiredTopsIds = [];
   List<String> acquiredBottomsIds = []; */
-  Set<PurinVars> acquiredPurinVars = {};
+  Set<PurinVar> acquiredPurinVars = {};
 
   Set<KotatsuDesigns> acquiredKotatsus = {
     KotatsuDesigns.pudding,
@@ -209,7 +209,7 @@ class ProgSystem {
     }
   }
 
-  void loadAcquiredPurinVars(Set<PurinVars> purinVarSet) {
+  void loadAcquiredPurinVars(Set<PurinVar> purinVarSet) {
     acquiredPurinVars = purinVarSet;
   }
 

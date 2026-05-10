@@ -13,8 +13,6 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
-import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
-import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/snack.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
@@ -155,10 +153,9 @@ class Purin extends ChangeNotifier {
   /// EQUIP LOGIC
   ///
   ///
-  Future<void> equip(PurinVars purinVars) async {
-    final purinVar = acquirables.purinVars[purinVars]!;
+  Future<void> equip(PurinVar purinVar) async {
     equipManager.equip(purinVar);
-    databaseManager.configPurinVarSave(purinVars);
+    databaseManager.configPurinVarSave(purinVar);
     notifyListeners();
   }
 

@@ -16,7 +16,7 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
   final progSystem = ProgSystem.singleton;
   final acquirables = Acquirables.singleton;
 
-  final List<PurinVars> acquiredPurinVars = [];
+  final List<PurinVar> acquiredPurinVars = [];
   final unlockPurinVarsMap = UnlocksFromLevel.acquiredPurinVars;
 
   @override
@@ -73,9 +73,7 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
                         ),
                     itemBuilder: (context, index) {
                       final purinVar = acquiredPurinVars[index];
-                      return PurinEquipTile(
-                        purinVar: acquirables.purinVars[purinVar]!,
-                      );
+                      return PurinEquipTile(purinVar: purinVar);
                     },
                   ),
                 ),
