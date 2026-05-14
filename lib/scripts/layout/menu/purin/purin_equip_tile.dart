@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/foundation/acquirable.dart';
 

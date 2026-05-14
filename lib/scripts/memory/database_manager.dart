@@ -3,6 +3,7 @@ import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/focus_time_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/pet_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/client_version.dart';

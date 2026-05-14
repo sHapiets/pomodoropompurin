@@ -26,6 +26,7 @@ class NotesFromVersion {
     },
     ClientVersion.violetCrownedHummingbird: {
       "Scripts Map": ["Fixed: Lvl 19 Purin Script duplication"],
+      "Shoe Achievements": ["Fixed: Total time format display miscalc."],
     },
   };
 

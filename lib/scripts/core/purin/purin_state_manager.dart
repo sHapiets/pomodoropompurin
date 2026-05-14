@@ -11,6 +11,7 @@ class PurinStateManager {
   PurinMood mood = PurinMood.stable;
   ValueNotifier<int> energy = ValueNotifier(40);
   ValueNotifier<int> hunger = ValueNotifier(10);
+  ValueNotifier<int> hygiene = ValueNotifier(40);
 
   void changeAction(PurinAction action) {
     this.action = action;

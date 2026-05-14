@@ -19,6 +19,7 @@ dependencies:
   just_audio: ^0.10.5
   just_audio_web: ^0.4.10
   wakelock_plus: ^1.5.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

@@ -82,7 +82,7 @@ class _PomTimerDisplayState extends State<PomTimerDisplay> {
 // List of Extra Methods
 abstract class PomTimerExtensions {
   static String formatDuration(int totalSeconds) {
-    final int hours = (totalSeconds ~/ 3600) % 24;
+    final int hours = (totalSeconds ~/ 3600);
     final int minutes = (totalSeconds ~/ 60) % 60;
     final int seconds = totalSeconds % 60;
 
