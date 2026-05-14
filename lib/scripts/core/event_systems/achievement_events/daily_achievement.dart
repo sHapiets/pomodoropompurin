@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/focus_time_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/pet_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/rewardable_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/snack_achievement.dart';
 import 'package:pomodoropompurin/scripts/memory/database_manager.dart';
 
 class DailyAchievement {
@@ -23,6 +24,7 @@ class DailyAchievement {
   FocusTimeAchievement focusTimeAchievement =
       FocusTimeAchievement.newFocusTimeAchievement(0);
   PetAchievement petAchievement = PetAchievement.newPetAchievement(0);
+  SnackAchievement snackAchievement = SnackAchievement.newSnackAchievement(0);
 
   final databaseManager = DatabaseManager.singleton;
 
@@ -61,6 +63,14 @@ class DailyAchievement {
     petAchievement.progress = petEnergyAchievementStatus['progress'];
     petAchievement.claimed = petEnergyAchievementStatus['claimed'];
 
+    Map<String, dynamic> snackAmountAchievementStatus =
+        dailyAchievementDoc['snackAmount'];
+    snackAchievement = SnackAchievement.newSnackAchievement(
+      snackAmountAchievementStatus['goalAmount'],
+    );
+    snackAchievement.progress = snackAmountAchievementStatus['progress'];
+    snackAchievement.claimed = snackAmountAchievementStatus['claimed'];
+
     updateHasClaimable();
   }
 
@@ -80,6 +90,12 @@ class DailyAchievement {
     petAchievement = PetAchievement.newPetAchievement(randPetEnergy);
     databaseManager.statusDailyAchievementPetSave(petAchievement);
 
+    final List<int> snackAmountPool = [3, 4, 5, 6, 7];
+    final randSnackAmount =
+        snackAmountPool[rand.nextInt(snackAmountPool.length)];
+    snackAchievement = SnackAchievement.newSnackAchievement(randSnackAmount);
+    databaseManager.statusDailyAchievementSnackSave(snackAchievement);
+
     updateHasClaimable();
   }
 
@@ -95,6 +111,12 @@ class DailyAchievement {
     updateHasClaimable();
   }
 
+  void addSnackProgress(int progress) {
+    snackAchievement.addProgress(progress);
+    databaseManager.statusDailyAchievementSnackSave(snackAchievement);
+    updateHasClaimable();
+  }
+
   void claimFocusTimeRewards() {
     focusTimeAchievement.claimRewards();
     databaseManager.statusDailyAchievementFocusTimeSave(focusTimeAchievement);
@@ -107,8 +129,16 @@ class DailyAchievement {
     updateHasClaimable();
   }
 
+  void claimSnackRewards() {
+    snackAchievement.claimRewards();
+    databaseManager.statusDailyAchievementSnackSave(snackAchievement);
+    updateHasClaimable();
+  }
+
   void updateHasClaimable() {
-    if (_isClaimable(focusTimeAchievement) || (_isClaimable(petAchievement))) {
+    if (_isClaimable(focusTimeAchievement) ||
+        (_isClaimable(petAchievement)) ||
+        _isClaimable(snackAchievement)) {
       hasClaimable.value = true;
     } else {
       hasClaimable.value = false;

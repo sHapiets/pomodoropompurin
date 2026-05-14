@@ -47,6 +47,8 @@ class AssetManager {
     'excited_purin_icon': 'assets/images/character_icons/purin/excited.png',
     'pumped_purin_icon': 'assets/images/character_icons/purin/pumped.png',
     'calm_purin_icon': 'assets/images/character_icons/purin/calm.png',
+    'sanrio2026_purin_icon':
+        'assets/images/character_icons/purin/sanrio2026.png',
 
     'thinking_koupen_icon': 'assets/images/character_icons/koupen/thinking.png',
     'blank_koupen_icon': 'assets/images/character_icons/koupen/blank.png',

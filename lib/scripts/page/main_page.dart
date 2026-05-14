@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/main.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/misc/sanrio_2026_voting.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/chopping_board.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/mixer.dart';
 import 'package:pomodoropompurin/scripts/core/kitchen/oven.dart';
@@ -18,6 +19,7 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/event_systems/sanrio_2026_voting_display.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_consumable_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/purin/purin_equip_menu.dart';
@@ -66,6 +68,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final tutorialManager = TutorialManager.singleton;
   final tutorialState = TutorialState.singleton;
   final clientVersionManager = ClientVersionManager.singleton;
+  final sanrio2026Voting = Sanrio2026Voting.singleton;
 
   @override
   void initState() {
@@ -79,6 +82,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (clientVersionManager.wasOutdated) {
         showLatestVersionNotes();
+      }
+      if (sanrio2026Voting.votableToday) {
+        showSanrio2026VotingDisplay();
       }
     });
   }
@@ -112,6 +118,23 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       builder: (context) {
         return shoeAchievementManager.shoeAchievementDialog;
       },
+    );
+  }
+
+  void showSanrio2026VotingDisplay() async {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: Colors.black26,
+      barrierLabel: '',
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionBuilder: (context, animation, _, child) {
+        return ScaleTransition(
+          scale: CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+          child: child,
+        );
+      },
+      pageBuilder: (_, __, ___) => Sanrio2026VotingDisplay(),
     );
   }
 

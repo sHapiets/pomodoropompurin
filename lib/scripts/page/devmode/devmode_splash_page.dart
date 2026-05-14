@@ -6,6 +6,7 @@ import 'package:pomodoropompurin/scripts/core/activity/activity_manager.dart';
 import 'package:pomodoropompurin/scripts/core/audio/background_music.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/daily_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/streak_system.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/misc/sanrio_2026_voting.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_interrupted_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
@@ -41,6 +42,7 @@ class _DevModeSplashPageState extends State<DevModeSplashPage>
   final activityManager = ActivityManager.singleton;
   final dailyAchievement = DailyAchievement.singleton;
   final streakSystem = StreakSystem.singleton;
+  final sanrio2026Voting = Sanrio2026Voting.singleton;
   final clientVersionManager = ClientVersionManager.singleton;
   final acquirables = Acquirables.singleton;
   final purin = Purin.singleton;
@@ -112,10 +114,16 @@ class _DevModeSplashPageState extends State<DevModeSplashPage>
           await _databaseManager.acquiredShoeAchievementLoad(),
         );
 
+        _progSystem.updateLevelSystem();
+        _progSystem.oshiriPoints.addListener(_progSystem.updateLevelSystem);
+
         dailyAchievement.initialize(
           await _databaseManager.statusDailyAchievementLoad(),
         );
         streakSystem.initialize(await _databaseManager.statusStreakLoad());
+        sanrio2026Voting.initialize(
+          await _databaseManager.statusSanrio2026Load(),
+        );
       }),
 
       MapEntry('Loading Inventories...', () async {

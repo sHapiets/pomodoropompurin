@@ -28,6 +28,7 @@ class StreakSystem {
     current = streakDoc['current'];
 
     final Timestamp latestCompletionTimestamp = streakDoc['latestCompletion'];
+
     latestCompletion = latestCompletionTimestamp.toDate();
 
     focusTime = streakDoc['focusTime'];
@@ -37,12 +38,16 @@ class StreakSystem {
 
     final difference = today.difference(lastDay).inDays;
 
-    if (difference >= 2) {
+    if (difference >= 3) {
       resetStreak();
-    } else if (difference == 1) {
+      return;
+    }
+
+    if (difference >= 1) {
       focusTime = 0;
       claimed = false;
       claimable.value = false;
+
       databaseSave();
     }
   }
@@ -55,6 +60,11 @@ class StreakSystem {
     final lastDay = toDateOnly(latestCompletion);
 
     final difference = today.difference(lastDay).inDays;
+
+    if (difference >= 3) {
+      resetStreak();
+      return;
+    }
 
     if (difference >= 1) {
       if (focusTime >= minSessionSeconds) {

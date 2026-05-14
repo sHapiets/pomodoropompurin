@@ -58,6 +58,7 @@ class _DailyAchievementDisplayState extends State<DailyAchievementDisplay> {
   Widget build(BuildContext context) {
     final focus = daily.focusTimeAchievement;
     final pet = daily.petAchievement;
+    final snack = daily.snackAchievement;
 
     return Center(
       child: FittedBox(
@@ -162,7 +163,7 @@ class _DailyAchievementDisplayState extends State<DailyAchievementDisplay> {
                       color: const Color.fromARGB(255, 158, 197, 68),
                       isDurationFormat: true,
                     ),
-
+                    /* 
                     const SizedBox(height: 14),
 
                     _achievementBar(
@@ -176,6 +177,38 @@ class _DailyAchievementDisplayState extends State<DailyAchievementDisplay> {
                               setState(() {
                                 daily.claimPetRewards();
                                 final rewards = daily.petAchievement.rewards;
+
+                                showDialog(
+                                  context: context,
+                                  builder: (dialContext) =>
+                                      AchievementRewardDialog(
+                                        pomPoints:
+                                            rewards[RewardType.pomPoints] ?? 0,
+                                        oshiriPoints:
+                                            rewards[RewardType.oshiriPoints] ??
+                                            0,
+                                        onClose: () =>
+                                            Navigator.pop(dialContext),
+                                      ),
+                                );
+                              });
+                            }
+                          : null,
+                      color: const Color.fromARGB(255, 158, 197, 68),
+                    ), */
+                    const SizedBox(height: 14),
+
+                    _achievementBar(
+                      icon: Icons.fastfood_rounded,
+                      title: "snacks eaten",
+                      progress: snack.progress,
+                      goal: snack.goal,
+                      claimed: snack.claimed,
+                      onClaim: snack.achieved && !snack.claimed
+                          ? () {
+                              setState(() {
+                                daily.claimSnackRewards();
+                                final rewards = daily.snackAchievement.rewards;
 
                                 showDialog(
                                   context: context,

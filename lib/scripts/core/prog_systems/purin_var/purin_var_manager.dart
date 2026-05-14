@@ -1,6 +1,6 @@
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
-import 'package:pomodoropompurin/scripts/foundation/purin_attributes.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_attributes/purin_attributes.dart';
 
 class PurinVarManager {
   PurinVarManager._();
@@ -8,5 +8,17 @@ class PurinVarManager {
 
   void savePurinVarProgress(PurinVar purinVar, Map<String, int> progress) {}
 
-  int getAttributeBoost(PurinAttributes attribute) {}
+  int getPurinVarLevel() {
+    return 0;
+  }
+
+  int getPassiveAttributeBoost(PurinAttributes attribute) {
+    int boost = 0;
+    /* 
+    for (final purinVar in PurinVar.values) {
+      boost += purinVar.passiveAttributeBoost();
+    } */
+
+    return boost;
+  }
 }

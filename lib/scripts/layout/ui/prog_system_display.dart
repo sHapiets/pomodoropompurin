@@ -31,14 +31,6 @@ class _ProgSystemDisplayState extends State<ProgSystemDisplay> {
   final expGaugeWidth = 80.0;
 
   @override
-  void initState() {
-    super.initState();
-
-    progSystem.updateLevelSystem();
-    progSystem.oshiriPoints.addListener(progSystem.updateLevelSystem);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: UIDisplayState.singleton.hide,

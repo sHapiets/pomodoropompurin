@@ -56,6 +56,14 @@ class NotesFromVersion {
         "Non-purchasables: incl. locked items for inventory count",
       ],
     },
+    ClientVersion.violetCrownedHummingbird: {
+      "Streak System": [
+        "2-day grace period: as originally intended, streak is only reset after missing 2 days instead of 1.",
+      ],
+      "Daily Achievement": [
+        "Petting: temporarily disabled (until next update)",
+      ],
+    },
   };
 
   Map<ClientVersion, Map<String, List<String>>> additions = {
@@ -126,6 +134,11 @@ class NotesFromVersion {
       "1 Gifted PurinVars": ["Mama-Purin"],
       "'Ingridient' Types": [
         "simple categorization of ingridients, slightly akin to actual groceries",
+      ],
+    },
+    ClientVersion.violetCrownedHummingbird: {
+      "Daily Achievement": [
+        "Snacking: Completed by feeding a certain amount of snacks!",
       ],
     },
   };
@@ -205,5 +218,18 @@ class NotesFromVersion {
         "To celebrate MOTHER'S DAY, Mama-Purin has been invited to the Purin's home! (Check your Purin collection...) \n\n"
         "Kindly send my greetings to your mom as well! Wishing Tita good health, and all the love she deserves! "
         "Hope she continues being the endearing and lovable person that she is! <3",
+    ClientVersion.violetCrownedHummingbird:
+        "Helloo Yana!\n\n"
+        "This week focuses only on Event-Systems.\n\n"
+        "Unfortunately, the 4th installment of Content Extension Pack will be moved next week; "
+        "which also means that the release of 1.1.0, supposedly for next week, is also moved :(( .\n\n"
+        "The 1.1.X Purin-Systems Update really needs a bit more time to develop. So far, the balance between "
+        "weekly updates, the major 1.1.0 update, and personal stuff, have worked well until recently. "
+        "Due to their shifts in work volume, time allocation changes were inevitable. So, I sincerely hope you understand. \n\n"
+        "As always, thank you for everything so far!\n\n"
+        "(PS: As I was testing this update earlier, I happened to notice the lost 7-day streak. Your recorded session "
+        "suggested, however, that the latest activity was most probably intended for the previous day. "
+        "Unfortunately, there's nothing I can do..... UNLESS I am unecessarily kind and benevolent, which I totally am mwahaha.) \n\n"
+        "(Kindly check your streak progress once more!)",
   };
 }

@@ -284,6 +284,8 @@ class Purin extends ChangeNotifier {
     addHungerPoints(hunger: hungerRewards);
     addEnergyPoints(energy: energyRewards);
 
+    dailyAchievement.addSnackProgress(1);
+
     stateManager.changeAction(PurinAction.feed);
     ScriptManager.singleton.removePurinMenuDialog();
     ScriptManager.singleton.addFeedDialog();

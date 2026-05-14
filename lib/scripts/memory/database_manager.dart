@@ -3,9 +3,9 @@ import 'package:pomodoropompurin/scripts/authentication/account_manager.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/focus_time_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/pet_achievement.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/achievement_types/snack_achievement.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement.dart';
-import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/client_version.dart';
 import 'package:pomodoropompurin/scripts/foundation/consumable.dart';
 import 'package:pomodoropompurin/scripts/foundation/date_log.dart';
@@ -159,6 +159,13 @@ class DatabaseManager {
     final statusStreakDoc = await statusStreakRef.get();
 
     return statusStreakDoc;
+  }
+
+  Future<DocumentSnapshot> statusSanrio2026Load() async {
+    final sanrio2026Ref = statusRef.doc('sanrio2026');
+    final sanrio2026Doc = sanrio2026Ref.get();
+
+    return sanrio2026Doc;
   }
 
   //
@@ -343,6 +350,27 @@ class DatabaseManager {
         'goalEnergy': petAchievement.goal,
         'progress': petAchievement.progress,
       },
+    });
+  }
+
+  Future<void> statusDailyAchievementSnackSave(
+    SnackAchievement snackAchievement,
+  ) async {
+    final dailyAchievementRef = statusRef.doc('dailyAchievement');
+    dailyAchievementRef.update({
+      'snackAmount': {
+        'claimed': snackAchievement.claimed,
+        'goalAmount': snackAchievement.goal,
+        'progress': snackAchievement.progress,
+      },
+    });
+  }
+
+  Future<void> statusSanrio2026Save(int votes, DateTime latestVote) async {
+    final sanrio2026Ref = statusRef.doc('sanrio2026');
+    sanrio2026Ref.update({
+      'votes': votes,
+      'latestVote': Timestamp.fromDate(latestVote),
     });
   }
 
