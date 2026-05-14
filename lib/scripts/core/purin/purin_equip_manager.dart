@@ -1,4 +1,5 @@
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 
 /// ----------------------------------------------------------------------------------
 /// ----- Purin, despite his obnoxiously 'spherical' shape, certainly loves style
