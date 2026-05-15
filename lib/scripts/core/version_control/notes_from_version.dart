@@ -229,7 +229,7 @@ class NotesFromVersion {
         "As always, thank you for everything so far!\n\n"
         "(PS: As I was testing this update earlier, I happened to notice the lost 7-day streak. Your recorded session "
         "suggested, however, that the latest activity was most probably intended for the previous day. "
-        "Unfortunately, there's nothing I can do..... UNLESS I am unecessarily kind and benevolent, which I totally am mwahaha.) \n\n"
+        "Unfortunately, there's nothing I can do..... *wink *wink ) \n\n"
         "(Kindly check your streak progress once more!)",
   };
 }
