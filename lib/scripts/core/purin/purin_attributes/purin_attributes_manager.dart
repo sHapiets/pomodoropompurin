@@ -9,7 +9,7 @@ class PurinAttributesManager {
 
   final progSystem = ProgSystem.singleton;
 
-  ValueNotifier<int> focus = ValueNotifier(40);
+  ValueNotifier<int> insight = ValueNotifier(40);
   ValueNotifier<int> diligence = ValueNotifier(40);
 
   ValueNotifier<int> comfort = ValueNotifier(40);
@@ -31,7 +31,7 @@ class PurinAttributesManager {
   ValueNotifier<int> _getAttributeNotifier(PurinAttributes attribute) {
     switch (attribute) {
       case PurinAttributes.insight:
-        return focus;
+        return insight;
 
       case PurinAttributes.diligence:
         return diligence;

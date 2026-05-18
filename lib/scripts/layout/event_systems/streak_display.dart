@@ -182,8 +182,10 @@ class StreakDisplay extends StatelessWidget {
                       ? () {
                           streak.claimRewards();
                           Navigator.pop(context);
-                          final int pomPointsRewards = streak.current * 60;
-                          final int oshiriPointsRewards = streak.current * 50;
+                          final int pomPointsRewards =
+                              streak.current.clamp(0, 10) * 60;
+                          final int oshiriPointsRewards =
+                              streak.current.clamp(0, 10) * 50;
 
                           showDialog(
                             context: context,

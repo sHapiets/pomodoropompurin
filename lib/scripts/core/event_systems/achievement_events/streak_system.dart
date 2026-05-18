@@ -61,11 +61,6 @@ class StreakSystem {
 
     final difference = today.difference(lastDay).inDays;
 
-    if (difference >= 3) {
-      resetStreak();
-      return;
-    }
-
     if (difference >= 1) {
       if (focusTime >= minSessionSeconds) {
         latestCompletion = now;
@@ -95,8 +90,8 @@ class StreakSystem {
     claimed = true;
     claimable.value = false;
 
-    final int pomPointsRewards = current * 60;
-    final int oshiriPointsRewards = current * 50;
+    final int pomPointsRewards = current.clamp(0, 10) * 60;
+    final int oshiriPointsRewards = current.clamp(0, 10) * 50;
 
     ProgSystem.singleton.addPomPoints(pomPointsRewards);
     ProgSystem.singleton.addOshiriPoints(oshiriPointsRewards);

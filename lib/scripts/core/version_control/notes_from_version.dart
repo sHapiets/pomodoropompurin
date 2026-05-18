@@ -27,6 +27,7 @@ class NotesFromVersion {
     ClientVersion.violetCrownedHummingbird: {
       "Scripts Map": ["Fixed: Lvl 19 Purin Script duplication"],
       "Shoe Achievements": ["Fixed: Total time format display miscalc."],
+      "Streak System": ["Fixed: New streak verification bug"],
     },
   };
 
@@ -137,6 +138,9 @@ class NotesFromVersion {
       ],
     },
     ClientVersion.violetCrownedHummingbird: {
+      "Sanrio 2026 Voting": [
+        "Voting: Daily popup to vote for Purin in this final week.",
+      ],
       "Daily Achievement": [
         "Snacking: Completed by feeding a certain amount of snacks!",
       ],
