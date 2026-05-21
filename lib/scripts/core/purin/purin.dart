@@ -9,7 +9,7 @@ import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/d
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';

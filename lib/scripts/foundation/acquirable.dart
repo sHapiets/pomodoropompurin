@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 
 /// This sets of classes defines all objects in the app that are used
 /// for customizing. This includes items, clothes for Purin, Purin

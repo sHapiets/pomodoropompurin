@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_selectable.dart';
 
 import '../foundation/acquirable.dart';

@@ -8,7 +8,7 @@ import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/d
 import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/streak_system.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_display_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/foundation/rewards_conversion.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';

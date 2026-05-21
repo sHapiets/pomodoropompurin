@@ -1,6 +1,6 @@
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 
 class HungerUI extends StatefulWidget {
   const HungerUI({super.key, this.showHungerValue = false});

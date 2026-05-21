@@ -3,7 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/src/events/messages/tap_down_event.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';

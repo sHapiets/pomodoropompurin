@@ -22,16 +22,20 @@ class PurinStateManager {
   }
 }
 
-enum PurinAction { idle, pet, feed }
+enum PurinAction { idle, down, pet, feed }
 
 enum PurinPosition {
-  kotatsuLeft,
-  kotatsuRight,
-  futon,
-  study,
-  sofaSitLeft,
-  sofaSitRight,
-  sofaRest,
+  kotatsuLeft(flipSprite: false),
+  kotatsuRight(flipSprite: true),
+  futon(flipSprite: true),
+  study(flipSprite: true),
+  sofaSitLeft(flipSprite: false),
+  sofaSitRight(flipSprite: true),
+  sofaRest(flipSprite: true);
+
+  const PurinPosition({required this.flipSprite});
+
+  final bool flipSprite;
 }
 
 enum PurinMood { down, stable }
