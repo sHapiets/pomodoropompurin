@@ -6,12 +6,11 @@ import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/dialog/script_dialog/script_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
-import 'package:pomodoropompurin/scripts/core/purin/purin_state_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
@@ -74,15 +73,6 @@ class PurinEntity extends PositionComponent
     PurinAction.pet: 1,
     PurinAction.feed: 2,
   };
-  final spriteFlipBoolFromPostion = {
-    PurinPosition.kotatsuLeft: false,
-    PurinPosition.kotatsuRight: true,
-    PurinPosition.futon: false,
-    PurinPosition.study: true,
-    PurinPosition.sofaSitLeft: false,
-    PurinPosition.sofaSitRight: true,
-    PurinPosition.sofaRest: false,
-  };
 
   late PurinVar lastPurinVar;
 
@@ -91,6 +81,7 @@ class PurinEntity extends PositionComponent
     super.onMount();
 
     loadAnim = LoadAnimation()..removeOnFinish = true;
+
     purinAnim = IdleBreathingAnimation();
     purinSprite = SpriteComponent(
       sprite: Sprite(Flame.images.fromCache('purinEntity.png')),
@@ -155,7 +146,7 @@ class PurinEntity extends PositionComponent
 
     purinSprite.sprite = sheet.getSprite(row, col);
 
-    bool flip = spriteFlipBoolFromPostion[purin.stateManager.position]!;
+    bool flip = purin.stateManager.position.flipSprite;
 
     if (flip && !purinSprite.isFlippedHorizontally) {
       purinSprite.flipHorizontally();

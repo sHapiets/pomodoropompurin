@@ -5,6 +5,7 @@ import 'package:pomodoropompurin/scripts/core/purin/purin.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_entity.dart';
+import 'package:pomodoropompurin/scripts/layout/purin/purin_status_effects.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/blanket.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/selectables/exterior.dart';
@@ -77,6 +78,7 @@ class PurinAreaHome extends PositionComponent with TapCallbacks {
       () async {
         await Future.delayed(Duration(seconds: 1));
         add(PurinEntity());
+        add(PurinStatusEffects());
       },
     ];
 
