@@ -186,6 +186,11 @@ class AssetManager {
       "purin_sprites/kimono_spritesheet.png",
       "purin_sprites/vampire_spritesheet.png",
       "purin_sprites/mama_spritesheet.png",
+      "purin_sprites/cheer_spritesheet.png",
+
+      "purin_sprites/faces/default_spritesheet.png",
+      "purin_sprites/faces/white_spritesheet.png",
+      "purin_sprites/faces/vampire_spritesheet.png",
 
       "purin_sprites/purin_shadow.png",
 

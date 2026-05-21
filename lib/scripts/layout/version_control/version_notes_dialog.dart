@@ -313,7 +313,7 @@ class _VersionNotesDialogState extends State<VersionNotesDialog> {
                     child: Text(
                       item,
                       style: TextStyle(fontSize: 12),
-                      textAlign: TextAlign.justify,
+                      textAlign: TextAlign.left,
                     ),
                   ),
                 ],

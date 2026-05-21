@@ -6,7 +6,8 @@ enum ClientVersion {
   siberianHusky(recencyTag: 4, versionNumber: "1.0.4"),
   whiteTailedDeer(recencyTag: 5, versionNumber: "1.0.5"),
   blueWhale(recencyTag: 6, versionNumber: "1.0.6"),
-  violetCrownedHummingbird(recencyTag: 7, versionNumber: "1.0.7");
+  violetCrownedHummingbird(recencyTag: 7, versionNumber: "1.0.7"),
+  southAmericanCoati(recencyTag: 8, versionNumber: "1.0.8");
 
   const ClientVersion({required this.recencyTag, required this.versionNumber});
 

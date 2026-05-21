@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_mood.dart';
 
 /// A singleton class that manages the state of PurinEntity
 class PurinStateManager {
@@ -8,7 +9,10 @@ class PurinStateManager {
   PurinAction action = PurinAction.idle;
   PurinPosition position = PurinPosition.kotatsuLeft;
 
-  PurinMood mood = PurinMood.stable;
+  final int lowHungerThreshold = 40;
+  final int lowEnergyThreshold = 40;
+
+  ValueNotifier<PurinMood> mood = ValueNotifier(PurinMood.neutral);
   ValueNotifier<int> energy = ValueNotifier(40);
   ValueNotifier<int> hunger = ValueNotifier(10);
   ValueNotifier<int> hygiene = ValueNotifier(40);
@@ -37,5 +41,3 @@ enum PurinPosition {
 
   final bool flipSprite;
 }
-
-enum PurinMood { down, stable }

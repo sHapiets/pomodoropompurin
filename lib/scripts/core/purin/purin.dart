@@ -9,6 +9,7 @@ import 'package:pomodoropompurin/scripts/core/event_systems/achievement_events/d
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_equip_manager.dart';
+import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_mood.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_state/purin_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager.dart';
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
@@ -319,18 +320,17 @@ class Purin extends ChangeNotifier {
 
   void addHungerPoints({int hunger = 1}) {
     final newHunger = (stateManager.hunger.value + hunger).clamp(0, 100);
-    stateManager.hunger.value = newHunger;
-    databaseManager.statusHungerSave(newHunger);
+    setHungerPoints(newHunger);
   }
 
   void depleteHungerPoints({int hunger = 1}) {
     final newHunger = (stateManager.hunger.value - hunger).clamp(0, 100);
-    stateManager.hunger.value = newHunger;
-    databaseManager.statusHungerSave(newHunger);
+    setHungerPoints(newHunger);
   }
 
   void setHungerPoints(int hunger) {
     stateManager.hunger.value = hunger;
+    updateMood();
     databaseManager.statusHungerSave(hunger);
   }
 
@@ -341,18 +341,17 @@ class Purin extends ChangeNotifier {
 
   void addEnergyPoints({int energy = 1}) {
     final newEnergy = (stateManager.energy.value + energy).clamp(0, 100);
-    stateManager.energy.value = newEnergy;
-    databaseManager.statusEnergySave(newEnergy);
+    setEnergyPoints(newEnergy);
   }
 
   void depleteEnergyPoints({int energy = 1}) {
     final newEnergy = (stateManager.energy.value - energy).clamp(0, 100);
-    stateManager.energy.value = newEnergy;
-    databaseManager.statusEnergySave(newEnergy);
+    setEnergyPoints(newEnergy);
   }
 
   void setEnergyPoints(int energy) {
     stateManager.energy.value = energy;
+    updateMood();
     databaseManager.statusEnergySave(energy);
   }
 
@@ -380,6 +379,49 @@ class Purin extends ChangeNotifier {
     final seconds = minSeconds + ((maxSeconds - minSeconds) * t);
 
     return Duration(seconds: seconds.round());
+  }
+
+  /// MOOD LOGIC
+  ///
+  ///
+
+  void updateMood() {
+    int moodPoints = 0;
+    final energy = stateManager.energy.value;
+    final hunger = stateManager.hunger.value;
+
+    final bool lowEnergy = energy < stateManager.lowEnergyThreshold;
+    final bool lowHunger = hunger < stateManager.lowHungerThreshold;
+
+    moodPoints = energy;
+    moodPoints += hunger;
+
+    final bool isDrained = moodPoints <= 50;
+
+    if (isDrained) {
+      stateManager.mood.value = PurinMood.drained;
+      return;
+    }
+
+    if (moodPoints <= 80 || lowEnergy || lowHunger) {
+      stateManager.mood.value = PurinMood.down;
+      return;
+    }
+
+    if (moodPoints <= 120) {
+      stateManager.mood.value = PurinMood.neutral;
+      return;
+    }
+
+    if (moodPoints <= 160) {
+      stateManager.mood.value = PurinMood.satisfied;
+      return;
+    }
+
+    if (moodPoints <= 200) {
+      stateManager.mood.value = PurinMood.elated;
+      return;
+    }
   }
 
   void idle() {

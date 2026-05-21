@@ -15,6 +15,7 @@ import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_equip_manager
 import 'package:pomodoropompurin/scripts/core/purinArea/purin_area_state_manager.dart';
 import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/layout/purin/purin_anim.dart';
+import 'package:pomodoropompurin/scripts/layout/purin/purin_face.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/effects/floating_plus_oshiri.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/load_animation.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area.dart';
@@ -56,6 +57,7 @@ class PurinEntity extends PositionComponent
   late SequenceEffect loadAnim;
   late IdleBreathingAnimation purinAnim;
   late SpriteComponent purinSprite;
+  late PurinFace purinFace;
   late SpriteComponent purinShadow;
   late CircleHitbox purinHitbox;
 
@@ -89,6 +91,7 @@ class PurinEntity extends PositionComponent
       position: Vector2(0, 0),
       anchor: Anchor.center,
     );
+    purinFace = PurinFace();
     purinShadow = SpriteComponent(
       sprite: Sprite(Flame.images.fromCache('purin_sprites/purin_shadow.png')),
       size: Vector2.all(70),
@@ -103,6 +106,7 @@ class PurinEntity extends PositionComponent
     purinSprite.paint.filterQuality = FilterQuality.medium;
     add(purinAnim);
     add(purinSprite);
+    add(purinFace);
     add(loadAnim);
 
     //sample hitbox, to put in center first!
@@ -150,8 +154,10 @@ class PurinEntity extends PositionComponent
 
     if (flip && !purinSprite.isFlippedHorizontally) {
       purinSprite.flipHorizontally();
+      purinFace.flipHorizontally();
     } else if (!flip && purinSprite.isFlippedHorizontally) {
       purinSprite.flipHorizontally();
+      purinFace.flipHorizontally();
     }
 
     if (purinVar != lastPurinVar) {

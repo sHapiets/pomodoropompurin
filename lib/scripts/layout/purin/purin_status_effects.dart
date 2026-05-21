@@ -71,7 +71,7 @@ class PurinStatusEffects extends PositionComponent {
 
   void showHungerPulse() {
     final hunger = purin.stateManager.hunger.value;
-    if (hunger >= 35) {
+    if (hunger >= purin.stateManager.lowHungerThreshold) {
       hungerPulseAnim.show = false;
       return;
     }
@@ -81,7 +81,7 @@ class PurinStatusEffects extends PositionComponent {
 
   void showEnergyGloom() {
     final energy = purin.stateManager.energy.value;
-    if (energy >= 35) {
+    if (energy >= purin.stateManager.lowEnergyThreshold) {
       energyGloomAnim.show = false;
       return;
     }

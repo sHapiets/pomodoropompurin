@@ -65,6 +65,14 @@ class NotesFromVersion {
         "Petting: temporarily disabled (until next update)",
       ],
     },
+    ClientVersion.southAmericanCoati: {
+      "Energy Replenishing": [
+        "From offline duration: Energy no longer recovers when logged out. It will make sense in the next update!",
+      ],
+      "Version Notes": [
+        "Text alignment: Switched to left align except for the Release Memo section.",
+      ],
+    },
   };
 
   Map<ClientVersion, Map<String, List<String>>> additions = {
@@ -144,6 +152,24 @@ class NotesFromVersion {
       "Daily Achievement": [
         "Snacking: Completed by feeding a certain amount of snacks!",
       ],
+    },
+    ClientVersion.southAmericanCoati: {
+      "Purin-Mood": [
+        "A general gauge of Purin's state, categorized into five (5) distinct moods, namely:",
+        "   Elated!!",
+        "   Satisfied!",
+        "   Neutral.",
+        "   Down..",
+        "   Drained....",
+        "Determined by Purin's FACIAL EXPRESSION when idling.",
+        "Taking care of Purin IMPROVES his mood, so make sure to visit him regularly!",
+      ],
+      "Purin-Status Visual Effects": [
+        "A low HUNGER level triggers Purin's stomach to growl!",
+        "Purin will feel a bit dizzy when his ENERGY is low!",
+      ],
+      "Blinking": [".... he blinks now...."],
+      "1 Event-Unlockable PurinVars": ["Cheer-Purin"],
     },
   };
 
@@ -235,5 +261,12 @@ class NotesFromVersion {
         "suggested, however, that the latest activity was most probably intended for the previous day. "
         "Unfortunately, there's nothing I can do..... *wink *wink ) \n\n"
         "(Kindly check your streak progress once more!)",
+    ClientVersion.southAmericanCoati:
+        "Helloo Yana!\n\n"
+        "This is the 4th and last installment of the Content Extension Pack.\n\n"
+        "It's a bit earlier than usual, but its better if the updates actually releases "
+        "on Fridays; though it's literally 2 A.M. as of writing, so I may have been too early. "
+        "Anyhow, kindly read the notes below to see what's new.\n\n"
+        "Thank you, as always.",
   };
 }

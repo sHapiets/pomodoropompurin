@@ -36,8 +36,6 @@ class Sanrio2026Voting {
     votes.value = eventDoc["votes"];
     final Timestamp latestVoteTimestamp = eventDoc["latestVote"];
     latestVote = latestVoteTimestamp.toDate();
-
-    votes.addListener(award);
   }
 
   void addVote() {
@@ -45,8 +43,6 @@ class Sanrio2026Voting {
     latestVote = DateTime.now();
     databaseSave();
   }
-
-  void award() {}
 
   void databaseSave() {
     databaseManager.statusSanrio2026Save(votes.value, latestVote);

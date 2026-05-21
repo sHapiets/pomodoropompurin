@@ -1,6 +1,8 @@
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoropompurin/scripts/core/acquirables.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/misc/sanrio_2026_voting.dart';
+import 'package:pomodoropompurin/scripts/core/event_systems/unlocks_from_events.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/prog_system.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/unlocks_from_level.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
@@ -19,6 +21,7 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
 
   final List<PurinVar> acquiredPurinVars = [];
   final unlockPurinVarsMap = UnlocksFromLevel.acquiredPurinVars;
+  final unlocksFromEvents = UnlocksFromEvents.fromProgress;
 
   @override
   void initState() {
@@ -29,6 +32,20 @@ class _PurinEquipMenuState extends State<PurinEquipMenu> {
     for (final entry in unlockPurinVarsMap.entries) {
       if (entry.key > oshiriLevel) continue;
       acquiredPurinVars.addAll(entry.value);
+    }
+
+    for (final entry in unlocksFromEvents.entries) {
+      switch (entry.key) {
+        case PurinVar.cheer:
+          final sanrio2026 = Sanrio2026Voting.singleton;
+          final votes = sanrio2026.votes.value;
+          final requiredVotes = entry.value;
+          if (votes >= requiredVotes) {
+            acquiredPurinVars.add(PurinVar.cheer);
+          }
+
+        default:
+      }
     }
   }
 

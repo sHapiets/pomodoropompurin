@@ -15,10 +15,12 @@ import 'package:pomodoropompurin/scripts/core/kitchen/sink.dart' as sink;
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer.dart';
 import 'package:pomodoropompurin/scripts/core/pom_timer/pom_timer_interrupted_manager.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/level_up/level_up_manager.dart';
+import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe_achievement_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/event_systems/sanrio_2026_reward_dialog.dart';
 import 'package:pomodoropompurin/scripts/layout/event_systems/sanrio_2026_voting_display.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kotatsu/kotatsu_consumable_menu.dart';
@@ -86,6 +88,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       if (sanrio2026Voting.votableToday) {
         showSanrio2026VotingDisplay();
       }
+      if (sanrio2026Voting.votes.value < 5) {
+        sanrio2026Voting.votes.addListener(showSanrio2026Rewards);
+      }
     });
   }
 
@@ -135,6 +140,27 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         );
       },
       pageBuilder: (_, __, ___) => Sanrio2026VotingDisplay(),
+    );
+  }
+
+  void showSanrio2026Rewards() async {
+    if (sanrio2026Voting.votes.value != 5) {
+      return;
+    }
+
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: Colors.black26,
+      barrierLabel: '',
+      transitionDuration: const Duration(milliseconds: 300),
+      transitionBuilder: (context, animation, _, child) {
+        return ScaleTransition(
+          scale: CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+          child: child,
+        );
+      },
+      pageBuilder: (_, __, ___) => Sanrio2026RewardDialog(),
     );
   }
 
