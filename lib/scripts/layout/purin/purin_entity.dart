@@ -61,15 +61,6 @@ class PurinEntity extends PositionComponent
   late SpriteComponent purinShadow;
   late CircleHitbox purinHitbox;
 
-  final spriteSheetRowFromPosition = {
-    PurinPosition.kotatsuLeft: 0,
-    PurinPosition.kotatsuRight: 0,
-    PurinPosition.study: 0,
-    PurinPosition.futon: 1,
-    PurinPosition.sofaSitLeft: 0,
-    PurinPosition.sofaSitRight: 0,
-    PurinPosition.sofaRest: 1,
-  };
   final spriteSheetColumnFromAction = {
     PurinAction.idle: 0,
     PurinAction.pet: 1,
@@ -145,8 +136,12 @@ class PurinEntity extends PositionComponent
       srcSize: Vector2(500, 500),
     );
 
-    final row = spriteSheetRowFromPosition[purin.stateManager.position]!;
+    int row = 0;
     final col = spriteSheetColumnFromAction[purin.stateManager.action]!;
+
+    if (purin.stateManager.action == PurinAction.sleep) {
+      row = 1;
+    }
 
     purinSprite.sprite = sheet.getSprite(row, col);
 

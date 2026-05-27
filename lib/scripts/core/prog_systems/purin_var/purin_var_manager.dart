@@ -1,4 +1,3 @@
-import 'package:pomodoropompurin/scripts/core/acquirables.dart';
 import 'package:pomodoropompurin/scripts/core/prog_systems/purin_var/purin_var.dart';
 import 'package:pomodoropompurin/scripts/core/purin/purin_attributes/purin_attributes.dart';
 

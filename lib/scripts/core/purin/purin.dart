@@ -146,9 +146,7 @@ class Purin extends ChangeNotifier {
   }
 
   void initializeRandomPosition() {
-    final random = Random();
-    final randomPurinPosition =
-        PurinPosition.values[random.nextInt(PurinPosition.values.length)];
+    final randomPurinPosition = PurinPosition.randomIdlePosition();
     changePosition(randomPurinPosition);
   }
 
@@ -228,7 +226,6 @@ class Purin extends ChangeNotifier {
   async_lib.Timer feedCooldown = async_lib.Timer.periodic(
     Duration(milliseconds: 2500),
     (timer) {
-      PurinStateManager.singleton.action = PurinAction.idle;
       timer.cancel();
     },
   );
@@ -304,6 +301,50 @@ class Purin extends ChangeNotifier {
       timer.cancel();
     });
     notifyListeners();
+  }
+
+  /// SLEEP LOGIC
+  ///
+  ///
+  Duration get durationSinceLatestSleep {
+    return DateTime.now().difference(stateManager.latestSleep);
+  }
+
+  async_lib.Timer sleepEnergyUpdater = async_lib.Timer.periodic(Duration.zero, (
+    timer,
+  ) {
+    timer.cancel();
+  });
+
+  void sleep(Duration newSleepDuration) {
+    changePosition(PurinPosition.futon);
+    changeAction(PurinAction.sleep);
+    stateManager.latestSleep = DateTime.now();
+
+    sleepEnergyUpdater.cancel();
+    sleepEnergyUpdater = async_lib.Timer.periodic(
+      const Duration(seconds: 100),
+      (timer) {
+        addEnergyPoints(energy: 1);
+      },
+    );
+
+    notifyListeners();
+  }
+
+  void endSleep() {
+    sleepEnergyUpdater.cancel();
+
+    changeAction(PurinAction.idle);
+    changePosition(PurinPosition.randomIdlePosition());
+
+    setLatestSleep(DateTime.now());
+    notifyListeners();
+  }
+
+  void setLatestSleep(DateTime loadLatestSleep) {
+    stateManager.latestSleep = loadLatestSleep;
+    updateMood();
   }
 
   /// HUNGER LOGIC
@@ -389,6 +430,7 @@ class Purin extends ChangeNotifier {
     int moodPoints = 0;
     final energy = stateManager.energy.value;
     final hunger = stateManager.hunger.value;
+    final latestSleep = stateManager.latestSleep;
 
     final bool lowEnergy = energy < stateManager.lowEnergyThreshold;
     final bool lowHunger = hunger < stateManager.lowHungerThreshold;
@@ -398,7 +440,11 @@ class Purin extends ChangeNotifier {
 
     final bool isDrained = moodPoints <= 50;
 
-    if (isDrained) {
+    final int hoursBeforeSleepy = 8;
+    final int hoursAwake = DateTime.now().difference(latestSleep).inHours;
+    final bool isSleepy = hoursAwake > hoursBeforeSleepy;
+
+    if (isDrained || isSleepy) {
       stateManager.mood.value = PurinMood.drained;
       return;
     }
@@ -422,9 +468,5 @@ class Purin extends ChangeNotifier {
       stateManager.mood.value = PurinMood.elated;
       return;
     }
-  }
-
-  void idle() {
-    changeAction(PurinAction.idle);
   }
 }

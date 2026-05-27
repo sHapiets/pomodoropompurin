@@ -193,9 +193,7 @@ class PomTimer {
       pomTimerDisplayStateManager.pomTimerState.value = PomTimerStates.pause;
     }
 
-    final random = Random();
-    final randomPurinPosition =
-        PurinPosition.values[random.nextInt(PurinPosition.values.length)];
+    final randomPurinPosition = PurinPosition.randomIdlePosition();
     final purin = Purin.singleton;
     purin.changePosition(randomPurinPosition);
     PurinAreaStateManager.singleton.jumpToPosition(

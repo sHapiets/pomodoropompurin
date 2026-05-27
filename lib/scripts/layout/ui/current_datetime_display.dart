@@ -157,13 +157,22 @@ class _CurrentDatetimeDisplayState extends State<CurrentDatetimeDisplay> {
                   child: IconButton(
                     iconSize: 25,
                     onPressed: () {
-                      showModalBottomSheet(
-                        enableDrag: false,
+                      showGeneralDialog(
                         context: context,
-                        elevation: 5,
+                        barrierDismissible: true,
                         barrierColor: Colors.black26,
-                        backgroundColor: Colors.transparent,
-                        builder: (_) => DailyAchievementDisplay(),
+                        barrierLabel: '',
+                        transitionDuration: const Duration(milliseconds: 300),
+                        transitionBuilder: (context, animation, _, child) {
+                          return ScaleTransition(
+                            scale: CurvedAnimation(
+                              parent: animation,
+                              curve: Curves.easeOutBack,
+                            ),
+                            child: child,
+                          );
+                        },
+                        pageBuilder: (_, __, ___) => DailyAchievementDisplay(),
                       );
                     },
                     icon: const Icon(

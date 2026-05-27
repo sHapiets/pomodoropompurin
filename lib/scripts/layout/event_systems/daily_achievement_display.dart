@@ -60,178 +60,186 @@ class _DailyAchievementDisplayState extends State<DailyAchievementDisplay> {
     final pet = daily.petAchievement;
     final snack = daily.snackAchievement;
 
-    return Center(
-      child: FittedBox(
-        fit: BoxFit.contain,
-        child: Container(
-          height: 400,
-          width: 400,
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: const Color.fromARGB(107, 255, 255, 255),
-              width: 3,
-            ),
-            color: Color.fromARGB(213, 145, 205, 243),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-
-          child: Column(
-            children: [
-              /// TOP BAR
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 30),
-
-                  Text(
-                    'daily achievements',
-                    style: TextStyle(
-                      fontFamily: 'Fredoka',
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(color: Colors.black38, offset: Offset(2, 2)),
-                      ],
-                    ),
-                  ),
-
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.expand_more),
-                    color: Colors.white,
-                  ),
-                ],
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Center(
+        child: FittedBox(
+          fit: BoxFit.contain,
+          child: Container(
+            height: 400,
+            width: 350,
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromARGB(107, 255, 255, 255),
+                width: 3,
               ),
+              color: Color.fromARGB(213, 145, 205, 243),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
 
-              const SizedBox(height: 8),
-
-              /// INNER PANEL
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListView(
-                  shrinkWrap: true,
+            child: Column(
+              children: [
+                /// TOP BAR
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    /// Countdown
-                    Center(
-                      child: Text(
-                        "refresh in ${formatTime(daily.refreshCountdownSeconds)}",
-                        style: TextStyle(
-                          fontFamily: 'Fredoka',
-                          fontSize: 13,
-                          color: Colors.grey[700],
-                        ),
+                    const SizedBox(width: 30),
+
+                    Text(
+                      'daily achievements',
+                      style: TextStyle(
+                        fontFamily: 'Fredoka',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(color: Colors.black38, offset: Offset(2, 2)),
+                        ],
                       ),
                     ),
 
-                    const SizedBox(height: 12),
-
-                    _achievementBar(
-                      icon: Icons.timer,
-                      title: "focus time",
-                      progress: focus.progress,
-                      goal: focus.goal,
-                      claimed: focus.claimed,
-                      onClaim: focus.achieved && !focus.claimed
-                          ? () {
-                              setState(() {
-                                daily.claimFocusTimeRewards();
-                                final rewards =
-                                    daily.focusTimeAchievement.rewards;
-
-                                showDialog(
-                                  context: context,
-                                  builder: (dialContext) =>
-                                      AchievementRewardDialog(
-                                        pomPoints:
-                                            rewards[RewardType.pomPoints] ?? 0,
-                                        oshiriPoints:
-                                            rewards[RewardType.oshiriPoints] ??
-                                            0,
-                                        onClose: () =>
-                                            Navigator.pop(dialContext),
-                                      ),
-                                );
-                              });
-                            }
-                          : null,
-                      color: const Color.fromARGB(255, 158, 197, 68),
-                      isDurationFormat: true,
-                    ),
-                    /* 
-                    const SizedBox(height: 14),
-
-                    _achievementBar(
-                      icon: Icons.favorite,
-                      title: "energy from petting",
-                      progress: pet.progress,
-                      goal: pet.goal,
-                      claimed: pet.claimed,
-                      onClaim: pet.achieved && !pet.claimed
-                          ? () {
-                              setState(() {
-                                daily.claimPetRewards();
-                                final rewards = daily.petAchievement.rewards;
-
-                                showDialog(
-                                  context: context,
-                                  builder: (dialContext) =>
-                                      AchievementRewardDialog(
-                                        pomPoints:
-                                            rewards[RewardType.pomPoints] ?? 0,
-                                        oshiriPoints:
-                                            rewards[RewardType.oshiriPoints] ??
-                                            0,
-                                        onClose: () =>
-                                            Navigator.pop(dialContext),
-                                      ),
-                                );
-                              });
-                            }
-                          : null,
-                      color: const Color.fromARGB(255, 158, 197, 68),
-                    ), */
-                    const SizedBox(height: 14),
-
-                    _achievementBar(
-                      icon: Icons.fastfood_rounded,
-                      title: "snacks eaten",
-                      progress: snack.progress,
-                      goal: snack.goal,
-                      claimed: snack.claimed,
-                      onClaim: snack.achieved && !snack.claimed
-                          ? () {
-                              setState(() {
-                                daily.claimSnackRewards();
-                                final rewards = daily.snackAchievement.rewards;
-
-                                showDialog(
-                                  context: context,
-                                  builder: (dialContext) =>
-                                      AchievementRewardDialog(
-                                        pomPoints:
-                                            rewards[RewardType.pomPoints] ?? 0,
-                                        oshiriPoints:
-                                            rewards[RewardType.oshiriPoints] ??
-                                            0,
-                                        onClose: () =>
-                                            Navigator.pop(dialContext),
-                                      ),
-                                );
-                              });
-                            }
-                          : null,
-                      color: const Color.fromARGB(255, 158, 197, 68),
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.close),
+                      color: Colors.white,
                     ),
                   ],
                 ),
-              ),
-            ],
+
+                const SizedBox(height: 8),
+
+                /// INNER PANEL
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      /// Countdown
+                      Center(
+                        child: Text(
+                          "refresh in ${formatTime(daily.refreshCountdownSeconds)}",
+                          style: TextStyle(
+                            fontFamily: 'Fredoka',
+                            fontSize: 13,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      _achievementBar(
+                        icon: Icons.timer,
+                        title: "focus time",
+                        progress: focus.progress,
+                        goal: focus.goal,
+                        claimed: focus.claimed,
+                        onClaim: focus.achieved && !focus.claimed
+                            ? () {
+                                setState(() {
+                                  daily.claimFocusTimeRewards();
+                                  final rewards =
+                                      daily.focusTimeAchievement.rewards;
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (dialContext) =>
+                                        AchievementRewardDialog(
+                                          pomPoints:
+                                              rewards[RewardType.pomPoints] ??
+                                              0,
+                                          oshiriPoints:
+                                              rewards[RewardType
+                                                  .oshiriPoints] ??
+                                              0,
+                                          onClose: () =>
+                                              Navigator.pop(dialContext),
+                                        ),
+                                  );
+                                });
+                              }
+                            : null,
+                        color: const Color.fromARGB(255, 158, 197, 68),
+                        isDurationFormat: true,
+                      ),
+                      /* 
+                      const SizedBox(height: 14),
+      
+                      _achievementBar(
+                        icon: Icons.favorite,
+                        title: "energy from petting",
+                        progress: pet.progress,
+                        goal: pet.goal,
+                        claimed: pet.claimed,
+                        onClaim: pet.achieved && !pet.claimed
+                            ? () {
+                                setState(() {
+                                  daily.claimPetRewards();
+                                  final rewards = daily.petAchievement.rewards;
+      
+                                  showDialog(
+                                    context: context,
+                                    builder: (dialContext) =>
+                                        AchievementRewardDialog(
+                                          pomPoints:
+                                              rewards[RewardType.pomPoints] ?? 0,
+                                          oshiriPoints:
+                                              rewards[RewardType.oshiriPoints] ??
+                                              0,
+                                          onClose: () =>
+                                              Navigator.pop(dialContext),
+                                        ),
+                                  );
+                                });
+                              }
+                            : null,
+                        color: const Color.fromARGB(255, 158, 197, 68),
+                      ), */
+                      const SizedBox(height: 14),
+
+                      _achievementBar(
+                        icon: Icons.fastfood_rounded,
+                        title: "snacks eaten",
+                        progress: snack.progress,
+                        goal: snack.goal,
+                        claimed: snack.claimed,
+                        onClaim: snack.achieved && !snack.claimed
+                            ? () {
+                                setState(() {
+                                  daily.claimSnackRewards();
+                                  final rewards =
+                                      daily.snackAchievement.rewards;
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (dialContext) =>
+                                        AchievementRewardDialog(
+                                          pomPoints:
+                                              rewards[RewardType.pomPoints] ??
+                                              0,
+                                          oshiriPoints:
+                                              rewards[RewardType
+                                                  .oshiriPoints] ??
+                                              0,
+                                          onClose: () =>
+                                              Navigator.pop(dialContext),
+                                        ),
+                                  );
+                                });
+                              }
+                            : null,
+                        color: const Color.fromARGB(255, 158, 197, 68),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
