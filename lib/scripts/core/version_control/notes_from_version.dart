@@ -277,7 +277,7 @@ class NotesFromVersion {
         "But to give you a bit of an insight, this major update supposedly introduces a LOT of things. "
         "So, to give you a small teaser, the highlight of all these new stuff is actually... STRAVA. \n\n"
         "Yes. Soon enough, running is now an activity you can do with Purin by using your Strava app. "
-        "For this feature alone, I had to develop a separate program that connects the Strava API "
+        "For this feature alone, I had to develop a separate program, which connects the Strava API "
         "to this one. It's actually functional just recently, but it needs more time for testing. \n\n"
         "More information on this update will come with the release itself. I'm not ready to spoil "
         "everything just yet. \n\n"
