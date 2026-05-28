@@ -258,6 +258,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           PurinMenuScriptWidget(),
           TutorialPageBlocker(),
           TutorialScriptWidget(),
+          /*
           SleepMainDisplay(),
           ActivityRadialMenu(
             radius: 120,
@@ -303,7 +304,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
+          ), */
         ],
       ),
     );

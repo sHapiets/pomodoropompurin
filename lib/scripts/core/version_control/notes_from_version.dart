@@ -268,5 +268,23 @@ class NotesFromVersion {
         "on Fridays; though it's literally 2 A.M. as of writing, so I may have been too early. "
         "Anyhow, kindly read the notes below to see what's new.\n\n"
         "Thank you, as always.",
+    ClientVersion.marshFrog:
+        "Helloo Yana.\n\n"
+        "Unfortunately, no new updates are pushed into production this week.\n\n"
+        "I know... "
+        "The 1.1.X release has been on the works for about a month now, yet I just could not "
+        "deliver it today. I'm really sorry for still making you wait more. \n\n"
+        "Just to share to you a bit of insight, this major update supposedly introduces a LOT of things. "
+        "Yet, the highlight of all these new stuff is actually... STRAVA. \n\n"
+        "Yes. Soon enough, running is now an activity you can do with Purin by using your Strava app. "
+        "For this feature alone, I had to develop a separate program to connect the Strava API "
+        "to this one.\n\n"
+        "Essentially, it is an update focused on your interactions with Purin, which is why running, sleeping, "
+        "and bathing "
+        "Purin are packed in 1.1.X. \n\n"
+        "Aside from these, the reconfiguration of the Purin-System introduces Attributes and much more, "
+        "which will be explained when the update actually releases. \n\n"
+        "Again, I'm sorry for letting you down this week. Though I could no longer promise when "
+        "the next update will be, I can only promise that the next one will be this one!",
   };
 }
