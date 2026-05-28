@@ -273,18 +273,14 @@ class NotesFromVersion {
         "Unfortunately, no new updates are pushed into production this week.\n\n"
         "I know... "
         "The 1.1.X release has been on the works for about a month now, yet I just could not "
-        "deliver it today. I'm really sorry for still making you wait more. \n\n"
-        "Just to share to you a bit of insight, this major update supposedly introduces a LOT of things. "
-        "Yet, the highlight of all these new stuff is actually... STRAVA. \n\n"
+        "deliver it today. I'm really sorry. \n\n"
+        "But to give you a bit of an insight, this major update supposedly introduces a LOT of things. "
+        "So, to give you a small teaser, the highlight of all these new stuff is actually... STRAVA. \n\n"
         "Yes. Soon enough, running is now an activity you can do with Purin by using your Strava app. "
-        "For this feature alone, I had to develop a separate program to connect the Strava API "
-        "to this one.\n\n"
-        "Essentially, it is an update focused on your interactions with Purin, which is why running, sleeping, "
-        "and bathing "
-        "Purin are packed in 1.1.X. \n\n"
-        "Aside from these, the reconfiguration of the Purin-System introduces Attributes and much more, "
-        "which will be explained when the update actually releases. \n\n"
-        "Again, I'm sorry for letting you down this week. Though I could no longer promise when "
-        "the next update will be, I can only promise that the next one will be this one!",
+        "For this feature alone, I had to develop a separate program that connects the Strava API "
+        "to this one. It's actually functional just recently, but it needs more time for testing. \n\n"
+        "More information on this update will come with the release itself. I'm not ready to spoil "
+        "everything just yet. \n\n"
+        "Again, thank you for everything.",
   };
 }

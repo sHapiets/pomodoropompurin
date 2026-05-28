@@ -139,7 +139,8 @@ class PurinEntity extends PositionComponent
     int row = 0;
     final col = spriteSheetColumnFromAction[purin.stateManager.action]!;
 
-    if (purin.stateManager.action == PurinAction.sleep) {
+    if (purin.stateManager.position == PurinPosition.futon ||
+        purin.stateManager.position == PurinPosition.sofaRest) {
       row = 1;
     }
 
