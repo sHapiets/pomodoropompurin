@@ -12,6 +12,7 @@ import 'package:pomodoropompurin/scripts/core/ui/purin_metrics_ui_state.dart';
 import 'package:pomodoropompurin/scripts/core/ui/ui_display_state.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/cursor_sprite.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/dotted_background.dart';
+import 'package:pomodoropompurin/scripts/layout/purin_area/effects/day_night_cycle.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/effects/heart_particles.dart';
 import 'package:pomodoropompurin/scripts/layout/purin_area/purin_area_home.dart';
 

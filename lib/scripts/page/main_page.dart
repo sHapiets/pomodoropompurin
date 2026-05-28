@@ -20,6 +20,8 @@ import 'package:pomodoropompurin/scripts/core/prog_systems/shoe_achievement/shoe
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_manager.dart';
 import 'package:pomodoropompurin/scripts/core/tutorial/tutorial_state.dart';
 import 'package:pomodoropompurin/scripts/core/version_control/client_version_manager.dart';
+import 'package:pomodoropompurin/scripts/layout/activity/radial_menu/activity_radial_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/activity/radial_menu/radial_menu_item.dart';
 import 'package:pomodoropompurin/scripts/layout/event_systems/sanrio_2026_reward_dialog.dart';
 import 'package:pomodoropompurin/scripts/layout/event_systems/sanrio_2026_voting_display.dart';
 import 'package:pomodoropompurin/scripts/layout/menu/kitchen/kitchen_menu.dart';
@@ -36,6 +38,7 @@ import 'package:pomodoropompurin/scripts/layout/script_dialog/pet_script_widget.
 import 'package:pomodoropompurin/scripts/layout/script_dialog/purin_menu_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/script_dialog/tutorial_script_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/shoe_achievement/shoe_achievement_menu.dart';
+import 'package:pomodoropompurin/scripts/layout/sleep/sleep_main_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/current_datetime_display.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/purin_metrics_main_widget.dart';
 import 'package:pomodoropompurin/scripts/layout/ui/purin_metrics/purin_metrics_ui.dart';
@@ -255,6 +258,52 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           PurinMenuScriptWidget(),
           TutorialPageBlocker(),
           TutorialScriptWidget(),
+          SleepMainDisplay(),
+          ActivityRadialMenu(
+            radius: 120,
+            holdDuration: const Duration(milliseconds: 300),
+            items: [
+              RadialMenuItem(
+                icon: Icons.home,
+                color: Colors.blue,
+                label: "Home",
+              ),
+              RadialMenuItem(
+                icon: Icons.favorite,
+                color: Colors.red,
+                label: "Like",
+              ),
+              RadialMenuItem(
+                icon: Icons.share,
+                color: Colors.green,
+                label: "Share",
+              ),
+              RadialMenuItem(
+                icon: Icons.settings,
+                color: Colors.orange,
+                label: "Settings",
+              ),
+              RadialMenuItem(
+                icon: Icons.delete,
+                color: Colors.purple,
+                label: "Delete",
+              ),
+            ],
+            onSelected: (item, index) {
+              debugPrint("Selected: ${item.label}");
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Text(
+                "Hold Me",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ],
       ),
     );
